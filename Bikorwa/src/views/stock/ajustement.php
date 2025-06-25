@@ -442,19 +442,7 @@ include('../layouts/header.php');
                                 <form id="stock-adjustment-form">
                                     <input type="hidden" id="product-id" name="product_id">
                                     
-                                    <div class="form-group">
-                                        <label>Type d'ajustement</label>
-                                        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                                            <label class="btn btn-outline-success active">
-                                                <input type="radio" name="adjustment_type" id="type-increase" value="increase" checked> 
-                                                <i class="fas fa-plus-circle mr-1"></i> Ajouter au stock
-                                            </label>
-                                            <label class="btn btn-outline-danger">
-                                                <input type="radio" name="adjustment_type" id="type-decrease" value="decrease"> 
-                                                <i class="fas fa-minus-circle mr-1"></i> Retirer du stock
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <input type="hidden" name="adjustment_type" id="adjustment-type" value="increase">
                                     
                                     <div class="row">
                                         <div class="col-md-6">
@@ -517,8 +505,6 @@ include('../layouts/header.php');
                         <h6 class="font-weight-bold">Produit</h6>
                         <p id="preview-product">-</p>
                         
-                        <h6 class="font-weight-bold">Type d'ajustement</h6>
-                        <p id="preview-type">-</p>
                     </div>
                     <div class="col-md-6">
                         <h6 class="font-weight-bold">Quantité</h6>
@@ -705,18 +691,6 @@ $(document).ready(function() {
         $('#product-results').hide();
     });
     
-    // Handle adjustment type change
-    $('input[name="adjustment_type"]').change(function() {
-        const type = $(this).val();
-        
-        if (type === 'increase') {
-            $('#price-group').show();
-            $('#price').attr('required', true);
-        } else {
-            $('#price-group').hide();
-            $('#price').removeAttr('required');
-        }
-    });
     
     // Handle form submission
     $('#stock-adjustment-form').submit(function(e) {
@@ -727,7 +701,7 @@ $(document).ready(function() {
         const productName = $('#product-name').text();
         const productCode = $('#product-code').text();
         const productUnit = $('#product-unit').text();
-        const adjustmentType = $('input[name="adjustment_type"]:checked').val();
+        const adjustmentType = $('#adjustment-type').val();
         const quantity = $('#quantity').val();
         const price = $('#price').val();
         const note = $('#note').val();
@@ -750,9 +724,6 @@ $(document).ready(function() {
         
         // Update preview modal
         $('#preview-product').html(`<strong>${productName}</strong> (Code: ${productCode})`);
-        $('#preview-type').html(adjustmentType === 'increase' ? 
-            '<span class="text-success"><i class="fas fa-plus-circle mr-1"></i> Ajout au stock</span>' : 
-            '<span class="text-danger"><i class="fas fa-minus-circle mr-1"></i> Retrait du stock</span>');
         // Use the exact unit from the database without any fallback
         $('#preview-quantity').text(quantity + ' ' + productUnit);
         
@@ -805,7 +776,6 @@ $(document).ready(function() {
                     
                     // Reset form
                     $('#stock-adjustment-form')[0].reset();
-                    $('#type-increase').prop('checked', true).trigger('change');
                 } else {
                     // Show error message
                     showNotification('danger', response.message || 'Une erreur est survenue');
@@ -828,7 +798,6 @@ $(document).ready(function() {
     // Reset form on new adjustment button click
     $('#new-adjustment-btn').click(function() {
         $('#stock-adjustment-form')[0].reset();
-        $('#type-increase').prop('checked', true).trigger('change');
     });
     
     // Format currency function
@@ -844,15 +813,4 @@ $(document).ready(function() {
     background-color: rgba(0, 123, 255, 0.05);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #adjustment-form .btn-group {
-        flex-direction: column;
-    }
-    
-    #adjustment-form .btn-group .btn {
-        border-radius: 0.25rem !important;
-        margin-bottom: 0.5rem;
-    }
-}
 </style>
