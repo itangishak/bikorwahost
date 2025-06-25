@@ -110,8 +110,14 @@ try {
             // Log session information for debugging
             error_log('Session after login: ' . print_r($_SESSION, true));
             
+            // Determine redirect URL based on user role
+            $redirect = '../dashboard/index.php';
+            if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
+                $redirect = '../dashboard/receptionniste.php';
+            }
+
             // Make sure to use the correct redirect path
-            send_json_response(true, 'Connexion réussie. Redirection en cours...', '../dashboard/index.php');
+            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect);
         } else {
             // Échec de la connexion
             send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized
