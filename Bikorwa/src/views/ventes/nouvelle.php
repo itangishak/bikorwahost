@@ -480,8 +480,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'add_vente') {
                 $stmtLog->execute();
             }
             
-            // Create a reference for traceability
-            $reference = 'VENTE-' . date('YmdHis') . '-' . $utilisateur_id;
+            // Create a reference for traceability using the invoice number
+            // This allows cancellation logic to reliably locate the movement
+            // record when reversing the sale.
+            $reference = 'Vente #' . $numero_facture;
             
             // Insert sortie record in mouvements_stock
             $queryInsertSortie = "INSERT INTO mouvements_stock 
