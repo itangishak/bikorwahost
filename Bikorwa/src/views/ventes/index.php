@@ -585,6 +585,8 @@ EOT;
     </div>
 </div>
 <!-- Page specific script -->
+<!-- Ensure jQuery is available for the page scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 // Define BASE_URL variable for JavaScript use
 var BASE_URL = window.location.origin + '/Bikorwa';
