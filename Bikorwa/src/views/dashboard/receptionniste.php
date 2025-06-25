@@ -96,62 +96,46 @@ try {
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-    <!-- Content Header -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Tableau de Bord - Réceptionniste</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="receptionniste.php">Accueil</a></li>
-                        <li class="breadcrumb-item active">Tableau de Bord</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1><i class="fas fa-tachometer-alt"></i> Tableau de Bord - Réceptionniste</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Tableau de Bord</li>
+            </ol>
+        </nav>
     </div>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Dashboard Header -->
-            <div class="dashboard-header mb-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="display-6">Bienvenue, <?php echo htmlspecialchars($user_name); ?></h1>
-                    <div class="current-datetime text-end">
-                        <div class="date fs-5"><?php echo $current_date; ?></div>
-                        <div class="time fs-6"><?php echo $current_time; ?></div>
-                    </div>
-                </div>
-                
-                <!-- Date Filter -->
-                <form method="get" class="date-filter row g-2 align-items-center mb-4">
-                    <div class="col-auto">
-                        <label for="date_debut" class="form-label">Date de Début:</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" class="form-control" id="date_debut" name="date_debut" value="<?php echo $date_debut; ?>">
-                    </div>
-                    <div class="col-auto">
-                        <label for="date_fin" class="form-label">Date de Fin:</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" class="form-control" id="date_fin" name="date_fin" value="<?php echo $date_fin; ?>">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">Appliquer</button>
-                    </div>
-                </form>
-            </div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <strong>Bienvenue, <?php echo htmlspecialchars($user_name); ?>!</strong>
+        Voici un aperçu de votre journée.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Date Filter -->
+    <form method="get" class="row g-2 align-items-center mb-4">
+        <div class="col-auto">
+            <label for="date_debut" class="form-label">Date de Début:</label>
+        </div>
+        <div class="col-auto">
+            <input type="date" class="form-control" id="date_debut" name="date_debut" value="<?php echo $date_debut; ?>">
+        </div>
+        <div class="col-auto">
+            <label for="date_fin" class="form-label">Date de Fin:</label>
+        </div>
+        <div class="col-auto">
+            <input type="date" class="form-control" id="date_fin" name="date_fin" value="<?php echo $date_fin; ?>">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Appliquer</button>
+        </div>
+    </form>
             
             <!-- Main Stats Cards -->
             <div class="row g-4 mb-5">
                 <!-- Total des Ventes -->
-                <div class="col-md-4">
+                <div class="col-xxl-3 col-md-6">
                     <div class="card dashboard-card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
                             <div class="icon-wrapper mb-3 mx-auto">
@@ -162,9 +146,9 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Total des Clients -->
-                <div class="col-md-4">
+                <div class="col-xxl-3 col-md-6">
                     <div class="card dashboard-card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
                             <div class="icon-wrapper mb-3 mx-auto">
@@ -175,9 +159,9 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Total des Produits -->
-                <div class="col-md-4">
+                <div class="col-xxl-3 col-md-6">
                     <div class="card dashboard-card h-100 border-0 shadow-sm">
                         <div class="card-body text-center p-4">
                             <div class="icon-wrapper mb-3 mx-auto">
@@ -185,6 +169,19 @@ require_once __DIR__ . '/../layouts/header.php';
                             </div>
                             <h5 class="card-title text-muted mb-3">Produits en Stock</h5>
                             <h2 class="display-5 fw-bold mb-0"><?php echo number_format($total_produits, 0, ',', ' '); ?></h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Valeur du Stock -->
+                <div class="col-xxl-3 col-md-6">
+                    <div class="card dashboard-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3 mx-auto">
+                                <i class="fas fa-coins text-warning fa-2x"></i>
+                            </div>
+                            <h5 class="card-title text-muted mb-3">Valeur du Stock</h5>
+                            <h2 class="display-5 fw-bold mb-0"><?php echo number_format($valeur_stock, 0, ',', ' '); ?> BIF</h2>
                         </div>
                     </div>
                 </div>
@@ -284,7 +281,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
         </div>
     </section>
-</div>
+</main>
 
 <?php
 // Include footer
