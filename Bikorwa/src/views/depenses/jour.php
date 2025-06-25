@@ -27,12 +27,12 @@ $current_user_id = $_SESSION['user_id'] ?? 0;
 $today = date('Y-m-d');
 
 // Query to get today's expenses
-$query = "SELECT d.*, c.nom AS categorie_nom, u.nom AS user_nom
-          FROM depenses d
-          JOIN categories_depenses c ON c.id = d.categorie_id
-          JOIN users u ON u.id = d.utilisateur_id
-          WHERE DATE(d.date_depense) = ?
-          ORDER BY d.date_depense DESC, d.id DESC";
+$query = "SELECT depenses.*, categories_depenses.nom as categorie_nom, users.nom as user_nom 
+          FROM depenses 
+          JOIN categories_depenses ON categories_depenses.id = depenses.categorie_id 
+          JOIN users ON users.id = depenses.utilisateur_id 
+          WHERE DATE(depenses.date_depense) = ?
+          ORDER BY depenses.date_depense DESC, depenses.id DESC";
 
 $stmt = $conn->prepare($query);
 $stmt->execute([$today]);

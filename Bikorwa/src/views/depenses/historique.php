@@ -34,25 +34,11 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $items_per_page = (int)$per_page;
 $offset = ($current_page - 1) * $items_per_page;
 
-// Determine the correct user reference column. Some deployments may still use
-// `user_id` instead of `utilisateur_id`. We detect the existing column to keep
-// backward compatibility.
-$userColumn = 'utilisateur_id';
-try {
-    $colCheck = $conn->prepare("SHOW COLUMNS FROM depenses LIKE 'utilisateur_id'");
-    $colCheck->execute();
-    if ($colCheck->rowCount() === 0) {
-        $userColumn = 'user_id';
-    }
-} catch (PDOException $e) {
-    // If the check fails for some reason, default to utilisateur_id
-}
-
 // Build the base query - Fixed table references and column names
-$query = "SELECT d.*, c.nom as categorie_nom, u.nom as utilisateur_nom
-          FROM depenses d
-          LEFT JOIN categories_depenses c ON d.categorie_id = c.id
-          LEFT JOIN users u ON d." . $userColumn . " = u.id
+$query = "SELECT d.*, c.nom as categorie_nom, u.nom as utilisateur_nom 
+          FROM depenses d 
+          LEFT JOIN categories_depenses c ON d.categorie_id = c.id 
+          LEFT JOIN users u ON d.utilisateur_id = u.id 
           WHERE 1=1";
 $count_query = "SELECT COUNT(*) AS total FROM depenses d WHERE 1=1";
 $params = [];

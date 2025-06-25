@@ -663,7 +663,7 @@ include('../layouts/header.php');
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= BASE_URL ?>">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="../dashboard/index.php">Accueil</a></li>
                         <li class="breadcrumb-item"><a href="<?= BASE_URL ?>/src/views/ventes/index.php">Ventes</a></li>
                         <li class="breadcrumb-item active">Nouvelle vente</li>
                     </ol>
