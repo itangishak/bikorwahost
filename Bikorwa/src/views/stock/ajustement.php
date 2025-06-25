@@ -22,14 +22,6 @@ $pdo = $db->getConnection();
 $page_title = "Ajustement de Stock";
 $active_page = "stock";
 
-// Check if user has gestionnaire role
-$isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
-
-// If not gestionnaire, redirect to stock index
-if (!$isGestionnaire) {
-    header('Location: index.php');
-    exit;
-}
 
 // Initialize variables
 $message = "";
