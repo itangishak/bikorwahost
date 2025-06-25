@@ -247,6 +247,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'add_vente') {
         $montant_paye = floatval($_POST['montant_paye']);
         $statut_paiement = $_POST['statut_paiement'];
         $note = $_POST['note'] ?? '';
+        $montant_restant = $montant_total - $montant_paye;
         
         // Validate payment status
         if (!in_array($statut_paiement, ['paye', 'partiel', 'credit'])) {
@@ -257,6 +258,38 @@ if (isset($_GET['action']) && $_GET['action'] === 'add_vente') {
         $produits = json_decode($_POST['produits'], true);
         if (!$produits || !is_array($produits) || count($produits) === 0) {
             throw new Exception('Aucun produit dans la vente');
+        }
+
+        // Check credit limit if sale on credit
+        if ($statut_paiement === 'credit') {
+            if (!$client_id) {
+                throw new Exception('Un client est requis pour les ventes à crédit');
+            }
+
+            $limit_query = "SELECT limite_credit FROM clients WHERE id = ?";
+            $limit_stmt = $pdo->prepare($limit_query);
+            $limit_stmt->bindParam(1, $client_id, PDO::PARAM_INT);
+            $limit_stmt->execute();
+            $client_limit = $limit_stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$client_limit) {
+                throw new Exception('Client non trouvé.');
+            }
+
+            $limite_credit = floatval($client_limit['limite_credit']);
+
+            $dette_query = "SELECT SUM(montant_restant) AS total_restant FROM dettes WHERE client_id = ? AND statut != 'annulee'";
+            $dette_stmt = $pdo->prepare($dette_query);
+            $dette_stmt->bindParam(1, $client_id, PDO::PARAM_INT);
+            $dette_stmt->execute();
+            $dette_result = $dette_stmt->fetch(PDO::FETCH_ASSOC);
+            $total_restant = $dette_result && $dette_result['total_restant'] ? floatval($dette_result['total_restant']) : 0;
+
+            $credit_disponible = $limite_credit - $total_restant;
+
+            if ($montant_restant > $credit_disponible) {
+                throw new Exception('Limite de crédit dépassée pour ce client. Montant maximal autorisé: ' . $credit_disponible);
+            }
         }
         
         // Generate unique invoice number format IN-YYYYMMDD-XXXX
@@ -310,7 +343,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'add_vente') {
         
         // Create debt record if payment is partial or on credit
         if ($statut_paiement === 'partiel' || $statut_paiement === 'credit') {
-            $montant_restant = $montant_total - $montant_paye;
             
             // Check if we have a client
             if (!$client_id) {
