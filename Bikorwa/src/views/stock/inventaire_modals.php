@@ -730,3 +730,77 @@
         }
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('inventorySearch');
+        const table = document.querySelector('table.table');
+        const mobileContainer = document.querySelector('.d-md-none');
+        let sortState = { field: '', asc: true };
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                filterProducts(this.value.trim().toLowerCase());
+            });
+        }
+
+        const sortCodeBtn = document.getElementById('sortCode');
+        const sortNomBtn = document.getElementById('sortNom');
+        if (sortCodeBtn) sortCodeBtn.addEventListener('click', () => sortProducts('code'));
+        if (sortNomBtn) sortNomBtn.addEventListener('click', () => sortProducts('nom'));
+
+        function filterProducts(keyword) {
+            if (!table) return;
+            table.querySelectorAll('tbody tr').forEach(row => {
+                const code = row.children[0].textContent.toLowerCase();
+                const nom = row.children[1].textContent.toLowerCase();
+                row.style.display = code.includes(keyword) || nom.includes(keyword) ? '' : 'none';
+            });
+
+            if (mobileContainer) {
+                mobileContainer.querySelectorAll('.product-card').forEach(card => {
+                    const code = card.querySelector('.small strong').textContent.toLowerCase();
+                    const nom = card.querySelector('h5').textContent.toLowerCase();
+                    card.style.display = code.includes(keyword) || nom.includes(keyword) ? '' : 'none';
+                });
+            }
+        }
+
+        function sortProducts(field) {
+            if (!table) return;
+            const asc = sortState.field === field ? !sortState.asc : true;
+            sortState = { field, asc };
+            const modifier = asc ? 1 : -1;
+
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            rows.sort((a, b) => {
+                const aText = field === 'code' ? a.children[0].textContent.trim().toLowerCase() : a.children[1].textContent.trim().toLowerCase();
+                const bText = field === 'code' ? b.children[0].textContent.trim().toLowerCase() : b.children[1].textContent.trim().toLowerCase();
+                if (aText < bText) return -1 * modifier;
+                if (aText > bText) return 1 * modifier;
+                return 0;
+            });
+            const tbody = table.querySelector('tbody');
+            rows.forEach(r => tbody.appendChild(r));
+
+            if (mobileContainer) {
+                const cards = Array.from(mobileContainer.querySelectorAll('.product-card'));
+                cards.sort((a, b) => {
+                    const aText = field === 'code' ? a.querySelector('.small strong').textContent.trim().toLowerCase() : a.querySelector('h5').textContent.trim().toLowerCase();
+                    const bText = field === 'code' ? b.querySelector('.small strong').textContent.trim().toLowerCase() : b.querySelector('h5').textContent.trim().toLowerCase();
+                    if (aText < bText) return -1 * modifier;
+                    if (aText > bText) return 1 * modifier;
+                    return 0;
+                });
+                cards.forEach(c => mobileContainer.appendChild(c));
+            }
+
+            updateIndicators();
+        }
+
+        function updateIndicators() {
+            document.querySelectorAll('.sort-indicator').forEach(el => el.textContent = '');
+            const target = sortState.field === 'code' ? sortCodeBtn : sortNomBtn;
+            if (target) target.querySelector('.sort-indicator').textContent = sortState.asc ? '▲' : '▼';
+        }
+    });
+</script>
