@@ -64,6 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->rowCount() > 0) {
                 throw new Exception("Un produit avec ce code existe déjà.");
             }
+
+            // Check if product name already exists
+            $stmt = $pdo->prepare("SELECT id FROM produits WHERE LOWER(nom) = LOWER(:nom)");
+            $stmt->execute(['nom' => $nom]);
+            if ($stmt->rowCount() > 0) {
+                throw new Exception("Un produit portant ce nom existe déjà.");
+            }
             
             // Insert product
             $stmt = $pdo->prepare("
@@ -167,6 +174,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute(['code' => $code, 'id' => $produit_id]);
             if ($stmt->rowCount() > 0) {
                 throw new Exception("Un autre produit avec ce code existe déjà.");
+            }
+
+            // Check if product name already exists for another product
+            $stmt = $pdo->prepare("SELECT id FROM produits WHERE LOWER(nom) = LOWER(:nom) AND id != :id");
+            $stmt->execute(['nom' => $nom, 'id' => $produit_id]);
+            if ($stmt->rowCount() > 0) {
+                throw new Exception("Un autre produit portant ce nom existe déjà.");
             }
             
             // Update product
