@@ -5,8 +5,8 @@
 
 // Database connection parameters
 $host = 'localhost:3306';
-$dbname = 'bikorwa_shop';
-$username = 'bumadste_bikorwa_shop';
+$dbname = 'bumadste_bikorwa_shop';
+$username = 'bumadste_bikorwa';
 $password = 'Bikorwa2024!';
 $charset = 'utf8mb4';
 
