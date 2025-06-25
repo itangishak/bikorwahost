@@ -584,9 +584,6 @@ EOT;
         </div>
     </div>
 </div>
-<!-- Include footer -->
-<?php include('../layouts/footer.php'); ?>
-
 <!-- Page specific script -->
 <script>
 // Define BASE_URL variable for JavaScript use
@@ -638,7 +635,11 @@ $(function() {
         currentPage = 1;
         loadVentes();
     });
-    
+
+    // Initialize delegated event handlers
+    setupViewButtons();
+    setupCancelButtons();
+
     // Function to load sales with pagination and filters
     function loadVentes() {
         const search = $('#search-input').val();
@@ -722,9 +723,7 @@ $(function() {
                         $('#ventes-list').append(row);
                     });
                     
-                    // Setup view and cancel buttons
-                    setupViewButtons();
-                    setupCancelButtons();
+
                     
                 } else {
                     // Show error
@@ -791,7 +790,7 @@ $(function() {
     
     // Function to setup view buttons
     function setupViewButtons() {
-        $('.view-btn').on('click', function() {
+        $('#ventes-list').on('click', '.view-btn', function() {
             const vente_id = $(this).data('id');
             
             // Show loading in modal
@@ -897,7 +896,7 @@ $(function() {
     
     // Function to setup cancel buttons
     function setupCancelButtons() {
-        $('.cancel-btn').on('click', function() {
+        $('#ventes-list').on('click', '.cancel-btn', function() {
             const row = $(this).closest('tr');
             const vente_id = $(this).data('id');
             const numero_facture = row.data('facture');
