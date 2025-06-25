@@ -670,7 +670,7 @@ include('../layouts/header.php');
                 <div class="col-md-4">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        <input type="text" name="search" class="form-control" placeholder="Rechercher un produit..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                        <input type="text" name="search" id="inventorySearch" class="form-control" placeholder="Rechercher un produit..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -809,8 +809,12 @@ include('../layouts/header.php');
                 <table class="table table-hover table-bordered table-striped">
                     <thead class="table-light">
                         <tr>
-                            <th>Code</th>
-                            <th>Nom</th>
+                            <th>
+                                <button type="button" class="btn btn-link p-0 text-decoration-none" id="sortCode">Code <span class="sort-indicator"></span></button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link p-0 text-decoration-none" id="sortNom">Nom <span class="sort-indicator"></span></button>
+                            </th>
                             <th>Catégorie</th>
                             <th>Unité</th>
                             <th class="text-end">Quantité</th>
