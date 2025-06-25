@@ -28,6 +28,7 @@ if (!$auth->hasAccess('clients')) {
 
 // Get current user ID for logging actions
 $current_user_id = $_SESSION['user_id'] ?? 0;
+$userRole = $_SESSION['user_role'] ?? '';
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
@@ -364,12 +365,14 @@ $use_custom_footer = true;
                                         <button type="button" class="btn btn-sm btn-info btn-action btn-view-client" data-id="<?php echo $client['id']; ?>" title="Voir les détails">
                                             <i class="fas fa-eye"></i>
                                         </button>
+                                        <?php if ($userRole === 'gestionnaire'): ?>
                                         <button type="button" class="btn btn-sm btn-primary btn-action btn-edit-client" data-id="<?php echo $client['id']; ?>" title="Modifier">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button type="button" class="btn btn-sm btn-danger btn-action btn-delete-client" data-id="<?php echo $client['id']; ?>" data-name="<?php echo htmlspecialchars($client['nom']); ?>" title="Supprimer">
                                             <i class="fas fa-trash"></i>
                                         </button>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

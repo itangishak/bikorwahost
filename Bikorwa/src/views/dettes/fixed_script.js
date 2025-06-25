@@ -47,9 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Edit debt
+    // Edit debt - only managers
     document.querySelectorAll('.editBtn').forEach(btn => {
         btn.addEventListener('click', function() {
+            if (!isManager) {
+                showToast('Erreur', 'Seuls les gestionnaires peuvent modifier des dettes', 'error');
+                return;
+            }
             const detteId = this.getAttribute('data-id');
             loadDetteForEdit(detteId);
         });

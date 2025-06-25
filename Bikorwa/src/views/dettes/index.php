@@ -467,9 +467,11 @@ require_once __DIR__ . '/../layouts/header.php';
                                                     <i class="fas fa-money-bill"></i>
                                                 </button>
                                                 
+                                                <?php if ($userRole === 'gestionnaire'): ?>
                                                 <button class="btn btn-sm btn-primary btn-action editBtn" data-id="<?php echo $dette['id']; ?>" title="Modifier">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
+                                                <?php endif; ?>
                                                 
                                                 <?php if ($userRole === 'gestionnaire'): ?>
                                                 <button class="btn btn-sm btn-danger btn-action deleteBtn" data-id="<?php echo $dette['id']; ?>" title="Annuler">

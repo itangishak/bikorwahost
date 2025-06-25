@@ -32,6 +32,15 @@ if (!$auth->hasAccess('clients')) {
     exit;
 }
 
+// Only managers can modify clients
+if (!$auth->isManager()) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Seuls les gestionnaires peuvent modifier un client.'
+    ]);
+    exit;
+}
+
 // Get current user ID for logging actions
 $current_user_id = $_SESSION['user_id'] ?? 0;
 
