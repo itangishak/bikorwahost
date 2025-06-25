@@ -307,7 +307,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <?php if ($isGestionnaire): ?>
+                <?php if ($hasStockAccess): ?>
                 <button type="button" class="btn btn-primary" id="viewToEditBtn">Modifier</button>
                 <?php endif; ?>
             </div>

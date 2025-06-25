@@ -23,8 +23,11 @@ $pdo = $db->getConnection();
 $page_title = "Inventaire";
 $active_page = "stock";
 
-// Check if user has gestionnaire role
+// Determine user roles and stock privileges. Receptionnistes may manage
+// inventory but cannot delete products.
 $isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
+$isReceptionniste = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste';
+$hasStockAccess = $isGestionnaire || $isReceptionniste;
 
 // Process form actions
 $message = "";
@@ -39,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->beginTransaction();
         
         if ($action === 'add_product') {
-            // Check if user is gestionnaire
-            if (!$isGestionnaire) {
+            // Check if user has stock management rights (gestionnaire or réceptionniste)
+            if (!$hasStockAccess) {
                 throw new Exception("Vous n'avez pas les droits pour ajouter un produit.");
             }
             
@@ -150,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messageType = "success";
         }
         else if ($action === 'edit_product') {
-            // Check if user is gestionnaire
-            if (!$isGestionnaire) {
+            // Check if user has stock management rights (gestionnaire or réceptionniste)
+            if (!$hasStockAccess) {
                 throw new Exception("Vous n'avez pas les droits pour modifier un produit.");
             }
             
@@ -251,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messageType = "success";
         }
         else if ($action === 'delete_product') {
-            // Check if user is gestionnaire
+            // Only gestionnaires are allowed to delete products
             if (!$isGestionnaire) {
                 throw new Exception("Vous n'avez pas les droits pour supprimer un produit.");
             }
@@ -314,8 +317,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         }
         else if ($action === 'adjust_stock') {
-            // Check if user is gestionnaire
-            if (!$isGestionnaire) {
+            // Check if user has stock management rights (gestionnaire or réceptionniste)
+            if (!$hasStockAccess) {
                 throw new Exception("Vous n'avez pas les droits pour ajuster le stock.");
             }
             
@@ -591,7 +594,7 @@ include('../layouts/header.php');
             <h1 class="h3 mb-0">Inventaire</h1>
         </div>
         <div class="col-md-6 text-md-end mt-3 mt-md-0">
-            <?php if ($isGestionnaire): ?>
+            <?php if ($hasStockAccess): ?>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
                 <i class="fas fa-plus-circle me-1"></i> Nouveau produit
             </button>
@@ -765,7 +768,7 @@ include('../layouts/header.php');
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 
-                                <?php if ($isGestionnaire): ?>
+                                <?php if ($hasStockAccess): ?>
                                 <button type="button" class="btn btn-sm btn-outline-secondary me-1"
                                         data-bs-toggle="modal" data-bs-target="#adjustStockModal"
                                         data-id="<?= $product['id'] ?>"
@@ -775,7 +778,7 @@ include('../layouts/header.php');
                                         data-quantite="<?= number_format($product['quantite_stock'], 2, ',', ' ') ?>">
                                     <i class="fas fa-dolly-flatbed"></i>
                                 </button>
-                                
+
                                 <button type="button" class="btn btn-sm btn-outline-info me-1"
                                         data-bs-toggle="modal" data-bs-target="#editProductModal"
                                         data-id="<?= $product['id'] ?>"
@@ -789,7 +792,7 @@ include('../layouts/header.php');
                                         data-actif="<?= $product['actif'] ? '1' : '0' ?>">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                
+                                <?php if ($isGestionnaire): ?>
                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                         data-bs-toggle="modal" data-bs-target="#deleteProductModal"
                                         data-id="<?= $product['id'] ?>"
@@ -797,6 +800,7 @@ include('../layouts/header.php');
                                         data-code="<?= htmlspecialchars($product['code']) ?>">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -886,7 +890,7 @@ include('../layouts/header.php');
                                                         <i class="fas fa-eye me-2"></i> Voir détails
                                                     </a>
                                                 </li>
-                                                <?php if ($isGestionnaire): ?>
+                                                <?php if ($hasStockAccess): ?>
                                                 <li>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#adjustStockModal"
                                                        data-id="<?= $product['id'] ?>"
@@ -911,6 +915,7 @@ include('../layouts/header.php');
                                                         <i class="fas fa-edit me-2"></i> Modifier
                                                     </a>
                                                 </li>
+                                                <?php if ($isGestionnaire): ?>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li>
                                                     <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#deleteProductModal"
@@ -920,6 +925,7 @@ include('../layouts/header.php');
                                                         <i class="fas fa-trash me-2"></i> Supprimer
                                                     </a>
                                                 </li>
+                                                <?php endif; ?>
                                                 <?php endif; ?>
                                             </ul>
                                         </div>
