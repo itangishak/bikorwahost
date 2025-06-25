@@ -1,6 +1,6 @@
 <?php
-// Redirect to inventory page with modals
-header('Location: inventaire_with_modals.php');
+// Redirect to inventory page
+header('Location: inventaire.php');
 exit;
 ?>
                 </button>
