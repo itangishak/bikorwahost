@@ -141,6 +141,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'cancel_sale') {
         $query = "UPDATE ventes SET statut_vente = 'annulee' WHERE id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$vente_id]);
+
+        // Save the cancellation reason in the note field
+        $query = "UPDATE ventes SET note = ? WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$raison, $vente_id]);
         
         // Update any debt records if they exist
         $query = "UPDATE dettes SET statut = 'annulee' WHERE vente_id = ?";
