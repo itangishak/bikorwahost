@@ -18,6 +18,13 @@ if (!$auth->isLoggedIn()) {
     exit;
 }
 
+// Only managers can modify debts
+if (!$auth->isManager()) {
+    http_response_code(403);
+    echo json_encode(["success" => false, "message" => "Seuls les gestionnaires peuvent modifier une dette"]);
+    exit;
+}
+
 // Get user ID for logging
 $user_id = $_SESSION['user_id'] ?? 0;
 

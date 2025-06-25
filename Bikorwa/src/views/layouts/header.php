@@ -260,8 +260,7 @@
                 <span>Tableau de Bord</span>
             </a>
             
-            <?php if ($user_role === 'gestionnaire'): ?>
-            <!-- Gestion des Ventes (gestionnaire only) -->
+            <!-- Gestion des Ventes -->
             <div class="sidebar-dropdown">
                 <a href="#" class="sidebar-item <?php echo $active_page == 'ventes' ? 'active' : ''; ?>" data-bs-toggle="collapse" data-bs-target="#venteSubMenu" aria-expanded="false">
                     <i class="fas fa-shopping-cart"></i>
@@ -274,14 +273,15 @@
                             <i class="fas fa-plus-circle"></i>
                             <span>Nouvelle Vente</span>
                         </a>
+                        <?php if ($user_role === 'gestionnaire'): ?>
                         <a href="<?php echo BASE_URL; ?>/src/views/ventes/index.php" class="sidebar-subitem">
                             <i class="fas fa-history"></i>
                             <span>Historique des Ventes</span>
                         </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
             
             <!-- Gestion des Stocks -->
             <div class="sidebar-dropdown">
@@ -296,27 +296,27 @@
                             <i class="fas fa-clipboard-list"></i>
                             <span>Inventaire</span>
                         </a>
-                        <?php if ($user_role === 'gestionnaire'): ?>
                         <a href="<?php echo BASE_URL; ?>/src/views/stock/ajustement.php" class="sidebar-subitem">
                             <i class="fas fa-sliders-h"></i>
                             <span>Ajustement de Stock</span>
                         </a>
-                        <?php endif; ?>
+                        <?php if ($user_role === 'gestionnaire'): ?>
                         <a href="<?php echo BASE_URL; ?>/src/views/stock/historique_approvisionnement.php" class="sidebar-subitem">
                             <i class="fas fa-history"></i>
                             <span>Historique d'approvisionnement</span>
                         </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
             
-            <?php if ($user_role === 'gestionnaire'): ?>
-            <!-- Gestion des Dettes (gestionnaire only) -->
+            <!-- Gestion des Dettes -->
             <a href="<?php echo BASE_URL; ?>/src/views/dettes/index.php" class="sidebar-item <?php echo $active_page == 'dettes' ? 'active' : ''; ?>">
                 <i class="fas fa-money-check-alt"></i>
                 <span>Gestion des Dettes</span>
             </a>
-            
+
+            <?php if ($user_role === 'gestionnaire'): ?>
             <!-- Gestion des Employés (gestionnaire only) -->
             <div class="sidebar-dropdown">
                 <a href="#" class="sidebar-item <?php echo $active_page == 'employes' ? 'active' : ''; ?>" data-bs-toggle="collapse" data-bs-target="#employesSubMenu" aria-expanded="false">
@@ -341,8 +341,10 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Gestion des Dépenses (gestionnaire only) -->
+
+            <?php endif; ?>
+
+            <!-- Gestion des Dépenses -->
             <div class="sidebar-dropdown">
                 <a href="#" class="sidebar-item <?php echo in_array($active_page, ['depenses-jour', 'depenses-historique']) ? 'active' : ''; ?>" data-bs-toggle="collapse" data-bs-target="#depensesSubMenu" aria-expanded="false">
                     <i class="fas fa-money-bill-wave"></i>
@@ -354,13 +356,14 @@
                         <i class="fas fa-money-bill-wave"></i>
                         <span>Dépenses du Jour</span>
                     </a>
+                    <?php if ($user_role === 'gestionnaire'): ?>
                     <a href="../depenses/historique.php" class="sidebar-item <?php echo $active_page == 'depenses-historique' ? 'active' : ''; ?>">
                         <i class="fas fa-history"></i>
                         <span>Historique des Dépenses</span>
                     </a>
+                    <?php endif; ?>
                 </div>
             </div>
-            <?php endif; ?>
             
             <!-- Gestion des Clients -->
             <a href="<?php echo BASE_URL; ?>/src/views/clients/index.php" class="sidebar-item <?php echo $active_page == 'clients' ? 'active' : ''; ?>">
