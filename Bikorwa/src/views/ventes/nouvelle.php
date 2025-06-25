@@ -825,7 +825,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="preview-modal-label">Prévisualiser la vente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -870,7 +870,7 @@ include('../layouts/header.php');
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 <button type="button" class="btn btn-primary" id="confirmer-vente">
                     <i class="fas fa-check mr-1"></i> Confirmer la vente
                 </button>
@@ -885,7 +885,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h5 class="modal-title text-white">Vente enregistrée avec succès</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

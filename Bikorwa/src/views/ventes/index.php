@@ -489,7 +489,7 @@ EOT;
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Détails de la Vente</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -534,7 +534,7 @@ EOT;
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <a id="print-facture" href="#" target="_blank" class="btn btn-primary">
                     <i class="fas fa-print"></i> Imprimer
                 </a>
@@ -549,7 +549,7 @@ EOT;
         <div class="modal-content">
             <div class="modal-header bg-danger">
                 <h4 class="modal-title">Annuler la Vente</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -575,7 +575,7 @@ EOT;
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-times-circle"></i> Confirmer l'Annulation
                     </button>
