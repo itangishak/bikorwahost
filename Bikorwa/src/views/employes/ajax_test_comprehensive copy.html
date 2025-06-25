@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Test Comprehensive - Employee Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body { padding: 20px; }
+        .test-card { margin-bottom: 15px; }
+        .log-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        .log-entry { margin-bottom: 5px; }
+        .log-time { color: #6c757d; }
+        .log-success { color: #198754; }
+        .log-error { color: #dc3545; }
+        .log-info { color: #0d6efd; }
+        .log-debug { color: #6610f2; }
+        .form-container { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AJAX Test Comprehensive - Employee Management</h1>
+        <p class="lead">This tool helps debug AJAX requests in the employee management system</p>
+        
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Test Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="useXHR" checked>
+                            <label class="form-check-label" for="useXHR">Add X-Requested-With Header</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="endpointSelect" class="form-label">Endpoint</label>
+                            <select class="form-select" id="endpointSelect">
+                                <option value="./process.php">process.php (Production)</option>
+                                <option value="./ajax_debug.php">ajax_debug.php (Debug)</option>
+                                <option value="./test_ajax.php">test_ajax.php (Simple Test)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="responseFormat" class="form-label">Expected Response Format</label>
+                            <select class="form-select" id="responseFormat">
+                                <option value="json">JSON</option>
+                                <option value="text">Plain Text</option>
+                            </select>
+                        </div>
+                        <button id="clearLog" class="btn btn-secondary">
+                            <i class="fas fa-trash-alt me-1"></i> Clear Log
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Employee Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="employeeId" class="form-label">Employee ID</label>
+                            <input type="number" class="form-control" id="employeeId" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="employeeName" value="Test Employee">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePosition" class="form-label">Position</label>
+                            <input type="text" class="form-control" id="employeePosition" value="Test Position">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="employeeStatus" checked>
+                            <label class="form-check-label" for="employeeStatus">Active</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card test-card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Create/Edit Tests</h5>
+                    </div>
+                    <div class="card-body">
+                        <button id="testAdd" class="btn btn-success me-2">
+                            <i class="fas fa-plus-circle me-1"></i> Test Add
+                        </button>
+                        <button id="testEdit" class="btn btn-warning me-2">
+                            <i class="fas fa-edit me-1"></i> Test Edit
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card test-card">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Delete/Status Tests</h5>
+                    </div>
+                    <div class="card-body">
+                        <button id="testDelete" class="btn btn-danger me-2">
+                            <i class="fas fa-trash me-1"></i> Test Delete
+                        </button>
+                        <button id="testToggleStatus" class="btn btn-info me-2">
+                            <i class="fas fa-toggle-on me-1"></i> Test Toggle Status
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card test-card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">View Tests</h5>
+                    </div>
+                    <div class="card-body">
+                        <button id="testView" class="btn btn-primary me-2">
+                            <i class="fas fa-eye me-1"></i> Test View
+                        </button>
+                        <button id="testList" class="btn btn-dark me-2">
+                            <i class="fas fa-list me-1"></i> Test List
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Log</h5>
+                        <span id="logStatus" class="badge bg-secondary">Ready</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="logContainer" class="log-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <h5>Troubleshooting Tips:</h5>
+            <ul>
+                <li>If you're getting "Invalid JSON" errors, the PHP script might be outputting errors before the JSON response.</li>
+                <li>Check if the X-Requested-With header is being properly detected in process.php.</li>
+                <li>Make sure process.php is properly returning JSON with the correct Content-Type header.</li>
+                <li>Verify that the server-side permissions logic in Auth::canDelete() and Auth::canModify() is working correctly.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logContainer = document.getElementById('logContainer');
+            const logStatus = document.getElementById('logStatus');
+            
+            // Log utility functions
+            function log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const entry = document.createElement('div');
+                entry.className = `log-entry log-${type}`;
+                entry.innerHTML = `<span class="log-time">[${timestamp}]</span> ${message}`;
+                logContainer.appendChild(entry);
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+            
+            function clearLog() {
+                logContainer.innerHTML = '';
+                log('Log cleared', 'debug');
+            }
+            
+            document.getElementById('clearLog').addEventListener('click', clearLog);
+            
+            // AJAX request function
+            function makeRequest(action, data = {}) {
+                const endpoint = document.getElementById('endpointSelect').value;
+                const useXHR = document.getElementById('useXHR').checked;
+                const responseFormat = document.getElementById('responseFormat').value;
+                
+                // Update status
+                logStatus.textContent = 'Sending...';
+                logStatus.className = 'badge bg-warning';
+                
+                // Create form data
+                const formData = new FormData();
+                formData.append('action', action);
+                
+                // Add all other data
+                for (const [key, value] of Object.entries(data)) {
+                    formData.append(key, value);
+                }
+                
+                // Log the request
+                log(`Request to ${endpoint}`, 'info');
+                log(`Action: ${action}`, 'info');
+                log(`Data: ${JSON.stringify(data)}`, 'debug');
+                
+                // Headers
+                const headers = {};
+                if (useXHR) {
+                    headers['X-Requested-With'] = 'XMLHttpRequest';
+                    log('Added X-Requested-With header', 'info');
+                }
+                
+                // Make the fetch request
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: headers,
+                    body: formData
+                })
+                .then(response => {
+                    // Log response status
+                    log(`Response status: ${response.status} ${response.statusText}`, 'info');
+                    logStatus.textContent = `Status: ${response.status}`;
+                    logStatus.className = response.ok ? 'badge bg-success' : 'badge bg-danger';
+                    
+                    // Get content type
+                    const contentType = response.headers.get('content-type');
+                    log(`Content-Type: ${contentType || 'Not specified'}`, 'debug');
+                    
+                    // Return text first
+                    return response.text();
+                })
+                .then(text => {
+                    // Log raw response
+                    log('Raw response:', 'debug');
+                    log(text, 'debug');
+                    
+                    // Try to parse as JSON if expected
+                    if (responseFormat === 'json') {
+                        try {
+                            const json = JSON.parse(text);
+                            log('Parsed JSON:', 'success');
+                            log(JSON.stringify(json, null, 2), 'success');
+                            
+                            // Show success/error based on response
+                            if (json.success) {
+                                log(`Success: ${json.message || 'Operation completed successfully'}`, 'success');
+                            } else {
+                                log(`Error: ${json.message || 'Operation failed'}`, 'error');
+                            }
+                        } catch (e) {
+                            log(`JSON parse error: ${e.message}`, 'error');
+                            
+                            // Try to identify PHP errors in the response
+                            if (text.includes('Fatal error') || text.includes('Warning') || text.includes('Notice')) {
+                                log('PHP error detected in response:', 'error');
+                                const errorLines = text.split('\n').filter(line => 
+                                    line.includes('Fatal error') || 
+                                    line.includes('Warning') || 
+                                    line.includes('Notice') ||
+                                    line.includes('Parse error')
+                                );
+                                errorLines.forEach(line => log(line, 'error'));
+                            }
+                        }
+                    } else {
+                        log('Response treated as plain text', 'info');
+                    }
+                })
+                .catch(error => {
+                    log(`Fetch error: ${error.message}`, 'error');
+                    logStatus.textContent = 'Error';
+                    logStatus.className = 'badge bg-danger';
+                })
+                .finally(() => {
+                    log('Request complete', 'info');
+                    // Add separator
+                    log('----------------------------', 'debug');
+                });
+            }
+            
+            // Test button click handlers
+            document.getElementById('testAdd').addEventListener('click', function() {
+                const data = {
+                    nom: document.getElementById('employeeName').value,
+                    poste: document.getElementById('employeePosition').value,
+                    date_embauche: '2025-01-01',
+                    salaire: '50000',
+                    telephone: '123-456-7890'
+                };
+                makeRequest('add', data);
+            });
+            
+            document.getElementById('testEdit').addEventListener('click', function() {
+                const data = {
+                    id: document.getElementById('employeeId').value,
+                    nom: document.getElementById('employeeName').value,
+                    poste: document.getElementById('employeePosition').value,
+                    date_embauche: '2025-01-01',
+                    salaire: '60000',
+                    telephone: '123-456-7890',
+                    actif: document.getElementById('employeeStatus').checked ? 1 : 0
+                };
+                makeRequest('edit', data);
+            });
+            
+            document.getElementById('testDelete').addEventListener('click', function() {
+                const data = {
+                    id: document.getElementById('employeeId').value
+                };
+                makeRequest('delete', data);
+            });
+            
+            document.getElementById('testToggleStatus').addEventListener('click', function() {
+                const data = {
+                    id: document.getElementById('employeeId').value
+                };
+                makeRequest('toggle_status', data);
+            });
+            
+            document.getElementById('testView').addEventListener('click', function() {
+                const data = {
+                    id: document.getElementById('employeeId').value
+                };
+                makeRequest('view', data);
+            });
+            
+            document.getElementById('testList').addEventListener('click', function() {
+                makeRequest('list');
+            });
+            
+            // Initial log
+            log('Test tool initialized', 'info');
+            log('Click any test button to start', 'info');
+        });
+    </script>
+</body>
+</html>

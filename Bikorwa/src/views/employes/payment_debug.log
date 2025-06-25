@@ -1,0 +1,54 @@
+[2025-06-06 03:34:39] Starting payment processing
+POST Data: Array
+(
+    [employe_id] => 5
+    [montant] => 100000
+    [date_paiement] => 2025-06-06
+    [mode_paiement] => Espèces
+    [reference] => 
+    [notes] => 
+)
+
+Payment Data: Array
+(
+    [employe_id] => 5
+    [montant] => 100000
+    [periode_debut] => 2025-06-06
+    [periode_fin] => 2025-06-06
+    [date_paiement] => 2025-06-06
+    [mode_paiement] => Espèces
+    [reference] => 
+    [note] => 
+    [utilisateur_id] => 1
+)
+
+Query: INSERT INTO salaires (employe_id, montant, periode_debut, periode_fin, date_paiement, mode_paiement, reference, note, utilisateur_id) VALUES (:employe_id, :montant, :periode_debut, :periode_fin, :date_paiement, :mode_paiement, :reference, :note, :utilisateur_id)
+Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mode_paiement' in 'field list'
+[2025-06-06 03:34:39] Processing completed
+
+[2025-06-06 03:38:17] Starting payment processing
+POST Data: Array
+(
+    [employe_id] => 5
+    [montant] => 10000
+    [date_paiement] => 2025-06-06
+    [reference] => 
+    [notes] => 
+)
+
+Payment Data: Array
+(
+    [employe_id] => 5
+    [montant] => 10000
+    [periode_debut] => 2025-06-06
+    [periode_fin] => 2025-06-06
+    [date_paiement] => 2025-06-06
+    [reference] => 
+    [note] => 
+    [utilisateur_id] => 1
+)
+
+Query: INSERT INTO salaires (employe_id, montant, periode_debut, periode_fin, date_paiement, reference, note, utilisateur_id) VALUES (:employe_id, :montant, :periode_debut, :periode_fin, :date_paiement, :reference, :note, :utilisateur_id)
+Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'reference' in 'field list'
+[2025-06-06 03:38:17] Processing completed
+

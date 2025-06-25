@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Debug</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        #result {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Employee Management Debug Console</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Test AJAX Operations</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <button id="testAdd" class="btn btn-success me-2">
+                                <i class="fas fa-plus-circle me-1"></i> Test Add Employee
+                            </button>
+                            <button id="testEdit" class="btn btn-warning me-2">
+                                <i class="fas fa-edit me-1"></i> Test Edit Employee
+                            </button>
+                            <button id="testDelete" class="btn btn-danger me-2">
+                                <i class="fas fa-trash me-1"></i> Test Delete Employee
+                            </button>
+                            <button id="testToggle" class="btn btn-info">
+                                <i class="fas fa-toggle-on me-1"></i> Test Toggle Status
+                            </button>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="useDebugEndpoint" checked>
+                            <label class="form-check-label" for="useDebugEndpoint">
+                                Use debug endpoint (ajax_debug.php)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Form Values</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="employeeId" class="form-label">Employee ID</label>
+                            <input type="number" class="form-control" id="employeeId" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Employee Name</label>
+                            <input type="text" class="form-control" id="employeeName" value="John Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="isActive" class="form-label">Is Active</label>
+                            <select class="form-select" id="isActive">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Result</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="result">
+                            <p class="text-muted">Test results will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultDiv = document.getElementById('result');
+            const useDebugEndpoint = document.getElementById('useDebugEndpoint');
+            
+            // Utility function to log results
+            function logResult(title, content) {
+                const timestamp = new Date().toLocaleTimeString();
+                resultDiv.innerHTML = `
+                    <div class="p-2">
+                        <h6>${timestamp} - ${title}</h6>
+                        <pre>${content}</pre>
+                        <hr>
+                    </div>
+                ` + resultDiv.innerHTML;
+            }
+            
+            // Function to handle AJAX requests
+            function testAjaxRequest(action, data = {}) {
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('action', action);
+                
+                // Add all data properties to formData
+                for (const [key, value] of Object.entries(data)) {
+                    formData.append(key, value);
+                }
+                
+                // Determine endpoint
+                const endpoint = useDebugEndpoint.checked ? './ajax_debug.php' : './process.php';
+                
+                logResult(`${action.toUpperCase()} Request`, `Sending to: ${endpoint}\nData: ${JSON.stringify(Object.fromEntries(formData))}`);
+                
+                // Make the request
+                fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    logResult(`Response Status`, `${response.status} ${response.statusText}`);
+                    return response.text();
+                })
+                .then(text => {
+                    logResult(`Raw Response`, text);
+                    try {
+                        const json = JSON.parse(text);
+                        logResult(`Parsed JSON`, JSON.stringify(json, null, 2));
+                    } catch (e) {
+                        logResult(`Parse Error`, `Failed to parse JSON: ${e.message}`);
+                    }
+                })
+                .catch(error => {
+                    logResult(`Fetch Error`, error.message);
+                });
+            }
+            
+            // Test Add Employee
+            document.getElementById('testAdd').addEventListener('click', function() {
+                testAjaxRequest('add', {
+                    nom: document.getElementById('employeeName').value,
+                    poste: 'Test Position',
+                    date_embauche: '2025-01-01',
+                    salaire: '50000'
+                });
+            });
+            
+            // Test Edit Employee
+            document.getElementById('testEdit').addEventListener('click', function() {
+                testAjaxRequest('edit', {
+                    id: document.getElementById('employeeId').value,
+                    nom: document.getElementById('employeeName').value,
+                    poste: 'Updated Position',
+                    date_embauche: '2025-01-01',
+                    salaire: '60000',
+                    actif: document.getElementById('isActive').value
+                });
+            });
+            
+            // Test Delete Employee
+            document.getElementById('testDelete').addEventListener('click', function() {
+                testAjaxRequest('delete', {
+                    id: document.getElementById('employeeId').value
+                });
+            });
+            
+            // Test Toggle Status
+            document.getElementById('testToggle').addEventListener('click', function() {
+                testAjaxRequest('toggle_status', {
+                    id: document.getElementById('employeeId').value
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Ajouter un nouveau produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="action" value="add_product">
+                    
+                    <div class="row g-3">
+                        <!-- Product Information -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="code" class="form-label">Code produit <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="code" name="code" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="categorie_id" class="form-label">Catégorie</label>
+                                <select class="form-select" id="categorie_id" name="categorie_id">
+                                    <option value="">Sélectionner une catégorie</option>
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['nom']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom du produit <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nom" name="nom" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="unite_mesure" class="form-label">Unité de mesure <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="unite_mesure" name="unite_mesure" required>
+                                <small class="form-text text-muted">Ex: pièce, kg, litre, etc.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="prix_achat" class="form-label">Prix d'achat <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="prix_achat" name="prix_achat" min="0" step="1" required>
+                                    <span class="input-group-text">F</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="prix_vente" class="form-label">Prix de vente <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="prix_vente" name="prix_vente" min="0" step="1" required>
+                                    <span class="input-group-text">F</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="quantite" class="form-label">Stock initial</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="quantite" name="quantite" min="0" step="0.01" value="0">
+                                    <span class="input-group-text quantite-unite">unité</span>
+                                </div>
+                                <small class="form-text text-muted">Laisser à 0 si aucun stock initial</small>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Modifier le produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="action" value="edit_product">
+                    <input type="hidden" name="produit_id" id="edit_produit_id">
+                    
+                    <div class="row g-3">
+                        <!-- Product Information -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="edit_code" class="form-label">Code produit <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="edit_code" name="code" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="edit_categorie_id" class="form-label">Catégorie</label>
+                                <select class="form-select" id="edit_categorie_id" name="categorie_id">
+                                    <option value="">Sélectionner une catégorie</option>
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['nom']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="edit_nom" class="form-label">Nom du produit <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="edit_nom" name="nom" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="edit_unite_mesure" class="form-label">Unité de mesure <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="edit_unite_mesure" name="unite_mesure" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="edit_prix_achat" class="form-label">Prix d'achat <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="edit_prix_achat" name="prix_achat" min="0" step="1" required>
+                                    <span class="input-group-text">F</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="edit_prix_vente" class="form-label">Prix de vente <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="edit_prix_vente" name="prix_vente" min="0" step="1" required>
+                                    <span class="input-group-text">F</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="edit_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="edit_description" name="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="edit_actif" name="actif" checked>
+                                <label class="form-check-label" for="edit_actif">Produit actif</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Product Modal -->
+<div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewProductModalLabel">Détails du produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-12 text-center mb-3">
+                        <div class="product-icon rounded-circle bg-primary bg-opacity-10 p-4 d-inline-block">
+                            <i class="fas fa-box fa-3x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h4 id="view_nom" class="mb-1"></h4>
+                        <div><span class="badge bg-secondary" id="view_code"></span></div>
+                    </div>
+                </div>
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Catégorie</div>
+                            <div class="fw-bold" id="view_categorie"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Unité de mesure</div>
+                            <div class="fw-bold" id="view_unite"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Prix d'achat</div>
+                            <div class="fw-bold" id="view_prix_achat"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Prix de vente</div>
+                            <div class="fw-bold" id="view_prix_vente"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Quantité en stock</div>
+                            <div class="fw-bold" id="view_quantite"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Valeur en stock</div>
+                            <div class="fw-bold" id="view_valeur"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Dernière mise à jour</div>
+                            <div class="fw-bold" id="view_date"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-detail-card p-3 border rounded mb-3">
+                            <div class="small text-muted">Statut</div>
+                            <div class="fw-bold" id="view_actif"></div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="product-detail-card p-3 border rounded mb-0">
+                            <div class="small text-muted">Description</div>
+                            <div class="fw-bold" id="view_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <?php if ($isGestionnaire): ?>
+                <button type="button" class="btn btn-primary" id="viewToEditBtn">Modifier</button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Adjust Stock Modal -->
+<div class="modal fade" id="adjustStockModal" tabindex="-1" aria-labelledby="adjustStockModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adjustStockModalLabel">Ajuster le stock</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="action" value="adjust_stock">
+                    <input type="hidden" name="produit_id" id="adjust_produit_id">
+                    
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Produit:</strong> <span id="adjust_nom_produit"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Code:</strong> <span id="adjust_code_produit"></span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <strong>Stock actuel:</strong> <span id="adjust_stock_actuel"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Type de mouvement <span class="text-danger">*</span></label>
+                        <div class="d-flex">
+                            <div class="form-check me-4">
+                                <input class="form-check-input" type="radio" name="type_mouvement" id="type_entree" value="entree" checked>
+                                <label class="form-check-label" for="type_entree">
+                                    <i class="fas fa-arrow-alt-circle-down text-success me-1"></i> Entrée
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type_mouvement" id="type_sortie" value="sortie">
+                                <label class="form-check-label" for="type_sortie">
+                                    <i class="fas fa-arrow-alt-circle-up text-danger me-1"></i> Sortie
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="adjust_quantite" class="form-label">Quantité <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="adjust_quantite" name="quantite" min="0.01" step="0.01" required>
+                            <span class="input-group-text" id="adjust_unite">unité</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="adjust_note" class="form-label">Note</label>
+                        <textarea class="form-control" id="adjust_note" name="note" rows="2" placeholder="Raison de l'ajustement..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Product Modal -->
+<div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProductModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-warning fa-4x mb-3"></i>
+                    <h5>Êtes-vous sûr de vouloir supprimer ce produit?</h5>
+                    <p class="mb-0" id="delete_product_name"></p>
+                    <p class="text-muted small" id="delete_product_code"></p>
+                </div>
+                <div class="alert alert-danger">
+                    <i class="fas fa-info-circle me-2"></i> Cette action est irréversible. Si le produit est utilisé dans des ventes, il sera désactivé au lieu d'être supprimé.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form action="" method="POST" class="d-inline">
+                    <input type="hidden" name="action" value="delete_product">
+                    <input type="hidden" name="produit_id" id="delete_produit_id">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Update unit of measure display based on input
+    document.addEventListener('DOMContentLoaded', function() {
+        // For new product form
+        const uniteMesureInput = document.getElementById('unite_mesure');
+        const quantiteUnite = document.querySelector('.quantite-unite');
+        
+        if (uniteMesureInput && quantiteUnite) {
+            uniteMesureInput.addEventListener('input', function() {
+                quantiteUnite.textContent = this.value || 'unité';
+            });
+        }
+        
+        // Handle Edit Product Modal
+        const editProductModal = document.getElementById('editProductModal');
+        if (editProductModal) {
+            editProductModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                
+                // Extract data
+                const id = button.getAttribute('data-id');
+                const code = button.getAttribute('data-code');
+                const nom = button.getAttribute('data-nom');
+                const description = button.getAttribute('data-description');
+                const categorieId = button.getAttribute('data-categorie-id');
+                const unite = button.getAttribute('data-unite');
+                const prixAchat = button.getAttribute('data-prix-achat');
+                const prixVente = button.getAttribute('data-prix-vente');
+                const actif = button.getAttribute('data-actif');
+                
+                // Set values in the form
+                document.getElementById('edit_produit_id').value = id;
+                document.getElementById('edit_code').value = code;
+                document.getElementById('edit_nom').value = nom;
+                document.getElementById('edit_description').value = description;
+                document.getElementById('edit_categorie_id').value = categorieId;
+                document.getElementById('edit_unite_mesure').value = unite;
+                document.getElementById('edit_prix_achat').value = prixAchat;
+                document.getElementById('edit_prix_vente').value = prixVente;
+                document.getElementById('edit_actif').checked = actif === '1';
+            });
+        }
+        
+        // Handle View Product Modal
+        const viewProductModal = document.getElementById('viewProductModal');
+        if (viewProductModal) {
+            viewProductModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                
+                // Extract data
+                const id = button.getAttribute('data-id');
+                const code = button.getAttribute('data-code');
+                const nom = button.getAttribute('data-nom');
+                const description = button.getAttribute('data-description') || 'Aucune description';
+                const categorie = button.getAttribute('data-categorie');
+                const unite = button.getAttribute('data-unite');
+                const prixAchat = button.getAttribute('data-prix-achat');
+                const prixVente = button.getAttribute('data-prix-vente');
+                const quantite = button.getAttribute('data-quantite');
+                const valeur = button.getAttribute('data-valeur');
+                const date = button.getAttribute('data-date');
+                const actif = button.getAttribute('data-actif');
+                
+                // Set values in the modal
+                document.getElementById('view_nom').textContent = nom;
+                document.getElementById('view_code').textContent = code;
+                document.getElementById('view_categorie').textContent = categorie;
+                document.getElementById('view_description').textContent = description;
+                document.getElementById('view_unite').textContent = unite;
+                document.getElementById('view_prix_achat').textContent = prixAchat + ' F';
+                document.getElementById('view_prix_vente').textContent = prixVente + ' F';
+                document.getElementById('view_quantite').textContent = quantite + ' ' + unite;
+                document.getElementById('view_valeur').textContent = valeur + ' F';
+                document.getElementById('view_date').textContent = date;
+                document.getElementById('view_actif').textContent = actif;
+                
+                // Setup the Edit button
+                const viewToEditBtn = document.getElementById('viewToEditBtn');
+                if (viewToEditBtn) {
+                    viewToEditBtn.onclick = function() {
+                        // Close the view modal
+                        const viewModal = bootstrap.Modal.getInstance(viewProductModal);
+                        viewModal.hide();
+                        
+                        // Trigger the edit modal with this product's data
+                        setTimeout(function() {
+                            const editButton = document.querySelector(`[data-bs-target="#editProductModal"][data-id="${id}"]`);
+                            if (editButton) {
+                                editButton.click();
+                            }
+                        }, 500);
+                    };
+                }
+            });
+        }
+        
+        // Handle Adjust Stock Modal
+        const adjustStockModal = document.getElementById('adjustStockModal');
+        if (adjustStockModal) {
+            adjustStockModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                
+                // Extract data
+                const id = button.getAttribute('data-id');
+                const nom = button.getAttribute('data-nom');
+                const code = button.getAttribute('data-code');
+                const unite = button.getAttribute('data-unite');
+                const quantite = button.getAttribute('data-quantite');
+                
+                // Set values in the form
+                document.getElementById('adjust_produit_id').value = id;
+                document.getElementById('adjust_nom_produit').textContent = nom;
+                document.getElementById('adjust_code_produit').textContent = code;
+                document.getElementById('adjust_stock_actuel').textContent = quantite + ' ' + unite;
+                document.getElementById('adjust_unite').textContent = unite;
+                
+                // Clear input field
+                document.getElementById('adjust_quantite').value = '';
+                document.getElementById('adjust_note').value = '';
+            });
+        }
+        
+        // Handle Delete Product Modal
+        const deleteProductModal = document.getElementById('deleteProductModal');
+        if (deleteProductModal) {
+            deleteProductModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                
+                // Extract data
+                const id = button.getAttribute('data-id');
+                const nom = button.getAttribute('data-nom');
+                const code = button.getAttribute('data-code');
+                
+                // Set values in the form
+                document.getElementById('delete_produit_id').value = id;
+                document.getElementById('delete_product_name').textContent = nom;
+                document.getElementById('delete_product_code').textContent = 'Code: ' + code;
+            });
+        }
+    });
+</script>

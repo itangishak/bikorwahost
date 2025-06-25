@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        #result {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            min-height: 100px;
+            margin-top: 20px;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX Test for BIKORWA SHOP</h1>
+    
+    <div class="card">
+        <h2>Test AJAX Connection</h2>
+        <p>Click the button below to test AJAX connection to the test_ajax.php script:</p>
+        <button id="testAjax" class="btn">Test AJAX</button>
+    </div>
+    
+    <div class="card">
+        <h2>Test Process Script</h2>
+        <p>Click the button below to test AJAX connection to the process.php script:</p>
+        <button id="testProcess" class="btn">Test Process</button>
+    </div>
+    
+    <div id="result">
+        <p>Results will appear here...</p>
+    </div>
+    
+    <script>
+        document.getElementById('testAjax').addEventListener('click', function() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Testing AJAX connection...</p>';
+            
+            fetch('./test_ajax.php')
+                .then(response => {
+                    resultDiv.innerHTML += `<p>Response status: ${response.status}</p>`;
+                    return response.text();
+                })
+                .then(text => {
+                    resultDiv.innerHTML += `<p>Raw response:</p><pre>${text}</pre>`;
+                    try {
+                        const json = JSON.parse(text);
+                        resultDiv.innerHTML += `<p>Parsed JSON:</p><pre>${JSON.stringify(json, null, 2)}</pre>`;
+                    } catch(e) {
+                        resultDiv.innerHTML += `<p>Error parsing JSON: ${e.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    resultDiv.innerHTML += `<p>Error: ${error.message}</p>`;
+                });
+        });
+        
+        document.getElementById('testProcess').addEventListener('click', function() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Testing process.php...</p>';
+            
+            const formData = new FormData();
+            formData.append('action', 'test');
+            formData.append('test_data', 'This is a test');
+            
+            fetch('./process.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    resultDiv.innerHTML += `<p>Response status: ${response.status}</p>`;
+                    return response.text();
+                })
+                .then(text => {
+                    resultDiv.innerHTML += `<p>Raw response:</p><pre>${text}</pre>`;
+                    try {
+                        const json = JSON.parse(text);
+                        resultDiv.innerHTML += `<p>Parsed JSON:</p><pre>${JSON.stringify(json, null, 2)}</pre>`;
+                    } catch(e) {
+                        resultDiv.innerHTML += `<p>Error parsing JSON: ${e.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    resultDiv.innerHTML += `<p>Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
