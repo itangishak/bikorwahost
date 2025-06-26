@@ -10,11 +10,15 @@ function startDbSession() {
 
     $database = new Database();
     $pdo = $database->getConnection();
-    $handler = new DbSessionHandler($pdo);
-    session_set_save_handler($handler, true);
+    if ($pdo instanceof PDO) {
+        $handler = new DbSessionHandler($pdo);
+        session_set_save_handler($handler, true);
+    } else {
+        error_log('Unable to initialize DB session handler: connection failed');
+    }
 
     // Check for token in header
-    $headers = getallheaders();
+    $headers = function_exists('getallheaders') ? getallheaders() : [];
     $token = $headers['X-Session-Id'] ?? '';
     if (!$token && isset($_POST['session_id'])) {
         $token = $_POST['session_id'];
