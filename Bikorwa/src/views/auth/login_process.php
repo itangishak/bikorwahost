@@ -12,13 +12,17 @@ ini_set('display_errors', 0); // Don't display errors to the browser
 ob_start();
 
 // Log function for debugging
-function logError($message) {
+function logError($message, $context = []) {
     // Create logs directory if it doesn't exist
     $logDir = __DIR__ . '/../../../logs';
     if (!is_dir($logDir)) {
         mkdir($logDir, 0755, true);
     }
-    error_log(date('Y-m-d H:i:s') . ' - Login Error: ' . $message . PHP_EOL, 3, $logDir . '/login_errors.log');
+    if (!empty($context)) {
+        $message .= ' | ' . json_encode($context);
+    }
+    $entry = date('Y-m-d H:i:s') . ' - Login Error: ' . $message . PHP_EOL;
+    file_put_contents($logDir . '/login_errors.log', $entry, FILE_APPEND);
 }
 
 // Function to test database connection
@@ -85,7 +89,14 @@ try {
         }
 
         // Log incoming request data for debugging (without passwords)
-        logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
+        $postData = $_POST;
+        if (isset($postData['password'])) {
+            $postData['password'] = '******';
+        }
+        logError(
+            'Login attempt for username: ' . ($postData['username'] ?? 'not provided'),
+            ['post' => $postData]
+        );
 
         // Récupérer et nettoyer les données du formulaire
         $username = sanitize_input($_POST['username'] ?? '');
@@ -126,8 +137,11 @@ try {
             send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized
         }
     } catch (Exception $e) {
-        // Log detailed error
-        logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+        // Log detailed error with trace
+        logError(
+            'Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine(),
+            ['trace' => $e->getTraceAsString()]
+        );
         
         // Send a generic error message to the client
         send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
@@ -138,8 +152,11 @@ try {
         }
     }
 } catch (Exception $e) {
-    // Log detailed error
-    logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+    // Log detailed error with trace
+    logError(
+        'Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine(),
+        ['trace' => $e->getTraceAsString()]
+    );
     
     // Send a generic error message to the client
     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
