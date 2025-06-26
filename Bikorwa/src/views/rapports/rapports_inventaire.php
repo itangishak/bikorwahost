@@ -9,7 +9,7 @@ require_once __DIR__.'/../../../src/utils/Auth.php';
 
 // Vérification des permissions
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gestionnaire') {
-    header('Location: /login.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 

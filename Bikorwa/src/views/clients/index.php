@@ -16,13 +16,13 @@ $auth = new Auth($conn);
 
 // Check if user is logged in
 if (!$auth->isLoggedIn()) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 
 // Check access permissions
 if (!$auth->hasAccess('clients')) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 

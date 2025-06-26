@@ -19,7 +19,7 @@ $authController = new AuthController();
 
 // Check if user is logged in and has access to user management
 if (!$auth->isLoggedIn() || !$auth->hasAccess('utilisateurs')) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 
