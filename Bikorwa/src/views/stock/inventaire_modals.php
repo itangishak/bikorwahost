@@ -199,9 +199,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <div class="modal-footer d-flex justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustPrev" title="Précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="adjustNext" title="Suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -320,9 +326,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustPrev" title="Précédent"><i class="fas fa-chevron-left"></i></button>
                 <h5 class="modal-title flex-grow-1" id="adjustStockModalLabel">Ajuster le stock</h5>
-                <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustNext" title="Suivant"><i class="fas fa-chevron-right"></i></button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="" method="POST" id="adjustStockForm">
@@ -718,6 +722,24 @@
                 const button = event.relatedTarget;
                 currentAdjustIndex = parseInt(button.dataset.index);
                 populateAdjustModal(button);
+            });
+
+            const keyHandler = function(e) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    if (prevBtn) prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    if (nextBtn) nextBtn.click();
+                }
+            };
+
+            adjustStockModal.addEventListener('shown.bs.modal', function () {
+                document.addEventListener('keydown', keyHandler);
+            });
+
+            adjustStockModal.addEventListener('hidden.bs.modal', function () {
+                document.removeEventListener('keydown', keyHandler);
             });
 
             if (prevBtn) {
