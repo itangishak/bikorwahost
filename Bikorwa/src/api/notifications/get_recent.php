@@ -18,6 +18,12 @@ if (!$auth->isLoggedIn()) {
     exit;
 }
 
+// Only managers can view notifications
+if (!$auth->isManager()) {
+    echo json_encode(['success' => false, 'message' => 'Access denied']);
+    exit;
+}
+
 $activityLog = new ActivityLog($conn);
 $activities = $activityLog->getRecentActivities(5);
 $count = $activityLog->getTodayActivityCount();

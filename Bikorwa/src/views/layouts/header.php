@@ -453,6 +453,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
         </div>
         
         <div class="d-flex align-items-center">
+            <?php if ($user_role === 'gestionnaire'): ?>
             <div class="position-relative">
                 <a href="#" id="notificationBell" class="btn btn-light position-relative me-3">
                     <i class="fas fa-bell"></i>
@@ -462,6 +463,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
                 </a>
                 <div id="notificationDropdown" class="card shadow" style="display:none; position:absolute; right:0; top:100%; width:300px; z-index:1000;"></div>
             </div>
+            <?php endif; ?>
             
             <div class="topbar-divider"></div>
             
@@ -492,6 +494,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
     document.addEventListener('DOMContentLoaded', function() {
         var dropdownToggle = document.querySelector('.topbar .dropdown-toggle');
         var dropdownMenu = document.querySelector('.topbar .dropdown-menu');
+<?php if ($user_role === 'gestionnaire'): ?>
         var bell = document.getElementById('notificationBell');
         var notifDropdown = document.getElementById('notificationDropdown');
 
@@ -511,6 +514,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
 
         fetchAlerts();
         setInterval(fetchAlerts, 60000);
+<?php endif; ?>
 
         if (dropdownToggle && dropdownMenu) {
             // Ensure menu is hidden initially
@@ -539,6 +543,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
             });
         }
 
+<?php if ($user_role === 'gestionnaire'): ?>
         if (bell && notifDropdown) {
             bell.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -561,5 +566,6 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
                 e.stopPropagation();
             });
         }
+<?php endif; ?>
     });
     </script>
