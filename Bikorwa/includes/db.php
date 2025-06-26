@@ -29,6 +29,10 @@ try {
 }
 
 // Constants
-define('BASE_URL', '/');
-define('CURRENCY', 'BIF');
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/Bikorwa');
+}
+if (!defined('CURRENCY')) {
+    define('CURRENCY', 'BIF');
+}
 ?>

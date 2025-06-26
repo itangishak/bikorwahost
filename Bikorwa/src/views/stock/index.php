@@ -1,6 +1,6 @@
 <?php
 // Redirect to inventory page
-header('Location: inventaire.php');
+header('Location: ' . BASE_URL . '/src/views/stock/inventaire.php');
 exit;
 ?>
                 </button>

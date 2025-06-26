@@ -15,7 +15,7 @@ $conn = require __DIR__ . '/../../includes/db.php';
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
-    header('Location: historique_approvisionnement.php');
+    header('Location: ' . BASE_URL . '/src/views/stock/historique_approvisionnement.php');
     exit;
 }
 
@@ -26,7 +26,7 @@ $stmt->execute([$id]);
 $entry = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$entry) {
-    header('Location: historique_approvisionnement.php');
+    header('Location: ' . BASE_URL . '/src/views/stock/historique_approvisionnement.php');
     exit;
 }
 

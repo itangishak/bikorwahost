@@ -10,7 +10,7 @@ require_once('../../config/config.php');
 
 // Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 
@@ -18,9 +18,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 if ($_SESSION['user_role'] !== 'receptionniste') {
     // Redirect to appropriate dashboard based on role
     if ($_SESSION['user_role'] === 'gestionnaire') {
-        header('Location: index.php');
+        header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     } else {
-        header('Location: ../auth/login.php');
+        header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     }
     exit;
 }
