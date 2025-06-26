@@ -16,7 +16,7 @@ $auth = new Auth($conn);
 
 // Check if user is logged in and has appropriate role
 if (!$auth->isLoggedIn()) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 

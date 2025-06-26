@@ -58,7 +58,7 @@ class AuthController {
         $this->auth->logout();
         
         // Rediriger vers la page de connexion
-        header('Location: login.php');
+        header('Location: ' . BASE_URL . '/src/views/auth/login.php');
         exit;
     }
     

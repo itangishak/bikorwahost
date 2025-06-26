@@ -9,7 +9,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 /* ── Auth ───────────────────────── */
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /login.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit();
 }
 
@@ -20,7 +20,7 @@ $pdo  = (new Database())->getConnection();
 $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$user) { header('Location: /login.php'); exit(); }
+if (!$user) { header('Location: ' . BASE_URL . '/src/views/auth/login.php'); exit(); }
 
 $page_title = 'Mon Profil';
 ?>

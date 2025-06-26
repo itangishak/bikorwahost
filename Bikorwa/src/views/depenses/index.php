@@ -16,7 +16,7 @@ $auth = new Auth($conn);
 
 // Check if user is logged in and has appropriate role
 if (!$auth->isLoggedIn()) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 
@@ -24,7 +24,7 @@ if (!$auth->isLoggedIn()) {
 // We can check role directly as fallback if hasAccess isn't working
 $userRole = $_SESSION['user_role'] ?? '';
 if (!$auth->hasAccess('depenses') && $userRole !== 'gestionnaire') {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 

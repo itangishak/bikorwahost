@@ -41,14 +41,14 @@ $authController = new AuthController();
 // Check if user is logged in
 if (!$auth->isLoggedIn()) {
     $_SESSION['error'] = 'Vous devez être connecté pour effectuer cette action';
-    header('Location: /auth/login.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['error'] = 'Méthode non autorisée';
-    header('Location: /employes/liste.php');
+    header('Location: ' . BASE_URL . '/src/views/employes/liste.php');
     exit;
 }
 
@@ -89,7 +89,7 @@ switch ($action) {
         // Check permissions
         if (!$auth->canModify()) {
             $_SESSION['error'] = 'Vous n\'avez pas les permissions nécessaires pour ajouter un employé';
-            header('Location: /employes/liste.php');
+            header('Location: ' . BASE_URL . '/src/views/employes/liste.php');
             exit;
         }
         
@@ -98,7 +98,7 @@ switch ($action) {
         foreach ($required_fields as $field) {
             if (!isset($_POST[$field]) || empty($_POST[$field])) {
                 $_SESSION['error'] = 'Veuillez remplir tous les champs obligatoires';
-                header('Location: /employes/liste.php');
+                header('Location: ' . BASE_URL . '/src/views/employes/liste.php');
                 exit;
             }
         }

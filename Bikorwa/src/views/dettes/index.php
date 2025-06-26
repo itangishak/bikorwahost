@@ -16,14 +16,14 @@ $auth = new Auth($conn);
 
 // Check if user is logged in and has appropriate role
 if (!$auth->isLoggedIn()) {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 
 // Allow access to both gestionnaires and receptionnistes with appropriate privileges
 $userRole = $_SESSION['user_role'] ?? '';
 if (!$auth->hasAccess('dettes') && $userRole !== 'gestionnaire') {
-    header('Location: /dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;
 }
 

@@ -19,7 +19,7 @@ $authController = new AuthController();
 
 // Check if user is logged in
 if (!$auth->isLoggedIn()) {
-    header('Location: /auth/login.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 
