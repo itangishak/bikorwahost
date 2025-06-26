@@ -431,8 +431,20 @@
     // Navigation helpers for Adjust Stock modal
     let adjustButtons = [];
     function refreshAdjustButtons() {
-        adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
-        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+        const tableButtons = Array.from(document.querySelectorAll('table.table tbody tr .adjust-stock-btn'));
+        const indexMap = {};
+        adjustButtons = [];
+        tableButtons.forEach((btn, idx) => {
+            adjustButtons.push(btn);
+            indexMap[btn.getAttribute('data-id')] = idx;
+            btn.dataset.index = idx;
+        });
+        document.querySelectorAll('.adjust-stock-btn').forEach(btn => {
+            const id = btn.getAttribute('data-id');
+            if (id in indexMap) {
+                btn.dataset.index = indexMap[id];
+            }
+        });
     }
     // Function to toggle custom unit field visibility
     function toggleCustomUnit(selectId, containerId) {
