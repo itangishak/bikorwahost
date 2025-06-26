@@ -19,9 +19,18 @@ class Auth {
     public function login($username, $password) {
         // Définir le nom d'utilisateur
         $this->user->username = $username;
-        
+
         // Vérifier si l'utilisateur existe
         if($this->user->userExists()) {
+            // Déconnecter tout utilisateur déjà authentifié pour éviter
+            // l'"écrasement" de session lorsqu'on ouvre plusieurs comptes
+            if($this->isLoggedIn() && isset($_SESSION['user_id']) && $_SESSION['user_id'] !== $this->user->id) {
+                $this->logout();
+                // Recréer une nouvelle session propre
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+            }
             // Vérifier si le compte est actif
             if(!$this->user->actif) {
                 return [
@@ -34,7 +43,10 @@ class Auth {
             if(password_verify($password, $this->user->password)) {
                 // Mettre à jour la dernière connexion
                 $this->user->updateLastLogin();
-                
+
+                // Régénérer l'identifiant de session pour éviter la fixation
+                session_regenerate_id(true);
+
                 // Créer les variables de session
                 $_SESSION['user_id'] = $this->user->id;
                 $_SESSION['user_name'] = $this->user->nom;
