@@ -54,9 +54,10 @@ if (!$isGestionnaire && $type_mouvement === 'sortie') {
 try {
     $pdo->beginTransaction();
 
-    $stmt = $pdo->prepare("SELECT p.nom, p.code, p.unite_mesure, s.quantite, pp.prix_achat
+    $stmt = $pdo->prepare("SELECT p.nom, p.code, p.unite_mesure, s.quantite, pp.prix_achat, c.nom AS categorie_nom
                             FROM produits p
                             LEFT JOIN stock s ON p.id = s.produit_id
+                            LEFT JOIN categories c ON p.categorie_id = c.id
                             LEFT JOIN (
                                 SELECT produit_id, prix_achat
                                 FROM prix_produits
@@ -107,9 +108,27 @@ try {
     $pdo->commit();
 
     $valeur_stock = $new_quantity * $produit['prix_achat'];
+
+    // Déterminer le seuil de stock bas selon la catégorie
+    $threshold = 10;
+    switch ($produit['categorie_nom']) {
+        case 'Spiritueux':
+        case 'Vins':
+            $threshold = 1;
+            break;
+        case 'Sodas':
+            $threshold = 15;
+            break;
+        case 'Bières':
+            $threshold = 10;
+            break;
+        default:
+            $threshold = 10;
+    }
+
     if ($new_quantity <= 0) {
         $status_badge = '<span class="badge bg-danger">Rupture</span>';
-    } elseif ($new_quantity <= 10) {
+    } elseif ($new_quantity <= $threshold) {
         $status_badge = '<span class="badge bg-warning text-dark">Stock bas</span>';
     } else {
         $status_badge = '<span class="badge bg-success">En stock</span>';
