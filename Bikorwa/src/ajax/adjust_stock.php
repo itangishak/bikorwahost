@@ -17,6 +17,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $db = new Database();
 $pdo = $db->getConnection();
 
+if (!$pdo) {
+    echo json_encode(['success' => false, 'message' => 'Erreur de connexion à la base de données']);
+    exit;
+}
+
 $isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
 $isReceptionniste = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste';
 $hasStockAccess = $isGestionnaire || $isReceptionniste;
