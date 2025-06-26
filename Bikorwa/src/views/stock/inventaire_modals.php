@@ -428,6 +428,12 @@
 </div>
 
 <script>
+    // Navigation helpers for Adjust Stock modal
+    let adjustButtons = [];
+    function refreshAdjustButtons() {
+        adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
+        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+    }
     // Function to toggle custom unit field visibility
     function toggleCustomUnit(selectId, containerId) {
         const selectElement = document.getElementById(selectId);
@@ -724,8 +730,7 @@
         const adjustForm = document.getElementById('adjustStockForm');
         const prevBtn = document.getElementById('adjustPrev');
         const nextBtn = document.getElementById('adjustNext');
-        const adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
-        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+        refreshAdjustButtons();
         let currentAdjustIndex = -1;
 
         function populateAdjustModal(button) {
@@ -916,6 +921,7 @@
                 cards.forEach(c => mobileContainer.appendChild(c));
             }
 
+            refreshAdjustButtons();
             updateIndicators();
         }
 
