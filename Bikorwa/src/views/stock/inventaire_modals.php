@@ -735,7 +735,7 @@
         const searchInput = document.getElementById('inventorySearch');
         const table = document.querySelector('table.table');
         const mobileContainer = document.querySelector('.d-md-none');
-        let sortState = { field: '', asc: true };
+        let sortState = JSON.parse(localStorage.getItem('inventorySort')) || { field: 'code', asc: true };
 
         if (searchInput) {
             searchInput.addEventListener('input', function () {
@@ -747,6 +747,8 @@
         const sortNomBtn = document.getElementById('sortNom');
         if (sortCodeBtn) sortCodeBtn.addEventListener('click', () => sortProducts('code'));
         if (sortNomBtn) sortNomBtn.addEventListener('click', () => sortProducts('nom'));
+
+        applySort();
 
         function filterProducts(keyword) {
             if (!table) return;
@@ -769,7 +771,14 @@
             if (!table) return;
             const asc = sortState.field === field ? !sortState.asc : true;
             sortState = { field, asc };
-            const modifier = asc ? 1 : -1;
+            localStorage.setItem('inventorySort', JSON.stringify(sortState));
+            applySort();
+        }
+
+        function applySort() {
+            if (!table) return;
+            const field = sortState.field;
+            const modifier = sortState.asc ? 1 : -1;
 
             const rows = Array.from(table.querySelectorAll('tbody tr'));
             rows.sort((a, b) => {
