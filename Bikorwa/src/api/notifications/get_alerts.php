@@ -19,6 +19,12 @@ if (!$auth->isLoggedIn()) {
     exit;
 }
 
+// Only managers are allowed to fetch alerts
+if (!$auth->isManager()) {
+    echo json_encode(['success' => false, 'message' => 'Access denied']);
+    exit;
+}
+
 $alertThreshold = $config['stock']['alert_threshold'] ?? 10;
 
 $stockModel = new Stock($conn);
