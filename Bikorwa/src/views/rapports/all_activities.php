@@ -96,12 +96,15 @@ ORDER BY date_action DESC
 LIMIT ? OFFSET ?";
 
 $stmt = $pdo->prepare($activities_query);
-$stmt->execute([
-    $date_debut.' 00:00:00', $date_fin.' 23:59:59',
-    $date_debut.' 00:00:00', $date_fin.' 23:59:59',
-    $date_debut.' 00:00:00', $date_fin.' 23:59:59',
-    $items_per_page, $offset
-]);
+$stmt->bindValue(1, $date_debut.' 00:00:00');
+$stmt->bindValue(2, $date_fin.' 23:59:59');
+$stmt->bindValue(3, $date_debut.' 00:00:00');
+$stmt->bindValue(4, $date_fin.' 23:59:59');
+$stmt->bindValue(5, $date_debut.' 00:00:00');
+$stmt->bindValue(6, $date_fin.' 23:59:59');
+$stmt->bindValue(7, (int)$items_per_page, PDO::PARAM_INT);
+$stmt->bindValue(8, (int)$offset, PDO::PARAM_INT);
+$stmt->execute();
 $activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 require_once __DIR__.'/../layouts/header.php';
