@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../utils/Settings.php';
+require_once __DIR__ . '/../../utils/Settings.php';
 if (!isset($pdo)) {
     $database = new Database();
     $pdo = $database->getConnection();
