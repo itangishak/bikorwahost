@@ -425,12 +425,13 @@
         
         <div class="d-flex align-items-center">
             <div class="position-relative">
-                <a href="#" class="btn btn-light position-relative me-3">
+                <a href="#" id="notificationBell" class="btn btn-light position-relative me-3">
                     <i class="fas fa-bell"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        1
+                        0
                     </span>
                 </a>
+                <div id="notificationDropdown" class="card shadow" style="display:none; position:absolute; right:0; top:100%; width:300px; z-index:1000;"></div>
             </div>
             
             <div class="topbar-divider"></div>
@@ -462,7 +463,29 @@
     document.addEventListener('DOMContentLoaded', function() {
         var dropdownToggle = document.querySelector('.topbar .dropdown-toggle');
         var dropdownMenu = document.querySelector('.topbar .dropdown-menu');
-        
+        var bell = document.getElementById('notificationBell');
+        var notifDropdown = document.getElementById('notificationDropdown');
+
+        function loadNotifications(showList) {
+            fetch('<?php echo BASE_URL; ?>/src/api/notifications/get_recent.php')
+                .then(function(resp){ return resp.json(); })
+                .then(function(data){
+                    if (data.success) {
+                        bell.querySelector('span').textContent = data.count;
+                        if (showList) {
+                            notifDropdown.innerHTML = data.html;
+                        }
+                    } else if (showList) {
+                        notifDropdown.innerHTML = '<div class="p-2 text-center text-muted small">Erreur de chargement</div>';
+                    }
+                })
+                .catch(function(){
+                    if (showList) {
+                        notifDropdown.innerHTML = '<div class="p-2 text-center text-danger small">Erreur de chargement</div>';
+                    }
+                });
+        }
+
         if (dropdownToggle && dropdownMenu) {
             // Ensure menu is hidden initially
             dropdownMenu.style.display = 'none';
@@ -486,6 +509,31 @@
             
             // Prevent clicks inside menu from closing it
             dropdownMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        if (bell && notifDropdown) {
+            loadNotifications(false);
+            setInterval(function(){ loadNotifications(false); }, 60000);
+
+            bell.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (notifDropdown.style.display === 'block') {
+                    notifDropdown.style.display = 'none';
+                } else {
+                    notifDropdown.style.display = 'block';
+                    loadNotifications(true);
+                }
+            });
+
+            document.addEventListener('click', function(){
+                notifDropdown.style.display = 'none';
+            });
+
+            notifDropdown.addEventListener('click', function(e){
                 e.stopPropagation();
             });
         }
