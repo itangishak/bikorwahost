@@ -142,7 +142,8 @@ require_once __DIR__.'/../layouts/header.php';
                                 <?php
                                 if ($act['type_activite'] === 'sortie') {
                                     $detail = 'Vente';
-                                    if (isset($act['reference']) && strpos($act['reference'], 'ADJ-OUT') === 0) {
+                                    $ref = $act['reference'] ?? '';
+                                    if (stripos($ref, 'ADJ-OUT') === 0 || stripos($ref, 'RETRAIT') === 0) {
                                         $detail = 'Ajustement';
                                     }
                                     echo 'Sortie (' . $detail . ')';
