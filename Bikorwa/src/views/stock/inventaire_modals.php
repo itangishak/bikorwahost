@@ -199,15 +199,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustPrev" title="Précédent"><i class="fas fa-chevron-left"></i></button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" id="adjustNext" title="Suivant"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </div>
             </form>
         </div>
