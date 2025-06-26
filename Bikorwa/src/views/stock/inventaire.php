@@ -334,6 +334,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($type_mouvement !== 'entree' && $type_mouvement !== 'sortie') {
                 throw new Exception("Type de mouvement invalide.");
             }
+
+            // Receptionnistes are not allowed to perform stock removals
+            if (!$isGestionnaire && $type_mouvement === 'sortie') {
+                throw new Exception("Seul le gestionnaire peut effectuer une sortie de stock.");
+            }
             
             // Get current product info
             $stmt = $pdo->prepare("

@@ -352,7 +352,7 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="type_mouvement" id="type_sortie" value="sortie">
+                                <input class="form-check-input" type="radio" name="type_mouvement" id="type_sortie" value="sortie" <?= $isGestionnaire ? '' : 'disabled' ?> >
                                 <label class="form-check-label" for="type_sortie">
                                     <i class="fas fa-arrow-alt-circle-up text-danger me-1"></i> Sortie
                                 </label>
