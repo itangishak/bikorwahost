@@ -4,10 +4,10 @@
  * This file should be included at the top of all protected pages
  */
 
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/session.php';
+
+// Start session using database-backed handler
+startDbSession();
 
 // FOR DEVELOPMENT ONLY: Create a mock session if not already set
 if (!isset($_SESSION['user_id'])) {
@@ -42,7 +42,7 @@ if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
     session_destroy();
     
     // Start new session for flash message
-    session_start();
+    startDbSession();
     
     // Set flash message
     if (function_exists('setFlashMessage')) {
