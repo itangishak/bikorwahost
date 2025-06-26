@@ -28,7 +28,11 @@ date_default_timezone_set('Africa/Kigali');
 // Basic application constants
 if (!defined('APP_NAME'))     define('APP_NAME', 'BIKORWA SHOP');
 if (!defined('APP_VERSION'))  define('APP_VERSION', '1.0.0');
-if (!defined('BASE_URL'))     define('BASE_URL', '/Bikorwa'); // Base URL configuration
+if (!defined('BASE_URL')) {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    define('BASE_URL', $protocol . $host . '/Bikorwa');
+}
 
 // Path constants
 if (!defined('ROOT_PATH'))    define('ROOT_PATH', dirname(dirname(__DIR__)));
