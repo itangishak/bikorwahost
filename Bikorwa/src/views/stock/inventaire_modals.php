@@ -766,7 +766,7 @@
                         method: 'POST',
                         body: formData
                     })
-                        .then(res => res.json())
+                        .then(res => res.ok ? res.json() : res.text().then(t => Promise.reject(t)))
                         .then(data => {
                             if (!data.success) {
                                 alert(data.message || 'Erreur');
@@ -787,7 +787,10 @@
                             const statusCell = document.getElementById('status-' + id);
                             if (statusCell) statusCell.innerHTML = data.status_badge;
                         })
-                        .catch(err => console.error(err));
+                        .catch(err => {
+                            console.error(err);
+                            alert('Une erreur est survenue');
+                        });
                 });
             }
         }
