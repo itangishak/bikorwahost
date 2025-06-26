@@ -491,7 +491,8 @@ try {
     $inventory_items = $pdo->query($fifo_value_query)->fetchAll(PDO::FETCH_ASSOC);
     
     // Calcul de la valeur totale
-    $total_value = array_sum(array_column($inventory_items, 'valeur_restante'));
+    // Valeur totale du stock selon le prix d'achat (FIFO)
+    $total_value_achat = array_sum(array_column($inventory_items, 'valeur_restante'));
     
 } catch (PDOException $e) {
     $error = "Erreur de calcul FIFO: " . $e->getMessage();
@@ -562,23 +563,26 @@ try {
     
     $stmt->execute();
     $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
     // Calculate totals
     $total_products = count($inventory);
     $out_of_stock = 0;
     $low_stock = 0;
-    
+    $total_value_vente = 0;
+
     foreach ($inventory as $product) {
         if ($product['quantite_stock'] == 0) {
             $out_of_stock++;
-        } else if ($product['quantite_stock'] <= 10) {
+        } elseif ($product['quantite_stock'] <= 10) {
             $low_stock++;
         }
+        $total_value_vente += $product['quantite_stock'] * $product['prix_vente'];
     }
 } catch (PDOException $e) {
     $inventory = [];
     $total_products = 0;
-    $total_value = 0;
+    $total_value_achat = 0;
+    $total_value_vente = 0;
     $out_of_stock = 0;
     $low_stock = 0;
     
@@ -638,7 +642,12 @@ include('../layouts/header.php');
                     </div>
                     <div>
                         <h6 class="card-subtitle text-muted mb-1">Valeur du stock</h6>
-                        <h2 class="card-title mb-0"><?= number_format($total_value, 0, ',', ' ') ?> F</h2>
+                        <p class="mb-1 fw-semibold">
+                            Achat: <?= number_format($total_value_achat, 0, ',', ' ') ?> F
+                        </p>
+                        <p class="mb-0 fw-semibold">
+                            Vente: <?= number_format($total_value_vente, 0, ',', ' ') ?> F
+                        </p>
                     </div>
                 </div>
             </div>
