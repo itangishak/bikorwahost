@@ -1,9 +1,20 @@
+<?php
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../utils/Settings.php';
+if (!isset($pdo)) {
+    $database = new Database();
+    $pdo = $database->getConnection();
+}
+$settingsObj = new Settings($pdo);
+$theme_mode = $settingsObj->get('theme', 'light');
+$app_name_setting = $settingsObj->get('shop_name', APP_NAME);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIKORWA SHOP - <?php echo $page_title ?? 'Gestion de Bar'; ?></title>
+    <title><?= htmlspecialchars($app_name_setting) ?> - <?php echo $page_title ?? 'Gestion de Bar'; ?></title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +46,24 @@
         body {
             background-color: var(--light);
             font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        body.dark-theme {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        body.dark-theme .sidebar,
+        body.dark-theme .topbar,
+        body.dark-theme .sidebar-brand {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        body.dark-theme .sidebar-item,
+        body.dark-theme .sidebar-subitem {
+            color: #adb5bd;
+        }
+        body.dark-theme .sidebar-item.active {
+            background-color: #343a40;
+            color: #fff;
         }
         
         /* Sidebar Styles */
@@ -234,14 +263,14 @@
                 margin-left: 0;
             }
         }
-    </style>
+</style>
 </head>
-<body>
+<body class="<?= $theme_mode === 'dark' ? 'dark-theme' : '' ?>">
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-brand">
             <i class="fas fa-store me-2"></i>
-            <span><?php echo htmlspecialchars(APP_NAME); ?></span>
+            <span><?= htmlspecialchars($app_name_setting) ?></span>
         </div>
         
         <div class="sidebar-menu">
@@ -398,7 +427,7 @@
             </div>
             
             <!-- Paramètres (gestionnaire only) -->
-            <a href="#" class="sidebar-item <?php echo $active_page == 'parametres' ? 'active' : ''; ?>">
+            <a href="<?php echo BASE_URL; ?>/src/views/parametres/application.php" class="sidebar-item <?php echo $active_page == 'parametres' ? 'active' : ''; ?>">
                 <i class="fas fa-cog"></i>
                 <span>Paramètres</span>
             </a>

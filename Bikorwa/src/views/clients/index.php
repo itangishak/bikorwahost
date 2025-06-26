@@ -6,10 +6,12 @@ $active_page = "clients";
 require_once './../../../src/config/config.php';
 require_once './../../../src/config/database.php';
 require_once './../../../src/utils/Auth.php';
+require_once './../../../src/utils/Settings.php';
 
 // Initialize database connection
 $database = new Database();
 $conn = $database->getConnection();
+$settingsObj = new Settings($conn);
 
 // Initialize authentication
 $auth = new Auth($conn);
@@ -33,7 +35,7 @@ $userRole = $_SESSION['user_role'] ?? '';
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$items_per_page = 10;
+$items_per_page = (int)$settingsObj->get('items_per_page', 10);
 $offset = ($current_page - 1) * $items_per_page;
 
 // Build the base query
