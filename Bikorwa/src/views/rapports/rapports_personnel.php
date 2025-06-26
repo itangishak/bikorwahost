@@ -78,31 +78,33 @@ function getRecentActivities($pdo, $date_debut, $date_fin, $limit = 15) {
         
         // Requête simplifiée et testée avec paiements de salaires
         $query = "
-        SELECT 
+        SELECT
             type_activite,
             date_action,
             titre,
             montant,
             username,
             role,
-            ref_id
+            ref_id,
+            reference
         FROM (
-            SELECT 
+            SELECT
                 'vente' as type_activite,
                 v.date_vente as date_action,
                 CONCAT('Vente #', v.numero_facture) as titre,
                 CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
                 COALESCE(u.username, 'Système') as username,
                 COALESCE(u.role, 'N/A') as role,
-                v.id as ref_id
+                v.id as ref_id,
+                v.numero_facture as reference
             FROM ventes v
             LEFT JOIN users u ON v.utilisateur_id = u.id
             WHERE v.date_vente BETWEEN ? AND ?
             
             UNION ALL
             
-            SELECT 
-                CASE 
+            SELECT
+                CASE
                     WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
                     ELSE 'sortie'
                 END as type_activite,
@@ -114,7 +116,8 @@ function getRecentActivities($pdo, $date_debut, $date_fin, $limit = 15) {
                 CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
                 COALESCE(u.username, 'Système') as username,
                 COALESCE(u.role, 'N/A') as role,
-                m.id as ref_id
+                m.id as ref_id,
+                m.reference
             FROM mouvements_stock m
             LEFT JOIN users u ON m.utilisateur_id = u.id
             LEFT JOIN produits p ON m.produit_id = p.id
@@ -122,14 +125,15 @@ function getRecentActivities($pdo, $date_debut, $date_fin, $limit = 15) {
             
             UNION ALL
             
-            SELECT 
+            SELECT
                 'paiement_salaire' as type_activite,
                 s.date_paiement as date_action,
                 CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
                 CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
                 COALESCE(u.username, 'Système') as username,
                 COALESCE(u.role, 'N/A') as role,
-                s.id as ref_id
+                s.id as ref_id,
+                NULL as reference
             FROM salaires s
             LEFT JOIN users u ON s.utilisateur_id = u.id
             LEFT JOIN employes e ON s.employe_id = e.id
@@ -752,6 +756,15 @@ require_once __DIR__.'/../../../src/views/layouts/header.php';
                                     <div class="activity-content">
                                         <p class="mb-1">
                                             <strong><?= htmlspecialchars($activity['titre']) ?></strong>
+                                            <?php if ($activity['type_activite'] === 'sortie'): ?>
+                                                <?php
+                                                $detail = 'Vente';
+                                                if (isset($activity['reference']) && strpos($activity['reference'], 'ADJ-OUT') === 0) {
+                                                    $detail = 'Ajustement';
+                                                }
+                                                ?>
+                                                <span class="badge bg-secondary ms-1"><?= $detail ?></span>
+                                            <?php endif; ?>
                                             <?php if (!empty($activity['montant'])): ?>
                                                 <span class="text-muted">- <?= htmlspecialchars($activity['montant']) ?></span>
                                             <?php endif; ?>
@@ -778,6 +791,11 @@ require_once __DIR__.'/../../../src/views/layouts/header.php';
                             <small class="text-muted">Affichage limité aux 15 dernières activités</small>
                         </div>
                         <?php endif; ?>
+                        <div class="text-center mt-2">
+                            <a href="all_activities.php" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-list"></i> Tous les activités
+                            </a>
+                        </div>
                     </div>
                 </div>
 
