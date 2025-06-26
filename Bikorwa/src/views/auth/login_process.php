@@ -18,7 +18,7 @@ function logError($message) {
     if (!is_dir($logDir)) {
         mkdir($logDir, 0755, true);
     }
-    error_log(date('Y-m-d H:i:s') . ' - Login Error: ' . $message, 3, $logDir . '/login_errors.log');
+    error_log(date('Y-m-d H:i:s') . ' - Login Error: ' . $message . PHP_EOL, 3, $logDir . '/login_errors.log');
 }
 
 // Function to test database connection
@@ -52,19 +52,13 @@ try {
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
     
-    // Test database connection and log result
-    $dbConnected = testDatabaseConnection();
-    if (!$dbConnected) {
-        send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
-    }
-
     // Helper function to send JSON response and exit
     function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200, $sessionId = null) {
         // Clean any output buffering
         while (ob_get_level()) {
             ob_end_clean();
         }
-        
+
         http_response_code($statusCode);
         header('Content-Type: application/json');
         $response = ['success' => $success, 'message' => $message];
@@ -76,6 +70,12 @@ try {
         }
         echo json_encode($response);
         exit;
+    }
+
+    // Test database connection and log result
+    $dbConnected = testDatabaseConnection();
+    if (!$dbConnected) {
+        send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
     }
 
     try {
