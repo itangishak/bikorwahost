@@ -494,7 +494,23 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
         var dropdownMenu = document.querySelector('.topbar .dropdown-menu');
         var bell = document.getElementById('notificationBell');
         var notifDropdown = document.getElementById('notificationDropdown');
-        var notifLoaded = false;
+
+        function fetchAlerts() {
+            fetch('<?php echo BASE_URL; ?>/src/api/notifications/get_alerts.php')
+                .then(function(resp){ return resp.json(); })
+                .then(function(data){
+                    if (data.success) {
+                        notifDropdown.innerHTML = data.html;
+                        bell.querySelector('span').textContent = data.count;
+                    }
+                })
+                .catch(function(){
+                    // ignore errors
+                });
+        }
+
+        fetchAlerts();
+        setInterval(fetchAlerts, 60000);
 
         if (dropdownToggle && dropdownMenu) {
             // Ensure menu is hidden initially
@@ -533,24 +549,8 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
                     return;
                 }
 
+                fetchAlerts();
                 notifDropdown.style.display = 'block';
-
-                if (!notifLoaded) {
-                    fetch('<?php echo BASE_URL; ?>/src/api/notifications/get_recent.php')
-                        .then(function(resp){ return resp.json(); })
-                        .then(function(data){
-                            if (data.success) {
-                                notifDropdown.innerHTML = data.html;
-                                bell.querySelector('span').textContent = data.count;
-                                notifLoaded = true;
-                            } else {
-                                notifDropdown.innerHTML = '<div class="p-2 text-center text-muted small">Erreur de chargement</div>';
-                            }
-                        })
-                        .catch(function(){
-                            notifDropdown.innerHTML = '<div class="p-2 text-center text-danger small">Erreur de chargement</div>';
-                        });
-                }
             });
 
             document.addEventListener('click', function(){
