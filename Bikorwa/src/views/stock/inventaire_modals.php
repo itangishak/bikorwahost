@@ -319,8 +319,10 @@
 <div class="modal fade" id="adjustStockModal" tabindex="-1" aria-labelledby="adjustStockModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="adjustStockModalLabel">Ajuster le stock</h5>
+            <div class="modal-header d-flex align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustPrev" title="Précédent"><i class="fas fa-chevron-left"></i></button>
+                <h5 class="modal-title flex-grow-1" id="adjustStockModalLabel">Ajuster le stock</h5>
+                <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustNext" title="Suivant"><i class="fas fa-chevron-right"></i></button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="" method="POST" id="adjustStockForm">
@@ -685,30 +687,87 @@
                 });
         }
         
-        // Handle Adjust Stock Modal
+        // Handle Adjust Stock Modal with navigation and AJAX
         const adjustStockModal = document.getElementById('adjustStockModal');
+        const adjustForm = document.getElementById('adjustStockForm');
+        const prevBtn = document.getElementById('adjustPrev');
+        const nextBtn = document.getElementById('adjustNext');
+        const adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
+        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+        let currentAdjustIndex = -1;
+
+        function populateAdjustModal(button) {
+            if (!button) return;
+            const id = button.getAttribute('data-id');
+            const nom = button.getAttribute('data-nom');
+            const code = button.getAttribute('data-code');
+            const unite = button.getAttribute('data-unite');
+            const quantite = button.getAttribute('data-quantite');
+
+            document.getElementById('adjust_produit_id').value = id;
+            document.getElementById('adjust_nom_produit').textContent = nom;
+            document.getElementById('adjust_code_produit').textContent = code;
+            document.getElementById('adjust_stock_actuel').textContent = quantite + ' ' + unite;
+            document.getElementById('adjust_unite').textContent = unite;
+            document.getElementById('adjust_quantite').value = '';
+            document.getElementById('adjust_note').value = '';
+        }
+
         if (adjustStockModal) {
             adjustStockModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
-                
-                // Extract data
-                const id = button.getAttribute('data-id');
-                const nom = button.getAttribute('data-nom');
-                const code = button.getAttribute('data-code');
-                const unite = button.getAttribute('data-unite');
-                const quantite = button.getAttribute('data-quantite');
-                
-                // Set values in the form
-                document.getElementById('adjust_produit_id').value = id;
-                document.getElementById('adjust_nom_produit').textContent = nom;
-                document.getElementById('adjust_code_produit').textContent = code;
-                document.getElementById('adjust_stock_actuel').textContent = quantite + ' ' + unite;
-                document.getElementById('adjust_unite').textContent = unite;
-                
-                // Clear input field
-                document.getElementById('adjust_quantite').value = '';
-                document.getElementById('adjust_note').value = '';
+                currentAdjustIndex = parseInt(button.dataset.index);
+                populateAdjustModal(button);
             });
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function () {
+                    if (!adjustButtons.length) return;
+                    currentAdjustIndex = (currentAdjustIndex - 1 + adjustButtons.length) % adjustButtons.length;
+                    populateAdjustModal(adjustButtons[currentAdjustIndex]);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function () {
+                    if (!adjustButtons.length) return;
+                    currentAdjustIndex = (currentAdjustIndex + 1) % adjustButtons.length;
+                    populateAdjustModal(adjustButtons[currentAdjustIndex]);
+                });
+            }
+
+            if (adjustForm) {
+                adjustForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(adjustForm);
+                    fetch('../../ajax/adjust_stock.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data.success) {
+                                alert(data.message || 'Erreur');
+                                return;
+                            }
+
+                            const id = formData.get('produit_id');
+                            document.getElementById('adjust_stock_actuel').textContent = data.new_quantity_formatted + ' ' + data.unite;
+
+                            document.querySelectorAll('[data-bs-target="#adjustStockModal"][data-id="' + id + '"]').forEach(btn => {
+                                btn.setAttribute('data-quantite', data.new_quantity_formatted);
+                            });
+
+                            const qtyCell = document.getElementById('qty-' + id);
+                            if (qtyCell) qtyCell.textContent = data.new_quantity_formatted;
+                            const valCell = document.getElementById('valeur-' + id);
+                            if (valCell) valCell.textContent = data.new_valeur_formatted + ' F';
+                            const statusCell = document.getElementById('status-' + id);
+                            if (statusCell) statusCell.innerHTML = data.status_badge;
+                        })
+                        .catch(err => console.error(err));
+                });
+            }
         }
         
         // Handle Delete Product Modal
