@@ -44,14 +44,13 @@ try {
     // Inclure les fichiers de configuration
     require_once './../../../src/config/config.php';
     require_once './../../../src/config/database.php';
+    require_once './../../../includes/session.php';
     require_once './../../../src/utils/Auth.php';
     require_once './../../../src/models/User.php';
     require_once './../../../src/controllers/AuthController.php';
     
-    // Démarrer la session si elle n'est pas déjà démarrée
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    // Initialiser la session stockée en base de données
+    $currentSessionId = startDbSession();
     
     // Test database connection and log result
     $dbConnected = testDatabaseConnection();
@@ -60,7 +59,7 @@ try {
     }
 
     // Helper function to send JSON response and exit
-    function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200) {
+    function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200, $sessionId = null) {
         // Clean any output buffering
         while (ob_get_level()) {
             ob_end_clean();
@@ -71,6 +70,9 @@ try {
         $response = ['success' => $success, 'message' => $message];
         if ($redirectUrl) {
             $response['redirectUrl'] = $redirectUrl;
+        }
+        if ($sessionId) {
+            $response['sessionId'] = $sessionId;
         }
         echo json_encode($response);
         exit;
@@ -116,8 +118,9 @@ try {
                 $redirect = '../dashboard/receptionniste.php';
             }
 
-            // Make sure to use the correct redirect path
-            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect);
+            // Make sure to use the correct redirect path and return the session ID
+            $sessionToken = session_id();
+            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect, 200, $sessionToken);
         } else {
             // Échec de la connexion
             send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized

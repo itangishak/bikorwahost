@@ -187,6 +187,13 @@ CREATE TABLE IF NOT EXISTS journal_activites (
     FOREIGN KEY (utilisateur_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
+-- Table de stockage des sessions
+CREATE TABLE IF NOT EXISTS sessions (
+    id VARCHAR(128) PRIMARY KEY,
+    data TEXT NOT NULL,
+    expires DATETIME NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS categories_depenses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL UNIQUE,

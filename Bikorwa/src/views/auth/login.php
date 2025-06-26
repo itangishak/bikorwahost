@@ -248,15 +248,16 @@ $active_page = "login";
                     success: function(response) {
                         console.log('Received response:', response);
                         if (response && response.success) {
+                            if (response.sessionId) {
+                                sessionStorage.setItem('sessionId', response.sessionId);
+                            }
                             $loginMessage.html('<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>' + response.message + '</div>');
                             // Redirect after a short delay
                             if(response.redirectUrl) {
                                 setTimeout(function() {
-                                    // Since we're using a relative path in the server response,
-                                    // we can navigate to it directly from the current directory
                                     console.log('Redirecting to:', response.redirectUrl);
                                     window.location.href = response.redirectUrl;
-                                }, 1500); // 1.5 seconds delay
+                                }, 1500);
                             }
                         } else {
                             $loginMessage.html('<div class="alert alert-danger"><i class="fas fa-exclamation-circle me-2"></i>' + (response && response.message ? response.message : 'Échec de la connexion. Veuillez réessayer.') + '</div>');
