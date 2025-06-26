@@ -253,24 +253,31 @@ class Stock {
     
     // Méthode pour obtenir la liste des produits en stock faible
     public function getStockFaible($seuil = 10) {
+        // Définir le seuil en fonction de la catégorie
+        $thresholdCase = "CASE
+                WHEN c.nom IN ('Spiritueux','Vins') THEN 1
+                WHEN c.nom = 'Sodas' THEN 15
+                WHEN c.nom = 'Bières' THEN 10
+                ELSE " . intval($seuil) . "
+            END";
+
         // Requête de sélection
         $query = "SELECT s.*, p.nom as produit_nom, p.code as produit_code, p.unite_mesure,
+                  c.nom as categorie_nom,
                   (SELECT prix_achat FROM prix_produits WHERE produit_id = p.id AND date_fin IS NULL LIMIT 1) as prix_achat_actuel,
                   (SELECT prix_vente FROM prix_produits WHERE produit_id = p.id AND date_fin IS NULL LIMIT 1) as prix_vente_actuel
                   FROM " . $this->table_name . " s
                   LEFT JOIN produits p ON s.produit_id = p.id
-                  WHERE s.quantite <= :seuil AND p.actif = 1
+                  LEFT JOIN categories c ON p.categorie_id = c.id
+                  WHERE s.quantite <= $thresholdCase AND p.actif = 1
                   ORDER BY s.quantite ASC";
-        
+
         // Préparation de la requête
         $stmt = $this->conn->prepare($query);
-        
-        // Liaison des paramètres
-        $stmt->bindParam(":seuil", $seuil);
-        
+
         // Exécution de la requête
         $stmt->execute();
-        
+
         return $stmt;
     }
     

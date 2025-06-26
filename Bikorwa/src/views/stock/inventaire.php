@@ -23,6 +23,21 @@ $pdo = $db->getConnection();
 $page_title = "Inventaire";
 $active_page = "stock";
 
+function get_category_threshold($cat) {
+    switch ($cat) {
+        case 'Spiritueux':
+        case 'Vins':
+            return 1;
+        case 'Sodas':
+            return 15;
+        case 'Bières':
+        case 'Autres':
+            return 10;
+        default:
+            return 10;
+    }
+}
+
 // Determine user roles and stock privileges. Receptionnistes may manage
 // inventory but cannot delete products.
 $isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
@@ -519,15 +534,17 @@ try {
     
     // Apply stock filter if provided
     if (isset($_GET['stock']) && $_GET['stock'] !== '') {
+        $thresholdCase = "CASE\n                WHEN c.nom IN ('Spiritueux','Vins') THEN 1\n                WHEN c.nom = 'Sodas' THEN 15\n                WHEN c.nom = 'Bières' THEN 10\n                ELSE 10\n            END";
+
         switch ($_GET['stock']) {
             case 'low':
-                $whereClause .= " AND s.quantite > 0 AND s.quantite <= 10";
+                $whereClause .= " AND s.quantite > 0 AND s.quantite <= (" . $thresholdCase . ")";
                 break;
             case 'out':
                 $whereClause .= " AND s.quantite = 0";
                 break;
             case 'in':
-                $whereClause .= " AND s.quantite > 10";
+                $whereClause .= " AND s.quantite > (" . $thresholdCase . ")";
                 break;
         }
     }
@@ -571,9 +588,10 @@ try {
     $total_value_vente = 0;
 
     foreach ($inventory as $product) {
+        $threshold = get_category_threshold($product['categorie_nom']);
         if ($product['quantite_stock'] == 0) {
             $out_of_stock++;
-        } elseif ($product['quantite_stock'] <= 10) {
+        } elseif ($product['quantite_stock'] <= $threshold) {
             $low_stock++;
         }
         $total_value_vente += $product['quantite_stock'] * $product['prix_vente'];
@@ -704,8 +722,8 @@ include('../layouts/header.php');
                     <select name="stock" class="form-select">
                         <option value="">Tous les niveaux de stock</option>
                         <option value="out" <?= isset($_GET['stock']) && $_GET['stock'] === 'out' ? 'selected' : '' ?>>Rupture de stock</option>
-                        <option value="low" <?= isset($_GET['stock']) && $_GET['stock'] === 'low' ? 'selected' : '' ?>>Stock bas (≤ 10)</option>
-                        <option value="in" <?= isset($_GET['stock']) && $_GET['stock'] === 'in' ? 'selected' : '' ?>>En stock (> 10)</option>
+                        <option value="low" <?= isset($_GET['stock']) && $_GET['stock'] === 'low' ? 'selected' : '' ?>>Stock bas</option>
+                        <option value="in" <?= isset($_GET['stock']) && $_GET['stock'] === 'in' ? 'selected' : '' ?>>En stock</option>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -735,9 +753,11 @@ include('../layouts/header.php');
                                     <?php endif; ?>
                                 </h5>
                                 <div>
-                                    <?php if ($product['quantite_stock'] <= 0): ?>
+                                    <?php
+                                        $threshold = get_category_threshold($product['categorie_nom']);
+                                        if ($product['quantite_stock'] <= 0): ?>
                                         <span class="badge bg-danger">Rupture</span>
-                                    <?php elseif ($product['quantite_stock'] <= 10): ?>
+                                    <?php elseif ($product['quantite_stock'] <= $threshold): ?>
                                         <span class="badge bg-warning text-dark">Stock bas</span>
                                     <?php else: ?>
                                         <span class="badge bg-success">En stock</span>
@@ -874,9 +894,11 @@ include('../layouts/header.php');
                                         <?= number_format($product['valeur_stock'], 0, ',', ' ') ?> F
                                     </td>
                                     <td class="text-center" id="status-<?= $product['id'] ?>">
-                                        <?php if ($product['quantite_stock'] <= 0): ?>
+                                        <?php
+                                            $threshold = get_category_threshold($product['categorie_nom']);
+                                            if ($product['quantite_stock'] <= 0): ?>
                                             <span class="badge bg-danger">Rupture</span>
-                                        <?php elseif ($product['quantite_stock'] <= 10): ?>
+                                        <?php elseif ($product['quantite_stock'] <= $threshold): ?>
                                             <span class="badge bg-warning text-dark">Stock bas</span>
                                         <?php else: ?>
                                             <span class="badge bg-success">En stock</span>
