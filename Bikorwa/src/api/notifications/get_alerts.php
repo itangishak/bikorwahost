@@ -27,32 +27,38 @@ if (!$auth->isManager()) {
 
 $alertThreshold = $config['stock']['alert_threshold'] ?? 10;
 
-$stockModel = new Stock($conn);
-$stmtStock = $stockModel->getStockFaible($alertThreshold);
-$lowStock = $stmtStock->fetchAll(PDO::FETCH_ASSOC);
-$lowStockCount = count($lowStock);
+try {
+    $stockModel = new Stock($conn);
+    $stmtStock = $stockModel->getStockFaible($alertThreshold);
+    $lowStock = $stmtStock->fetchAll(PDO::FETCH_ASSOC);
+    $lowStockCount = count($lowStock);
 
-// Debts due soon or overdue (next 7 days)
-$query = "SELECT d.id, d.montant_restant, d.date_echeance, c.nom AS client_nom
-          FROM dettes d
-          LEFT JOIN clients c ON d.client_id = c.id
-          WHERE d.statut IN ('active','partiellement_payee')
-            AND d.date_echeance IS NOT NULL
-            AND d.date_echeance <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
-          ORDER BY d.date_echeance ASC";
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$dueDebts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$dueCount = count($dueDebts);
-$overdueCount = 0;
-foreach ($dueDebts as $row) {
-    if (strtotime($row['date_echeance']) < strtotime(date('Y-m-d'))) {
-        $overdueCount++;
+    // Debts due soon or overdue (next 7 days)
+    $query = "SELECT d.id, d.montant_restant, d.date_echeance, c.nom AS client_nom
+              FROM dettes d
+              LEFT JOIN clients c ON d.client_id = c.id
+              WHERE d.statut IN ('active','partiellement_payee')
+                AND d.date_echeance IS NOT NULL
+                AND d.date_echeance <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+              ORDER BY d.date_echeance ASC";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $dueDebts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $dueCount = count($dueDebts);
+    $overdueCount = 0;
+    foreach ($dueDebts as $row) {
+        if (strtotime($row['date_echeance']) < strtotime(date('Y-m-d'))) {
+            $overdueCount++;
+        }
     }
-}
 
-$stmtToday = $conn->query("SELECT COUNT(*) FROM dettes WHERE DATE(date_creation) = CURDATE()");
-$todayAddedCount = (int)$stmtToday->fetchColumn();
+    $stmtToday = $conn->query("SELECT COUNT(*) FROM dettes WHERE DATE(date_creation) = CURDATE()");
+    $todayAddedCount = (int)$stmtToday->fetchColumn();
+} catch (Exception $e) {
+    error_log('Failed to fetch alerts: ' . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Server error']);
+    exit;
+}
 
 $htmlParts = [];
 if ($lowStockCount > 0) {
