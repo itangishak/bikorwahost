@@ -774,12 +774,13 @@ include('../layouts/header.php');
                                 </button>
                                 
                                 <?php if ($hasStockAccess): ?>
-                                <button type="button" class="btn btn-sm btn-outline-secondary me-1"
+                                <button type="button" class="btn btn-sm btn-outline-secondary me-1 adjust-stock-btn"
                                         data-bs-toggle="modal" data-bs-target="#adjustStockModal"
                                         data-id="<?= $product['id'] ?>"
                                         data-nom="<?= htmlspecialchars($product['nom']) ?>"
                                         data-code="<?= htmlspecialchars($product['code']) ?>"
                                         data-unite="<?= htmlspecialchars($product['unite_mesure']) ?>"
+                                        data-prix-achat="<?= $product['prix_achat'] ?>"
                                         data-quantite="<?= number_format($product['quantite_stock'], 2, ',', ' ') ?>">
                                     <i class="fas fa-dolly-flatbed"></i>
                                 </button>
@@ -841,7 +842,7 @@ include('../layouts/header.php');
                             </tr>
                         <?php else: ?>
                             <?php foreach ($inventory as $product): ?>
-                                <tr>
+                                <tr id="product-row-<?= $product['id'] ?>">
                                     <td><code><?= htmlspecialchars($product['code']) ?></code></td>
                                     <td>
                                         <?= htmlspecialchars($product['nom']) ?>
@@ -851,7 +852,7 @@ include('../layouts/header.php');
                                     </td>
                                     <td><?= htmlspecialchars($product['categorie_nom'] ?? 'Non catégorisé') ?></td>
                                     <td><?= htmlspecialchars($product['unite_mesure']) ?></td>
-                                    <td class="text-end">
+                                    <td class="text-end" id="qty-<?= $product['id'] ?>">
                                         <?= number_format($product['quantite_stock'], 2, ',', ' ') ?>
                                     </td>
                                     <td class="text-end">
@@ -860,10 +861,10 @@ include('../layouts/header.php');
                                     <td class="text-end">
                                         <?= number_format($product['prix_vente'], 0, ',', ' ') ?> F
                                     </td>
-                                    <td class="text-end">
+                                    <td class="text-end" id="valeur-<?= $product['id'] ?>">
                                         <?= number_format($product['valeur_stock'], 0, ',', ' ') ?> F
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" id="status-<?= $product['id'] ?>">
                                         <?php if ($product['quantite_stock'] <= 0): ?>
                                             <span class="badge bg-danger">Rupture</span>
                                         <?php elseif ($product['quantite_stock'] <= 10): ?>
@@ -897,11 +898,12 @@ include('../layouts/header.php');
                                                 </li>
                                                 <?php if ($hasStockAccess): ?>
                                                 <li>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#adjustStockModal"
+                                                    <a class="dropdown-item adjust-stock-btn" href="#" data-bs-toggle="modal" data-bs-target="#adjustStockModal"
                                                        data-id="<?= $product['id'] ?>"
                                                        data-nom="<?= htmlspecialchars($product['nom']) ?>"
                                                        data-code="<?= htmlspecialchars($product['code']) ?>"
                                                        data-unite="<?= htmlspecialchars($product['unite_mesure']) ?>"
+                                                       data-prix-achat="<?= $product['prix_achat'] ?>"
                                                        data-quantite="<?= number_format($product['quantite_stock'], 2, ',', ' ') ?>">
                                                         <i class="fas fa-dolly-flatbed me-2"></i> Ajuster stock
                                                     </a>
