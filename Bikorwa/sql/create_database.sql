@@ -220,3 +220,15 @@ INSERT INTO categories (nom, description) VALUES
 ('Vins', 'Vins et champagnes'),
 ('Autres', 'Autres produits');
 
+
+-- Table des parametres de l'application
+CREATE TABLE IF NOT EXISTS settings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    value TEXT NOT NULL
+);
+
+-- Valeurs par defaut pour les parametres
+INSERT INTO settings (name, value) VALUES
+('theme','light'),
+('shop_name','BIKORWA SHOP');

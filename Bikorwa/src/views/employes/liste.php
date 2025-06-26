@@ -8,10 +8,12 @@ require_once './../../../src/config/database.php';
 require_once './../../../src/utils/Auth.php';
 require_once './../../../src/models/User.php';
 require_once './../../../src/controllers/AuthController.php';
+require_once './../../../src/utils/Settings.php';
 
 // Initialize database connection
 $database = new Database();
 $conn = $database->getConnection();
+$settingsObj = new Settings($conn);
 
 // Initialize auth
 $auth = new Auth($conn);
@@ -27,7 +29,7 @@ if (!$auth->isLoggedIn()) {
 $search = $_GET['search'] ?? '';
 $statut = $_GET['statut'] ?? '';
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$items_per_page = 10;
+$items_per_page = (int)$settingsObj->get('items_per_page', 10);
 $offset = ($current_page - 1) * $items_per_page;
 
 // Build the base query

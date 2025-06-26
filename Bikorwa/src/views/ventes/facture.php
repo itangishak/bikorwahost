@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Load configuration and database
 $config = require_once('../../config/config.php');
 require_once('../../config/database.php');
+require_once('../../utils/Settings.php');
 
 // Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
@@ -17,6 +18,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 // Initialize database connection
 $db = new Database();
 $pdo = $db->getConnection();
+$settings = new Settings($pdo);
+$config['shop_info']['name'] = $settings->get('shop_name', $config['shop_info']['name']);
 
 $vente_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($vente_id <= 0) {
