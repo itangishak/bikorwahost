@@ -324,11 +324,13 @@
 <!-- Adjust Stock Modal -->
 <div class="modal fade" id="adjustStockModal" tabindex="-1" aria-labelledby="adjustStockModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content position-relative">
             <div class="modal-header d-flex align-items-center">
                 <h5 class="modal-title flex-grow-1" id="adjustStockModalLabel">Ajuster le stock</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- Toasts shown inside modal -->
+            <div id="adjustToastContainer" class="toast-container position-absolute top-0 end-0 p-3" style="z-index: 1080;"></div>
             <form action="" method="POST" id="adjustStockForm">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="adjust_stock">
@@ -379,9 +381,15 @@
                         <textarea class="form-control" id="adjust_note" name="note" rows="2" placeholder="Raison de l'ajustement..."></textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <div class="modal-footer justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="adjustPrev" title="Précédent"><i class="fas fa-chevron-left"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="adjustNext" title="Suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -420,6 +428,12 @@
 </div>
 
 <script>
+    // Navigation helpers for Adjust Stock modal
+    let adjustButtons = [];
+    function refreshAdjustButtons() {
+        adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
+        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+    }
     // Function to toggle custom unit field visibility
     function toggleCustomUnit(selectId, containerId) {
         const selectElement = document.getElementById(selectId);
@@ -691,13 +705,32 @@
                 });
         }
         
+        // Toast helper for adjust stock actions
+        function showAdjustToast(message, type = 'success') {
+            const container = document.getElementById('adjustToastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>`;
+            container.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
+            bsToast.show();
+            toast.addEventListener('hidden.bs.toast', () => toast.remove());
+        }
+
         // Handle Adjust Stock Modal with navigation and AJAX
         const adjustStockModal = document.getElementById('adjustStockModal');
         const adjustForm = document.getElementById('adjustStockForm');
         const prevBtn = document.getElementById('adjustPrev');
         const nextBtn = document.getElementById('adjustNext');
-        const adjustButtons = Array.from(document.querySelectorAll('[data-bs-target="#adjustStockModal"]'));
-        adjustButtons.forEach((btn, idx) => btn.dataset.index = idx);
+        refreshAdjustButtons();
         let currentAdjustIndex = -1;
 
         function populateAdjustModal(button) {
@@ -769,7 +802,7 @@
                         .then(res => res.ok ? res.json() : res.text().then(t => Promise.reject(t)))
                         .then(data => {
                             if (!data.success) {
-                                alert(data.message || 'Erreur');
+                                showAdjustToast(data.message || 'Erreur', 'danger');
                                 return;
                             }
 
@@ -786,10 +819,11 @@
                             if (valCell) valCell.textContent = data.new_valeur_formatted + ' F';
                             const statusCell = document.getElementById('status-' + id);
                             if (statusCell) statusCell.innerHTML = data.status_badge;
+                            showAdjustToast('Stock ajusté avec succès');
                         })
                         .catch(err => {
                             console.error(err);
-                            alert('Une erreur est survenue');
+                            showAdjustToast('Une erreur est survenue', 'danger');
                         });
                 });
             }
@@ -887,6 +921,7 @@
                 cards.forEach(c => mobileContainer.appendChild(c));
             }
 
+            refreshAdjustButtons();
             updateIndicators();
         }
 
