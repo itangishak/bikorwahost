@@ -15,8 +15,9 @@ $conn = $database->getConnection();
 $auth = new Auth($conn);
 
 // Check if user is logged in and has appropriate role
+// Redirect unauthenticated users to the login page rather than the dashboard
 if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 
