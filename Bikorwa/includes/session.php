@@ -3,10 +3,6 @@ require_once __DIR__ . '/../src/config/database.php';
 require_once __DIR__ . '/../src/utils/DbSessionHandler.php';
 
 function startDbSession() {
-    // Disable cookie-based sessions
-    ini_set('session.use_cookies', 0);
-    ini_set('session.use_only_cookies', 0);
-    ini_set('session.use_trans_sid', 0);
 
     $database = new Database();
     $pdo = $database->getConnection();
@@ -27,7 +23,9 @@ function startDbSession() {
         session_id($token);
     }
 
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     return session_id();
 }
