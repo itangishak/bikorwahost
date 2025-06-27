@@ -12,8 +12,9 @@ $_SESSION = array();
 // Destroy the session
 session_destroy();
 
-// Clear session storage on the client side and redirect
-echo <<<HTML
+// Get the login URL
+$loginUrl = BASE_URL . '/src/views/auth/login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +24,10 @@ echo <<<HTML
         sessionStorage.removeItem('sessionId');
         
         // Redirect to the login page
-        window.location.href = "<?php echo BASE_URL . '/src/views/auth/login.php'; ?>";
+        window.location.href = "<?php echo $loginUrl; ?>";
     </script>
 </head>
 <body>
     <p>Déconnexion en cours...</p>
 </body>
 </html>
-HTML;
-
-exit;
-?>
