@@ -1,11 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
 
-// Debug - check if session exists
-if (isset($_SESSION)) {
-    error_log('Session exists before logout: ' . print_r($_SESSION, true));
-}
-
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -17,9 +12,25 @@ $_SESSION = array();
 // Destroy the session
 session_destroy();
 
-error_log('Redirecting to: ' . BASE_URL . '/src/views/auth/login.php');
+// Clear session storage on the client side and redirect
+echo <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Déconnexion</title>
+    <script>
+        // Clear the session ID from session storage
+        sessionStorage.removeItem('sessionId');
+        
+        // Redirect to the login page
+        window.location.href = "<?php echo BASE_URL . '/src/views/auth/login.php'; ?>";
+    </script>
+</head>
+<body>
+    <p>Déconnexion en cours...</p>
+</body>
+</html>
+HTML;
 
-// Redirect to login page
-header('Location: ' . BASE_URL . '/src/views/auth/login.php');
 exit;
 ?>
