@@ -11,10 +11,20 @@ class AuthController {
     
     // Constructeur
     public function __construct() {
+        // Vérifier que la classe Database est bien chargée
+        if (!class_exists('Database')) {
+            $databaseFile = __DIR__ . '/../config/database.php';
+            if (file_exists($databaseFile)) {
+                require_once $databaseFile;
+            } else {
+                throw new RuntimeException('Fichier de configuration de la base de données introuvable : ' . $databaseFile);
+            }
+        }
+
         // Connexion à la base de données
         $database = new Database();
         $this->db = $database->getConnection();
-        
+
         // Initialisation de l'authentification
         $this->auth = new Auth($this->db);
     }
