@@ -40,6 +40,26 @@ function testDatabaseConnection() {
     }
 }
 
+// Helper function to send JSON response and exit
+function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200, $sessionId = null) {
+    // Clean any output buffering
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+
+    http_response_code($statusCode);
+    header('Content-Type: application/json');
+    $response = ['success' => $success, 'message' => $message];
+    if ($redirectUrl) {
+        $response['redirectUrl'] = $redirectUrl;
+    }
+    if ($sessionId) {
+        $response['sessionId'] = $sessionId;
+    }
+    echo json_encode($response);
+    exit;
+}
+
 try {
     // Inclure les fichiers de configuration
     require_once './../../../src/config/config.php';
@@ -48,29 +68,9 @@ try {
     require_once './../../../src/utils/Auth.php';
     require_once './../../../src/models/User.php';
     require_once './../../../src/controllers/AuthController.php';
-    
+
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
-    
-    // Helper function to send JSON response and exit
-    function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200, $sessionId = null) {
-        // Clean any output buffering
-        while (ob_get_level()) {
-            ob_end_clean();
-        }
-
-        http_response_code($statusCode);
-        header('Content-Type: application/json');
-        $response = ['success' => $success, 'message' => $message];
-        if ($redirectUrl) {
-            $response['redirectUrl'] = $redirectUrl;
-        }
-        if ($sessionId) {
-            $response['sessionId'] = $sessionId;
-        }
-        echo json_encode($response);
-        exit;
-    }
 
     // Test database connection and log result
     $dbConnected = testDatabaseConnection();
