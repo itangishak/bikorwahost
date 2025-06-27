@@ -21,25 +21,6 @@ function logError($message) {
     error_log(date('Y-m-d H:i:s') . ' - Login Error: ' . $message . PHP_EOL, 3, $logDir . '/login_errors.log');
 }
 
-// Function to test database connection
-function testDatabaseConnection() {
-    try {
-        $database = new Database();
-        $conn = $database->getConnection();
-        
-        if ($conn) {
-            logError('Database connection successful');
-            return true;
-        } else {
-            logError('Database connection failed: Connection object is null');
-            return false;
-        }
-    } catch (Exception $e) {
-        logError('Database connection failed: ' . $e->getMessage());
-        return false;
-    }
-}
-
 // Helper function to send JSON response and exit
 function send_json_response($success, $message, $redirectUrl = null, $statusCode = 200, $sessionId = null) {
     // Clean any output buffering
@@ -61,89 +42,154 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
+    // Start session first
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
     // Base directory of the project
     $baseDir = dirname(__DIR__, 3);
+    
+    // Log the base directory for debugging
+    logError('Base directory: ' . $baseDir);
 
-    // Inclure les fichiers de configuration
-    require_once $baseDir . '/src/config/config.php';
-    require_once $baseDir . '/src/config/database.php';
-    require_once $baseDir . '/includes/session.php';
-    require_once $baseDir . '/includes/functions.php';
-    require_once $baseDir . '/src/utils/Auth.php';
-    require_once $baseDir . '/src/models/User.php';
-    require_once $baseDir . '/src/controllers/AuthController.php';
+    // Include configuration files with error checking
+    $configFiles = [
+        $baseDir . '/src/config/config.php',
+        $baseDir . '/src/config/database.php',
+        $baseDir . '/src/utils/Auth.php',
+        $baseDir . '/src/models/User.php',
+        $baseDir . '/src/controllers/AuthController.php'
+    ];
 
-    // Initialiser la session stockée en base de données
-    $currentSessionId = startDbSession();
+    foreach ($configFiles as $file) {
+        if (file_exists($file)) {
+            require_once $file;
+            logError('Successfully included: ' . $file);
+        } else {
+            logError('File not found: ' . $file);
+            send_json_response(false, 'Erreur de configuration du système.', null, 500);
+        }
+    }
 
-    // Test database connection and log result
-    $dbConnected = testDatabaseConnection();
-    if (!$dbConnected) {
+    // Include optional files (functions and session)
+    $optionalFiles = [
+        $baseDir . '/includes/functions.php',
+        $baseDir . '/includes/session.php'
+    ];
+
+    foreach ($optionalFiles as $file) {
+        if (file_exists($file)) {
+            require_once $file;
+            logError('Successfully included optional file: ' . $file);
+        } else {
+            logError('Optional file not found: ' . $file);
+        }
+    }
+
+    // Function to test database connection
+    function testDatabaseConnection() {
+        try {
+            $database = new Database();
+            $conn = $database->getConnection();
+            
+            if ($conn) {
+                logError('Database connection successful');
+                return true;
+            } else {
+                logError('Database connection failed: Connection object is null');
+                return false;
+            }
+        } catch (Exception $e) {
+            logError('Database connection failed: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Test database connection
+    if (!testDatabaseConnection()) {
         send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
     }
 
-    // try {
-        // Vérifier si la requête est de type POST
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            send_json_response(false, 'Méthode non autorisée.', null, 405); // 405 Method Not Allowed
+    // Initialize session if function exists
+    if (function_exists('startDbSession')) {
+        try {
+            $currentSessionId = startDbSession();
+            logError('Database session initialized: ' . $currentSessionId);
+        } catch (Exception $e) {
+            logError('Database session initialization failed: ' . $e->getMessage());
+            // Continue without database session
         }
+    }
 
-        // Log incoming request data for debugging (without passwords)
-        logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
+    // Vérifier si la requête est de type POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        send_json_response(false, 'Méthode non autorisée.', null, 405);
+    }
 
-        // Récupérer et nettoyer les données du formulaire
-        $username = sanitize_input($_POST['username'] ?? '');
-        $password = $_POST['password'] ?? ''; // Ne pas nettoyer le mot de passe pour ne pas altérer les caractères spéciaux
+    // Log incoming request data for debugging (without passwords)
+    logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
 
-        // Vérifier que les champs ne sont pas vides
-        if (empty($username) || empty($password)) {
-            send_json_response(false, 'Veuillez remplir tous les champs.', null, 400); // 400 Bad Request
-        }
+    // Récupérer et nettoyer les données du formulaire
+    $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-        // Initialiser le contrôleur d'authentification
-        $authController = new AuthController();
+    // Use sanitize_input if function exists, otherwise use trim
+    if (function_exists('sanitize_input')) {
+        $username = sanitize_input($username);
+    }
 
-        // Tenter la connexion
-        $result = $authController->login($username, $password); // Pass the username and password to the login method
+    // Vérifier que les champs ne sont pas vides
+    if (empty($username) || empty($password)) {
+        send_json_response(false, 'Veuillez remplir tous les champs.', null, 400);
+    }
 
-        // Traiter le résultat
-        if ($result['success']) {
-            // Connexion réussie
-            // Session variables like $_SESSION['user_id'], $_SESSION['username'] should be set within $authController->login()
-            $_SESSION['flash_message'] = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($result['user']['nom']) . '!'; // Keep for non-JS fallback or direct page load after login
-            $_SESSION['flash_type'] = 'success';
-            
-            // Log session information for debugging
-            error_log('Session after login: ' . print_r($_SESSION, true));
-            
-            // Determine redirect URL based on user role
-            $redirect = '../dashboard/index.php';
-            if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
-                $redirect = '../dashboard/receptionniste.php';
-            }
+    // Initialiser le contrôleur d'authentification
+    $authController = new AuthController();
 
-            // Make sure to use the correct redirect path and return the session ID
-            $sessionToken = session_id();
-            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect, 200, $sessionToken);
-        } else {
-            // Échec de la connexion
-            send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized
-        }
-    // } catch (Exception $e) {
-    //     // Log detailed error
-    //     logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+    // Tenter la connexion
+    $result = $authController->login($username, $password);
+
+    // Log the result for debugging
+    logError('Login result: ' . json_encode($result));
+
+    // Traiter le résultat
+    if ($result && isset($result['success']) && $result['success']) {
+        // Connexion réussie
+        $_SESSION['flash_message'] = 'Connexion réussie. Bienvenue!';
+        $_SESSION['flash_type'] = 'success';
         
-    //     // Send a generic error message to the client
-    //     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
-    // } finally {
-    //     // Clean up any output buffering if we get here
-    //     while (ob_get_level()) {
-    //         ob_end_clean();
-    //     }
-    // }
+        // Log session information for debugging
+        logError('Session after login: ' . print_r($_SESSION, true));
+        
+        // Determine redirect URL based on user role
+        $redirect = '../dashboard/index.php';
+        if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
+            $redirect = '../dashboard/receptionniste.php';
+        }
+
+        // Get session ID
+        $sessionToken = session_id();
+        
+        $welcomeMessage = 'Connexion réussie. Redirection en cours...';
+        if (isset($result['user']['nom'])) {
+            $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($result['user']['nom']) . '!';
+        }
+        
+        send_json_response(true, $welcomeMessage, $redirect, 200, $sessionToken);
+    } else {
+        // Échec de la connexion
+        $errorMessage = 'Échec de la connexion.';
+        if (isset($result['message'])) {
+            $errorMessage = $result['message'];
+        }
+        send_json_response(false, $errorMessage, null, 401);
+    }
+
 } catch (Exception $e) {
     // Log detailed error
     logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+    logError('Stack trace: ' . $e->getTraceAsString());
     
     // Send a generic error message to the client
     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
@@ -153,3 +199,4 @@ try {
         ob_end_clean();
     }
 }
+?>
