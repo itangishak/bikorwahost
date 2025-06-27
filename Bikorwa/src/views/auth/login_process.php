@@ -42,11 +42,6 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
-    // Start session first
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
     // Base directory of the project
     $baseDir = dirname(__DIR__, 3);
     
