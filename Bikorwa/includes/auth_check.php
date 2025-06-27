@@ -9,16 +9,11 @@ require_once __DIR__ . '/session.php';
 // Start session using database-backed handler
 startDbSession();
 
-// FOR DEVELOPMENT ONLY: Create a mock session if not already set
-if (!isset($_SESSION['user_id'])) {
-    // Create a mock session for the gestionnaire user to bypass login during development
-    $_SESSION['user_id'] = 1;
-    $_SESSION['username'] = 'admin';
-    $_SESSION['user_role'] = 'gestionnaire';
-    $_SESSION['user_nom'] = 'Administrateur';
-    $_SESSION['user_active'] = true;
-    $_SESSION['logged_in'] = true;
-}
+// The following block created a mock session for development purposes.
+// It granted "gestionnaire" privileges when no session existed, which caused
+// privilege leakage across users sharing the same browser. This code has been
+// removed to ensure that permissions are strictly tied to the authenticated
+// user's session.
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['username']) || !isset($_SESSION['user_role'])) {
