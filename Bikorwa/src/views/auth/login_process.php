@@ -61,14 +61,17 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
+    // Base directory of the project
+    $baseDir = dirname(__DIR__, 3);
+
     // Inclure les fichiers de configuration
-    require_once __DIR__ . '/../../../src/config/config.php';
-    require_once __DIR__ . '/../../../src/config/database.php';
-    require_once __DIR__ . '/../../../includes/session.php';
-    require_once __DIR__ . '/../../../includes/functions.php';
-    require_once __DIR__ . '/../../../src/utils/Auth.php';
-    require_once __DIR__ . '/../../../src/models/User.php';
-    require_once __DIR__ . '/../../../src/controllers/AuthController.php';
+    require_once $baseDir . '/src/config/config.php';
+    require_once $baseDir . '/src/config/database.php';
+    require_once $baseDir . '/includes/session.php';
+    require_once $baseDir . '/includes/functions.php';
+    require_once $baseDir . '/src/utils/Auth.php';
+    require_once $baseDir . '/src/models/User.php';
+    require_once $baseDir . '/src/controllers/AuthController.php';
 
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
@@ -150,4 +153,3 @@ try {
         ob_end_clean();
     }
 }
-?>
