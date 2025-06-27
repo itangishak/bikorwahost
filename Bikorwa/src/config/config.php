@@ -1,7 +1,7 @@
 <?php
 /**
  * Configuration générale de l'application
- * BIKORWA SHOP
+ * KUBIKOTI BAR
  */
 
 // ====================================================

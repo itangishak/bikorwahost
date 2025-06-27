@@ -1,7 +1,7 @@
 <?php
 /**
  * Traitement de la connexion (AJAX)
- * BIKORWA SHOP
+ * KUBIKOTI BAR
  */
 
 // Enable error reporting for debugging

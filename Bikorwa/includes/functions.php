@@ -1,6 +1,6 @@
 <?php
 /**
- * Common utility functions for BIKORWA SHOP
+ * Common utility functions for KUBIKOTI BAR
  */
 
 /**
