@@ -62,12 +62,12 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 
 try {
     // Inclure les fichiers de configuration
-    require_once './../../../src/config/config.php';
-    require_once './../../../src/config/database.php';
-    require_once './../../../includes/session.php';
-    require_once './../../../src/utils/Auth.php';
-    require_once './../../../src/models/User.php';
-    require_once './../../../src/controllers/AuthController.php';
+    require_once __DIR__ . '/../../../src/config/config.php';
+    require_once __DIR__ . '/../../../src/config/database.php';
+    require_once __DIR__ . '/../../../includes/session.php';
+    require_once __DIR__ . '/../../../src/utils/Auth.php';
+    require_once __DIR__ . '/../../../src/models/User.php';
+    require_once __DIR__ . '/../../../src/controllers/AuthController.php';
 
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
