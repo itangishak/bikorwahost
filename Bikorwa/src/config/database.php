@@ -6,7 +6,8 @@
 
 class Database {
     // Paramètres de connexion à la base de données
-    private $host = "localhost:3306";
+    private $host = "localhost";
+    private $port = 3306;
     private $db_name = "bumadste_bikorwa_shop";
     private $username = "bumadste_bikorwa";
     private $password = "Bikorwa2024!";
@@ -17,8 +18,9 @@ class Database {
         $this->conn = null;
 
         try {
+            $dsn = "mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name;
             $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
+                $dsn,
                 $this->username,
                 $this->password
             );
