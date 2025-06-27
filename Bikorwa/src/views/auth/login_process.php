@@ -68,7 +68,7 @@ try {
     require_once __DIR__ . '/../../../includes/functions.php';
     require_once __DIR__ . '/../../../src/utils/Auth.php';
     require_once __DIR__ . '/../../../src/models/User.php';
-    // require_once __DIR__ . '/../../../src/controllers/AuthController.php';
+    require_once __DIR__ . '/../../../src/controllers/AuthController.php';
 
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
@@ -79,50 +79,75 @@ try {
         send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
     }
 
-    // Vérifier si la requête est de type POST
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        send_json_response(false, 'Méthode non autorisée.', null, 405); // 405 Method Not Allowed
-    }
+    // try {
+        // Vérifier si la requête est de type POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            send_json_response(false, 'Méthode non autorisée.', null, 405); // 405 Method Not Allowed
+        }
 
-    // Log incoming request data for debugging (without passwords)
-    logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
+        // Log incoming request data for debugging (without passwords)
+        logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
 
-    // Récupérer et nettoyer les données du formulaire
-    $username = sanitize_input($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? ''; // Ne pas nettoyer le mot de passe pour ne pas altérer les caractères spéciaux
+        // Récupérer et nettoyer les données du formulaire
+        $username = sanitize_input($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? ''; // Ne pas nettoyer le mot de passe pour ne pas altérer les caractères spéciaux
 
-    // Vérifier que les champs ne sont pas vides
-    if (empty($username) || empty($password)) {
-        send_json_response(false, 'Veuillez remplir tous les champs.', null, 400); // 400 Bad Request
-    }
+        // Vérifier que les champs ne sont pas vides
+        if (empty($username) || empty($password)) {
+            send_json_response(false, 'Veuillez remplir tous les champs.', null, 400); // 400 Bad Request
+        }
 
-    // Initialiser le contrôleur d'authentification
-    // $authController = new AuthController();
+        // Initialiser le contrôleur d'authentification
+        $authController = new AuthController();
 
-    // Tenter la connexion
-    // $result = $authController->login($username, $password); // Pass the username and password to the login method
+        // Tenter la connexion
+        $result = $authController->login($username, $password); // Pass the username and password to the login method
 
-    // Traiter le résultat
-    // if ($result['success']) {
-    //     // Connexion réussie
-    //     // Session variables like $_SESSION['user_id'], $_SESSION['username'] should be set within $authController->login()
-    //     $_SESSION['flash_message'] = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($result['user']['nom']) . '!'; // Keep for non-JS fallback or direct page load after login
-    //     $_SESSION['flash_type'] = 'success';
-    //     
-    //     // Log session information for debugging
-    //     error_log('Session after login: ' . print_r($_SESSION, true));
-    //     
-    //     // Determine redirect URL based on user role
-    //     $redirect = '../dashboard/index.php';
-    //     if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
-    //         $redirect = '../dashboard/receptionniste.php';
+        // Traiter le résultat
+        if ($result['success']) {
+            // Connexion réussie
+            // Session variables like $_SESSION['user_id'], $_SESSION['username'] should be set within $authController->login()
+            $_SESSION['flash_message'] = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($result['user']['nom']) . '!'; // Keep for non-JS fallback or direct page load after login
+            $_SESSION['flash_type'] = 'success';
+            
+            // Log session information for debugging
+            error_log('Session after login: ' . print_r($_SESSION, true));
+            
+            // Determine redirect URL based on user role
+            $redirect = '../dashboard/index.php';
+            if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
+                $redirect = '../dashboard/receptionniste.php';
+            }
+
+            // Make sure to use the correct redirect path and return the session ID
+            $sessionToken = session_id();
+            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect, 200, $sessionToken);
+        } else {
+            // Échec de la connexion
+            send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized
+        }
+    // } catch (Exception $e) {
+    //     // Log detailed error
+    //     logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+        
+    //     // Send a generic error message to the client
+    //     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
+    // } finally {
+    //     // Clean up any output buffering if we get here
+    //     while (ob_get_level()) {
+    //         ob_end_clean();
     //     }
-
-    //     // Make sure to use the correct redirect path and return the session ID
-    //     $sessionToken = session_id();
-    //     send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect, 200, $sessionToken);
-    // } else {
-    //     // Échec de la connexion
-    //     send_json_response(false, $result['message'] ?? 'Échec de la connexion.', null, 401); // 401 Unauthorized
     // }
+} catch (Exception $e) {
+    // Log detailed error
+    logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+    
+    // Send a generic error message to the client
+    send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
+} finally {
+    // Clean up any output buffering if we get here
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+}
 ?>
