@@ -68,7 +68,7 @@ try {
     require_once __DIR__ . '/../../../includes/functions.php';
     require_once __DIR__ . '/../../../src/utils/Auth.php';
     require_once __DIR__ . '/../../../src/models/User.php';
-    require_once __DIR__ . '/../../../src/controllers/AuthController.php';
+    // require_once __DIR__ . '/../../../src/controllers/AuthController.php';
 
     // Initialiser la session stockée en base de données
     $currentSessionId = startDbSession();
