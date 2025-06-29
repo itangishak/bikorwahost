@@ -19,6 +19,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../../../src/config/config.php';
 require_once __DIR__ . '/../../../src/config/database.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/session.php';
 require_once __DIR__ . '/../../../src/utils/Auth.php';
 require_once __DIR__ . '/../../../src/models/User.php';
 require_once __DIR__ . '/../../../src/controllers/AuthController.php';
@@ -54,20 +55,10 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
-    // Initialize session if it isn't already active
-    if (!function_exists('startDbSession')) {
-        throw new Exception('Session handler function not found');
-    }
-
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        $sessionId = session_id();
-    } else {
-        $sessionId = startDbSession();
-    }
-
-    if (!$sessionId) {
-        throw new Exception('Failed to initialize session');
-    }
+    // Start PHP session
+require_once __DIR__ . '/../../../includes/session_manager.php';
+$sessionManager = SessionManager::getInstance();
+$sessionManager->startSession();
 
     // Verify request method
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -106,19 +97,8 @@ try {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            // Handle successful login
-            if (!regenerateSessionId(true)) {
-                throw new Exception('Failed to regenerate session ID');
-            }
-
-            // Set session variables
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_name'] = $user['nom'];
-            $_SESSION['user_role'] = $user['role'];
-            $_SESSION['user_active'] = $user['actif'];
-            $_SESSION['logged_in'] = true;
-            $_SESSION['last_activity'] = time();
+            // Handle successful login using SessionManager
+            $sessionManager->loginUser($user);
 
             // Log activity
             $auth = new Auth($conn);

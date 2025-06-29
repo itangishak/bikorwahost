@@ -4,10 +4,10 @@
  * This file should be included at the top of all protected pages
  */
 
-require_once __DIR__ . '/session.php';
-
-// Start session using database-backed handler
-startDbSession();
+// Start session at the beginning of each protected page
+require_once __DIR__ . '/session_manager.php';
+$sessionManager = SessionManager::getInstance();
+$sessionManager->startSession();
 
 // The following block created a mock session for development purposes.
 // It granted "gestionnaire" privileges when no session existed, which caused
@@ -15,10 +15,10 @@ startDbSession();
 // removed to ensure that permissions are strictly tied to the authenticated
 // user's session.
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['username']) || !isset($_SESSION['user_role'])) {
+// Check if user is logged in using SessionManager
+if (!$sessionManager->isLoggedIn()) {
     // Save the requested URL for redirection after login
-    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
+    $sessionManager->set('redirect_after_login', $_SERVER['REQUEST_URI']);
     
     // Set flash message
     if (function_exists('setFlashMessage')) {
@@ -31,13 +31,12 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username']) || !isset($_SE
 }
 
 // Check if user account is active
-if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
-    // Log them out
-    session_unset();
-    session_destroy();
+if (!$sessionManager->isUserActive()) {
+    // Log them out using SessionManager
+    $sessionManager->logoutUser();
     
     // Start new session for flash message
-    startDbSession();
+    $sessionManager->startSession();
     
     // Set flash message
     if (function_exists('setFlashMessage')) {
@@ -50,8 +49,7 @@ if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
 }
 
 // Define user access level constants for easier permission checking
-define('IS_ADMIN', $_SESSION['user_role'] === 'gestionnaire');
-define('IS_STAFF', $_SESSION['user_role'] === 'receptionniste');
+define('IS_ADMIN', $sessionManager->isManager());
+define('IS_STAFF', $sessionManager->isReceptionist());
 
-// Update last activity timestamp to keep session alive
-$_SESSION['last_activity'] = time();
+// Session activity is automatically updated by SessionManager

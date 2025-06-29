@@ -1,6 +1,6 @@
 <?php
 
-// Include authentication check and database-backed session
+// Include authentication check which also starts the PHP session
 require_once __DIR__ . '/../../../includes/auth_check.php';
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
@@ -22,7 +22,7 @@ if (!$pdo) {
 }
 
 // Ensure the connected user has the proper role
-if ($_SESSION['user_role'] !== 'gestionnaire') {
+if (!$sessionManager->isManager()) {
     header('Location: ../auth/login.php');
     exit;
 }
@@ -259,7 +259,7 @@ require_once __DIR__.'/../layouts/header.php';
     <!-- Welcome Message -->
     <div class="alert alert-info alert-dismissible fade show" role="alert">
         <i class="fas fa-info-circle"></i> 
-        <strong>Bienvenue, <?= htmlspecialchars($_SESSION['user_name'] ?? 'Gestionnaire') ?>!</strong> 
+        <strong>Bienvenue, <?= htmlspecialchars($sessionManager->getUserName() ?? 'Gestionnaire') ?>!</strong>
         Voici un aperçu de votre entreprise pour aujourd'hui.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
