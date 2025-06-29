@@ -19,6 +19,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../../../src/config/config.php';
 require_once __DIR__ . '/../../../src/config/database.php';
 require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/session.php';
 require_once __DIR__ . '/../../../src/utils/Auth.php';
 require_once __DIR__ . '/../../../src/models/User.php';
 require_once __DIR__ . '/../../../src/controllers/AuthController.php';
@@ -54,19 +55,9 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
-    // Initialize session if it isn't already active
-    if (!function_exists('startDbSession')) {
-        throw new Exception('Session handler function not found');
-    }
-
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        $sessionId = session_id();
-    } else {
-        $sessionId = startDbSession();
-    }
-
-    if (!$sessionId) {
-        throw new Exception('Failed to initialize session');
+    // Start PHP session
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
     }
 
     // Verify request method
