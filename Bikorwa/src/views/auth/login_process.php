@@ -4,9 +4,16 @@
  * KUBIKOTI BAR
  */
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 0);
+// Prevent headers from being sent
+declare(strict_types=1);
+
+// Disable output buffering
+if (ob_get_level()) {
+    ob_end_clean();
+}
+
+// Prevent any output
+header('Content-Type: application/json');
 
 // Log function for debugging
 function logError($message) {
@@ -37,14 +44,6 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
     echo json_encode($response);
     exit;
 }
-
-// Include required files
-require_once __DIR__ . '/../../../src/config/config.php';
-require_once __DIR__ . '/../../../src/config/database.php';
-require_once __DIR__ . '/../../../src/utils/Auth.php';
-require_once __DIR__ . '/../../../src/models/User.php';
-require_once __DIR__ . '/../../../src/controllers/AuthController.php';
-require_once __DIR__ . '/../../../includes/session.php';
 
 try {
     // Initialize session first

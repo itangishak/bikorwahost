@@ -1,17 +1,20 @@
 <?php
+// Prevent headers from being sent
+declare(strict_types=1);
+
+// Disable output buffering
+if (ob_get_level()) {
+    ob_end_clean();
+}
+
+// Prevent any output
+header('Content-Type: text/plain');
+
+// Initialize database connection first
 require_once __DIR__ . '/../src/config/database.php';
 require_once __DIR__ . '/../src/utils/DbSessionHandler.php';
 
 function startDbSession() {
-    // Initialize session parameters
-    ini_set('session.cookie_lifetime', 0);
-    ini_set('session.gc_maxlifetime', 86400); // 24 hours
-    ini_set('session.use_cookies', 1);
-    ini_set('session.use_only_cookies', 1);
-    ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.use_strict_mode', 1);
-
     // Get database connection
     $database = new Database();
     $pdo = $database->getConnection();
@@ -39,6 +42,15 @@ SQL
         return false;
     }
 
+    // Initialize session parameters before session_start()
+    ini_set('session.cookie_lifetime', 0);
+    ini_set('session.gc_maxlifetime', 86400); // 24 hours
+    ini_set('session.use_cookies', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_strict_mode', 1);
+
     // Initialize session handler
     try {
         $handler = new DbSessionHandler($pdo);
@@ -48,26 +60,28 @@ SQL
         return false;
     }
 
-    // Start session if not already started
+    // Start session
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 
-    // Handle session ID from request
+    // Handle session ID
     $session_id = session_id();
     if (empty($session_id)) {
-        // Generate new session ID
-        $session_id = bin2hex(random_bytes(16));
-        session_id($session_id);
-        session_start();
+        try {
+            $session_id = bin2hex(random_bytes(16));
+            session_id($session_id);
+            session_start();
+        } catch (Exception $e) {
+            error_log('Failed to generate session ID: ' . $e->getMessage());
+            return false;
+        }
     }
 
-    // Store session creation time
+    // Initialize session variables
     if (!isset($_SESSION['created_at'])) {
         $_SESSION['created_at'] = time();
     }
-
-    // Update last activity time
     $_SESSION['last_activity'] = time();
 
     return $session_id;
@@ -76,10 +90,15 @@ SQL
 // Function to destroy session
 function destroySession() {
     if (session_status() === PHP_SESSION_ACTIVE) {
-        session_destroy();
-        session_write_close();
-        setcookie(session_name(), '', time() - 3600, '/');
-        return true;
+        try {
+            session_destroy();
+            session_write_close();
+            setcookie(session_name(), '', time() - 3600, '/');
+            return true;
+        } catch (Exception $e) {
+            error_log('Failed to destroy session: ' . $e->getMessage());
+            return false;
+        }
     }
     return false;
 }
@@ -87,17 +106,22 @@ function destroySession() {
 // Function to regenerate session ID with proper cleanup
 function regenerateSessionId($deleteOldSession = true) {
     if (session_status() === PHP_SESSION_ACTIVE) {
-        $oldSessionData = $_SESSION;
-        session_write_close();
-        session_regenerate_id($deleteOldSession);
-        session_start();
-        
-        // Restore session data
-        foreach ($oldSessionData as $key => $value) {
-            $_SESSION[$key] = $value;
+        try {
+            $oldSessionData = $_SESSION;
+            session_write_close();
+            session_regenerate_id($deleteOldSession);
+            session_start();
+            
+            // Restore session data
+            foreach ($oldSessionData as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
+            
+            return true;
+        } catch (Exception $e) {
+            error_log('Failed to regenerate session ID: ' . $e->getMessage());
+            return false;
         }
-        
-        return true;
     }
     return false;
 }
