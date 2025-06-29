@@ -1,7 +1,9 @@
 <?php
 
-// Include authentication check which initializes session properly
-require_once __DIR__ . '/../../../includes/auth_check.php';
+// Initialize PHP session and helper functions
+// Load session configuration before starting the session manager
+require_once __DIR__ . '/../../../includes/session_init.php';
+require_once __DIR__ . '/../../../includes/session.php';
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
@@ -22,10 +24,7 @@ if (!$pdo) {
 }
 
 // Ensure the connected user has the proper role
-if (!has_role('gestionnaire')) {
-    header('Location: ../auth/login.php');
-    exit;
-}
+require_role('gestionnaire');
 
 // Get current date for filters
 $today = date('Y-m-d');
@@ -216,8 +215,7 @@ require_once __DIR__.'/../layouts/header.php';
 ?>
 
 <style>
-/* Existing styles */
-{{ ... }}
+/* Custom dashboard styles */
 
 /* New spacing rules */
 .card {
@@ -236,7 +234,6 @@ require_once __DIR__.'/../layouts/header.php';
 }
 
 /* Existing animations and hover effects */
-{{ ... }}
 </style>
 
 <main id="main" class="main">
@@ -528,3 +525,4 @@ require_once __DIR__.'/../layouts/header.php';
 // Include footer
 require_once __DIR__.'/../layouts/footer.php';
 ?>
+
