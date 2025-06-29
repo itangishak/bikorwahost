@@ -38,19 +38,16 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
     exit;
 }
 
+// Include required files
+require_once __DIR__ . '/../../../src/config/config.php';
+require_once __DIR__ . '/../../../src/config/database.php';
+require_once __DIR__ . '/../../../src/utils/Auth.php';
+require_once __DIR__ . '/../../../src/models/User.php';
+require_once __DIR__ . '/../../../src/controllers/AuthController.php';
+require_once __DIR__ . '/../../../includes/session.php';
+
 try {
-    // Base directory of the project
-    $baseDir = dirname(__DIR__, 3);
-
-    // Initialize database connection
-    $database = new Database();
-    $conn = $database->getConnection();
-    
-    if (!$conn instanceof PDO) {
-        send_json_response(false, 'Erreur de connexion à la base de données.', null, 500);
-    }
-
-    // Initialize session
+    // Initialize session first
     if (!function_exists('startDbSession')) {
         throw new Exception('Session handler function not found');
     }
@@ -76,6 +73,14 @@ try {
     // Validate input
     if (empty($username) || empty($password)) {
         send_json_response(false, 'Veuillez remplir tous les champs.', null, 400);
+    }
+
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    
+    if (!$conn instanceof PDO) {
+        throw new Exception('Failed to get database connection');
     }
 
     try {
