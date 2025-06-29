@@ -1,0 +1,185 @@
+[25-Jun-2025 17:29:33 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:29:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:29:49 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:29:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:29:57 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:29:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:30:21 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 17:30:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 18:00:31 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[25-Jun-2025 18:00:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/get_product_batches.php on line 12
+[26-Jun-2025 13:33:19 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:33:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:33:59 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:33:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:00 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:01 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:01 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:04 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:10 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 13:34:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:10 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:10 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:11 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:11 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:00:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:35 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:37 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:37 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:17:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:13 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:15 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:16 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:16 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:17 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:24:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:26:15 UTC] PHP Warning:  require_once(./../../config/database.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7
+[26-Jun-2025 14:26:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required './../../config/database.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/ajax/adjust_stock.php on line 7

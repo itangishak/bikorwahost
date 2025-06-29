@@ -1,0 +1,15 @@
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::open($savePath, $sessionName) should either be compatible with SessionHandlerInterface::open(string $path, string $name): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 11
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::close() should either be compatible with SessionHandlerInterface::close(): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 15
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::read($id) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 19
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::write($id, $data) should either be compatible with SessionHandlerInterface::write(string $id, string $data): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 28
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::destroy($id) should either be compatible with SessionHandlerInterface::destroy(string $id): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 34
+[27-Jun-2025 13:18:32 UTC] PHP Deprecated:  Return type of DbSessionHandler::gc($max_lifetime) should either be compatible with SessionHandlerInterface::gc(int $max_lifetime): int|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 39
+[27-Jun-2025 13:18:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bumadste_bikorwa_shop.sessions' doesn't exist in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php:21
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php(21): PDOStatement->execute(Array)
+#1 [internal function]: DbSessionHandler->read('d3e2120a9ca1dc7...')
+#2 /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php(30): session_start()
+#3 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php(16): startDbSession()
+#4 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/depenses/jour.php(6): require_once('/home/bumadste/...')
+#5 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 21

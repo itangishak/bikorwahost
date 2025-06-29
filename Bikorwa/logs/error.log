@@ -4851,3 +4851,1544 @@ Stack trace:
 #0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/depenses/jour.php(38): PDOStatement->execute(Array)
 #1 {main}
   thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/depenses/jour.php on line 38
+[25-Jun-2025 19:05:57 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+    [csrf_token] => 3a79e931f832c4e042eca8f414f8b526b002741a92d9f4cde7e5c157db6dbbf7
+)
+
+[25-Jun-2025 19:05:57 Africa/Kigali] Redirecting to: /Bikorwa/src/views/auth/login.php
+[25-Jun-2025 19:07:42 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:08:08 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:08:08 Africa/Kigali] Redirecting to: /Bikorwa/src/views/auth/login.php
+[25-Jun-2025 19:08:25 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:08:58 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:21:06 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:21:44 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:22:21 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:28:10 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:37:19 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:37:19 Africa/Kigali] Redirecting to: /Bikorwa/src/views/auth/login.php
+[25-Jun-2025 19:37:32 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[25-Jun-2025 19:57:27 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[25-Jun-2025 19:58:24 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[25-Jun-2025 19:58:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[25-Jun-2025 19:58:48 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[25-Jun-2025 19:59:25 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[26-Jun-2025 11:48:02 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[26-Jun-2025 12:26:26 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[26-Jun-2025 12:35:15 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[26-Jun-2025 12:35:35 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 258
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 265
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 270
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 288
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 293
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 314
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 327
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 349
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 354
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 355
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 360
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 369
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 377
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 382
+[26-Jun-2025 12:35:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 401
+[26-Jun-2025 12:35:48 Africa/Kigali] Executing employee query: SELECT id, nom,actif FROM employes WHERE actif = 1 ORDER BY nom
+[26-Jun-2025 12:35:48 Africa/Kigali] Found employees: 2
+[26-Jun-2025 12:35:48 Africa/Kigali] Sample employee data: Array
+(
+    [id] => 17
+    [nom] => HAKIZIMANA Nadjati
+    [actif] => 1
+)
+
+[26-Jun-2025 12:36:25 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 12:36:25 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 59
+[26-Jun-2025 12:36:25 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT 
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id
+        FROM (
+            SELECT 
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                CASE 
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 12:36:25 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 12:36:25 Africa/Kigali] DEBUG: Ventes found: 6
+[26-Jun-2025 12:36:25 Africa/Kigali] DEBUG: Stock movements found: 88
+[26-Jun-2025 12:36:25 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 12:36:25 Africa/Kigali] DEBUG Today Activities - Journal entities: auth:1
+[26-Jun-2025 12:36:25 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":1,"utilisateurs_actifs":1,"ventes_aujourd_hui":"0","mouvements_stock":"0","paiements_salaires":"0"}
+[26-Jun-2025 12:37:05 Africa/Kigali] Executing employee query: SELECT id, nom,actif FROM employes WHERE actif = 1 ORDER BY nom
+[26-Jun-2025 12:37:05 Africa/Kigali] Found employees: 2
+[26-Jun-2025 12:37:05 Africa/Kigali] Sample employee data: Array
+(
+    [id] => 17
+    [nom] => HAKIZIMANA Nadjati
+    [actif] => 1
+)
+
+[26-Jun-2025 13:26:29 Africa/Kigali] PHP Warning:  require_once(/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:26:29 Africa/Kigali] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php:3
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php(214): require_once()
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:27:52 Africa/Kigali] PHP Warning:  require_once(/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:27:52 Africa/Kigali] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php:3
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php(214): require_once()
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:27:58 Africa/Kigali] PHP Warning:  require_once(/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php): Failed to open stream: No such file or directory in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:27:58 Africa/Kigali] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/../utils/Settings.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php:3
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php(587): include()
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 3
+[26-Jun-2025 13:34:09 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 13:34:09 Africa/Kigali] Redirecting to: https://uab.bumadventiste.org/Bikorwa/src/views/auth/login.php
+[26-Jun-2025 13:34:24 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 13:41:46 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 13:43:34 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:44:07 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:46:56 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:07 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:15 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:23 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:32 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:43 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:47:59 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:08 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:16 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:29 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:39 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:47 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:48:54 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:03 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:20 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:29 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:38 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:47 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:49:55 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:10 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:19 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:27 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:36 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:44 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:50:52 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:51:00 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:51:36 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:51:47 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:51:59 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:54:57 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 13:56:13 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 13:56:13 Africa/Kigali] Redirecting to: https://uab.bumadventiste.org/Bikorwa/src/views/auth/login.php
+[26-Jun-2025 13:56:26 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 13:56:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 13:57:35 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 13:57:43 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 13:57:46 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 13:59:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 14:02:51 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 413
+[26-Jun-2025 14:11:27 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:11:27 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 59
+[26-Jun-2025 14:11:27 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT 
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id
+        FROM (
+            SELECT 
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                CASE 
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 14:11:27 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:11:27 Africa/Kigali] DEBUG: Ventes found: 6
+[26-Jun-2025 14:11:27 Africa/Kigali] DEBUG: Stock movements found: 121
+[26-Jun-2025 14:11:27 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 14:11:27 Africa/Kigali] DEBUG Today Activities - Journal entities: auth:4, stock:33
+[26-Jun-2025 14:11:27 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":37,"utilisateurs_actifs":2,"ventes_aujourd_hui":"0","mouvements_stock":"33","paiements_salaires":"0"}
+[26-Jun-2025 14:18:07 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 14:18:07 Africa/Kigali] Redirecting to: https://uab.bumadventiste.org/Bikorwa/src/views/auth/login.php
+[26-Jun-2025 14:18:22 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 14:20:12 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 14:20:29 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:20:29 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 59
+[26-Jun-2025 14:20:29 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT 
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id
+        FROM (
+            SELECT 
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                CASE 
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 14:20:29 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:20:29 Africa/Kigali] DEBUG: Ventes found: 7
+[26-Jun-2025 14:20:29 Africa/Kigali] DEBUG: Stock movements found: 122
+[26-Jun-2025 14:20:29 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 14:20:29 Africa/Kigali] DEBUG Today Activities - Journal entities: :1, auth:6, stock:33, ventes:1
+[26-Jun-2025 14:20:29 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":41,"utilisateurs_actifs":2,"ventes_aujourd_hui":"1","mouvements_stock":"33","paiements_salaires":"0"}
+[26-Jun-2025 14:53:15 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:53:15 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 59
+[26-Jun-2025 14:53:15 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT 
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id
+        FROM (
+            SELECT 
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                CASE 
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT 
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 14:53:15 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 14:53:15 Africa/Kigali] DEBUG: Ventes found: 7
+[26-Jun-2025 14:53:15 Africa/Kigali] DEBUG: Stock movements found: 122
+[26-Jun-2025 14:53:15 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 14:53:15 Africa/Kigali] DEBUG Today Activities - Journal entities: :1, auth:6, stock:33, ventes:1
+[26-Jun-2025 14:53:15 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":41,"utilisateurs_actifs":2,"ventes_aujourd_hui":"1","mouvements_stock":"33","paiements_salaires":"0"}
+[26-Jun-2025 15:00:14 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 15:00:14 Africa/Kigali] Redirecting to: https://uab.bumadventiste.org/Bikorwa/src/views/auth/login.php
+[26-Jun-2025 15:00:27 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 15:01:25 Africa/Kigali] Session exists before logout: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 15:01:25 Africa/Kigali] Redirecting to: https://uab.bumadventiste.org/Bikorwa/src/views/auth/login.php
+[26-Jun-2025 15:01:41 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, Administrateur!
+    [flash_type] => success
+)
+
+[26-Jun-2025 15:02:01 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:02:18 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:02:27 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:02:36 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:02:51 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:03:01 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:03:16 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:05:25 Africa/Kigali] PHP Warning:  Undefined array key "unite_mesure" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/inventaire.php on line 418
+[26-Jun-2025 15:21:27 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:21:27 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 15:21:27 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 15:21:27 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:21:27 Africa/Kigali] DEBUG: Ventes found: 7
+[26-Jun-2025 15:21:27 Africa/Kigali] DEBUG: Stock movements found: 130
+[26-Jun-2025 15:21:27 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 15:21:27 Africa/Kigali] DEBUG Today Activities - Journal entities: :1, auth:8, stock:41, ventes:1
+[26-Jun-2025 15:21:27 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":51,"utilisateurs_actifs":2,"ventes_aujourd_hui":"1","mouvements_stock":"41","paiements_salaires":"0"}
+[26-Jun-2025 15:22:06 Africa/Kigali] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''25' OFFSET '0'' at line 54 in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/rapports/all_activities.php:103
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/rapports/all_activities.php(103): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/rapports/all_activities.php on line 103
+[26-Jun-2025 15:24:06 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:24:06 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 15:24:06 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 15:24:06 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:24:06 Africa/Kigali] DEBUG: Ventes found: 7
+[26-Jun-2025 15:24:06 Africa/Kigali] DEBUG: Stock movements found: 130
+[26-Jun-2025 15:24:06 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 15:24:06 Africa/Kigali] DEBUG Today Activities - Journal entities: :1, auth:8, stock:41, ventes:1
+[26-Jun-2025 15:24:06 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":51,"utilisateurs_actifs":2,"ventes_aujourd_hui":"1","mouvements_stock":"41","paiements_salaires":"0"}
+[26-Jun-2025 15:36:49 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:36:49 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 15:36:49 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 15:36:49 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:36:49 Africa/Kigali] DEBUG: Ventes found: 8
+[26-Jun-2025 15:36:49 Africa/Kigali] DEBUG: Stock movements found: 131
+[26-Jun-2025 15:36:49 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 15:36:49 Africa/Kigali] DEBUG Today Activities - Journal entities: :2, auth:8, client:2, stock:41, ventes:2
+[26-Jun-2025 15:36:49 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":55,"utilisateurs_actifs":2,"ventes_aujourd_hui":"2","mouvements_stock":"41","paiements_salaires":"0"}
+[26-Jun-2025 15:37:14 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:37:14 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 15:37:14 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 15:37:14 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:37:14 Africa/Kigali] DEBUG: Ventes found: 8
+[26-Jun-2025 15:37:14 Africa/Kigali] DEBUG: Stock movements found: 131
+[26-Jun-2025 15:37:14 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 15:37:14 Africa/Kigali] DEBUG Today Activities - Journal entities: :2, auth:8, client:2, stock:41, ventes:2
+[26-Jun-2025 15:37:14 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":55,"utilisateurs_actifs":2,"ventes_aujourd_hui":"2","mouvements_stock":"41","paiements_salaires":"0"}
+[26-Jun-2025 15:58:01 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:58:01 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 15:58:01 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 15:58:01 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 15:58:01 Africa/Kigali] DEBUG: Ventes found: 8
+[26-Jun-2025 15:58:01 Africa/Kigali] DEBUG: Stock movements found: 131
+[26-Jun-2025 15:58:01 Africa/Kigali] DEBUG: Total activities after merge: 15
+[26-Jun-2025 15:58:01 Africa/Kigali] DEBUG Today Activities - Journal entities: :2, auth:8, client:2, stock:41, ventes:2
+[26-Jun-2025 15:58:01 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":55,"utilisateurs_actifs":2,"ventes_aujourd_hui":"2","mouvements_stock":"41","paiements_salaires":"0"}
+[26-Jun-2025 16:21:41 Africa/Kigali] Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue, John Esterique!
+    [flash_type] => success
+)
+
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 18:50:40 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 18:53:25 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 19:03:34 Africa/Kigali] getRecentActivities: Executing query with params: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 19:03:34 Africa/Kigali] Erreur getRecentActivities: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''15'' at line 63
+[26-Jun-2025 19:03:34 Africa/Kigali] getRecentActivities: Query was: 
+        SELECT
+            type_activite,
+            date_action,
+            titre,
+            montant,
+            username,
+            role,
+            ref_id,
+            reference
+        FROM (
+            SELECT
+                'vente' as type_activite,
+                v.date_vente as date_action,
+                CONCAT('Vente #', v.numero_facture) as titre,
+                CONCAT(FORMAT(v.montant_paye, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                v.id as ref_id,
+                v.numero_facture as reference
+            FROM ventes v
+            LEFT JOIN users u ON v.utilisateur_id = u.id
+            WHERE v.date_vente BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                CASE
+                    WHEN m.type_mouvement = 'entree' THEN 'approvisionnement'
+                    ELSE 'sortie'
+                END as type_activite,
+                m.date_mouvement as date_action,
+                CONCAT(
+                    CASE WHEN m.type_mouvement = 'entree' THEN 'Entrée: ' ELSE 'Sortie: ' END,
+                    COALESCE(p.nom, 'Produit inconnu')
+                ) as titre,
+                CONCAT(FORMAT(m.quantite, 0), ' ', COALESCE(p.unite_mesure, 'unité')) as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                m.id as ref_id,
+                m.reference
+            FROM mouvements_stock m
+            LEFT JOIN users u ON m.utilisateur_id = u.id
+            LEFT JOIN produits p ON m.produit_id = p.id
+            WHERE m.date_mouvement BETWEEN ? AND ?
+            
+            UNION ALL
+            
+            SELECT
+                'paiement_salaire' as type_activite,
+                s.date_paiement as date_action,
+                CONCAT('Salaire: ', COALESCE(e.nom, 'Employé inconnu')) as titre,
+                CONCAT(FORMAT(s.montant, 0), ' BIF') as montant,
+                COALESCE(u.username, 'Système') as username,
+                COALESCE(u.role, 'N/A') as role,
+                s.id as ref_id,
+                NULL as reference
+            FROM salaires s
+            LEFT JOIN users u ON s.utilisateur_id = u.id
+            LEFT JOIN employes e ON s.employe_id = e.id
+            WHERE s.date_paiement BETWEEN ? AND ?
+        ) combined_activities
+        ORDER BY date_action DESC
+        LIMIT ?
+[26-Jun-2025 19:03:34 Africa/Kigali] getRecentActivities: Params were: ["2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59","2025-06-01 00:00:00","2025-06-26 23:59:59",15]
+[26-Jun-2025 19:03:34 Africa/Kigali] DEBUG: Ventes found: 0
+[26-Jun-2025 19:03:34 Africa/Kigali] DEBUG: Stock movements found: 0
+[26-Jun-2025 19:03:34 Africa/Kigali] DEBUG: Total activities after merge: 0
+[26-Jun-2025 19:03:34 Africa/Kigali] DEBUG Today Activities - Journal entities: :2, auth:9, client:2, stock:109, ventes:2
+[26-Jun-2025 19:03:34 Africa/Kigali] DEBUG Today Activities - Journal result: {"total_activites":124,"utilisateurs_actifs":2,"ventes_aujourd_hui":"2","mouvements_stock":"109","paiements_salaires":"0"}
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 19:44:44 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[26-Jun-2025 20:01:30 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::open($savePath, $sessionName) should either be compatible with SessionHandlerInterface::open(string $path, string $name): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 11
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::close() should either be compatible with SessionHandlerInterface::close(): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 15
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::read($id) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 19
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::write($id, $data) should either be compatible with SessionHandlerInterface::write(string $id, string $data): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 28
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::destroy($id) should either be compatible with SessionHandlerInterface::destroy(string $id): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 34
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::gc($max_lifetime) should either be compatible with SessionHandlerInterface::gc(int $max_lifetime): int|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 39
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 7
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 8
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 9
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 15
+[27-Jun-2025 15:09:03 Africa/Kigali] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 30
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::open($savePath, $sessionName) should either be compatible with SessionHandlerInterface::open(string $path, string $name): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 11
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::close() should either be compatible with SessionHandlerInterface::close(): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 15
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::read($id) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 19
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::write($id, $data) should either be compatible with SessionHandlerInterface::write(string $id, string $data): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 28
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::destroy($id) should either be compatible with SessionHandlerInterface::destroy(string $id): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 34
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::gc($max_lifetime) should either be compatible with SessionHandlerInterface::gc(int $max_lifetime): int|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 39
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 7
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 8
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 9
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 15
+[27-Jun-2025 15:09:40 Africa/Kigali] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 30
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::open($savePath, $sessionName) should either be compatible with SessionHandlerInterface::open(string $path, string $name): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 11
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::close() should either be compatible with SessionHandlerInterface::close(): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 15
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::read($id) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 19
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::write($id, $data) should either be compatible with SessionHandlerInterface::write(string $id, string $data): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 28
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::destroy($id) should either be compatible with SessionHandlerInterface::destroy(string $id): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 34
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Deprecated:  Return type of DbSessionHandler::gc($max_lifetime) should either be compatible with SessionHandlerInterface::gc(int $max_lifetime): int|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/DbSessionHandler.php on line 39
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 7
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 8
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 9
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 15
+[27-Jun-2025 15:09:51 Africa/Kigali] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 30
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:18:18 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:18:28 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:18:34 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:26:31 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 11
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:26:53 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:27:03 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:27:48 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 11
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:28:58 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:29:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:30:33 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[27-Jun-2025 15:31:09 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
+[29-Jun-2025 11:47:13 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 11
+[29-Jun-2025 11:47:46 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 11
+[29-Jun-2025 11:48:07 Africa/Kigali] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php on line 11
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 287
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 294
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 299
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 317
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 322
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 343
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 351
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 356
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 378
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 383
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 384
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 389
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 398
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 406
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 411
+[29-Jun-2025 12:22:19 Africa/Kigali] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 430
