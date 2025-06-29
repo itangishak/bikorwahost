@@ -1,1 +1,5 @@
 [25-Jun-2025 15:58:36 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[29-Jun-2025 16:44:24 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[29-Jun-2025 16:44:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php on line 14
+[29-Jun-2025 16:44:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php on line 15
+[29-Jun-2025 16:44:24 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php on line 18

@@ -1,0 +1,17 @@
+[29-Jun-2025 14:51:31 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:27:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_user_logged_in() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/auth_check.php:19
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php(4): require_once()
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/auth_check.php on line 19
+[29-Jun-2025 15:44:19 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:44:23 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:44:42 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:51:38 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:51:44 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 15:56:32 UTC] PHP Fatal error:  Cannot redeclare get_current_user() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_init.php on line 55
+[29-Jun-2025 16:04:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_user_logged_in() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/auth_check.php:19
+Stack trace:
+#0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/receptionniste.php(3): require_once()
+#1 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/auth_check.php on line 19
