@@ -1,13 +1,18 @@
 <?php
 
 // Initialize session with proper configuration
-require_once __DIR__ . '/../../../includes/session_init.php';
+require_once __DIR__ . '/../../../includes/session_db_manager.php';
+require_once __DIR__ . '/../../../src/config/database.php';
+
+$database = new Database();
+$pdo = $database->getConnection();
+$sessionManager = new DatabaseSessionManager($pdo);
 
 // Check if user is already logged in
-if (is_user_logged_in()) {
+if ($sessionManager->isLoggedIn()) {
     // Redirect based on role
     $redirect = '../dashboard/index.php';
-    if (has_role('receptionniste')) {
+    if ($sessionManager->hasRole('receptionniste')) {
         $redirect = '../dashboard/receptionniste.php';
     }
     header('Location: ' . $redirect);
