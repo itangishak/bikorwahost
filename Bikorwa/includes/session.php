@@ -23,7 +23,7 @@ function startDbSession() {
 
     // Ensure sessions table exists
     try {
-        $stmt = $pdo->prepare("""
+        $stmt = $pdo->prepare(<<<SQL
             CREATE TABLE IF NOT EXISTS sessions (
                 id VARCHAR(128) PRIMARY KEY,
                 data TEXT NOT NULL,
@@ -31,7 +31,8 @@ function startDbSession() {
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-        """);
+SQL
+        );
         $stmt->execute();
     } catch (Exception $e) {
         error_log('Failed to create sessions table: ' . $e->getMessage());
