@@ -8,7 +8,7 @@ if (ob_get_level()) {
 }
 
 // Prevent any output
-header('Content-Type: text/plain');
+header("Content-Type: text/html; charset=UTF-8");
 
 // Initialize database connection first
 require_once __DIR__ . '/../src/config/database.php';
