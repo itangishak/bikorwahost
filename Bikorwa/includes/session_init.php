@@ -45,12 +45,12 @@ function is_user_logged_in() {
            !empty($_SESSION['user_id']);
 }
 
-// Function to get current user data
-function get_current_user() {
+// Function to get logged-in user data
+function get_logged_in_user() {
     if (!is_user_logged_in()) {
         return null;
     }
-    
+
     return [
         'id' => $_SESSION['user_id'] ?? null,
         'username' => $_SESSION['username'] ?? null,
