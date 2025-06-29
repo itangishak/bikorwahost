@@ -3,9 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Initialize PHP session and helper functions
-require_once __DIR__ . '/../../../includes/session.php';
-require_once __DIR__ . '/../../../includes/session_init.php';
+// Initialize application (loads session manager and helpers)
+require_once __DIR__ . '/../../../includes/init.php';
 
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
@@ -28,7 +27,7 @@ try {
 }
 
 // Ensure the connected user has the proper role
-require_role('gestionnaire');
+requireManager();
 
 // Get current date for filters
 $today = date('Y-m-d');
