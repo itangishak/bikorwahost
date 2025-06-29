@@ -17,6 +17,21 @@ function startDbSession() {
     $database = new Database();
     $pdo = $database->getConnection();
     if ($pdo instanceof PDO) {
+        // Ensure the sessions table exists. If it doesn't, create it
+        try {
+            $exists = $pdo->query("SHOW TABLES LIKE 'sessions'")->rowCount() > 0;
+            if (!$exists) {
+                $createQuery = "CREATE TABLE IF NOT EXISTS sessions (
+                    id VARCHAR(128) PRIMARY KEY,
+                    data TEXT NOT NULL,
+                    expires DATETIME NOT NULL
+                )";
+                $pdo->exec($createQuery);
+            }
+        } catch (Exception $e) {
+            error_log('Unable to verify sessions table: ' . $e->getMessage());
+        }
+
         $handler = new DbSessionHandler($pdo);
         session_set_save_handler($handler, true);
     } else {
