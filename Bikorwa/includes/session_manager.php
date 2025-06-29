@@ -4,8 +4,8 @@
  * This file ensures consistent session handling across the entire application
  */
 
-// Prevent multiple inclusions
-if (defined('SESSION_MANAGER_LOADED') || class_exists('SessionManager')) {
+// Prevent multiple inclusions without triggering autoload
+if (defined('SESSION_MANAGER_LOADED')) {
     return;
 }
 define('SESSION_MANAGER_LOADED', true);
@@ -312,9 +312,9 @@ class SessionManager
     }
     
     /**
-     * Get current user name
+     * Get current user's full name
      */
-    public function getUserName() 
+    public function getFullName()
     {
         return $this->get('user_name');
     }
