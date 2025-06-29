@@ -6,10 +6,7 @@
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);
-ini_set('display_errors', 0); // Don't display errors to the browser
-
-// Start output buffering to capture any errors
-ob_start();
+ini_set('display_errors', 0);
 
 // Log function for debugging
 function logError($message) {
@@ -45,168 +42,94 @@ try {
     // Base directory of the project
     $baseDir = dirname(__DIR__, 3);
 
-    // Include configuration files with error checking
-    $configFiles = [
-        $baseDir . '/src/config/config.php',
-        $baseDir . '/src/config/database.php',
-        $baseDir . '/src/utils/Auth.php',
-        $baseDir . '/src/models/User.php',
-        $baseDir . '/src/controllers/AuthController.php'
-    ];
-
-    foreach ($configFiles as $file) {
-        if (file_exists($file)) {
-            require_once $file;
-            logError('Successfully included: ' . $file);
-        } else {
-            logError('File not found: ' . $file);
-            send_json_response(false, 'Erreur de configuration du système.', null, 500);
-        }
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    
+    if (!$conn instanceof PDO) {
+        send_json_response(false, 'Erreur de connexion à la base de données.', null, 500);
     }
 
-    // Include optional files (functions and session)
-    $optionalFiles = [
-        $baseDir . '/includes/functions.php',
-        $baseDir . '/includes/session.php'
-    ];
-
-    foreach ($optionalFiles as $file) {
-        if (file_exists($file)) {
-            require_once $file;
-            logError('Successfully included optional file: ' . $file);
-        } else {
-            logError('Optional file not found: ' . $file);
-        }
+    // Initialize session
+    if (!function_exists('startDbSession')) {
+        throw new Exception('Session handler function not found');
     }
 
-    // Function to test database connection
-    function testDatabaseConnection() {
-        try {
-            $database = new Database();
-            $conn = $database->getConnection();
-
-            if ($conn) {
-                logError('Database connection successful');
-                return true;
-            } else {
-                logError('Database connection failed: Connection object is null');
-                return false;
-            }
-        } catch (Exception $e) {
-            logError('Database connection failed: ' . $e->getMessage());
-            return false;
-        }
+    $sessionId = startDbSession();
+    if (!$sessionId) {
+        throw new Exception('Failed to initialize session');
     }
 
-    // Test database connection
-    if (!testDatabaseConnection()) {
-        send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
-    }
-
-    // Initialize session if function exists
-    if (function_exists('startDbSession')) {
-        try {
-            $currentSessionId = startDbSession();
-            logError('Database session initialized: ' . $currentSessionId);
-        } catch (Exception $e) {
-            logError('Database session initialization failed: ' . $e->getMessage());
-            // Continue without database session
-        }
-    }
-
-    // Vérifier si la requête est de type POST
+    // Verify request method
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         send_json_response(false, 'Méthode non autorisée.', null, 405);
     }
 
-    // Log incoming request data for debugging (without passwords)
-    logError('Login attempt for username: ' . ($_POST['username'] ?? 'not provided'));
-
-    // Récupérer et nettoyer les données du formulaire
+    // Get and sanitize input
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    // Use sanitize_input if function exists, otherwise use trim
     if (function_exists('sanitize_input')) {
         $username = sanitize_input($username);
     }
 
-    // Vérifier que les champs ne sont pas vides
+    // Validate input
     if (empty($username) || empty($password)) {
         send_json_response(false, 'Veuillez remplir tous les champs.', null, 400);
     }
 
-    // --- Start of integrated login logic ---
-    $database = new Database();
-    $conn = $database->getConnection(); // Get PDO connection
-
-    if (!$conn) {
-        send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
-    }
-
     try {
-        // SQL query using prepared statement
-        // Assuming 'email' in your provided code maps to 'username' in the project's 'users' table
+        // Prepare and execute query
         $stmt = $conn->prepare("SELECT id, username, password, nom, role, actif FROM users WHERE username = :username");
-
         if (!$stmt) {
-            logError("SQL prepare error: " . implode(" ", $conn->errorInfo()));
-            send_json_response(false, "Erreur interne du serveur.", null, 500);
+            throw new Exception("SQL prepare error: " . implode(" ", $conn->errorInfo()));
         }
 
-        $stmt->bindParam(":username", $username);
-        $stmt->execute();
+        $stmt->execute(['username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
-            // Check if password matches the stored hash
-            if (password_verify($password, $user['password'])) {
-                // Store session variables
-                session_regenerate_id(true);
-                $_SESSION['user_id']      = $user['id'];
-                $_SESSION['username']     = $user['username'];
-                $_SESSION['user_name']    = $user['nom'];
-                $_SESSION['user_role']    = $user['role'];
-                $_SESSION['user_active']  = $user['actif'];
-                $_SESSION['logged_in']    = true;
-                $_SESSION['last_activity'] = time();
-
-                // Log the activity using the project's Auth class
-                $auth = new Auth($conn); // Re-initialize Auth with the PDO connection
-                $activity = "User " . $user['nom'] . " logged in successfully.";
-                $auth->logActivity("Login", "User", $user['id'], $activity);
-
-                // Determine redirect URL based on user role
-                $redirect = BASE_URL . '/src/views/dashboard/index.php'; // Default for gestionnaire
-                if ($user['role'] === 'receptionniste') {
-                    $redirect = BASE_URL . '/src/views/dashboard/receptionniste.php';
-                }
-
-                $welcomeMessage = 'Connexion réussie. Redirection en cours...';
-                if (isset($user['nom'])) {
-                    $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !';
-                }
-
-                send_json_response(true, $welcomeMessage, $redirect, 200, session_id());
-            } else {
-                send_json_response(false, "Mot de passe incorrect.", null, 401);
+        if ($user && password_verify($password, $user['password'])) {
+            // Handle successful login
+            if (!regenerateSessionId(true)) {
+                throw new Exception('Failed to regenerate session ID');
             }
+
+            // Set session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_name'] = $user['nom'];
+            $_SESSION['user_role'] = $user['role'];
+            $_SESSION['user_active'] = $user['actif'];
+            $_SESSION['logged_in'] = true;
+            $_SESSION['last_activity'] = time();
+
+            // Log activity
+            $auth = new Auth($conn);
+            $activity = "User " . $user['nom'] . " logged in successfully.";
+            $auth->logActivity("Login", "User", $user['id'], $activity);
+
+            // Determine redirect URL
+            $redirect = BASE_URL . '/src/views/dashboard/index.php';
+            if ($user['role'] === 'receptionniste') {
+                $redirect = BASE_URL . '/src/views/dashboard/receptionniste.php';
+            }
+
+            $welcomeMessage = 'Connexion réussie. Redirection en cours...';
+            if (isset($user['nom'])) {
+                $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !';
+            }
+
+            send_json_response(true, $welcomeMessage, $redirect, 200, session_id());
         } else {
-            send_json_response(false, "Nom d'utilisateur introuvable.", null, 401);
+            // Invalid credentials
+            send_json_response(false, $user ? "Mot de passe incorrect." : "Nom d'utilisateur introuvable.", null, 401);
         }
     } catch (Exception $e) {
-        logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
-        logError('Stack trace: ' . $e->getTraceAsString());
+        logError('Database error: ' . $e->getMessage());
         send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
     }
-    // --- End of integrated login logic ---
-
 } catch (Exception $e) {
-    // Log detailed error
-    logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
-    logError('Stack trace: ' . $e->getTraceAsString());
-
-    // Send a generic error message to the client
+    logError('Login process error: ' . $e->getMessage());
     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
 } finally {
     // Clean up any output buffering if we get here
