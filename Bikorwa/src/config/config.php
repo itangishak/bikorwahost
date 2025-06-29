@@ -8,13 +8,20 @@
 // 1. BASIC CONFIGURATIONS - Must come first
 // ====================================================
 
-// Only set session parameters if no session is active yet
+// Always use the database-backed session handler
+require_once __DIR__ . '/../../includes/session.php';
+
+// Set basic session parameters when starting a fresh session
 if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.cookie_lifetime', 0);
     ini_set('session.gc_maxlifetime', 86400);
-    require_once __DIR__ . '/../../includes/session.php';
-    startDbSession();
+    // Completely disable cookie-based sessions
+    ini_set('session.use_cookies', '0');
+    ini_set('session.use_only_cookies', '0');
 }
+
+// startDbSession() will gracefully migrate any active session
+startDbSession();
 
 // Set timezone
 date_default_timezone_set('Africa/Kigali');
