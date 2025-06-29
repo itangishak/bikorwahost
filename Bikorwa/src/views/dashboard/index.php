@@ -1,6 +1,6 @@
 <?php
 
-// Include authentication check which also starts the PHP session
+// Include authentication check which initializes session properly
 require_once __DIR__ . '/../../../includes/auth_check.php';
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
@@ -22,7 +22,7 @@ if (!$pdo) {
 }
 
 // Ensure the connected user has the proper role
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
+if (!has_role('gestionnaire')) {
     header('Location: ../auth/login.php');
     exit;
 }

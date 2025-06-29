@@ -9,8 +9,8 @@ while (ob_get_level()) {
     ob_end_clean();
 }
 
-// Start session first
-session_start();
+// Initialize session with proper configuration
+require_once __DIR__ . '/../../../includes/session_init.php';
 
 // Set JSON content type
 header('Content-Type: application/json');
