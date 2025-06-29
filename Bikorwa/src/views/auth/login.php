@@ -245,6 +245,8 @@ $active_page = "login";
                     success: function(response) {
                         console.log('Received response:', response);
                         if (response && response.success) {
+                            console.log('I reach here');
+                            console.log('Redirecting to:', response.redirectUrl);
                             if (response.sessionId) {
                                 sessionStorage.setItem('sessionId', response.sessionId);
                             }
