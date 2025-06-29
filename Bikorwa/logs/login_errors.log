@@ -241,3 +241,306 @@
     [flash_type] => success
 )
 
+2025-06-29 10:35:27 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:35:27 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:35:27 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:35:27 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:35:27 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:35:27 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:35:27 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:35:27 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:35:27 - Login Error: Database connection successful
+2025-06-29 12:35:27 - Login Error: Database session initialized: 9f7dc1d95ddef438d4ecc134942b0889
+2025-06-29 12:35:27 - Login Error: Login attempt for username: admin
+2025-06-29 12:35:27 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:35:27 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:40:12 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:40:12 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:40:12 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:40:12 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:40:12 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:40:12 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:40:12 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:40:12 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:40:12 - Login Error: Database connection successful
+2025-06-29 12:40:12 - Login Error: Database session initialized: 94813664398923a9bbca68e4a46998a2
+2025-06-29 12:40:12 - Login Error: Login attempt for username: admin
+2025-06-29 12:40:12 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:40:12 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:40:38 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:40:38 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:40:38 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:40:38 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:40:38 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:40:38 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:40:38 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:40:38 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:40:38 - Login Error: Database connection successful
+2025-06-29 12:40:38 - Login Error: Database session initialized: d6e530808ae55908db0d539dd06d9585
+2025-06-29 12:40:38 - Login Error: Login attempt for username: admin
+2025-06-29 12:40:38 - Login Error: Login result: {"success":false,"message":"Mot de passe incorrect."}
+2025-06-29 10:40:52 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:40:52 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:40:52 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:40:52 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:40:52 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:40:52 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:40:52 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:40:52 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:40:52 - Login Error: Database connection successful
+2025-06-29 12:40:52 - Login Error: Database session initialized: d6e530808ae55908db0d539dd06d9585
+2025-06-29 12:40:52 - Login Error: Login attempt for username: admin
+2025-06-29 12:40:52 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:40:52 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:44:54 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:44:54 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:44:54 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:44:54 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:44:54 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:44:54 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:44:54 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:44:54 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:44:54 - Login Error: Database connection successful
+2025-06-29 12:44:54 - Login Error: Database session initialized: 3cffaa8b68ead00d9f9945c391b93152
+2025-06-29 12:44:54 - Login Error: Login attempt for username: admin
+2025-06-29 12:44:54 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:44:54 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:45:21 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:45:21 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:45:21 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:45:21 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:45:21 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:45:21 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:45:21 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:45:21 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:45:21 - Login Error: Database connection successful
+2025-06-29 12:45:21 - Login Error: Database session initialized: f734c55dcc65e3115eed99dfb41dc962
+2025-06-29 12:45:21 - Login Error: Login attempt for username: admin
+2025-06-29 12:45:21 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:45:21 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:45:44 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:45:44 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:45:44 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:45:44 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:45:44 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:45:44 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:45:44 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:45:44 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:45:44 - Login Error: Database connection successful
+2025-06-29 12:45:44 - Login Error: Database session initialized: f3350070325494810f7c25ab6eadceca
+2025-06-29 12:45:44 - Login Error: Login attempt for username: Itangishaka
+2025-06-29 12:45:44 - Login Error: Login result: {"success":true,"user":{"id":"4","nom":"John Esterique","role":"receptionniste"}}
+2025-06-29 12:45:44 - Login Error: Session after login: Array
+(
+    [user_id] => 4
+    [user_name] => John Esterique
+    [user_role] => receptionniste
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:51:05 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:51:05 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:51:05 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:51:05 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:51:05 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:51:05 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:51:05 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:51:05 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:51:05 - Login Error: Database connection successful
+2025-06-29 12:51:05 - Login Error: Database session initialized: fa13b392f3cdd89a8d4e035478d90fd1
+2025-06-29 12:51:05 - Login Error: Login attempt for username: admin
+2025-06-29 12:51:05 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:51:05 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:51:24 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:51:24 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:51:24 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:51:24 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:51:24 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:51:24 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:51:24 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:51:24 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:51:24 - Login Error: Database connection successful
+2025-06-29 12:51:24 - Login Error: Database session initialized: e64dc8a9f8929c7b763d492801bd02f0
+2025-06-29 12:51:24 - Login Error: Login attempt for username: admin
+2025-06-29 12:51:24 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:51:24 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 10:54:14 - Login Error: Base directory: /home/bumadste/uab.bumadventiste.org/Bikorwa
+2025-06-29 12:54:14 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 12:54:14 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 12:54:14 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 12:54:14 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 12:54:14 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 12:54:14 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 12:54:14 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 12:54:14 - Login Error: Database connection successful
+2025-06-29 12:54:14 - Login Error: Database session initialized: a9b4e90638a57ad30f19bea6b588f13b
+2025-06-29 12:54:14 - Login Error: Login attempt for username: admin
+2025-06-29 12:54:14 - Login Error: Login result: {"success":true,"user":{"id":"1","nom":"Administrateur","role":"gestionnaire"}}
+2025-06-29 12:54:14 - Login Error: Session after login: Array
+(
+    [user_id] => 1
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [logged_in] => 1
+    [flash_message] => Connexion réussie. Bienvenue!
+    [flash_type] => success
+)
+
+2025-06-29 13:09:50 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:09:50 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:09:50 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:09:50 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:09:50 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:09:50 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:09:50 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:09:50 - Login Error: Database connection successful
+2025-06-29 13:09:50 - Login Error: Database session initialized: c6ee4d8020e8ba5c945665baa23bf92a
+2025-06-29 13:09:50 - Login Error: Login attempt for username: admin
+2025-06-29 13:10:01 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:10:01 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:10:01 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:10:01 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:10:01 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:10:01 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:10:01 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:10:01 - Login Error: Database connection successful
+2025-06-29 13:10:01 - Login Error: Database session initialized: c6ee4d8020e8ba5c945665baa23bf92a
+2025-06-29 13:10:01 - Login Error: Login attempt for username: admin
+2025-06-29 13:10:18 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:10:18 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:10:18 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:10:18 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:10:18 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:10:18 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:10:18 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:10:18 - Login Error: Database connection successful
+2025-06-29 13:10:18 - Login Error: Database session initialized: c6ee4d8020e8ba5c945665baa23bf92a
+2025-06-29 13:10:18 - Login Error: Login attempt for username: adad
+2025-06-29 13:10:31 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:10:31 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:10:31 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:10:31 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:10:31 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:10:31 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:10:31 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:10:31 - Login Error: Database connection successful
+2025-06-29 13:10:31 - Login Error: Database session initialized: c6ee4d8020e8ba5c945665baa23bf92a
+2025-06-29 13:10:31 - Login Error: Login attempt for username: admin
+2025-06-29 13:19:02 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:19:02 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:19:02 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:19:02 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:19:02 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:19:02 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:19:02 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:19:02 - Login Error: Database connection successful
+2025-06-29 13:19:02 - Login Error: Database session initialized: c6ee4d8020e8ba5c945665baa23bf92a
+2025-06-29 13:19:02 - Login Error: Login attempt for username: admin
+2025-06-29 13:27:23 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:27:23 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:27:23 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:27:23 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:27:23 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:27:23 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:27:23 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:27:23 - Login Error: Database connection successful
+2025-06-29 13:27:23 - Login Error: Database session initialized: 4de43e28338ee78c851013f9f5ac2b98
+2025-06-29 13:27:23 - Login Error: Login attempt for username: admin
+2025-06-29 13:27:43 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:27:43 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:27:43 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:27:43 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:27:43 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:27:43 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:27:43 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:27:43 - Login Error: Database connection successful
+2025-06-29 13:27:43 - Login Error: Database session initialized: 94ccc538a60607531d6e6d658896ce4d
+2025-06-29 13:27:43 - Login Error: Login attempt for username: admin
+2025-06-29 13:31:16 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:31:16 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:31:16 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:31:16 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:31:16 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:31:16 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:31:16 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:31:16 - Login Error: Database connection successful
+2025-06-29 13:31:16 - Login Error: Database session initialized: 865d545f5522dc7c8346550a4c2d4b6f
+2025-06-29 13:31:16 - Login Error: Login attempt for username: admin
+2025-06-29 13:35:39 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/config.php
+2025-06-29 13:35:39 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/config/database.php
+2025-06-29 13:35:39 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/utils/Auth.php
+2025-06-29 13:35:39 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/models/User.php
+2025-06-29 13:35:39 - Login Error: Successfully included: /home/bumadste/uab.bumadventiste.org/Bikorwa/src/controllers/AuthController.php
+2025-06-29 13:35:39 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/functions.php
+2025-06-29 13:35:39 - Login Error: Successfully included optional file: /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php
+2025-06-29 13:35:39 - Login Error: Database connection successful
+2025-06-29 13:35:39 - Login Error: Database session initialized: 096807c6c0d6518058ff74c4db9d7941
+2025-06-29 13:35:39 - Login Error: Login attempt for username: admin
+2025-06-29 12:10:52 - Login Error: Login process error: Session handler function not found
+2025-06-29 13:19:29 - Login Error: Login process error: Session handler function not found
+2025-06-29 13:37:09 - Login Error: Login process error: Session handler function not found
