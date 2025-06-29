@@ -1,25 +1,30 @@
 <?php
+// Error reporting for debugging (remove in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Initialize PHP session and helper functions
 require_once __DIR__ . '/../../../includes/session.php';
 require_once __DIR__ . '/../../../includes/session_init.php';
+
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
-
-
-
 
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 
 // Initialize database connection
-$database = new Database();
-$pdo = $database->getConnection();
-
-// Check if database connection is successful
-if (!$pdo) {
-    die("Erreur de connexion à la base de données");
+try {
+    $database = new Database();
+    $pdo = $database->getConnection();
+    
+    // Check if database connection is successful
+    if (!$pdo) {
+        throw new Exception("Erreur de connexion à la base de données");
+    }
+} catch (Exception $e) {
+    die("Erreur de connexion à la base de données: " . $e->getMessage());
 }
 
 // Ensure the connected user has the proper role
@@ -50,17 +55,21 @@ $recent_sales = [];
 $low_stock_products = [];
 $top_products_month = [];
 $monthly_sales_data = [];
+$error_message = null;
 
 try {
+    // Set PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     // Today's Sales
     $today_query = "SELECT 
         COALESCE(SUM(montant_paye), 0) as total,
         COUNT(*) as count
         FROM ventes 
-        WHERE DATE(date_vente) = :today 
+        WHERE DATE(date_vente) = ? 
         AND statut_vente != 'annulee'";
     $today_stmt = $pdo->prepare($today_query);
-    $today_stmt->execute([':today' => $today]);
+    $today_stmt->execute([$today]);
     $today_result = $today_stmt->fetch(PDO::FETCH_ASSOC);
     $stats['today_sales'] = $today_result['total'] ?? 0;
     $stats['today_sales_count'] = $today_result['count'] ?? 0;
@@ -70,10 +79,10 @@ try {
         COALESCE(SUM(montant_paye), 0) as total,
         COUNT(*) as count
         FROM ventes 
-        WHERE DATE(date_vente) >= :current_month 
+        WHERE DATE(date_vente) >= ? 
         AND statut_vente != 'annulee'";
     $month_stmt = $pdo->prepare($month_query);
-    $month_stmt->execute([':current_month' => $current_month]);
+    $month_stmt->execute([$current_month]);
     $month_result = $month_stmt->fetch(PDO::FETCH_ASSOC);
     $stats['month_sales'] = $month_result['total'] ?? 0;
     $stats['month_sales_count'] = $month_result['count'] ?? 0;
@@ -81,10 +90,10 @@ try {
     // This Year's Sales
     $year_query = "SELECT COALESCE(SUM(montant_paye), 0) as total
         FROM ventes 
-        WHERE DATE(date_vente) >= :current_year 
+        WHERE DATE(date_vente) >= ? 
         AND statut_vente != 'annulee'";
     $year_stmt = $pdo->prepare($year_query);
-    $year_stmt->execute([':current_year' => $current_year]);
+    $year_stmt->execute([$current_year]);
     $year_result = $year_stmt->fetch(PDO::FETCH_ASSOC);
     $stats['year_sales'] = $year_result['total'] ?? 0;
 
@@ -123,44 +132,54 @@ try {
     $clients_result = $clients_stmt->fetch(PDO::FETCH_ASSOC);
     $stats['total_clients'] = $clients_result['count'] ?? 0;
 
-    // Active Debts
+    // Active Debts (with table existence check)
     try {
-        $debts_query = "SELECT 
-            COUNT(*) as count,
-            COALESCE(SUM(montant_restant), 0) as total_amount
-            FROM dettes 
-            WHERE statut IN ('active', 'partiellement_payee')";
-        $debts_stmt = $pdo->prepare($debts_query);
-        $debts_stmt->execute();
-        $debts_result = $debts_stmt->fetch(PDO::FETCH_ASSOC);
-        $stats['active_debts'] = $debts_result['count'] ?? 0;
-        $stats['total_debt_amount'] = $debts_result['total_amount'] ?? 0;
+        // Check if dettes table exists
+        $check_table = $pdo->query("SHOW TABLES LIKE 'dettes'");
+        if ($check_table->rowCount() > 0) {
+            $debts_query = "SELECT 
+                COUNT(*) as count,
+                COALESCE(SUM(montant_restant), 0) as total_amount
+                FROM dettes 
+                WHERE statut IN ('active', 'partiellement_payee')";
+            $debts_stmt = $pdo->prepare($debts_query);
+            $debts_stmt->execute();
+            $debts_result = $debts_stmt->fetch(PDO::FETCH_ASSOC);
+            $stats['active_debts'] = $debts_result['count'] ?? 0;
+            $stats['total_debt_amount'] = $debts_result['total_amount'] ?? 0;
+        }
     } catch (PDOException $e) {
         // Table dettes might not exist
         $stats['active_debts'] = 0;
         $stats['total_debt_amount'] = 0;
     }
 
-    // Total Employees
+    // Total Employees (with table existence check)
     try {
-        $employees_query = "SELECT COUNT(*) as count FROM employes WHERE actif = 1";
-        $employees_stmt = $pdo->prepare($employees_query);
-        $employees_stmt->execute();
-        $employees_result = $employees_stmt->fetch(PDO::FETCH_ASSOC);
-        $stats['total_employees'] = $employees_result['count'] ?? 0;
+        $check_employees = $pdo->query("SHOW TABLES LIKE 'employes'");
+        if ($check_employees->rowCount() > 0) {
+            $employees_query = "SELECT COUNT(*) as count FROM employes WHERE actif = 1";
+            $employees_stmt = $pdo->prepare($employees_query);
+            $employees_stmt->execute();
+            $employees_result = $employees_stmt->fetch(PDO::FETCH_ASSOC);
+            $stats['total_employees'] = $employees_result['count'] ?? 0;
+        }
     } catch (PDOException $e) {
         $stats['total_employees'] = 0;
     }
 
-    // This Month's Expenses
+    // This Month's Expenses (with table existence check)
     try {
-        $expenses_query = "SELECT COALESCE(SUM(montant), 0) as total
-            FROM depenses 
-            WHERE date_depense >= :current_month";
-        $expenses_stmt = $pdo->prepare($expenses_query);
-        $expenses_stmt->execute([':current_month' => $current_month]);
-        $expenses_result = $expenses_stmt->fetch(PDO::FETCH_ASSOC);
-        $stats['month_expenses'] = $expenses_result['total'] ?? 0;
+        $check_expenses = $pdo->query("SHOW TABLES LIKE 'depenses'");
+        if ($check_expenses->rowCount() > 0) {
+            $expenses_query = "SELECT COALESCE(SUM(montant), 0) as total
+                FROM depenses 
+                WHERE date_depense >= ?";
+            $expenses_stmt = $pdo->prepare($expenses_query);
+            $expenses_stmt->execute([$current_month]);
+            $expenses_result = $expenses_stmt->fetch(PDO::FETCH_ASSOC);
+            $stats['month_expenses'] = $expenses_result['total'] ?? 0;
+        }
     } catch (PDOException $e) {
         $stats['month_expenses'] = 0;
     }
@@ -189,17 +208,18 @@ try {
         FROM details_ventes dv
         JOIN produits p ON dv.produit_id = p.id
         JOIN ventes v ON dv.vente_id = v.id
-        WHERE DATE(v.date_vente) >= :current_month
+        WHERE DATE(v.date_vente) >= ?
         AND v.statut_vente != 'annulee'
         GROUP BY p.id, p.nom
         ORDER BY quantite_vendue DESC
         LIMIT 5";
     $top_products_stmt = $pdo->prepare($top_products_query);
-    $top_products_stmt->execute([':current_month' => $current_month]);
+    $top_products_stmt->execute([$current_month]);
     $top_products_month = $top_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     $error_message = "Erreur lors du chargement des données: " . $e->getMessage();
+    error_log("Dashboard Error: " . $e->getMessage()); // Log the error
 }
 
 // Calculate profit margin (estimation)
@@ -232,11 +252,44 @@ require_once __DIR__.'/../layouts/header.php';
     }
 }
 
-/* Existing animations and hover effects */
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.info-card .card-icon {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    width: 60px;
+    height: 60px;
+}
+
+.sales-card .card-icon {
+    background: linear-gradient(45deg, #28a745, #1e7e34);
+}
+
+.revenue-card .card-icon {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+}
+
+.customers-card .card-icon {
+    background: linear-gradient(45deg, #fd7e14, #e8690e);
+}
+
+.card-icon i {
+    color: white;
+    font-size: 1.5rem;
+}
 </style>
 
 <main id="main" class="main">
-    <?php if (isset($error_message)): ?>
+    <?php if (isset($error_message) && $error_message): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="fas fa-exclamation-triangle"></i> <?= htmlspecialchars($error_message) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -524,4 +577,3 @@ require_once __DIR__.'/../layouts/header.php';
 // Include footer
 require_once __DIR__.'/../layouts/footer.php';
 ?>
-
