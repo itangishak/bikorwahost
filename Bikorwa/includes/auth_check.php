@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username']) || !isset($_SE
     }
     
     // Redirect to login page - using a relative path to avoid issues
-    header('Location: /login.php');
+    header('Location: ../../src/views/auth/login.php');
     exit;
 }
 
@@ -45,7 +45,7 @@ if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
     }
     
     // Redirect to login page - using a relative path to avoid issues
-    header('Location: /login.php');
+    header('Location: ../../src/views/auth/login.php');
     exit;
 }
 
