@@ -216,8 +216,7 @@ require_once __DIR__.'/../layouts/header.php';
 ?>
 
 <style>
-/* Existing styles */
-{{ ... }}
+/* Custom dashboard styles */
 
 /* New spacing rules */
 .card {
@@ -236,7 +235,6 @@ require_once __DIR__.'/../layouts/header.php';
 }
 
 /* Existing animations and hover effects */
-{{ ... }}
 </style>
 
 <main id="main" class="main">
