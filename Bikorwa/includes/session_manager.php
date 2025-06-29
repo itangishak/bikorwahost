@@ -5,7 +5,7 @@
  */
 
 // Prevent multiple inclusions
-if (defined('SESSION_MANAGER_LOADED')) {
+if (defined('SESSION_MANAGER_LOADED') || class_exists('SessionManager')) {
     return;
 }
 define('SESSION_MANAGER_LOADED', true);

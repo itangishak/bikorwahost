@@ -18,7 +18,7 @@ require_once __DIR__ . '/session_manager.php';
 
 // Ensure session is started
 global $sessionManager;
-if (!isset($sessionManager)) {
+if (!isset($sessionManager) && class_exists('SessionManager')) {
     $sessionManager = SessionManager::getInstance();
     $sessionManager->startSession();
 }
