@@ -1,5 +1,5 @@
 <?php
-// Include authentication check and database-backed session
+// Include authentication check which also starts the PHP session
 require_once __DIR__ . '/../../../includes/auth_check.php';
 
 // Include database connection and config
