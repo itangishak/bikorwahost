@@ -3,6 +3,16 @@ require_once __DIR__ . '/../src/config/database.php';
 require_once __DIR__ . '/../src/utils/DbSessionHandler.php';
 
 function startDbSession() {
+    // If a session was already started using the default handler,
+    // preserve the ID and data before reinitialising with the DB handler
+    $existingId = null;
+    $existingData = [];
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $existingId = session_id();
+        $existingData = $_SESSION;
+        session_write_close();
+    }
 
     $database = new Database();
     $pdo = $database->getConnection();
@@ -19,12 +29,22 @@ function startDbSession() {
     if (!$token && isset($_POST['session_id'])) {
         $token = $_POST['session_id'];
     }
+
     if ($token) {
         session_id($token);
+    } elseif ($existingId) {
+        session_id($existingId);
     }
 
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    // Restore any previously stored data
+    if (!empty($existingData)) {
+        foreach ($existingData as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
     }
 
     return session_id();
