@@ -1,55 +1,38 @@
 <?php
 /**
- * Authentication check for protected pages
+ * Simple authentication check for protected pages
  * This file should be included at the top of all protected pages
  */
 
-// Start session at the beginning of each protected page
-require_once __DIR__ . '/session_manager.php';
-$sessionManager = SessionManager::getInstance();
-$sessionManager->startSession();
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// The following block created a mock session for development purposes.
-// It granted "gestionnaire" privileges when no session existed, which caused
-// privilege leakage across users sharing the same browser. This code has been
-// removed to ensure that permissions are strictly tied to the authenticated
-// user's session.
-
-// Check if user is logged in using SessionManager
-if (!$sessionManager->isLoggedIn()) {
+// Check if user is logged in
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // Save the requested URL for redirection after login
-    $sessionManager->set('redirect_after_login', $_SERVER['REQUEST_URI']);
+    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
     
-    // Set flash message
-    if (function_exists('setFlashMessage')) {
-        setFlashMessage('warning', 'Veuillez vous connecter pour accéder à cette page.');
-    }
-    
-    // Redirect to login page - using a relative path to avoid issues
+    // Redirect to login page
     header('Location: ../../src/views/auth/login.php');
     exit;
 }
 
 // Check if user account is active
-if (!$sessionManager->isUserActive()) {
-    // Log them out using SessionManager
-    $sessionManager->logoutUser();
+if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
+    // Log them out
+    session_unset();
+    session_destroy();
     
-    // Start new session for flash message
-    $sessionManager->startSession();
-    
-    // Set flash message
-    if (function_exists('setFlashMessage')) {
-        setFlashMessage('danger', 'Votre compte a été désactivé. Veuillez contacter l\'administrateur.');
-    }
-    
-    // Redirect to login page - using a relative path to avoid issues
+    // Redirect to login page
     header('Location: ../../src/views/auth/login.php');
     exit;
 }
 
 // Define user access level constants for easier permission checking
-define('IS_ADMIN', $sessionManager->isManager());
-define('IS_STAFF', $sessionManager->isReceptionist());
+define('IS_ADMIN', isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire');
+define('IS_STAFF', isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste');
 
-// Session activity is automatically updated by SessionManager
+// Update last activity timestamp to keep session alive
+$_SESSION['last_activity'] = time();

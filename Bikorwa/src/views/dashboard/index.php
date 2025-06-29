@@ -22,7 +22,7 @@ if (!$pdo) {
 }
 
 // Ensure the connected user has the proper role
-if (!$sessionManager->isManager()) {
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
     header('Location: ../auth/login.php');
     exit;
 }
@@ -259,7 +259,7 @@ require_once __DIR__.'/../layouts/header.php';
     <!-- Welcome Message -->
     <div class="alert alert-info alert-dismissible fade show" role="alert">
         <i class="fas fa-info-circle"></i> 
-        <strong>Bienvenue, <?= htmlspecialchars($sessionManager->getUserName() ?? 'Gestionnaire') ?>!</strong>
+        <strong>Bienvenue, <?= htmlspecialchars($_SESSION['user_name'] ?? 'Gestionnaire') ?>!</strong>
         Voici un aperçu de votre entreprise pour aujourd'hui.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

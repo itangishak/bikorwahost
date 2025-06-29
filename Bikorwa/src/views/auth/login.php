@@ -1,11 +1,19 @@
 <?php
 
-// Enable error reporting for debugging purposes
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 // Start a standard PHP session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Check if user is already logged in
+if (isset($_SESSION['user_id']) && isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    // Redirect based on role
+    $redirect = 'dashboard/index.php';
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste') {
+        $redirect = 'dashboard/receptionniste.php';
+    }
+    header('Location: ../../../src/views/' . $redirect);
+    exit;
 }
 
 // Include the configuration file to get BASE_URL

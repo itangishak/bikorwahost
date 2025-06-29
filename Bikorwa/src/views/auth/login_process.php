@@ -4,24 +4,20 @@
  * KUBIKOTI BAR
  */
 
-// Prevent headers from being sent
-declare(strict_types=1);
-
-// Disable output buffering
-if (ob_get_level()) {
+// Clean any output buffering
+while (ob_get_level()) {
     ob_end_clean();
 }
 
-// Prevent any output
+// Start session first
+session_start();
+
+// Set JSON content type
 header('Content-Type: application/json');
 
-// Include core configuration and helpers
+// Include core configuration
 require_once __DIR__ . '/../../../src/config/config.php';
 require_once __DIR__ . '/../../../src/config/database.php';
-require_once __DIR__ . '/../../../includes/functions.php';
-require_once __DIR__ . '/../../../src/utils/Auth.php';
-require_once __DIR__ . '/../../../src/models/User.php';
-require_once __DIR__ . '/../../../src/controllers/AuthController.php';
 
 // Log function for debugging
 function logError($message) {
@@ -54,10 +50,6 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
-    // Start PHP session
-require_once __DIR__ . '/../../../includes/session_manager.php';
-$sessionManager = SessionManager::getInstance();
-$sessionManager->startSession();
 
     // Verify request method
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -96,13 +88,31 @@ $sessionManager->startSession();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            // Handle successful login using SessionManager
-            $sessionManager->loginUser($user);
+            // Check if user is active
+            if (!$user['actif']) {
+                send_json_response(false, 'Votre compte est désactivé. Veuillez contacter l\'administrateur.', null, 401);
+            }
+            
+            // Regenerate session ID for security
+            session_regenerate_id(true);
+            
+            // Set session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_name'] = $user['nom'];
+            $_SESSION['user_role'] = $user['role'];
+            $_SESSION['user_active'] = $user['actif'];
+            $_SESSION['logged_in'] = true;
+            $_SESSION['login_time'] = time();
 
-            // Log activity
-            $auth = new Auth($conn);
-            $activity = "User " . $user['nom'] . " logged in successfully.";
-            $auth->logActivity("Login", "User", $user['id'], $activity);
+            // Log activity (simplified)
+            try {
+                $logStmt = $conn->prepare("INSERT INTO journal_activites (utilisateur_id, action, entite, entite_id, details) VALUES (?, ?, ?, ?, ?)");
+                $logStmt->execute([$user['id'], 'Login', 'User', $user['id'], 'User ' . $user['nom'] . ' logged in successfully.']);
+            } catch (Exception $e) {
+                // Log error but don't fail login
+                logError('Failed to log activity: ' . $e->getMessage());
+            }
 
             // Determine redirect URL
             $redirect = BASE_URL . '/src/views/dashboard/index.php';
