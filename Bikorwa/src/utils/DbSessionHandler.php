@@ -41,4 +41,3 @@ class DbSessionHandler implements SessionHandlerInterface {
         return $stmt->execute();
     }
 }
-?>

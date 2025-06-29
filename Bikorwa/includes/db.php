@@ -37,4 +37,3 @@ if (!defined('BASE_URL')) {
 if (!defined('CURRENCY')) {
     define('CURRENCY', 'BIF');
 }
-?>
