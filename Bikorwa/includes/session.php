@@ -105,23 +105,17 @@ function destroySession() {
 
 // Function to regenerate session ID with proper cleanup
 function regenerateSessionId($deleteOldSession = true) {
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        try {
-            $oldSessionData = $_SESSION;
-            session_write_close();
-            session_regenerate_id($deleteOldSession);
-            session_start();
-            
-            // Restore session data
-            foreach ($oldSessionData as $key => $value) {
-                $_SESSION[$key] = $value;
-            }
-            
-            return true;
-        } catch (Exception $e) {
-            error_log('Failed to regenerate session ID: ' . $e->getMessage());
-            return false;
-        }
+    // Ensure the session is active before regenerating the ID
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        return false;
     }
-    return false;
+
+    try {
+        // PHP preserves the session data automatically when regenerating
+        session_regenerate_id($deleteOldSession);
+        return true;
+    } catch (Exception $e) {
+        error_log('Failed to regenerate session ID: ' . $e->getMessage());
+        return false;
+    }
 }
