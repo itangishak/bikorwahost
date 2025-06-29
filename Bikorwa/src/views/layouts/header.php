@@ -24,6 +24,22 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Setup AJAX to send session ID
+        $(document).ready(function() {
+            var sessionId = sessionStorage.getItem('sessionId');
+            if (sessionId) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-Session-Id': sessionId
+                    }
+                });
+            }
+        });
+    </script>
     
     <!-- Custom CSS -->
     <style>
