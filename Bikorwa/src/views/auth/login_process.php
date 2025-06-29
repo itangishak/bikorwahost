@@ -44,9 +44,6 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 try {
     // Base directory of the project
     $baseDir = dirname(__DIR__, 3);
-    
-    // Log the base directory for debugging
-    logError('Base directory: ' . $baseDir);
 
     // Include configuration files with error checking
     $configFiles = [
@@ -87,7 +84,7 @@ try {
         try {
             $database = new Database();
             $conn = $database->getConnection();
-            
+
             if ($conn) {
                 logError('Database connection successful');
                 return true;
@@ -139,53 +136,72 @@ try {
         send_json_response(false, 'Veuillez remplir tous les champs.', null, 400);
     }
 
-    // Initialiser le contrôleur d'authentification
-    $authController = new AuthController();
+    // --- Start of integrated login logic ---
+    $database = new Database();
+    $conn = $database->getConnection(); // Get PDO connection
 
-    // Tenter la connexion
-    $result = $authController->login($username, $password);
-
-    // Log the result for debugging
-    logError('Login result: ' . json_encode($result));
-
-    // Traiter le résultat
-    if ($result && isset($result['success']) && $result['success']) {
-        // Connexion réussie
-        $_SESSION['flash_message'] = 'Connexion réussie. Bienvenue!';
-        $_SESSION['flash_type'] = 'success';
-        
-        // Log session information for debugging
-        logError('Session after login: ' . print_r($_SESSION, true));
-        
-        // Determine redirect URL based on user role
-        $redirect = '../dashboard/index.php';
-        if (isset($result['user']['role']) && $result['user']['role'] === 'receptionniste') {
-            $redirect = '../dashboard/receptionniste.php';
-        }
-
-        // Get session ID
-        $sessionToken = session_id();
-        
-        $welcomeMessage = 'Connexion réussie. Redirection en cours...';
-        if (isset($result['user']['nom'])) {
-            $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($result['user']['nom']) . '!';
-        }
-        
-        send_json_response(true, $welcomeMessage, $redirect, 200, $sessionToken);
-    } else {
-        // Échec de la connexion
-        $errorMessage = 'Échec de la connexion.';
-        if (isset($result['message'])) {
-            $errorMessage = $result['message'];
-        }
-        send_json_response(false, $errorMessage, null, 401);
+    if (!$conn) {
+        send_json_response(false, 'Erreur de connexion à la base de données. Veuillez contacter l\'administrateur.', null, 500);
     }
+
+    try {
+        // SQL query using prepared statement
+        // Assuming 'email' in your provided code maps to 'username' in the project's 'users' table
+        $stmt = $conn->prepare("SELECT id, username, password, nom, role FROM users WHERE username = :username");
+
+        if (!$stmt) {
+            logError("SQL prepare error: " . implode(" ", $conn->errorInfo()));
+            send_json_response(false, "Erreur interne du serveur.", null, 500);
+        }
+
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // Check if password matches the stored hash
+            if (password_verify($password, $user['password'])) {
+                // Store session variables
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['nom']; // Assuming 'nom' is the equivalent of 'firstname'
+                $_SESSION['user_role'] = $user['role']; // This will be 'gestionnaire' or 'receptionniste'
+                $_SESSION['last_activity'] = time();
+
+                // Log the activity using the project's Auth class
+                $auth = new Auth($conn); // Re-initialize Auth with the PDO connection
+                $activity = "User " . $user['nom'] . " logged in successfully.";
+                $auth->logActivity("Login", "User", $user['id'], $activity);
+
+                // Determine redirect URL based on user role
+                $redirect = BASE_URL . '/src/views/dashboard/index.php'; // Default for gestionnaire
+                if ($user['role'] === 'receptionniste') {
+                    $redirect = BASE_URL . '/src/views/dashboard/receptionniste.php';
+                }
+
+                $welcomeMessage = 'Connexion réussie. Redirection en cours...';
+                if (isset($user['nom'])) {
+                    $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !';
+                }
+
+                send_json_response(true, $welcomeMessage, $redirect, 200, session_id());
+            } else {
+                send_json_response(false, "Mot de passe incorrect.", null, 401);
+            }
+        } else {
+            send_json_response(false, "Nom d'utilisateur introuvable.", null, 401);
+        }
+    } catch (Exception $e) {
+        logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+        logError('Stack trace: ' . $e->getTraceAsString());
+        send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
+    }
+    // --- End of integrated login logic ---
 
 } catch (Exception $e) {
     // Log detailed error
     logError('Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
     logError('Stack trace: ' . $e->getTraceAsString());
-    
+
     // Send a generic error message to the client
     send_json_response(false, 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer.', null, 500);
 } finally {
