@@ -9,15 +9,13 @@ while (ob_get_level()) {
     ob_end_clean();
 }
 
-// Initialize session with proper configuration
-require_once __DIR__ . '/../../../includes/session_init.php';
-
 // Set JSON content type
 header('Content-Type: application/json');
 
 // Include core configuration
 require_once __DIR__ . '/../../../src/config/config.php';
 require_once __DIR__ . '/../../../src/config/database.php';
+require_once __DIR__ . '/../../../includes/session_db_manager.php';
 
 // Log function for debugging
 function logError($message) {

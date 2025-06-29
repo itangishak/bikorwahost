@@ -4,8 +4,16 @@
  * This file should be included at the top of all protected pages
  */
 
-// Initialize session with proper configuration
-require_once __DIR__ . '/session_init.php';
+// Include the new database session manager
+require_once __DIR__ . '/session_db_manager.php';
+
+// Initialize database connection
+require_once __DIR__ . '/../src/config/database.php';
+$database = new Database();
+$pdo = $database->getConnection();
+
+// Create and manage user session without cookies
+$sessionManager = new DatabaseSessionManager($pdo);
 
 // Check if user is logged in using the helper function
 if (!is_user_logged_in()) {

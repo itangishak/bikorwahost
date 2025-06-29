@@ -187,12 +187,16 @@ CREATE TABLE IF NOT EXISTS journal_activites (
     FOREIGN KEY (utilisateur_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Table de stockage des sessions
-CREATE TABLE IF NOT EXISTS sessions (
-    id VARCHAR(128) PRIMARY KEY,
+
+-- Create user_sessions table for database-based sessions
+CREATE TABLE IF NOT EXISTS user_sessions (
+    user_id INT PRIMARY KEY,
     data TEXT NOT NULL,
-    expires DATETIME NOT NULL
-);
+    expires DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS categories_depenses (
     id INT AUTO_INCREMENT PRIMARY KEY,
