@@ -147,7 +147,7 @@ try {
     try {
         // SQL query using prepared statement
         // Assuming 'email' in your provided code maps to 'username' in the project's 'users' table
-        $stmt = $conn->prepare("SELECT id, username, password, nom, role FROM users WHERE username = :username");
+        $stmt = $conn->prepare("SELECT id, username, password, nom, role, actif FROM users WHERE username = :username");
 
         if (!$stmt) {
             logError("SQL prepare error: " . implode(" ", $conn->errorInfo()));
@@ -162,9 +162,13 @@ try {
             // Check if password matches the stored hash
             if (password_verify($password, $user['password'])) {
                 // Store session variables
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_name'] = $user['nom']; // Assuming 'nom' is the equivalent of 'firstname'
-                $_SESSION['user_role'] = $user['role']; // This will be 'gestionnaire' or 'receptionniste'
+                session_regenerate_id(true);
+                $_SESSION['user_id']      = $user['id'];
+                $_SESSION['username']     = $user['username'];
+                $_SESSION['user_name']    = $user['nom'];
+                $_SESSION['user_role']    = $user['role'];
+                $_SESSION['user_active']  = $user['actif'];
+                $_SESSION['logged_in']    = true;
                 $_SESSION['last_activity'] = time();
 
                 // Log the activity using the project's Auth class
