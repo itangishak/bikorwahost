@@ -76,6 +76,12 @@ SQL
     }
     $_SESSION['last_activity'] = time();
 
+    // Debugging: log and output session ID if enabled
+    if (defined('SESSION_DEBUG') && SESSION_DEBUG) {
+        error_log('Session started: ' . session_id());
+        echo "<script>console.log('Session ID: " . session_id() . "');</script>";
+    }
+
     return $session_id;
 }
 

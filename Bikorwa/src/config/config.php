@@ -28,6 +28,11 @@ if (!defined('ROOT_PATH'))    define('ROOT_PATH', dirname(dirname(__DIR__)));
 if (!defined('SRC_PATH'))     define('SRC_PATH', ROOT_PATH . '/src');
 if (!defined('ASSETS_PATH'))  define('ASSETS_PATH', ROOT_PATH . '/assets');
 
+// Enable session debugging if needed
+if (!defined('SESSION_DEBUG')) {
+    define('SESSION_DEBUG', false);
+}
+
 // ====================================================
 // 3. ERROR HANDLING
 // ====================================================
