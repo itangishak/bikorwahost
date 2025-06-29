@@ -1,12 +1,7 @@
 <?php
 
-// Initialize session with proper configuration
-require_once __DIR__ . '/../../../includes/session_db_manager.php';
-require_once __DIR__ . '/../../../src/config/database.php';
-
-$database = new Database();
-$pdo = $database->getConnection();
-$sessionManager = new DatabaseSessionManager($pdo);
+// Initialize centralized session manager
+require_once __DIR__ . '/../../../includes/session.php';
 
 // Check if user is already logged in
 if ($sessionManager->isLoggedIn()) {
