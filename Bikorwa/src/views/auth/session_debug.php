@@ -5,42 +5,15 @@
  */
 
 // Include your config files
-require_once 'https://uab.bumadventiste.org/Bikorwa/src/config/config.php';
+require_once __DIR__ . '/../../../src/config/config.php';
 
-// Check if database session function exists
-if (function_exists('startDbSession')) {
-    echo "✅ Database session function EXISTS<br>";
-    
-    try {
-        $sessionId = startDbSession();
-        echo "✅ Database session STARTED successfully<br>";
-        echo "Session ID: " . $sessionId . "<br>";
-        echo "Session Handler: " . session_get_save_handler() . "<br>";
-        
-        // Check if we can write to database sessions
-        $_SESSION['test'] = 'database_session_test';
-        echo "✅ Database session WRITE test successful<br>";
-        
-    } catch (Exception $e) {
-        echo "❌ Database session FAILED: " . $e->getMessage() . "<br>";
-        echo "Falling back to cookie sessions...<br>";
-        
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        echo "Cookie session started. ID: " . session_id() . "<br>";
-        echo "Session Handler: " . session_get_save_handler() . "<br>";
-    }
-} else {
-    echo "❌ Database session function NOT FOUND<br>";
-    echo "Using cookie-based sessions...<br>";
-    
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    echo "Cookie session started. ID: " . session_id() . "<br>";
-    echo "Session Handler: " . session_get_save_handler() . "<br>";
+// Start a normal PHP session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
+
+echo "Session started. ID: " . session_id() . "<br>";
+echo "Session Handler: " . session_module_name() . "<br>";
 
 // Display current session data
 echo "<br><strong>Current Session Data:</strong><br>";

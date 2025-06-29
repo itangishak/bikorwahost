@@ -4,10 +4,10 @@
  * This file should be included at the top of all protected pages
  */
 
-require_once __DIR__ . '/session.php';
-
-// Start session using database-backed handler
-startDbSession();
+// Start session at the beginning of each protected page
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // The following block created a mock session for development purposes.
 // It granted "gestionnaire" privileges when no session existed, which caused
@@ -37,7 +37,9 @@ if (isset($_SESSION['user_active']) && $_SESSION['user_active'] !== true) {
     session_destroy();
     
     // Start new session for flash message
-    startDbSession();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     
     // Set flash message
     if (function_exists('setFlashMessage')) {
