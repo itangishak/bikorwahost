@@ -55,15 +55,6 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 }
 
 try {
-    // Initialize session first
-    if (!function_exists('startDbSession')) {
-        throw new Exception('Session handler function not found');
-    }
-
-    $sessionId = startDbSession();
-    if (!$sessionId) {
-        throw new Exception('Failed to initialize session');
-    }
 
     // Verify request method
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

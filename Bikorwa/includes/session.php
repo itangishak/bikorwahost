@@ -7,8 +7,7 @@ if (ob_get_level()) {
     ob_end_clean();
 }
 
-// Prevent any output
-header("Content-Type: text/html; charset=UTF-8");
+// No default content-type header to allow flexibility for included scripts
 
 // Initialize database connection first
 require_once __DIR__ . '/../src/config/database.php';
