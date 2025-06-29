@@ -16,7 +16,7 @@ function getCurrentUser() {
     return [
         'id' => $sessionManager->getUserId(),
         'username' => $sessionManager->getUsername(),
-        'name' => $sessionManager->getUserName(),
+        'name' => $sessionManager->getFullName(),
         'role' => $sessionManager->getUserRole(),
         'active' => $sessionManager->isUserActive(),
         'logged_in' => $sessionManager->isLoggedIn()
