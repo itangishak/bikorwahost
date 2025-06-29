@@ -14,8 +14,7 @@ header('Content-Type: application/json');
 
 // Include core configuration
 require_once __DIR__ . '/../../../src/config/config.php';
-require_once __DIR__ . '/../../../src/config/database.php';
-require_once __DIR__ . '/../../../includes/session_db_manager.php';
+require_once __DIR__ . '/../../../includes/session.php';
 
 // Log function for debugging
 function logError($message) {
