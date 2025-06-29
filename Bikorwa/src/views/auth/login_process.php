@@ -56,9 +56,9 @@ function send_json_response($success, $message, $redirectUrl = null, $statusCode
 
 try {
     // Start PHP session
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+require_once __DIR__ . '/../../../includes/session_manager.php';
+$sessionManager = SessionManager::getInstance();
+$sessionManager->startSession();
 
     // Verify request method
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -97,19 +97,8 @@ try {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            // Handle successful login
-            if (!regenerateSessionId(true)) {
-                throw new Exception('Failed to regenerate session ID');
-            }
-
-            // Set session variables
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_name'] = $user['nom'];
-            $_SESSION['user_role'] = $user['role'];
-            $_SESSION['user_active'] = $user['actif'];
-            $_SESSION['logged_in'] = true;
-            $_SESSION['last_activity'] = time();
+            // Handle successful login using SessionManager
+            $sessionManager->loginUser($user);
 
             // Log activity
             $auth = new Auth($conn);
