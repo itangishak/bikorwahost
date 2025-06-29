@@ -1,11 +1,13 @@
 <?php
-// Dashboard Page for BIKORWA SHOP - Gestionnaire Role
-$page_title = "Tableau de Bord - Gestionnaire";
-$active_page = "dashboard";
 
 // Start session if not already started
 
     session_start();
+// Dashboard Page for BIKORWA SHOP - Gestionnaire Role
+$page_title = "Tableau de Bord - Gestionnaire";
+$active_page = "dashboard";
+
+
 
 
 require_once __DIR__.'/../../../src/config/config.php';
@@ -20,7 +22,11 @@ if (!$pdo) {
     die("Erreur de connexion à la base de données");
 }
 
-
+// Check if user is logged in and has appropriate role
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
+    header('Location: ../auth/login.php');
+    exit;
+}
 
 // Get current date for filters
 $today = date('Y-m-d');
