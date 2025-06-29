@@ -1,8 +1,9 @@
 <?php
 
 // Initialize PHP session and helper functions
-require_once __DIR__ . '/../../../includes/session.php';
+// Load session configuration before starting the session manager
 require_once __DIR__ . '/../../../includes/session_init.php';
+require_once __DIR__ . '/../../../includes/session.php';
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
