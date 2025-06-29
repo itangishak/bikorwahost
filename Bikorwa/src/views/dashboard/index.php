@@ -1,6 +1,6 @@
 <?php
 
-// Include authentication check and database-backed session
+// Include authentication check which also starts the PHP session
 require_once __DIR__ . '/../../../includes/auth_check.php';
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
