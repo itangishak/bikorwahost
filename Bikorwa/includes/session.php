@@ -125,4 +125,3 @@ function regenerateSessionId($deleteOldSession = true) {
     }
     return false;
 }
-?>

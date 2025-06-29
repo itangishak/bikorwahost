@@ -141,4 +141,3 @@ function getFlashMessage() {
     
     return $message;
 }
-?>

@@ -55,4 +55,3 @@ define('IS_STAFF', $_SESSION['user_role'] === 'receptionniste');
 
 // Update last activity timestamp to keep session alive
 $_SESSION['last_activity'] = time();
-?>
