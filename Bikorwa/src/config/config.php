@@ -8,16 +8,7 @@
 // 1. BASIC CONFIGURATIONS - Must come first
 // ====================================================
 
-// Only set session parameters if no session is active yet
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.cookie_lifetime', 0);
-    ini_set('session.gc_maxlifetime', 86400);
-    require_once __DIR__ . '/../../includes/session.php';
-    startDbSession();
-}
 
-// Set timezone
-date_default_timezone_set('Africa/Kigali');
 
 // ====================================================
 // 2. APPLICATION CONSTANTS
