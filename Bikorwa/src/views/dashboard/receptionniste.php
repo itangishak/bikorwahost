@@ -1,19 +1,10 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Include authentication check and database-backed session
+require_once __DIR__ . '/../../../includes/auth_check.php';
 
 // Include database connection and config
 require_once('../../config/database.php');
 require_once('../../config/config.php');
-
-// Check if user is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: ../auth/login.php');
-    exit;
-}
-
 // Check if user role is receptionniste
 if ($_SESSION['user_role'] !== 'receptionniste') {
     // Redirect to appropriate dashboard based on role
