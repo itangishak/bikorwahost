@@ -606,7 +606,9 @@ $(document).ready(function() {
             $.ajax({
                 url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
                 type: 'GET',
-                data: { search: search, with_stock: true },
+                // We want to search among all products regardless of their
+                // current stock level, so we don't filter by available stock
+                data: { search: search, with_stock: false },
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
