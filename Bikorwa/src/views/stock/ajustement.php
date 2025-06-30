@@ -366,7 +366,7 @@ include('../layouts/header.php');
         <?php if (!empty($message)): ?>
             <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
                 <?= $message ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -487,7 +487,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="previewModalLabel">Confirmer l'ajustement</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -519,7 +519,7 @@ include('../layouts/header.php');
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 <button type="button" class="btn btn-primary" id="confirm-adjustment">
                     <i class="fas fa-check mr-1"></i> Confirmer
                 </button>
@@ -534,7 +534,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title">Ajustement réussi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -547,7 +547,7 @@ include('../layouts/header.php');
                 <a href="<?= BASE_URL ?>/src/views/stock/inventaire.php" class="btn btn-outline-secondary">
                     Retour à l'inventaire
                 </a>
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="new-adjustment-btn">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="new-adjustment-btn">
                     Nouvel ajustement
                 </button>
             </div>
