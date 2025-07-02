@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS mouvements_stock (
     quantity_remaining DECIMAL(10,2) DEFAULT NULL,
     quantite DECIMAL(10,2) NOT NULL,
     prix_unitaire DECIMAL(10,2) NOT NULL,
+    prix_vente DECIMAL(10,2) DEFAULT NULL,
     valeur_totale DECIMAL(10,2) NOT NULL,
     reference VARCHAR(100),
     date_mouvement DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
