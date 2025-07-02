@@ -204,33 +204,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'actif' => $actif
             ]);
             
-            // Check if price has changed
-            $stmt = $pdo->prepare("
-                SELECT prix_achat, prix_vente 
-                FROM prix_produits 
-                WHERE produit_id = :produit_id 
-                AND date_fin IS NULL
-            ");
+            // Handle product pricing
+            $stmt = $pdo->prepare(
+                "SELECT prix_achat, prix_vente
+                 FROM prix_produits
+                 WHERE produit_id = :produit_id AND date_fin IS NULL"
+            );
             $stmt->execute(['produit_id' => $produit_id]);
             $currentPrice = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ($currentPrice && 
-                (abs($currentPrice['prix_achat'] - $prix_achat) > 0.01 || 
-                 abs($currentPrice['prix_vente'] - $prix_vente) > 0.01)) {
-                
-                // Close the current price period
-                $stmt = $pdo->prepare("
-                    UPDATE prix_produits 
-                    SET date_fin = NOW() 
-                    WHERE produit_id = :produit_id AND date_fin IS NULL
-                ");
+
+            if (!$currentPrice) {
+                // No current price entry - create one
+                $stmt = $pdo->prepare(
+                    "INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
+                     VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)"
+                );
+                $stmt->execute([
+                    'produit_id' => $produit_id,
+                    'prix_achat' => $prix_achat,
+                    'prix_vente' => $prix_vente,
+                    'cree_par' => $_SESSION['user_id']
+                ]);
+            } elseif (
+                abs($currentPrice['prix_achat'] - $prix_achat) > 0.01 ||
+                abs($currentPrice['prix_vente'] - $prix_vente) > 0.01
+            ) {
+                // Close the current price period and insert the new price
+                $stmt = $pdo->prepare(
+                    "UPDATE prix_produits
+                     SET date_fin = NOW()
+                     WHERE produit_id = :produit_id AND date_fin IS NULL"
+                );
                 $stmt->execute(['produit_id' => $produit_id]);
-                
-                // Add new price entry
-                $stmt = $pdo->prepare("
-                    INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
-                    VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)
-                ");
+
+                $stmt = $pdo->prepare(
+                    "INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
+                     VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)"
+                );
                 $stmt->execute([
                     'produit_id' => $produit_id,
                     'prix_achat' => $prix_achat,
