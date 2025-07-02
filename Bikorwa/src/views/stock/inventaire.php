@@ -533,8 +533,9 @@ try {
     }
     
     $stmt = $pdo->prepare("
-        SELECT 
+        SELECT
             p.id, p.code, p.nom, p.description, p.unite_mesure, p.actif,
+            p.categorie_id,
             c.nom as categorie_nom,
             COALESCE(s.quantite, 0) as quantite_stock,
             s.date_mise_a_jour,
