@@ -92,12 +92,13 @@ try {
         // Get available stock with FIFO batches
         if ($with_stock && $row['quantite_stock'] > 0) {
             // Get the FIFO batches for this product
-            $fifoQuery = "SELECT 
+            $fifoQuery = "SELECT
                             ms.produit_id,
                             ms.quantity_remaining,
                             ms.prix_unitaire,
+                            ms.prix_vente,
                             ms.date_mouvement
-                           FROM 
+                           FROM
                             mouvements_stock ms
                            WHERE 
                             ms.produit_id = :id 
@@ -113,8 +114,9 @@ try {
             $batches = [];
             while ($batch = $stmtFifo->fetch(PDO::FETCH_ASSOC)) {
                 $batches[] = [
-                    'quantity' => $batch['quantity_remaining'],
-                    'prix_achat' => $batch['prix_unitaire']
+                    'quantity'   => $batch['quantity_remaining'],
+                    'prix_achat' => $batch['prix_unitaire'],
+                    'prix_vente' => $batch['prix_vente']
                 ];
             }
             
