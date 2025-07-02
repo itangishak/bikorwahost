@@ -746,7 +746,7 @@ include('../layouts/header.php');
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="prix">Prix unitaire</label>
-                                            <input type="number" class="form-control" id="prix" readonly>
+                                            <input type="number" class="form-control" id="prix">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
