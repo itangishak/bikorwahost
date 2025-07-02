@@ -545,13 +545,8 @@ try {
         LEFT JOIN stock s ON p.id = s.produit_id
         LEFT JOIN (
             SELECT produit_id, prix_achat, prix_vente
-            FROM prix_produits pp1
-            WHERE (pp1.date_fin IS NULL OR pp1.date_fin = (
-                SELECT MAX(date_fin) 
-                FROM prix_produits pp2 
-                WHERE pp2.produit_id = pp1.produit_id
-            ))
-            GROUP BY produit_id
+            FROM prix_produits
+            WHERE date_fin IS NULL
         ) pp ON p.id = pp.produit_id
         WHERE 1=1 $whereClause
         ORDER BY p.nom
