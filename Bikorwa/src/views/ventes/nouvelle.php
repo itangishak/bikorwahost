@@ -126,11 +126,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_produits') {
         $baseQuery .= " LEFT JOIN (
                           SELECT produit_id, prix_achat, prix_vente
                           FROM prix_produits
-                          WHERE date_fin IS NULL OR date_fin = (
-                              SELECT MAX(date_fin)
-                              FROM prix_produits pp2
-                              WHERE pp2.produit_id = prix_produits.produit_id
-                          )
+                          WHERE date_fin IS NULL
                       ) pp ON p.id = pp.produit_id
                       WHERE p.actif = 1";
         
