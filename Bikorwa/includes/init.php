@@ -4,6 +4,9 @@
  * This ensures consistent session management across the application
  */
 
+// Start output buffering to prevent header errors
+ob_start();
+
 // Include bootstrap
 require_once __DIR__ . '/bootstrap.php';
 
@@ -33,6 +36,12 @@ function requireAuth() {
 
 function requireRole($role) {
     global $sessionManager;
+    
+    // Clean output buffer before headers
+    if (ob_get_length()) {
+        ob_end_clean();
+    }
+    
     requireAuth();
     if ($sessionManager->getUserRole() !== $role) {
         header('Location: ' . BASE_URL . '/src/views/auth/login.php');

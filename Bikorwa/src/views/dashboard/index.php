@@ -1,4 +1,7 @@
 <?php
+// Start session before any output
+require_once __DIR__ . '/../../../includes/session_init.php';
+
 // Error reporting for debugging (remove in production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
