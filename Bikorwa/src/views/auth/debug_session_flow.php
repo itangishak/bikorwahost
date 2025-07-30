@@ -8,11 +8,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Start the PHP session before any output is sent
+session_start();
+
 echo "<html><head><title>Session Flow Debug - KUBIKOTI BAR</title></head><body>";
 echo "<h1>Session Flow Debug</h1>";
 
 echo "<h2>Step 1: Basic PHP Session</h2>";
-session_start();
 echo "<p>✅ PHP session started</p>";
 echo "<p><strong>Session ID:</strong> " . session_id() . "</p>";
 echo "<p><strong>Session Status:</strong> " . session_status() . " (1=disabled, 2=active, 3=none)</p>";
