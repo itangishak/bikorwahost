@@ -292,7 +292,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
         <div class="sidebar-menu">
             <?php
             // Get user role from session for role-based menu access
-            $user_role = $_SESSION['user_role'] ?? 'receptionniste';
+            $user_role = $_SESSION['role'] ?? 'receptionniste';
             
             // Determine correct dashboard URL based on role
             $dashboard_url = ($user_role === 'receptionniste')
@@ -489,7 +489,7 @@ $app_name_setting = $settingsObj->get('shop_name', APP_NAME);
                         <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($_SESSION['user_name'] ?? 'User'); ?>&background=4e73df&color=fff" alt="User Avatar" class="topbar-user-avatar">
                         <div class="ms-2 d-none d-lg-inline">
                             <div class="topbar-user-name"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></div>
-                            <div class="text-muted small"><?php echo htmlspecialchars($_SESSION['user_role'] ?? 'Role'); ?></div>
+                            <div class="text-muted small"><?php echo htmlspecialchars($_SESSION['role'] ?? 'Role'); ?></div>
                         </div>
                     </div>
                 </a>
