@@ -35,6 +35,9 @@ $produit_id = intval($_POST['produit_id'] ?? 0);
 $type_mouvement = $_POST['type_mouvement'] ?? '';
 $quantite = floatval(str_replace(',', '.', $_POST['quantite'] ?? '0'));
 $note = trim($_POST['note'] ?? '');
+$date_mouvement = isset($_POST['date_mouvement']) && $_POST['date_mouvement'] !== ''
+    ? date('Y-m-d H:i:s', strtotime($_POST['date_mouvement']))
+    : date('Y-m-d H:i:s');
 
 if ($quantite <= 0) {
     echo json_encode(['success' => false, 'message' => 'La quantité doit être supérieure à zéro.']);
@@ -77,13 +80,13 @@ try {
 
     $new_quantity = ($type_mouvement === 'entree') ? $produit['quantite'] + $quantite : $produit['quantite'] - $quantite;
 
-    $stmt = $pdo->prepare("UPDATE stock SET quantite = :q, date_mise_a_jour = NOW() WHERE produit_id = :id");
-    $stmt->execute(['q' => $new_quantity, 'id' => $produit_id]);
+    $stmt = $pdo->prepare("UPDATE stock SET quantite = :q, date_mise_a_jour = :date_mouvement WHERE produit_id = :id");
+    $stmt->execute(['q' => $new_quantity, 'id' => $produit_id, 'date_mouvement' => $date_mouvement]);
 
     $reference = ($type_mouvement === 'entree' ? 'AJOUT-' : 'RETRAIT-') . date('YmdHis');
 
-    $stmt = $pdo->prepare("INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale, utilisateur_id, note, reference, quantity_remaining)
-                           VALUES (:produit_id, :type_mouvement, :quantite, :prix_unitaire, :valeur_totale, :utilisateur_id, :note, :reference, :quantity_remaining)");
+    $stmt = $pdo->prepare("INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale, utilisateur_id, note, reference, quantity_remaining, date_mouvement)
+                           VALUES (:produit_id, :type_mouvement, :quantite, :prix_unitaire, :valeur_totale, :utilisateur_id, :note, :reference, :quantity_remaining, :date_mouvement)");
     $stmt->execute([
         'produit_id' => $produit_id,
         'type_mouvement' => $type_mouvement,
@@ -93,7 +96,8 @@ try {
         'utilisateur_id' => $_SESSION['user_id'],
         'note' => $note,
         'reference' => $reference,
-        'quantity_remaining' => $type_mouvement === 'entree' ? $quantite : null
+        'quantity_remaining' => $type_mouvement === 'entree' ? $quantite : null,
+        'date_mouvement' => $date_mouvement
     ]);
 
     $stmt = $pdo->prepare("INSERT INTO journal_activites (utilisateur_id, action, entite, entite_id, details)
