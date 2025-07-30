@@ -221,30 +221,7 @@ try {
             </div>
         </div>
 
-        <!-- Average Value Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-calculator text-info fs-4 me-2"></i>
-                                <div class="text-uppercase small text-info fw-bold">Moyenne/approvisionnement</div>
-                            </div>
-                            <div class="h4 mb-0">
-                                <?php
-                                $avg_query = "SELECT AVG(valeur_totale) as average FROM mouvements_stock 
-                                            WHERE type_mouvement = 'entree' $date_where";
-                                $avg_stmt = $pdo->prepare($avg_query);
-                                $avg_stmt->execute($date_params);
-                                $avg_data = $avg_stmt->fetch(PDO::FETCH_ASSOC);
-                                echo number_format($avg_data['average'] ?? 0, 0, ',', ' '); ?> BIF
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Products Card -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -371,7 +348,7 @@ try {
                 <div id="modalContent" style="display: none;">
                     <!-- Summary cards for the selected date -->
                     <div class="row mb-4">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card bg-primary text-white">
                                 <div class="card-body text-center">
                                     <i class="fas fa-boxes fa-2x mb-2"></i>
@@ -380,7 +357,7 @@ try {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card bg-success text-white">
                                 <div class="card-body text-center">
                                     <i class="fas fa-list-ol fa-2x mb-2"></i>
@@ -389,21 +366,12 @@ try {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card bg-info text-white">
                                 <div class="card-body text-center">
                                     <i class="fas fa-tags fa-2x mb-2"></i>
                                     <h4 id="modalProductCount">0</h4>
                                     <small>Produits différents</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-warning text-white">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-calculator fa-2x mb-2"></i>
-                                    <h4 id="modalAvgValue">0 BIF</h4>
-                                    <small>Valeur moyenne</small>
                                 </div>
                             </div>
                         </div>
@@ -536,7 +504,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modalTotalValue').textContent = formatNumber(summary.total_value) + ' BIF';
         document.getElementById('modalTotalCount').textContent = summary.total_count;
         document.getElementById('modalProductCount').textContent = summary.product_count;
-        document.getElementById('modalAvgValue').textContent = formatNumber(summary.avg_value) + ' BIF';
         
         // Update table
         const tbody = document.getElementById('modalTableBody');

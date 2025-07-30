@@ -56,7 +56,6 @@ try {
     $summary_sql = "SELECT 
         COUNT(*) as total_count,
         SUM(valeur_totale) as total_value,
-        AVG(valeur_totale) as avg_value,
         COUNT(DISTINCT produit_id) as product_count
     FROM mouvements_stock 
     WHERE type_mouvement = 'entree'
@@ -84,7 +83,6 @@ try {
     $formatted_summary = [
         'total_count' => intval($summary['total_count']),
         'total_value' => floatval($summary['total_value'] ?? 0),
-        'avg_value' => floatval($summary['avg_value'] ?? 0),
         'product_count' => intval($summary['product_count'])
     ];
 
