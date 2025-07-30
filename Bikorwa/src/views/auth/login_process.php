@@ -24,18 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
+            // Determine effective role (treat admin username as gestionnaire)
+            $effectiveRole = $user['role'];
+            if ($user['username'] === 'admin') {
+                $effectiveRole = 'gestionnaire';
+            }
+            
             // Store session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['name'] = $user['nom'];
-            $_SESSION['role'] = $user['role'];
+            $_SESSION['role'] = $effectiveRole;
             $_SESSION['logged_in'] = true;
             $_SESSION['last_activity'] = time();
 
-            // Determine redirect based on role
-            if ($user['role'] === 'gestionnaire') {
+            // Determine redirect based on effective role
+            if ($effectiveRole === 'gestionnaire') {
                 $link = BASE_URL . '/src/views/dashboard/index.php';
-            } elseif ($user['role'] === 'receptionniste') {
+            } elseif ($effectiveRole === 'receptionniste') {
                 $link = BASE_URL . '/src/views/dashboard/receptionniste.php';
             } else {
                 $link = BASE_URL . '/src/views/dashboard/index.php';
