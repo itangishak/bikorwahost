@@ -134,6 +134,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
         $price = isset($_POST['price']) ? floatval(str_replace(',', '.', $_POST['price'])) : 0;
         $sell_price = isset($_POST['sell_price']) ? floatval(str_replace(',', '.', $_POST['sell_price'])) : 0;
         $note = isset($_POST['note']) ? trim($_POST['note']) : '';
+        $date_mouvement = isset($_POST['date_mouvement']) ? trim($_POST['date_mouvement']) : '';
+        if ($date_mouvement) {
+            $date_mouvement = date('Y-m-d H:i:s', strtotime($date_mouvement));
+        } else {
+            $date_mouvement = date('Y-m-d H:i:s');
+        }
         
         // Validate required fields
         if ($product_id <= 0 || empty($adjustment_type) || $quantity <= 0) {
@@ -181,7 +187,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
                        date_mouvement, utilisateur_id, note, reference)
                       VALUES
                       (:produit_id, 'entree', :quantite, :quantity_remaining, :prix_unitaire, :prix_vente, :valeur_totale,
-                       NOW(), :utilisateur_id, :note, :reference)";
+                       :date_mouvement, :utilisateur_id, :note, :reference)";
             
             $stmt = $pdo->prepare($query);
             $stmt->execute([
@@ -191,6 +197,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
                 'prix_unitaire' => $price,
                 'prix_vente' => $sell_price,
                 'valeur_totale' => $valeur_totale,
+                'date_mouvement' => $date_mouvement,
                 'utilisateur_id' => $_SESSION['user_id'],
                 'note' => $note ?: 'Ajustement de stock (Ajout)',
                 'reference' => $reference
@@ -265,12 +272,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
             }
             
             // Record the stock decrease
-            $query = "INSERT INTO mouvements_stock 
-                      (produit_id, type_mouvement, quantite, quantity_remaining, prix_unitaire, valeur_totale, 
+            $query = "INSERT INTO mouvements_stock
+                      (produit_id, type_mouvement, quantite, quantity_remaining, prix_unitaire, valeur_totale,
                        date_mouvement, utilisateur_id, note, reference)
-                      VALUES 
-                      (:produit_id, 'sortie', :quantite, 0, :prix_unitaire, :valeur_totale, 
-                       NOW(), :utilisateur_id, :note, :reference)";
+                      VALUES
+                      (:produit_id, 'sortie', :quantite, 0, :prix_unitaire, :valeur_totale,
+                       :date_mouvement, :utilisateur_id, :note, :reference)";
             
             $stmt = $pdo->prepare($query);
             $stmt->execute([
@@ -278,6 +285,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
                 'quantite' => $quantity,
                 'prix_unitaire' => $total_value_removed / $quantity, // Average price of removed items
                 'valeur_totale' => $total_value_removed,
+                'date_mouvement' => $date_mouvement,
                 'utilisateur_id' => $_SESSION['user_id'],
                 'note' => $note ?: 'Ajustement de stock (Retrait)',
                 'reference' => $reference
@@ -479,7 +487,16 @@ include('../layouts/header.php');
                                             </div>
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="movement-date">Date du mouvement <span class="text-danger">*</span></label>
+                                                <input type="datetime-local" class="form-control" id="movement-date" name="date_mouvement" value="<?= date('Y-m-d\TH:i') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="note">Note / Raison</label>
                                         <textarea class="form-control" id="note" name="note" rows="2"></textarea>
@@ -515,7 +532,7 @@ include('../layouts/header.php');
                     <div class="col-md-6">
                         <h6 class="font-weight-bold">Produit</h6>
                         <p id="preview-product">-</p>
-                        
+
                     </div>
                     <div class="col-md-6">
                         <h6 class="font-weight-bold">Quantité</h6>
@@ -527,7 +544,14 @@ include('../layouts/header.php');
                         <p id="preview-sell-price">-</p>
                     </div>
                 </div>
-                
+
+                <div class="row">
+                    <div class="col-12">
+                        <h6 class="font-weight-bold">Date</h6>
+                        <p id="preview-date">-</p>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12">
                         <h6 class="font-weight-bold">Note</h6>
@@ -698,7 +722,10 @@ $(document).ready(function() {
         // Update form fields
         $('#product-id').val(productId);
         $('#unit-display').text(productUnit);
-        
+
+        // Set current date and time for movement date field
+        $('#movement-date').val(new Date().toISOString().slice(0,16));
+
         // Show adjustment form
         $('#adjustment-form').show();
         
@@ -760,7 +787,15 @@ $(document).ready(function() {
             $('#preview-sell-price-label').hide();
             $('#preview-sell-price').hide();
         }
-        
+
+        // Display chosen date in preview
+        const dateVal = $('#movement-date').val();
+        if (dateVal) {
+            $('#preview-date').text(new Date(dateVal).toLocaleString('fr-FR'));
+        } else {
+            $('#preview-date').text('-');
+        }
+
         $('#preview-note').text(note || '-');
         
         // Show preview modal
@@ -799,9 +834,10 @@ $(document).ready(function() {
                     showNotification('success', 'Ajustement effectué avec succès!');
                     // Show success modal
                     $('#success-modal').modal('show');
-                    
+
                     // Reset form
                     $('#stock-adjustment-form')[0].reset();
+                    $('#movement-date').val(new Date().toISOString().slice(0,16));
                 } else {
                     // Show error message
                     showNotification('danger', response.message || 'Une erreur est survenue');
@@ -824,6 +860,7 @@ $(document).ready(function() {
     // Reset form on new adjustment button click
     $('#new-adjustment-btn').click(function() {
         $('#stock-adjustment-form')[0].reset();
+        $('#movement-date').val(new Date().toISOString().slice(0,16));
     });
     
     // Format currency function
