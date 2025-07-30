@@ -115,16 +115,16 @@ try {
             if (!headers_sent()) {
                 session_regenerate_id(true);
             }
-            
-            // Set session variables
-            $_SESSION['user_id'] = (int)$user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_name'] = $user['nom'];
-            $_SESSION['user_role'] = $user['role'];
-            $_SESSION['user_active'] = (bool)$user['actif'];
-            $_SESSION['logged_in'] = 'true'; // Use string to avoid type conversion issues
-            $_SESSION['login_time'] = time();
-            
+
+            // Use the centralized session manager to set login state
+            $sessionManager->loginUser([
+                'id'   => (int)$user['id'],
+                'username' => $user['username'],
+                'nom'  => $user['nom'],
+                'role' => $user['role'],
+                'actif'=> (bool)$user['actif']
+            ]);
+
             // Log successful session creation
             logError('Session variables set successfully for user: ' . $username);
 
