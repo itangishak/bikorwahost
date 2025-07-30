@@ -336,6 +336,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $type_mouvement = $_POST['type_mouvement'];
             $quantite = floatval(str_replace(',', '.', $_POST['quantite']));
             $note = trim($_POST['note'] ?? '');
+            $date_mouvement = isset($_POST['date_mouvement']) && $_POST['date_mouvement'] !== ''
+                ? date('Y-m-d H:i:s', strtotime($_POST['date_mouvement']))
+                : date('Y-m-d H:i:s');
             
             if ($quantite <= 0) {
                 throw new Exception("La quantité doit être supérieure à zéro.");
@@ -382,12 +385,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $stmt = $pdo->prepare("
                 UPDATE stock 
-                SET quantite = :quantite, date_mise_a_jour = NOW()
+                SET quantite = :quantite, date_mise_a_jour = :date_mouvement
                 WHERE produit_id = :produit_id
             ");
             $stmt->execute([
                 'produit_id' => $produit_id,
-                'quantite' => $new_quantity
+                'quantite' => $new_quantity,
+                'date_mouvement' => $date_mouvement
             ]);
             
             // Record stock movement
@@ -396,12 +400,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $stmt = $pdo->prepare("
                 INSERT INTO mouvements_stock (
-                    produit_id, type_mouvement, quantite, prix_unitaire, 
-                    valeur_totale, utilisateur_id, note, reference
+                    produit_id, type_mouvement, quantite, prix_unitaire,
+                    valeur_totale, utilisateur_id, note, reference, date_mouvement
                 )
                 VALUES (
-                    :produit_id, :type_mouvement, :quantite, :prix_unitaire, 
-                    :valeur_totale, :utilisateur_id, :note, :reference
+                    :produit_id, :type_mouvement, :quantite, :prix_unitaire,
+                    :valeur_totale, :utilisateur_id, :note, :reference, :date_mouvement
                 )
             ");
             $stmt->execute([
@@ -412,7 +416,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'valeur_totale' => $produit['prix_achat'] * $quantite,
                 'utilisateur_id' => $_SESSION['user_id'],
                 'note' => $note,
-                'reference' => $reference
+                'reference' => $reference,
+                'date_mouvement' => $date_mouvement
             ]);
             
             // Log activity
