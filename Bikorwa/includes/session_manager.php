@@ -91,29 +91,34 @@ class SessionManager
      */
     private function configureSession() 
     {
-        // Configure session settings before starting
-        ini_set('session.use_strict_mode', 1);
-        ini_set('session.cookie_httponly', 1);
-        ini_set('session.cookie_secure', 0); // Set to 1 for HTTPS
-        ini_set('session.use_only_cookies', 1);
-        ini_set('session.cookie_samesite', 'Strict');
-        
-        // Set session lifetime
-        ini_set('session.gc_maxlifetime', $this->sessionLifetime);
-        ini_set('session.cookie_lifetime', $this->sessionLifetime);
-        
-        // Set session name
-        session_name($this->sessionName);
-        
-        // Set up database session handler if available
-        if ($this->pdo) {
-            try {
-                $this->sessionHandler = new DbSessionHandler($this->pdo);
-                session_set_save_handler($this->sessionHandler, true);
-            } catch (Exception $e) {
-                error_log('SessionManager: Failed to set database session handler: ' . $e->getMessage());
-                // Continue with default file-based sessions
+        // Only configure if headers haven't been sent
+        if (!headers_sent()) {
+            // Configure session settings before starting
+            ini_set('session.use_strict_mode', 1);
+            ini_set('session.cookie_httponly', 1);
+            ini_set('session.cookie_secure', 0); // Set to 1 for HTTPS
+            ini_set('session.use_only_cookies', 1);
+            ini_set('session.cookie_samesite', 'Strict');
+            
+            // Set session lifetime
+            ini_set('session.gc_maxlifetime', $this->sessionLifetime);
+            ini_set('session.cookie_lifetime', $this->sessionLifetime);
+            
+            // Set session name
+            session_name($this->sessionName);
+            
+            // Set up database session handler if available
+            if ($this->pdo) {
+                try {
+                    $this->sessionHandler = new DbSessionHandler($this->pdo);
+                    session_set_save_handler($this->sessionHandler, true);
+                } catch (Exception $e) {
+                    error_log('SessionManager: Failed to set database session handler: ' . $e->getMessage());
+                    // Continue with default file-based sessions
+                }
             }
+        } else {
+            error_log('SessionManager: Headers already sent, skipping session configuration');
         }
     }
     
@@ -123,7 +128,21 @@ class SessionManager
     public function startSession() 
     {
         if ($this->sessionStarted || session_status() === PHP_SESSION_ACTIVE) {
+            $this->sessionStarted = true;
             return true;
+        }
+        
+        // Check if headers have been sent
+        if (headers_sent($file, $line)) {
+            error_log("SessionManager: Headers already sent in $file on line $line");
+            // If session is already active, mark as started
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                $this->sessionStarted = true;
+                return true;
+            }
+            // Try to work with existing session state
+            $this->sessionStarted = false;
+            return false;
         }
         
         try {
