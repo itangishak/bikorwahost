@@ -66,27 +66,48 @@ try {
         send_json_response(false, 'Veuillez remplir tous les champs.', null, 400);
     }
 
-    // Initialize database connection
+    // Initialize database connection with better error handling
     $database = new Database();
     $conn = $database->getConnection();
     
     if (!$conn instanceof PDO) {
-        throw new Exception('Failed to get database connection');
+        logError('Database connection failed - not a PDO instance');
+        send_json_response(false, 'Erreur de connexion à la base de données.', null, 500);
+    }
+    
+    // Test database connection
+    try {
+        $conn->query('SELECT 1');
+    } catch (Exception $e) {
+        logError('Database connection test failed: ' . $e->getMessage());
+        send_json_response(false, 'Erreur de connexion à la base de données.', null, 500);
     }
 
     try {
+        // Log the login attempt
+        logError('Login attempt for username: ' . $username);
+        
         // Prepare and execute query
-        $stmt = $conn->prepare("SELECT id, username, password, nom, role, actif FROM users WHERE username = :username");
+        $stmt = $conn->prepare("SELECT id, username, password, nom, role, actif FROM users WHERE username = :username AND actif = 1");
         if (!$stmt) {
             throw new Exception("SQL prepare error: " . implode(" ", $conn->errorInfo()));
         }
 
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Log user found status
+        if ($user) {
+            logError('User found: ' . $user['username'] . ', role: ' . $user['role']);
+        } else {
+            logError('No user found with username: ' . $username);
+        }
 
         if ($user && password_verify($password, $user['password'])) {
-            // Check if user is active
+            logError('Password verification successful for user: ' . $username);
+            // User is already active (checked in query), but double-check
             if (!$user['actif']) {
+                logError('User account is inactive: ' . $username);
                 send_json_response(false, 'Votre compte est désactivé. Veuillez contacter l\'administrateur.', null, 401);
             }
             
@@ -101,6 +122,9 @@ try {
             $_SESSION['user_active'] = $user['actif'];
             $_SESSION['logged_in'] = true;
             $_SESSION['login_time'] = time();
+            
+            // Log successful session creation
+            logError('Session variables set successfully for user: ' . $username);
 
             // Log activity (simplified)
             try {
@@ -124,8 +148,14 @@ try {
 
             send_json_response(true, $welcomeMessage, $redirect, 200, session_id());
         } else {
-            // Invalid credentials
-            send_json_response(false, $user ? "Mot de passe incorrect." : "Nom d'utilisateur introuvable.", null, 401);
+            // Invalid credentials - log the failure
+            if ($user) {
+                logError('Password verification failed for user: ' . $username);
+                send_json_response(false, "Mot de passe incorrect.", null, 401);
+            } else {
+                logError('User not found: ' . $username);
+                send_json_response(false, "Nom d'utilisateur introuvable.", null, 401);
+            }
         }
     } catch (Exception $e) {
         logError('Database error: ' . $e->getMessage());
