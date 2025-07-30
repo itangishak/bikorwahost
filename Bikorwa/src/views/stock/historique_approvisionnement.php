@@ -498,10 +498,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create form data
         const formData = new FormData();
         formData.append('date', date);
+        formData.append('PHPSESSID', '<?= session_id() ?>');
         
         fetch('get_date_supplies.php', {
             method: 'POST',
-            body: formData
+            body: formData,
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {
