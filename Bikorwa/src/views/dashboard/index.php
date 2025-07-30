@@ -3,6 +3,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Debug session variables
+error_log('Dashboard session variables: ' . print_r($_SESSION, true));
+
 // Initialize application (loads session manager and helpers)
 require_once __DIR__ . '/../../../includes/init.php';
 

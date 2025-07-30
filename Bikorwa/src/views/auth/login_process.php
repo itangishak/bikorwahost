@@ -127,15 +127,7 @@ try {
 
             // Log successful session creation
             logError('Session variables set successfully for user: ' . $username);
-
-            // Log activity (simplified)
-            try {
-                $logStmt = $conn->prepare("INSERT INTO journal_activites (utilisateur_id, action, entite, entite_id, details) VALUES (?, ?, ?, ?, ?)");
-                $logStmt->execute([$user['id'], 'Login', 'User', $user['id'], 'User ' . $user['nom'] . ' logged in successfully.']);
-            } catch (Exception $e) {
-                // Log error but don't fail login
-                logError('Failed to log activity: ' . $e->getMessage());
-            }
+            logError('Session data after login: ' . print_r($_SESSION, true));
 
             // Determine redirect URL
             $redirect = BASE_URL . '/src/views/dashboard/index.php';

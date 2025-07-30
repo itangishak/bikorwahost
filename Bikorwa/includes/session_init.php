@@ -35,6 +35,10 @@ if (session_status() === PHP_SESSION_NONE) {
     
     // Start the session
     session_start();
+    
+    // Debug session initialization
+    error_log('Session initialized with params: ' . print_r(session_get_cookie_params(), true));
+    error_log('Current session status: ' . session_status());
 }
 
 // Function to check if user is logged in
