@@ -303,20 +303,24 @@ class SessionManager
      */
     public function isLoggedIn() 
     {
-        $userId = $this->get('user_id');
-        $loggedIn = $this->get('logged_in');
-        
-        // Check if user_id exists and is not empty
-        if (!$userId || empty($userId)) {
+        // First check if session is active
+        if (!$this->sessionStarted || session_status() !== PHP_SESSION_ACTIVE) {
+            error_log('Session not active - sessionStarted: ' . ($this->sessionStarted ? 'true' : 'false') . ', status: ' . session_status());
             return false;
         }
         
-        // Check logged_in status (handle various formats: true, 'true', 1, '1')
-        if ($loggedIn === true || $loggedIn === 'true' || $loggedIn === 1 || $loggedIn === '1') {
-            return true;
+        // Then check user_id exists
+        $userId = $this->get('user_id');
+        if (!$userId || empty($userId)) {
+            error_log('User ID not found in session');
+            return false;
         }
         
-        return false;
+        // Finally check logged_in status with more flexible comparison
+        $loggedIn = $this->get('logged_in');
+        $result = filter_var($loggedIn, FILTER_VALIDATE_BOOLEAN);
+        error_log('Login check - logged_in: ' . var_export($loggedIn, true) . ', result: ' . ($result ? 'true' : 'false'));
+        return $result;
     }
     
     /**
