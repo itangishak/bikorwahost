@@ -5,7 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Check permissions
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
+$allowedRoles = ['gestionnaire', 'admin'];
+if (!isset($_SESSION['user_role']) || !in_array(strtolower($_SESSION['user_role']), $allowedRoles)) {
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Accès non autorisé']);
     exit;
