@@ -1,28 +1,20 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
+session_start();
 
-// Use SessionManager for logout
-require_once __DIR__ . '/../../../includes/session_manager.php';
-$sessionManager = SessionManager::getInstance();
-$sessionManager->startSession();
+// Unset all session variables
+$_SESSION = array();
 
-// Logout user using SessionManager
-$sessionManager->logoutUser();
+// Destroy the session
+session_destroy();
 
-// Get the login URL
-$loginUrl = BASE_URL . '/src/views/auth/login.php';
+// Redirect to login page
+header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+exit;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Déconnexion</title>
-    <script>
-        // Clear the session ID from session storage
-        sessionStorage.removeItem('sessionId');
-        
-        // Redirect to the login page
-        window.location.href = "<?php echo $loginUrl; ?>";
-    </script>
 </head>
 <body>
     <p>Déconnexion en cours...</p>

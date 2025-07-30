@@ -116,31 +116,23 @@ try {
                 session_regenerate_id(true);
             }
 
-            // Use the centralized session manager to set login state
-            $sessionManager->loginUser([
-                'id'   => (int)$user['id'],
-                'username' => $user['username'],
-                'nom'  => $user['nom'],
-                'role' => $user['role'],
-                'actif'=> (bool)$user['actif']
-            ]);
+            // Set basic session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['name'] = $user['nom'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['logged_in'] = true;
+            $_SESSION['last_activity'] = time();
 
-            // Log successful session creation
-            logError('Session variables set successfully for user: ' . $username);
-            logError('Session data after login: ' . print_r($_SESSION, true));
-
-            // Determine redirect URL
-            $redirect = BASE_URL . '/src/views/dashboard/index.php';
+            // Determine redirect URL based on role
+            $redirect = BASE_URL . '/src/views/dashboard/';
             if ($user['role'] === 'receptionniste') {
-                $redirect = BASE_URL . '/src/views/dashboard/receptionniste.php';
+                $redirect .= 'receptionniste.php';
+            } else {
+                $redirect .= 'index.php';
             }
 
-            $welcomeMessage = 'Connexion réussie. Redirection en cours...';
-            if (isset($user['nom'])) {
-                $welcomeMessage = 'Connexion réussie. Bienvenue, ' . htmlspecialchars($user['nom']) . ' !';
-            }
-
-            send_json_response(true, $welcomeMessage, $redirect, 200, session_id());
+            send_json_response(true, 'Connexion réussie. Redirection en cours...', $redirect, 200, session_id());
         } else {
             // Invalid credentials - log the failure
             if ($user) {

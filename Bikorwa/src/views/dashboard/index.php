@@ -10,6 +10,18 @@ ob_start();
 require_once __DIR__ . '/../../../includes/session_init.php';
 require_once __DIR__ . '/../../../includes/init.php';
 
+// Simple session check
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit;
+}
+
+// Role check
+if ($_SESSION['role'] !== 'gestionnaire') {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit;
+}
+
 // Verify session is active
 if (session_status() !== PHP_SESSION_ACTIVE) {
     die('Session initialization failed');

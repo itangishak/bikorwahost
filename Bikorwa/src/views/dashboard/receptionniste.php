@@ -2,19 +2,21 @@
 // Include authentication check which also starts the PHP session
 require_once __DIR__ . '/../../../includes/auth_check.php';
 
+// Simple session check
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit;
+}
+
+// Role check
+if ($_SESSION['role'] !== 'receptionniste') {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit;
+}
+
 // Include database connection and config
 require_once('../../config/database.php');
 require_once('../../config/config.php');
-// Check if user role is receptionniste
-if ($_SESSION['user_role'] !== 'receptionniste') {
-    // Redirect to appropriate dashboard based on role
-    if ($_SESSION['user_role'] === 'gestionnaire') {
-        header('Location: index.php');
-    } else {
-        header('Location: ../auth/login.php');
-    }
-    exit;
-}
 
 // Initialize database connection
 $db = new Database();
