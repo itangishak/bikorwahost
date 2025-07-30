@@ -1,21 +1,25 @@
 <?php
-// Start session before any output
-require_once __DIR__ . '/../../../includes/session_init.php';
-
-// Error reporting for debugging (remove in production)
+// Strict error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Debug session variables
-error_log('Dashboard session variables: ' . print_r($_SESSION, true));
+// Start output buffering
+ob_start();
 
-// Initialize application (loads session manager and helpers)
+// Initialize session and core systems
+require_once __DIR__ . '/../../../includes/session_init.php';
 require_once __DIR__ . '/../../../includes/init.php';
+
+// Verify session is active
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    die('Session initialization failed');
+}
 
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
 
+// Load configuration
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 
@@ -24,13 +28,17 @@ try {
     $database = new Database();
     $pdo = $database->getConnection();
     
-    // Check if database connection is successful
     if (!$pdo) {
         throw new Exception("Erreur de connexion à la base de données");
     }
 } catch (Exception $e) {
+    // Clean buffer before error output
+    ob_end_clean();
     die("Erreur de connexion à la base de données: " . $e->getMessage());
 }
+
+// Clean buffer before any potential redirects
+ob_end_clean();
 
 // Ensure the connected user has the proper role
 requireManager();

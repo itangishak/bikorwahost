@@ -10,35 +10,36 @@ if (defined('SESSION_INIT_LOADED')) {
 }
 define('SESSION_INIT_LOADED', true);
 
-// Configure session settings before starting session
+// Only initialize if no session exists
 if (session_status() === PHP_SESSION_NONE) {
-    // Session configuration
+    // Configure session settings
     ini_set('session.use_strict_mode', 1);
     ini_set('session.cookie_httponly', 1);
-    ini_set('session.cookie_secure', 0); // Set to 1 for HTTPS
+    ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
     ini_set('session.use_only_cookies', 1);
-    ini_set('session.cookie_lifetime', 3600); // 1 hour
+    ini_set('session.cookie_lifetime', 3600);
     ini_set('session.gc_maxlifetime', 3600);
     
     // Set session name
     session_name('BIKORWA_SESSION');
     
-    // Set session cookie parameters
+    // Set cookie parameters with proper domain
     session_set_cookie_params([
         'lifetime' => 3600,
         'path' => '/',
-        'domain' => '',
-        'secure' => false, // Set to true for HTTPS
+        'domain' => $_SERVER['HTTP_HOST'],
+        'secure' => isset($_SERVER['HTTPS']),
         'httponly' => true,
-        'samesite' => 'Strict'
+        'samesite' => 'Lax'
     ]);
     
-    // Start the session
-    session_start();
-    
-    // Debug session initialization
-    error_log('Session initialized with params: ' . print_r(session_get_cookie_params(), true));
-    error_log('Current session status: ' . session_status());
+    // Start session with error suppression
+    @session_start();
+}
+
+// Verify session started properly
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    die('Failed to initialize session');
 }
 
 // Function to check if user is logged in
