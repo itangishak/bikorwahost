@@ -18,15 +18,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Include config first to get BASE_URL
+require_once __DIR__ . '/../../config/config.php';
+
 // Check permissions
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
 
-// Include database connection and config
+// Include database connection
 require_once __DIR__ . '/../../../includes/db.php';
-require_once __DIR__ . '/../../config/config.php';
 
 require_once __DIR__ . '/../layouts/header.php';
 
