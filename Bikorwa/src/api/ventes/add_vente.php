@@ -183,16 +183,16 @@ try {
             $stmt->close();
         }
         
-        // Create stock movement for this sale
+        // Create stock movement for this sale (use sale date for synchronization)
         $query = "INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, 
-                    prix_unitaire, valeur_totale, reference, utilisateur_id, note)
-                  VALUES (?, 'sortie', ?, ?, ?, ?, ?, ?)";
+                    prix_unitaire, valeur_totale, reference, date_mouvement, utilisateur_id, note)
+                  VALUES (?, 'sortie', ?, ?, ?, ?, ?, ?, ?)";
         $reference = "Vente #" . $numero_facture;
         $valeur_totale = $prix_vente * $quantite;
         
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("idddsis", $produit_id, $quantite, $prix_vente, $valeur_totale, 
-                         $reference, $utilisateur_id, $note);
+        $stmt->bind_param("idddssis", $produit_id, $quantite, $prix_vente, $valeur_totale, 
+                         $reference, $date_vente, $utilisateur_id, $note);
         $stmt->execute();
         $stmt->close();
         

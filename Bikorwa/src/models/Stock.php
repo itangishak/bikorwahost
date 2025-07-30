@@ -53,7 +53,7 @@ class Stock {
     }
     
     // Méthode pour ajouter du stock (entrée)
-    public function ajouterStock($produit_id, $quantite, $prix_unitaire, $reference, $utilisateur_id, $note = null) {
+    public function ajouterStock($produit_id, $quantite, $prix_unitaire, $reference, $utilisateur_id, $note = null, $date_mouvement = null) {
         // Commencer une transaction
         $this->conn->beginTransaction();
         
@@ -89,25 +89,48 @@ class Stock {
             // Calculer la valeur totale
             $valeur_totale = $quantite * $prix_unitaire;
             
-            // Enregistrer le mouvement de stock
-            $query = "INSERT INTO " . $this->table_mouvements . " 
-                      SET produit_id = :produit_id, 
-                          type_mouvement = 'entree', 
-                          quantite = :quantite, 
-                          prix_unitaire = :prix_unitaire, 
-                          valeur_totale = :valeur_totale, 
-                          reference = :reference, 
-                          utilisateur_id = :utilisateur_id, 
-                          note = :note";
-            
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(":produit_id", $produit_id);
-            $stmt->bindParam(":quantite", $quantite);
-            $stmt->bindParam(":prix_unitaire", $prix_unitaire);
-            $stmt->bindParam(":valeur_totale", $valeur_totale);
-            $stmt->bindParam(":reference", $reference);
-            $stmt->bindParam(":utilisateur_id", $utilisateur_id);
-            $stmt->bindParam(":note", $note);
+            // Enregistrer le mouvement de stock (avec date personnalisée si fournie)
+            if ($date_mouvement) {
+                $query = "INSERT INTO " . $this->table_mouvements . " 
+                          SET produit_id = :produit_id, 
+                              type_mouvement = 'entree', 
+                              quantite = :quantite, 
+                              prix_unitaire = :prix_unitaire, 
+                              valeur_totale = :valeur_totale, 
+                              reference = :reference, 
+                              date_mouvement = :date_mouvement, 
+                              utilisateur_id = :utilisateur_id, 
+                              note = :note";
+                
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(":produit_id", $produit_id);
+                $stmt->bindParam(":quantite", $quantite);
+                $stmt->bindParam(":prix_unitaire", $prix_unitaire);
+                $stmt->bindParam(":valeur_totale", $valeur_totale);
+                $stmt->bindParam(":reference", $reference);
+                $stmt->bindParam(":date_mouvement", $date_mouvement);
+                $stmt->bindParam(":utilisateur_id", $utilisateur_id);
+                $stmt->bindParam(":note", $note);
+            } else {
+                $query = "INSERT INTO " . $this->table_mouvements . " 
+                          SET produit_id = :produit_id, 
+                              type_mouvement = 'entree', 
+                              quantite = :quantite, 
+                              prix_unitaire = :prix_unitaire, 
+                              valeur_totale = :valeur_totale, 
+                              reference = :reference, 
+                              utilisateur_id = :utilisateur_id, 
+                              note = :note";
+                
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(":produit_id", $produit_id);
+                $stmt->bindParam(":quantite", $quantite);
+                $stmt->bindParam(":prix_unitaire", $prix_unitaire);
+                $stmt->bindParam(":valeur_totale", $valeur_totale);
+                $stmt->bindParam(":reference", $reference);
+                $stmt->bindParam(":utilisateur_id", $utilisateur_id);
+                $stmt->bindParam(":note", $note);
+            }
             $stmt->execute();
             
             // Valider la transaction
@@ -122,7 +145,7 @@ class Stock {
     }
     
     // Méthode pour retirer du stock (sortie)
-    public function retirerStock($produit_id, $quantite, $prix_unitaire, $reference, $utilisateur_id, $note = null) {
+    public function retirerStock($produit_id, $quantite, $prix_unitaire, $reference, $utilisateur_id, $note = null, $date_mouvement = null) {
         // Commencer une transaction
         $this->conn->beginTransaction();
         
@@ -150,25 +173,48 @@ class Stock {
             // Calculer la valeur totale
             $valeur_totale = $quantite * $prix_unitaire;
             
-            // Enregistrer le mouvement de stock
-            $query = "INSERT INTO " . $this->table_mouvements . " 
-                      SET produit_id = :produit_id, 
-                          type_mouvement = 'sortie', 
-                          quantite = :quantite, 
-                          prix_unitaire = :prix_unitaire, 
-                          valeur_totale = :valeur_totale, 
-                          reference = :reference, 
-                          utilisateur_id = :utilisateur_id, 
-                          note = :note";
-            
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(":produit_id", $produit_id);
-            $stmt->bindParam(":quantite", $quantite);
-            $stmt->bindParam(":prix_unitaire", $prix_unitaire);
-            $stmt->bindParam(":valeur_totale", $valeur_totale);
-            $stmt->bindParam(":reference", $reference);
-            $stmt->bindParam(":utilisateur_id", $utilisateur_id);
-            $stmt->bindParam(":note", $note);
+            // Enregistrer le mouvement de stock (avec date personnalisée si fournie)
+            if ($date_mouvement) {
+                $query = "INSERT INTO " . $this->table_mouvements . " 
+                          SET produit_id = :produit_id, 
+                              type_mouvement = 'sortie', 
+                              quantite = :quantite, 
+                              prix_unitaire = :prix_unitaire, 
+                              valeur_totale = :valeur_totale, 
+                              reference = :reference, 
+                              date_mouvement = :date_mouvement, 
+                              utilisateur_id = :utilisateur_id, 
+                              note = :note";
+                
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(":produit_id", $produit_id);
+                $stmt->bindParam(":quantite", $quantite);
+                $stmt->bindParam(":prix_unitaire", $prix_unitaire);
+                $stmt->bindParam(":valeur_totale", $valeur_totale);
+                $stmt->bindParam(":reference", $reference);
+                $stmt->bindParam(":date_mouvement", $date_mouvement);
+                $stmt->bindParam(":utilisateur_id", $utilisateur_id);
+                $stmt->bindParam(":note", $note);
+            } else {
+                $query = "INSERT INTO " . $this->table_mouvements . " 
+                          SET produit_id = :produit_id, 
+                              type_mouvement = 'sortie', 
+                              quantite = :quantite, 
+                              prix_unitaire = :prix_unitaire, 
+                              valeur_totale = :valeur_totale, 
+                              reference = :reference, 
+                              utilisateur_id = :utilisateur_id, 
+                              note = :note";
+                
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(":produit_id", $produit_id);
+                $stmt->bindParam(":quantite", $quantite);
+                $stmt->bindParam(":prix_unitaire", $prix_unitaire);
+                $stmt->bindParam(":valeur_totale", $valeur_totale);
+                $stmt->bindParam(":reference", $reference);
+                $stmt->bindParam(":utilisateur_id", $utilisateur_id);
+                $stmt->bindParam(":note", $note);
+            }
             $stmt->execute();
             
             // Valider la transaction
@@ -300,6 +346,26 @@ class Stock {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $row['valeur_totale'] ?? 0;
+    }
+    
+    // Méthode pour enregistrer le stock initial avec la date de création du produit
+    public function enregistrerStockInitial($produit_id, $quantite, $prix_unitaire, $utilisateur_id, $note = null) {
+        // Récupérer la date de création du produit
+        $query = "SELECT date_creation FROM produits WHERE id = :produit_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":produit_id", $produit_id);
+        $stmt->execute();
+        $produit = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$produit) {
+            return false; // Produit non trouvé
+        }
+        
+        $date_creation = $produit['date_creation'];
+        $reference = "Stock initial - Produit #" . $produit_id;
+        
+        // Utiliser la méthode ajouterStock avec la date de création du produit
+        return $this->ajouterStock($produit_id, $quantite, $prix_unitaire, $reference, $utilisateur_id, $note, $date_creation);
     }
 }
 ?>

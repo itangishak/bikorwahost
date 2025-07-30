@@ -286,7 +286,15 @@ try {
                                             <td><?= htmlspecialchars($entry['quantite']) ?></td>
                                             <td><?= htmlspecialchars(number_format($entry['prix_unitaire'], 0, ',', ' ')) ?> BIF</td>
                                             <td><?= htmlspecialchars(number_format($entry['valeur_totale'], 0, ',', ' ')) ?> BIF</td>
-                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($entry['date_mouvement']))) ?></td>
+                                             <td>
+                                                <a href="#" class="text-primary text-decoration-none view-date-supplies" 
+                                                   data-date="<?= date('Y-m-d', strtotime($entry['date_mouvement'])) ?>"
+                                                   data-date-formatted="<?= date('d/m/Y', strtotime($entry['date_mouvement'])) ?>"
+                                                   title="Voir tous les approvisionnements du <?= date('d/m/Y', strtotime($entry['date_mouvement'])) ?>">
+                                                    <i class="fas fa-calendar-day me-1"></i>
+                                                    <?= htmlspecialchars(date('d/m/Y H:i', strtotime($entry['date_mouvement']))) ?>
+                                                </a>
+                                            </td>
                                             <td><?= htmlspecialchars($entry['utilisateur_nom']) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -330,6 +338,100 @@ try {
     </div>
 </div>
 
+<!-- Modal for viewing supplies by date -->
+<div class="modal fade" id="dateSuppliesModal" tabindex="-1" aria-labelledby="dateSuppliesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dateSuppliesModalLabel">
+                    <i class="fas fa-calendar-day text-primary me-2"></i>
+                    Approvisionnements du <span id="modalDateTitle"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalLoadingSpinner" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Chargement des approvisionnements...</p>
+                </div>
+                <div id="modalContent" style="display: none;">
+                    <!-- Summary cards for the selected date -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-boxes fa-2x mb-2"></i>
+                                    <h4 id="modalTotalValue">0 BIF</h4>
+                                    <small>Valeur totale</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-list-ol fa-2x mb-2"></i>
+                                    <h4 id="modalTotalCount">0</h4>
+                                    <small>Nombre d'entrées</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-tags fa-2x mb-2"></i>
+                                    <h4 id="modalProductCount">0</h4>
+                                    <small>Produits différents</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-calculator fa-2x mb-2"></i>
+                                    <h4 id="modalAvgValue">0 BIF</h4>
+                                    <small>Valeur moyenne</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detailed table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Valeur Totale</th>
+                                    <th>Heure</th>
+                                    <th>Utilisateur</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modalTableBody">
+                                <!-- Content will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="modalError" class="alert alert-danger" style="display: none;">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span id="modalErrorMessage">Une erreur s'est produite lors du chargement des données.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Delete button handler
@@ -353,6 +455,108 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // View date supplies handler
+    document.querySelectorAll('.view-date-supplies').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const date = this.getAttribute('data-date');
+            const dateFormatted = this.getAttribute('data-date-formatted');
+            
+            // Update modal title
+            document.getElementById('modalDateTitle').textContent = dateFormatted;
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('dateSuppliesModal'));
+            modal.show();
+            
+            // Reset modal content
+            document.getElementById('modalLoadingSpinner').style.display = 'block';
+            document.getElementById('modalContent').style.display = 'none';
+            document.getElementById('modalError').style.display = 'none';
+            
+            // Fetch data for the selected date
+            fetchDateSupplies(date);
+        });
+    });
+    
+    function fetchDateSupplies(date) {
+        // Create form data
+        const formData = new FormData();
+        formData.append('date', date);
+        
+        fetch('get_date_supplies.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayDateSupplies(data.supplies, data.summary);
+            } else {
+                showModalError(data.message || 'Erreur lors du chargement des données');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showModalError('Erreur de connexion au serveur');
+        });
+    }
+    
+    function displayDateSupplies(supplies, summary) {
+        // Hide loading spinner
+        document.getElementById('modalLoadingSpinner').style.display = 'none';
+        
+        // Update summary cards
+        document.getElementById('modalTotalValue').textContent = formatNumber(summary.total_value) + ' BIF';
+        document.getElementById('modalTotalCount').textContent = summary.total_count;
+        document.getElementById('modalProductCount').textContent = summary.product_count;
+        document.getElementById('modalAvgValue').textContent = formatNumber(summary.avg_value) + ' BIF';
+        
+        // Update table
+        const tbody = document.getElementById('modalTableBody');
+        tbody.innerHTML = '';
+        
+        if (supplies.length > 0) {
+            supplies.forEach(supply => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${escapeHtml(supply.id)}</td>
+                    <td>${escapeHtml(supply.produit_nom)}</td>
+                    <td>${escapeHtml(supply.quantite)}</td>
+                    <td>${formatNumber(supply.prix_unitaire)} BIF</td>
+                    <td>${formatNumber(supply.valeur_totale)} BIF</td>
+                    <td>${escapeHtml(supply.heure)}</td>
+                    <td>${escapeHtml(supply.utilisateur_nom)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            const row = document.createElement('tr');
+            row.innerHTML = '<td colspan="7" class="text-center text-muted">Aucun approvisionnement trouvé pour cette date.</td>';
+            tbody.appendChild(row);
+        }
+        
+        // Show content
+        document.getElementById('modalContent').style.display = 'block';
+    }
+    
+    function showModalError(message) {
+        document.getElementById('modalLoadingSpinner').style.display = 'none';
+        document.getElementById('modalContent').style.display = 'none';
+        document.getElementById('modalErrorMessage').textContent = message;
+        document.getElementById('modalError').style.display = 'block';
+    }
+    
+    function formatNumber(number) {
+        return new Intl.NumberFormat('fr-FR').format(number || 0);
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 });
 </script>
 
