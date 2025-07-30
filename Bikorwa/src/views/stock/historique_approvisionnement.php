@@ -36,15 +36,37 @@ require_once __DIR__ . '/../../config/config.php';
 
 require_once __DIR__ . '/../layouts/header.php';
 
+// Get date filter parameters first
+$date_debut = $_GET['date_debut'] ?? '';
+$date_fin = $_GET['date_fin'] ?? '';
+
+// Build WHERE clause for date filtering
+$date_where = "";
+$date_params = [];
+if (!empty($date_debut)) {
+    $date_where .= " AND date_mouvement >= ?";
+    $date_params[] = $date_debut;
+}
+if (!empty($date_fin)) {
+    $date_where .= " AND date_mouvement <= ?";
+    $date_params[] = $date_fin . ' 23:59:59';
+}
+
 // Fetch all supply history (stock entries) with pagination
 $itemsPerPage = 10; // Number of items per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $offset = ($page - 1) * $itemsPerPage; // Calculate offset
 
-// Count total number of entries for pagination
-$countSql = "SELECT COUNT(*) as total FROM mouvements_stock WHERE type_mouvement = 'entree'";
+// Count total number of entries for pagination (with date filter)
+$countSql = "SELECT COUNT(*) as total FROM mouvements_stock WHERE type_mouvement = 'entree'" . $date_where;
 try {
-    $countStmt = $pdo->query($countSql);
+    $countStmt = $pdo->prepare($countSql);
+    if (!empty($date_params)) {
+        foreach ($date_params as $index => $param) {
+            $countStmt->bindValue($index + 1, $param);
+        }
+    }
+    $countStmt->execute();
     $totalItems = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
     $totalPages = ceil($totalItems / $itemsPerPage);
 } catch (PDOException $e) {
@@ -53,6 +75,7 @@ try {
     $totalPages = 1;
 }
 
+// Main query with date filter
 $sql = "SELECT 
     m.id, 
     p.nom AS produit_nom, 
@@ -64,12 +87,19 @@ $sql = "SELECT
 FROM mouvements_stock m
 JOIN produits p ON m.produit_id = p.id
 JOIN users u ON m.utilisateur_id = u.id
-WHERE m.type_mouvement = 'entree'
+WHERE m.type_mouvement = 'entree'" . $date_where . "
 ORDER BY m.date_mouvement DESC
 LIMIT :offset, :itemsPerPage";
 try {
     $stmt = $pdo->prepare($sql);
     if ($stmt) {
+        // Bind date parameters first
+        if (!empty($date_params)) {
+            foreach ($date_params as $index => $param) {
+                $stmt->bindValue($index + 1, $param);
+            }
+        }
+        // Bind pagination parameters
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindValue(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
         $stmt->execute();
@@ -79,28 +109,11 @@ try {
     echo 'Query error: ' . $e->getMessage() . '<br>';
     $entries = array();
 }
+
 ?>
 
 <div class="content">
     <h1>Historique d'approvisionnement</h1>
-    
-    <?php
-    // Get date filter parameters
-    $date_debut = $_GET['date_debut'] ?? '';
-    $date_fin = $_GET['date_fin'] ?? '';
-    
-    // Build WHERE clause for date filtering
-    $date_where = "";
-    $date_params = [];
-    if (!empty($date_debut)) {
-        $date_where .= " AND date_mouvement >= ?";
-        $date_params[] = $date_debut;
-    }
-    if (!empty($date_fin)) {
-        $date_where .= " AND date_mouvement <= ?";
-        $date_params[] = $date_fin . ' 23:59:59';
-    }
-    ?>
     
     <!-- Date Filter Form -->
     <div class="card mb-4">
