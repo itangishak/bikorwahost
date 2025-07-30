@@ -219,33 +219,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'actif' => $actif
             ]);
             
-            // Check if price has changed
-            $stmt = $pdo->prepare("
-                SELECT prix_achat, prix_vente 
-                FROM prix_produits 
-                WHERE produit_id = :produit_id 
-                AND date_fin IS NULL
-            ");
+            // Handle product pricing
+            $stmt = $pdo->prepare(
+                "SELECT prix_achat, prix_vente
+                 FROM prix_produits
+                 WHERE produit_id = :produit_id AND date_fin IS NULL"
+            );
             $stmt->execute(['produit_id' => $produit_id]);
             $currentPrice = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ($currentPrice && 
-                (abs($currentPrice['prix_achat'] - $prix_achat) > 0.01 || 
-                 abs($currentPrice['prix_vente'] - $prix_vente) > 0.01)) {
-                
-                // Close the current price period
-                $stmt = $pdo->prepare("
-                    UPDATE prix_produits 
-                    SET date_fin = NOW() 
-                    WHERE produit_id = :produit_id AND date_fin IS NULL
-                ");
+
+            if (!$currentPrice) {
+                // No current price entry - create one
+                $stmt = $pdo->prepare(
+                    "INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
+                     VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)"
+                );
+                $stmt->execute([
+                    'produit_id' => $produit_id,
+                    'prix_achat' => $prix_achat,
+                    'prix_vente' => $prix_vente,
+                    'cree_par' => $_SESSION['user_id']
+                ]);
+            } elseif (
+                abs($currentPrice['prix_achat'] - $prix_achat) > 0.01 ||
+                abs($currentPrice['prix_vente'] - $prix_vente) > 0.01
+            ) {
+                // Close the current price period and insert the new price
+                $stmt = $pdo->prepare(
+                    "UPDATE prix_produits
+                     SET date_fin = NOW()
+                     WHERE produit_id = :produit_id AND date_fin IS NULL"
+                );
                 $stmt->execute(['produit_id' => $produit_id]);
-                
-                // Add new price entry
-                $stmt = $pdo->prepare("
-                    INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
-                    VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)
-                ");
+
+                $stmt = $pdo->prepare(
+                    "INSERT INTO prix_produits (produit_id, prix_achat, prix_vente, cree_par)
+                     VALUES (:produit_id, :prix_achat, :prix_vente, :cree_par)"
+                );
                 $stmt->execute([
                     'produit_id' => $produit_id,
                     'prix_achat' => $prix_achat,
@@ -341,6 +351,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $type_mouvement = $_POST['type_mouvement'];
             $quantite = floatval(str_replace(',', '.', $_POST['quantite']));
             $note = trim($_POST['note'] ?? '');
+            $date_mouvement = isset($_POST['date_mouvement']) && $_POST['date_mouvement'] !== ''
+                ? date('Y-m-d H:i:s', strtotime($_POST['date_mouvement']))
+                : date('Y-m-d H:i:s');
             
             if ($quantite <= 0) {
                 throw new Exception("La quantité doit être supérieure à zéro.");
@@ -387,12 +400,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $stmt = $pdo->prepare("
                 UPDATE stock 
-                SET quantite = :quantite, date_mise_a_jour = NOW()
+                SET quantite = :quantite, date_mise_a_jour = :date_mouvement
                 WHERE produit_id = :produit_id
             ");
             $stmt->execute([
                 'produit_id' => $produit_id,
-                'quantite' => $new_quantity
+                'quantite' => $new_quantity,
+                'date_mouvement' => $date_mouvement
             ]);
             
             // Record stock movement
@@ -401,12 +415,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $stmt = $pdo->prepare("
                 INSERT INTO mouvements_stock (
-                    produit_id, type_mouvement, quantite, prix_unitaire, 
-                    valeur_totale, utilisateur_id, note, reference
+                    produit_id, type_mouvement, quantite, prix_unitaire,
+                    valeur_totale, utilisateur_id, note, reference, date_mouvement
                 )
                 VALUES (
-                    :produit_id, :type_mouvement, :quantite, :prix_unitaire, 
-                    :valeur_totale, :utilisateur_id, :note, :reference
+                    :produit_id, :type_mouvement, :quantite, :prix_unitaire,
+                    :valeur_totale, :utilisateur_id, :note, :reference, :date_mouvement
                 )
             ");
             $stmt->execute([
@@ -417,7 +431,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'valeur_totale' => $produit['prix_achat'] * $quantite,
                 'utilisateur_id' => $_SESSION['user_id'],
                 'note' => $note,
-                'reference' => $reference
+                'reference' => $reference,
+                'date_mouvement' => $date_mouvement
             ]);
             
             // Log activity
@@ -550,8 +565,9 @@ try {
     }
     
     $stmt = $pdo->prepare("
-        SELECT 
+        SELECT
             p.id, p.code, p.nom, p.description, p.unite_mesure, p.actif,
+            p.categorie_id,
             c.nom as categorie_nom,
             COALESCE(s.quantite, 0) as quantite_stock,
             s.date_mise_a_jour,
@@ -562,13 +578,8 @@ try {
         LEFT JOIN stock s ON p.id = s.produit_id
         LEFT JOIN (
             SELECT produit_id, prix_achat, prix_vente
-            FROM prix_produits pp1
-            WHERE (pp1.date_fin IS NULL OR pp1.date_fin = (
-                SELECT MAX(date_fin) 
-                FROM prix_produits pp2 
-                WHERE pp2.produit_id = pp1.produit_id
-            ))
-            GROUP BY produit_id
+            FROM prix_produits
+            WHERE date_fin IS NULL
         ) pp ON p.id = pp.produit_id
         WHERE 1=1 $whereClause
         ORDER BY p.nom

@@ -58,11 +58,12 @@ try {
     }
     
     // Get batches with remaining quantity (for FIFO tracking)
-    $query = "SELECT 
+    $query = "SELECT
                 ms.id,
                 ms.quantite as quantite_initiale,
                 ms.quantity_remaining as quantite_restante,
                 ms.prix_unitaire,
+                ms.prix_vente,
                 ms.valeur_totale,
                 ms.date_mouvement,
                 ms.reference,

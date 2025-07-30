@@ -369,7 +369,12 @@
                             <span class="input-group-text" id="adjust_unite">unité</span>
                         </div>
                     </div>
-                    
+
+                    <div class="mb-3">
+                        <label for="adjust_date" class="form-label">Date du mouvement <span class="text-danger">*</span></label>
+                        <input type="datetime-local" class="form-control" id="adjust_date" name="date_mouvement" value="<?= date('Y-m-d\TH:i') ?>" required>
+                    </div>
+
                     <div class="mb-3">
                         <label for="adjust_note" class="form-label">Note</label>
                         <textarea class="form-control" id="adjust_note" name="note" rows="2" placeholder="Raison de l'ajustement..."></textarea>
@@ -741,6 +746,9 @@
             document.getElementById('adjust_stock_actuel').textContent = quantite + ' ' + unite;
             document.getElementById('adjust_unite').textContent = unite;
             document.getElementById('adjust_quantite').value = '';
+            const now = new Date().toISOString().slice(0,16);
+            const adjustDate = document.getElementById('adjust_date');
+            if (adjustDate) adjustDate.value = now;
             document.getElementById('adjust_note').value = '';
         }
 

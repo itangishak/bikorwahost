@@ -126,11 +126,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_produits') {
         $baseQuery .= " LEFT JOIN (
                           SELECT produit_id, prix_achat, prix_vente
                           FROM prix_produits
-                          WHERE date_fin IS NULL OR date_fin = (
-                              SELECT MAX(date_fin)
-                              FROM prix_produits pp2
-                              WHERE pp2.produit_id = prix_produits.produit_id
-                          )
+                          WHERE date_fin IS NULL
                       ) pp ON p.id = pp.produit_id
                       WHERE p.actif = 1";
         
@@ -170,12 +166,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_produits') {
             // Get available stock with FIFO batches
             if ($with_stock && $row['quantite_stock'] > 0) {
                 // Get the FIFO batches for this product
-                $fifoQuery = "SELECT 
+                $fifoQuery = "SELECT
                                 ms.produit_id,
                                 ms.quantity_remaining,
                                 ms.prix_unitaire,
+                                ms.prix_vente,
                                 ms.date_mouvement
-                               FROM 
+                               FROM
                                 mouvements_stock ms
                                WHERE 
                                 ms.produit_id = :id 
@@ -191,8 +188,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_produits') {
                 $batches = [];
                 while ($batch = $stmtFifo->fetch(PDO::FETCH_ASSOC)) {
                     $batches[] = [
-                        'quantity' => $batch['quantity_remaining'],
-                        'prix_achat' => $batch['prix_unitaire']
+                        'quantity'   => $batch['quantity_remaining'],
+                        'prix_achat' => $batch['prix_unitaire'],
+                        'prix_vente' => $batch['prix_vente']
                     ];
                 }
                 
@@ -635,12 +633,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_product_batches') {
         }
         
         // Get FIFO batches for the product
-        $batchQuery = "SELECT 
-                        ms.id, 
-                        ms.date_mouvement, 
-                        ms.quantite as quantite_initiale, 
-                        ms.quantity_remaining as quantite_restante, 
+        $batchQuery = "SELECT
+                        ms.id,
+                        ms.date_mouvement,
+                        ms.quantite as quantite_initiale,
+                        ms.quantity_remaining as quantite_restante,
                         ms.prix_unitaire,
+                        ms.prix_vente,
                         ms.reference
                        FROM mouvements_stock ms
                        WHERE ms.produit_id = :product_id 
@@ -746,7 +745,7 @@ include('../layouts/header.php');
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="prix">Prix unitaire</label>
-                                            <input type="number" class="form-control" id="prix" readonly>
+                                            <input type="number" class="form-control" id="prix">
                                         </div>
                                     </div>
                                     <div class="col-md-2">

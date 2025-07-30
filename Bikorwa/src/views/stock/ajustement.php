@@ -58,11 +58,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_product_batches') {
         }
         
         // Get batches with remaining quantity (for FIFO tracking)
-        $query = "SELECT 
+        $query = "SELECT
                     ms.id,
                     ms.quantite as quantite_initiale,
                     ms.quantity_remaining as quantite_restante,
                     ms.prix_unitaire,
+                    ms.prix_vente,
                     ms.valeur_totale,
                     ms.date_mouvement,
                     ms.reference,
@@ -131,6 +132,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
         $adjustment_type = isset($_POST['adjustment_type']) ? trim($_POST['adjustment_type']) : '';
         $quantity = isset($_POST['quantity']) ? floatval(str_replace(',', '.', $_POST['quantity'])) : 0;
         $price = isset($_POST['price']) ? floatval(str_replace(',', '.', $_POST['price'])) : 0;
+        $sell_price = isset($_POST['sell_price']) ? floatval(str_replace(',', '.', $_POST['sell_price'])) : 0;
         $note = isset($_POST['note']) ? trim($_POST['note']) : '';
         
         // Validate required fields
@@ -143,9 +145,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
             throw new Exception("Type d'ajustement invalide.");
         }
         
-        // If it's a stock increase, validate price
-        if ($adjustment_type === 'increase' && $price <= 0) {
-            throw new Exception("Le prix unitaire doit être supérieur à zéro pour un ajout de stock.");
+        // If it's a stock increase, validate price and selling price
+        if ($adjustment_type === 'increase') {
+            if ($price <= 0) {
+                throw new Exception("Le prix unitaire doit être supérieur à zéro pour un ajout de stock.");
+            }
+            if ($sell_price <= 0) {
+                throw new Exception("Le prix de vente doit être supérieur à zéro pour un ajout de stock.");
+            }
         }
         
         // Get product details
@@ -169,11 +176,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
             $reference = 'ADJ-IN-' . date('YmdHis');
             
             // Insert into mouvements_stock table
-            $query = "INSERT INTO mouvements_stock 
-                      (produit_id, type_mouvement, quantite, quantity_remaining, prix_unitaire, valeur_totale, 
+            $query = "INSERT INTO mouvements_stock
+                      (produit_id, type_mouvement, quantite, quantity_remaining, prix_unitaire, prix_vente, valeur_totale,
                        date_mouvement, utilisateur_id, note, reference)
-                      VALUES 
-                      (:produit_id, 'entree', :quantite, :quantity_remaining, :prix_unitaire, :valeur_totale, 
+                      VALUES
+                      (:produit_id, 'entree', :quantite, :quantity_remaining, :prix_unitaire, :prix_vente, :valeur_totale,
                        NOW(), :utilisateur_id, :note, :reference)";
             
             $stmt = $pdo->prepare($query);
@@ -182,6 +189,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'process_adjustment') {
                 'quantite' => $quantity,
                 'quantity_remaining' => $quantity, // Full quantity available initially
                 'prix_unitaire' => $price,
+                'prix_vente' => $sell_price,
                 'valeur_totale' => $valeur_totale,
                 'utilisateur_id' => $_SESSION['user_id'],
                 'note' => $note ?: 'Ajustement de stock (Ajout)',
@@ -366,7 +374,7 @@ include('../layouts/header.php');
         <?php if (!empty($message)): ?>
             <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
                 <?= $message ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -459,6 +467,17 @@ include('../layouts/header.php');
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" id="sell-price-group">
+                                                <label for="sell_price">Prix de vente <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="sell_price" name="sell_price">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">BIF</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="form-group">
@@ -487,7 +506,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="previewModalLabel">Confirmer l'ajustement</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -504,6 +523,8 @@ include('../layouts/header.php');
                         
                         <h6 class="font-weight-bold" id="preview-price-label">Prix unitaire</h6>
                         <p id="preview-price">-</p>
+                        <h6 class="font-weight-bold" id="preview-sell-price-label">Prix de vente</h6>
+                        <p id="preview-sell-price">-</p>
                     </div>
                 </div>
                 
@@ -519,7 +540,7 @@ include('../layouts/header.php');
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                 <button type="button" class="btn btn-primary" id="confirm-adjustment">
                     <i class="fas fa-check mr-1"></i> Confirmer
                 </button>
@@ -534,7 +555,7 @@ include('../layouts/header.php');
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title">Ajustement réussi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -547,7 +568,7 @@ include('../layouts/header.php');
                 <a href="<?= BASE_URL ?>/src/views/stock/inventaire.php" class="btn btn-outline-secondary">
                     Retour à l'inventaire
                 </a>
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="new-adjustment-btn">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="new-adjustment-btn">
                     Nouvel ajustement
                 </button>
             </div>
@@ -606,7 +627,9 @@ $(document).ready(function() {
             $.ajax({
                 url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
                 type: 'GET',
-                data: { search: search, with_stock: true },
+                // We want to search among all products regardless of their
+                // current stock level, so we don't filter by available stock
+                data: { search: search, with_stock: false },
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
@@ -696,6 +719,7 @@ $(document).ready(function() {
         const adjustmentType = $('#adjustment-type').val();
         const quantity = $('#quantity').val();
         const price = $('#price').val();
+        const sellPrice = $('#sell_price').val();
         const note = $('#note').val();
         
         // Validate
@@ -709,9 +733,15 @@ $(document).ready(function() {
             return;
         }
         
-        if (adjustmentType === 'increase' && (!price || parseFloat(price) <= 0)) {
-            showNotification('danger', 'Veuillez entrer un prix unitaire valide.');
-            return;
+        if (adjustmentType === 'increase') {
+            if (!price || parseFloat(price) <= 0) {
+                showNotification('danger', 'Veuillez entrer un prix unitaire valide.');
+                return;
+            }
+            if (!sellPrice || parseFloat(sellPrice) <= 0) {
+                showNotification('danger', 'Veuillez entrer un prix de vente valide.');
+                return;
+            }
         }
         
         // Update preview modal
@@ -722,9 +752,13 @@ $(document).ready(function() {
         if (adjustmentType === 'increase') {
             $('#preview-price-label').show();
             $('#preview-price').text(formatCurrency(price) + ' BIF').show();
+            $('#preview-sell-price-label').show();
+            $('#preview-sell-price').text(formatCurrency(sellPrice) + ' BIF').show();
         } else {
             $('#preview-price-label').hide();
             $('#preview-price').hide();
+            $('#preview-sell-price-label').hide();
+            $('#preview-sell-price').hide();
         }
         
         $('#preview-note').text(note || '-');

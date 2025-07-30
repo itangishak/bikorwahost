@@ -136,10 +136,17 @@ try {
     $gross_profit = 0;
     $net_profit = 0;
     
-    // 1. Coût des Marchandises Vendues - estimation basée sur les prix de vente
-    // Utilisation d'un ratio estimé de 60% du prix de vente comme coût d'achat
-    $cogs_estimation_ratio = 0.6; // 60% du prix de vente
-    $cogs = $product_revenue * $cogs_estimation_ratio;
+    // 1. Coût des Marchandises Vendues - calculé à partir du prix d'achat des produits vendus
+    $cogs_query = "SELECT
+            SUM(dv.prix_achat_unitaire * dv.quantite) AS total_cogs
+        FROM details_ventes dv
+        JOIN ventes v ON dv.vente_id = v.id
+        WHERE DATE(v.date_vente) BETWEEN :date_debut AND :date_fin
+        AND v.statut_vente != 'annulee'";
+    $cogs_stmt = $pdo->prepare($cogs_query);
+    $cogs_stmt->execute([':date_debut' => $date_debut, ':date_fin' => $date_fin]);
+    $cogs_result = $cogs_stmt->fetch(PDO::FETCH_ASSOC);
+    $cogs = $cogs_result['total_cogs'] ?? 0;
     
     // 2. Frais d'Exploitation - vérifier si la table existe
     try {
