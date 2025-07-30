@@ -39,13 +39,6 @@ if (!defined('SESSION_DEBUG')) {
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1); // Set to 0 in production
-ini_set('log_errors', 1);
-
-// Create logs directory if it doesn't exist
-if (!file_exists(ROOT_PATH . '/logs')) {
-    mkdir(ROOT_PATH . '/logs', 0777, true);
-}
-ini_set('error_log', ROOT_PATH . '/logs/error.log');
 
 // ====================================================
 // 4. AUTOLOADER

@@ -26,21 +26,20 @@ $current_user_id = $_SESSION['user_id'] ?? 0;
 // Fetch active employees
 try {
     $query = "SELECT id, nom,actif FROM employes WHERE actif = 1 ORDER BY nom";
-    error_log("Executing employee query: " . $query); // Debug
+
     
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $employes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    error_log("Found employees: " . count($employes)); // Debug
-    error_log("Sample employee data: " . print_r($employes[0] ?? 'None', true)); // Debug
+
     
     if (empty($employes)) {
-        error_log("No active employees found - verify data in employes table");
+
         $noEmployees = true;
     }
 } catch (PDOException $e) {
-    error_log("Employee fetch error: " . $e->getMessage());
+
     $employes = [];
     $noEmployees = true;
 }
@@ -76,7 +75,7 @@ try {
     if($currentPage < 1) $currentPage = 1;
     if($currentPage > $totalPages) $currentPage = $totalPages;
 } catch (PDOException $e) {
-    error_log("Payments fetch error: " . $e->getMessage());
+
 }
 
 require __DIR__.'/../layouts/header.php';

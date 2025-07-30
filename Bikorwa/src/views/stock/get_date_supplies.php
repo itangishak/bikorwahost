@@ -96,14 +96,14 @@ try {
 
 } catch (PDOException $e) {
     // Database error
-    error_log("Database error in get_date_supplies.php: " . $e->getMessage());
+
     echo json_encode([
         'success' => false, 
         'message' => 'Erreur de base de données'
     ]);
 } catch (Exception $e) {
     // General error
-    error_log("Error in get_date_supplies.php: " . $e->getMessage());
+
     echo json_encode([
         'success' => false, 
         'message' => 'Une erreur s\'est produite'

@@ -1,1 +1,0 @@
-[29-Jun-2025 14:37:15 UTC] PHP Fatal error:  Cannot redeclare SessionManager::getUserName() in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 317

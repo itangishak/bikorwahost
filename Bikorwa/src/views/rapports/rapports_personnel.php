@@ -61,7 +61,7 @@ function getDetailedStaffStats($pdo, $date_debut, $date_fin) {
         $stmt->execute([':date_debut' => $date_debut, ':date_fin' => $date_fin]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        error_log("Erreur dans getDetailedStaffStats: " . $e->getMessage());
+
         return [];
     }
 }
@@ -72,7 +72,7 @@ function getRecentActivities($pdo, $date_debut, $date_fin, $limit = 15) {
     try {
         // Vérification de la connexion PDO
         if (!$pdo) {
-            error_log("getRecentActivities: PDO connection is null");
+
             return [];
         }
         
@@ -155,19 +155,14 @@ function getRecentActivities($pdo, $date_debut, $date_fin, $limit = 15) {
         ];
         
         // Debug logging
-        error_log("getRecentActivities: Executing query with params: " . json_encode($params));
+
         
         $stmt->execute($params);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        error_log("getRecentActivities: Found " . count($results) . " activities");
-        
         return $results;
         
     } catch (PDOException $e) {
-        error_log("Erreur getRecentActivities: " . $e->getMessage());
-        error_log("getRecentActivities: Query was: " . $query);
-        error_log("getRecentActivities: Params were: " . json_encode($params ?? []));
         return [];
     }
 }
@@ -192,7 +187,7 @@ function getGlobalKPIs($pdo, $date_debut, $date_fin) {
         $stmt->execute([':date_debut' => $date_debut, ':date_fin' => $date_fin]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        error_log("Erreur dans getGlobalKPIs: " . $e->getMessage());
+
         return [
             'nb_employes_actifs' => 0,
             'total_ventes' => 0,
@@ -233,22 +228,10 @@ function getTodayActivities($pdo) {
             $stmt->execute([$today]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            // Debug: Vérifier les entités dans le journal
-            $entitiesQuery = $pdo->prepare("SELECT entite, COUNT(*) as count FROM journal_activites WHERE DATE(date_action) = ? GROUP BY entite");
-            $entitiesQuery->execute([$today]);
-            $entities = $entitiesQuery->fetchAll(PDO::FETCH_ASSOC);
-            
-            $entitiesDebug = [];
-            foreach ($entities as $entity) {
-                $entitiesDebug[] = $entity['entite'] . ':' . $entity['count'];
-            }
-            error_log("DEBUG Today Activities - Journal entities: " . implode(', ', $entitiesDebug));
-            error_log("DEBUG Today Activities - Journal result: " . json_encode($result));
-            
             return $result;
         } else {
             // Fallback: utiliser les tables directes
-            error_log("DEBUG: Using fallback - journal count was $journalCount");
+
             
             $ventesQuery = "SELECT COUNT(*) as ventes_count FROM ventes WHERE DATE(date_vente) = ?";
             $stockQuery = "SELECT COUNT(*) as stock_count FROM mouvements_stock WHERE DATE(date_mouvement) = ?";
@@ -277,7 +260,7 @@ function getTodayActivities($pdo) {
             $stmt->execute([$today, $today, $today]);
             $users = $stmt->fetch()['users_count'];
             
-            error_log("DEBUG Fallback: Ventes=$ventes, Stock=$stock, Salaires=$salaires, Users=$users");
+
             
             return [
                 'total_activites' => $ventes + $stock + $salaires,
@@ -289,7 +272,7 @@ function getTodayActivities($pdo) {
         }
         
     } catch (PDOException $e) {
-        error_log("Erreur dans getTodayActivities: " . $e->getMessage());
+
         return [
             'total_activites' => 0,
             'utilisateurs_actifs' => 0,
@@ -364,13 +347,8 @@ if (empty($recentActivities)) {
             $recentActivities = array_slice($recentActivities, 0, 15);
         }
         
-        // Debug logging
-        error_log("DEBUG: Ventes found: " . count($ventesActivities));
-        error_log("DEBUG: Stock movements found: " . count($stockActivities));
-        error_log("DEBUG: Total activities after merge: " . count($recentActivities));
-        
     } catch (PDOException $e) {
-        error_log("Erreur récupération activités directes: " . $e->getMessage());
+
         $recentActivities = [];
     }
 }
