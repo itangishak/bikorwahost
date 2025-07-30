@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Include config for BASE_URL
+require_once __DIR__ . '/../../../src/config/config.php';
+
 // Unset all session variables
 $_SESSION = array();
 
@@ -9,14 +12,5 @@ session_destroy();
 
 // Redirect to login page
 header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-exit;
+exit();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Déconnexion</title>
-</head>
-<body>
-    <p>Déconnexion en cours...</p>
-</body>
-</html>
