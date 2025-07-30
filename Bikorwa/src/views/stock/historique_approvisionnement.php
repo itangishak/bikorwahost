@@ -4,9 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Debug logging
-error_log("Stock History Access Attempt - Session ID: " . session_id());
+// Enhanced debug logging
+error_log("=== STOCK HISTORY ACCESS ===");
+error_log("Session ID: " . session_id());
 error_log("Session Data: " . print_r($_SESSION, true));
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Request Data: " . print_r($_REQUEST, true));
 
 // Include config first to get BASE_URL
 require_once __DIR__ . '/../../config/config.php';

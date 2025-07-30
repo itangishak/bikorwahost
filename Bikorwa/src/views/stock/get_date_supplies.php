@@ -4,9 +4,22 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Temporary debug output
+header('Content-Type: text/plain');
+print_r($_SESSION);
+exit;
+
+// Enhanced debug logging
+error_log("=== GET DATE SUPPLIES ACCESS ===");
+error_log("Session ID: " . session_id());
+error_log("Session Data: " . print_r($_SESSION, true));
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("POST Data: " . print_r($_POST, true));
+
 // Check permissions
 $allowedRoles = ['gestionnaire', 'admin'];
 if (!isset($_SESSION['user_role']) || !in_array(strtolower($_SESSION['user_role']), $allowedRoles)) {
+    error_log("ACCESS DENIED - Role: " . ($_SESSION['user_role'] ?? 'Not Set'));
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Accès non autorisé']);
     exit;
