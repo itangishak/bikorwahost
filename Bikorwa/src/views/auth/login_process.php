@@ -111,16 +111,18 @@ try {
                 send_json_response(false, 'Votre compte est désactivé. Veuillez contacter l\'administrateur.', null, 401);
             }
             
-            // Regenerate session ID for security
-            session_regenerate_id(true);
+            // Regenerate session ID for security (only if headers not sent)
+            if (!headers_sent()) {
+                session_regenerate_id(true);
+            }
             
             // Set session variables
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = (int)$user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_name'] = $user['nom'];
             $_SESSION['user_role'] = $user['role'];
-            $_SESSION['user_active'] = $user['actif'];
-            $_SESSION['logged_in'] = true;
+            $_SESSION['user_active'] = (bool)$user['actif'];
+            $_SESSION['logged_in'] = 'true'; // Use string to avoid type conversion issues
             $_SESSION['login_time'] = time();
             
             // Log successful session creation

@@ -284,7 +284,20 @@ class SessionManager
      */
     public function isLoggedIn() 
     {
-        return $this->has('user_id') && !empty($this->get('user_id')) && $this->get('logged_in') === true;
+        $userId = $this->get('user_id');
+        $loggedIn = $this->get('logged_in');
+        
+        // Check if user_id exists and is not empty
+        if (!$userId || empty($userId)) {
+            return false;
+        }
+        
+        // Check logged_in status (handle various formats: true, 'true', 1, '1')
+        if ($loggedIn === true || $loggedIn === 'true' || $loggedIn === 1 || $loggedIn === '1') {
+            return true;
+        }
+        
+        return false;
     }
     
     /**
