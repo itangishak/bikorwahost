@@ -89,19 +89,20 @@ JOIN produits p ON m.produit_id = p.id
 JOIN users u ON m.utilisateur_id = u.id
 WHERE m.type_mouvement = 'entree'" . $date_where . "
 ORDER BY m.date_mouvement DESC
-LIMIT :offset, :itemsPerPage";
+LIMIT ?, ?";
 try {
     $stmt = $pdo->prepare($sql);
     if ($stmt) {
+        $paramIndex = 1;
         // Bind date parameters first
         if (!empty($date_params)) {
-            foreach ($date_params as $index => $param) {
-                $stmt->bindValue($index + 1, $param);
+            foreach ($date_params as $param) {
+                $stmt->bindValue($paramIndex++, $param);
             }
         }
         // Bind pagination parameters
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->bindValue(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
+        $stmt->bindValue($paramIndex++, $offset, PDO::PARAM_INT);
+        $stmt->bindValue($paramIndex, $itemsPerPage, PDO::PARAM_INT);
         $stmt->execute();
         $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
