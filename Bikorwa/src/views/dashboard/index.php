@@ -1,39 +1,24 @@
 <?php
-// Strict error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
 
-// Start output buffering
-ob_start();
+require_once __DIR__ . '/../../../src/config/config.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
-// Initialize session and core systems
-require_once __DIR__ . '/../../../includes/session_init.php';
-require_once __DIR__ . '/../../../includes/init.php';
-
-// Simple session check
+// Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
+    exit();
 }
 
-// Role check
+// Check user role
 if ($_SESSION['role'] !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
-
-// Verify session is active
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    die('Session initialization failed');
+    exit();
 }
 
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
-
-// Load configuration
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
 
 // Initialize database connection
 try {
@@ -44,16 +29,8 @@ try {
         throw new Exception("Erreur de connexion à la base de données");
     }
 } catch (Exception $e) {
-    // Clean buffer before error output
-    ob_end_clean();
     die("Erreur de connexion à la base de données: " . $e->getMessage());
 }
-
-// Clean buffer before any potential redirects
-ob_end_clean();
-
-// Ensure the connected user has the proper role
-requireManager();
 
 // Get current date for filters
 $today = date('Y-m-d');

@@ -1,22 +1,20 @@
 <?php
-// Include authentication check which also starts the PHP session
-require_once __DIR__ . '/../../../includes/auth_check.php';
+session_start();
 
-// Simple session check
+require_once __DIR__ . '/../../../src/config/config.php';
+require_once __DIR__ . '/../../../src/config/database.php';
+
+// Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
+    exit();
 }
 
-// Role check
+// Check user role
 if ($_SESSION['role'] !== 'receptionniste') {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
+    exit();
 }
-
-// Include database connection and config
-require_once('../../config/database.php');
-require_once('../../config/config.php');
 
 // Initialize database connection
 $db = new Database();
