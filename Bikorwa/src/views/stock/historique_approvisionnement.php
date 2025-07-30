@@ -105,24 +105,44 @@ try {
     <!-- Date Filter Form -->
     <div class="card mb-4">
         <div class="card-body">
-            <form method="get" class="row g-3">
-                <div class="col-md-3">
-                    <label for="date_debut" class="form-label">Date début</label>
-                    <input type="date" class="form-control" id="date_debut" name="date_debut" 
-                           value="<?= htmlspecialchars($date_debut) ?>">
+            <div class="row g-3">
+                <!-- Existing date range filter -->
+                <div class="col-md-8">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="date_debut" class="form-label">Date début</label>
+                            <input type="date" class="form-control" id="date_debut" name="date_debut" 
+                                   value="<?= htmlspecialchars($date_debut) ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="date_fin" class="form-label">Date fin</label>
+                            <input type="date" class="form-control" id="date_fin" name="date_fin" 
+                                   value="<?= htmlspecialchars($date_fin) ?>">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary me-2">Filtrer</button>
+                            <?php if (!empty($date_debut) || !empty($date_fin)): ?>
+                                <a href="?" class="btn btn-outline-secondary">Réinitialiser</a>
+                            <?php endif; ?>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-3">
-                    <label for="date_fin" class="form-label">Date fin</label>
-                    <input type="date" class="form-control" id="date_fin" name="date_fin" 
-                           value="<?= htmlspecialchars($date_fin) ?>">
+                
+                <!-- Date search functionality -->
+                <div class="col-md-4">
+                    <div class="border-start ps-3">
+                        <label for="search_date" class="form-label">Rechercher par date spécifique</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="search_date" placeholder="Sélectionner une date">
+                            <button class="btn btn-success" type="button" id="searchDateBtn">
+                                <i class="fas fa-search me-1"></i>
+                                Rechercher
+                            </button>
+                        </div>
+                        <small class="text-muted">Voir tous les approvisionnements d'une date</small>
+                    </div>
                 </div>
-                <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary">Filtrer</button>
-                    <?php if (!empty($date_debut) || !empty($date_fin)): ?>
-                        <a href="?" class="btn btn-outline-secondary ms-2">Réinitialiser</a>
-                    <?php endif; ?>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     
@@ -286,15 +306,7 @@ try {
                                             <td><?= htmlspecialchars($entry['quantite']) ?></td>
                                             <td><?= htmlspecialchars(number_format($entry['prix_unitaire'], 0, ',', ' ')) ?> BIF</td>
                                             <td><?= htmlspecialchars(number_format($entry['valeur_totale'], 0, ',', ' ')) ?> BIF</td>
-                                             <td>
-                                                <a href="#" class="text-primary text-decoration-none view-date-supplies" 
-                                                   data-date="<?= date('Y-m-d', strtotime($entry['date_mouvement'])) ?>"
-                                                   data-date-formatted="<?= date('d/m/Y', strtotime($entry['date_mouvement'])) ?>"
-                                                   title="Voir tous les approvisionnements du <?= date('d/m/Y', strtotime($entry['date_mouvement'])) ?>">
-                                                    <i class="fas fa-calendar-day me-1"></i>
-                                                    <?= htmlspecialchars(date('d/m/Y H:i', strtotime($entry['date_mouvement']))) ?>
-                                                </a>
-                                            </td>
+                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($entry['date_mouvement']))) ?></td>
                                             <td><?= htmlspecialchars($entry['utilisateur_nom']) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -456,28 +468,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // View date supplies handler
-    document.querySelectorAll('.view-date-supplies').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const date = this.getAttribute('data-date');
-            const dateFormatted = this.getAttribute('data-date-formatted');
-            
-            // Update modal title
-            document.getElementById('modalDateTitle').textContent = dateFormatted;
-            
-            // Show modal
-            const modal = new bootstrap.Modal(document.getElementById('dateSuppliesModal'));
-            modal.show();
-            
-            // Reset modal content
-            document.getElementById('modalLoadingSpinner').style.display = 'block';
-            document.getElementById('modalContent').style.display = 'none';
-            document.getElementById('modalError').style.display = 'none';
-            
-            // Fetch data for the selected date
-            fetchDateSupplies(date);
-        });
+    // Search date button handler
+    document.getElementById('searchDateBtn').addEventListener('click', function() {
+        const dateInput = document.getElementById('search_date');
+        const date = dateInput.value;
+        
+        if (!date) {
+            alert('Veuillez sélectionner une date');
+            return;
+        }
+        
+        // Format date for display
+        const dateObj = new Date(date);
+        const dateFormatted = dateObj.toLocaleDateString('fr-FR');
+        
+        // Update modal title
+        document.getElementById('modalDateTitle').textContent = dateFormatted;
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('dateSuppliesModal'));
+        modal.show();
+        
+        // Reset modal content
+        document.getElementById('modalLoadingSpinner').style.display = 'block';
+        document.getElementById('modalContent').style.display = 'none';
+        document.getElementById('modalError').style.display = 'none';
+        
+        // Fetch data for the selected date
+        fetchDateSupplies(date);
+    });
+    
+    // Allow Enter key to trigger search
+    document.getElementById('search_date').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('searchDateBtn').click();
+        }
     });
     
     function fetchDateSupplies(date) {
