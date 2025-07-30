@@ -16,23 +16,17 @@
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    $_SESSION['user_role'] = 'gestionnaire';
 }
 
-// Debug: Check if session role is set and its value
-echo 'Session Role: ' . (isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'Not Set') . '<br>';
-// Temporary: Comment out the redirect to see the debug output
-// Check permissions before any output
-// if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
-//     header('Location: ../auth/login.php');
-//     exit;
-// }
+// Check permissions
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit;
+}
 
 // Include database connection and config
 require_once __DIR__ . '/../../../includes/db.php';
 require_once __DIR__ . '/../../config/config.php';
-
-
 
 require_once __DIR__ . '/../layouts/header.php';
 

@@ -46,8 +46,8 @@ $active_page = "login";
             </div>
             
             <?php if (isset($_SESSION['flash_message'])): ?>
-                <div class="alert alert-<?php echo $_SESSION['flash_type'] ?? 'danger'; ?> alert-dismissible fade show">
-                    <?php echo $_SESSION['flash_message']; ?>
+                <div class="alert alert-<?php echo isset($_SESSION['flash_type']) ? $_SESSION['flash_type'] : 'danger'; ?> alert-dismissible fade show">
+                    <?php echo htmlspecialchars($_SESSION['flash_message']); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
                 <?php unset($_SESSION['flash_message'], $_SESSION['flash_type']); ?>
