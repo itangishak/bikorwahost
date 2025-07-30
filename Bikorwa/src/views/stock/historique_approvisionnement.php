@@ -4,12 +4,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Debug logging
+error_log("Stock History Access Attempt - Session ID: " . session_id());
+error_log("Session Data: " . print_r($_SESSION, true));
+
 // Include config first to get BASE_URL
 require_once __DIR__ . '/../../config/config.php';
 
-// Check permissions
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+// Enhanced role check
+$allowedRoles = ['gestionnaire', 'admin'];
+if (!isset($_SESSION['role']) || !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
+    error_log("Access Denied - Role: " . ($_SESSION['role'] ?? 'Not Set'));
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php?reason=unauthorized');
     exit;
 }
 
