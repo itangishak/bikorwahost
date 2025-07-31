@@ -1,15 +1,21 @@
 <?php
-require_once __DIR__ . '/../../includes/header.php';
-require_once __DIR__ . '/../../includes/sidebar.php';
+// Start session if needed
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Check permissions
-if ($_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
+// Application config
+require_once __DIR__ . '/../../config/config.php';
+
+// Role check (allow gestionnaire and admin)
+$allowedRoles = ['gestionnaire', 'admin'];
+if (!isset($_SESSION['role']) || !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php?reason=unauthorized');
     exit;
 }
 
 // Database connection
-$conn = require __DIR__ . '/../../includes/db.php';
+require_once __DIR__ . '/../../../includes/db.php';
 
 // Get supply entry ID
 $id = $_GET['id'] ?? null;
@@ -21,7 +27,7 @@ if (!$id) {
 
 // Fetch entry data
 $query = "SELECT * FROM mouvements_stock WHERE id = ?";
-$stmt = $conn->prepare($query);
+$stmt = $pdo->prepare($query);
 $stmt->execute([$id]);
 $entry = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,11 +38,12 @@ if (!$entry) {
 
 // Fetch products
 $products_query = "SELECT id, nom FROM produits ORDER BY nom";
-$products_stmt = $conn->prepare($products_query);
+$products_stmt = $pdo->prepare($products_query);
 $products_stmt->execute();
 $products = $products_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<?php require_once __DIR__ . '/../layouts/header.php'; ?>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -100,4 +107,4 @@ $products = $products_stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
