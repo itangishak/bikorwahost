@@ -16,21 +16,23 @@ try {
     echo '<pre>Session ID: '.session_id().'</pre>';
     echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
-    // Include database connection and config using absolute paths
-    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/config/database.php');
-    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/config/config.php');
-    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php');
+    // Include database connection and config - using same relative depth as inventaire.php
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../includes/session.php');
 
     echo '<p>Includes loaded successfully</p>';
 
     // Check if user is logged in
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        throw new Exception('User not logged in');
+        header('Location: ../auth/login.php');
+        exit;
     }
 
     // Verify gestionnaire role
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-        throw new Exception('Access denied - requires gestionnaire role');
+        header('Location: /dashboard/index.php?error=access_denied');
+        exit;
     }
 
     $page_title = "Gestion des Utilisateurs";
