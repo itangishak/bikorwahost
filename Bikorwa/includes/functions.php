@@ -73,7 +73,7 @@ function logActivity($action, $entite, $entite_id, $details = '') {
  * @return bool True if user is administrator
  */
 function isAdmin() {
-    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
 }
 
 /**
@@ -82,7 +82,7 @@ function isAdmin() {
  * @return bool True if user can edit/delete
  */
 function canEdit() {
-    return isset($_SESSION['user_role']);
+    return isset($_SESSION['role']);
 }
 
 /**

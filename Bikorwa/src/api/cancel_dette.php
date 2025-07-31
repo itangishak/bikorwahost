@@ -9,10 +9,10 @@ require_once 'D:\MyApp\app\Bikorwa\includes\auth_check.php';
 header('Content-Type: application/json');
 
 // Check if user has permission to cancel dettes (gestionnaire only)
-if ($_SESSION['user_role'] !== 'gestionnaire') {
+if ($_SESSION['role'] !== 'gestionnaire') {
     echo json_encode([
         'success' => false,
-        'message' => 'Vous n\'avez pas les droits nécessaires pour annuler une dette'
+        'message' => 'Permission denied'
     ]);
     exit;
 }

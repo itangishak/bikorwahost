@@ -22,7 +22,7 @@ if (!$auth->isLoggedIn()) {
 }
 
 // Allow access to both gestionnaires and receptionnistes with appropriate privileges
-$userRole = $_SESSION['user_role'] ?? '';
+$userRole = $_SESSION['role'] ?? '';
 if (!$auth->hasAccess('dettes') && $userRole !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;

@@ -50,7 +50,7 @@ class Auth {
                 // Créer les variables de session
                 $_SESSION['user_id'] = $this->user->id;
                 $_SESSION['user_name'] = $this->user->nom;
-                $_SESSION['user_role'] = $this->user->role;
+                $_SESSION['role'] = $this->user->role;
                 $_SESSION['logged_in'] = true;
                 
                 // Journaliser la connexion
@@ -101,12 +101,12 @@ class Auth {
     
     // Méthode pour vérifier si l'utilisateur est un gestionnaire
     public function isManager() {
-        return $this->isLoggedIn() && $_SESSION['user_role'] === 'gestionnaire';
+        return $this->isLoggedIn() && $_SESSION['role'] === 'gestionnaire';
     }
     
     // Méthode pour vérifier si l'utilisateur est un réceptionniste
     public function isReceptionist() {
-        return $this->isLoggedIn() && $_SESSION['user_role'] === 'receptionniste';
+        return $this->isLoggedIn() && $_SESSION['role'] === 'receptionniste';
     }
     
     // Méthode pour vérifier si l'utilisateur a la permission de modifier
@@ -140,7 +140,7 @@ class Auth {
         }
         
         // Récupérer le rôle de l'utilisateur
-        $role = $_SESSION['user_role'];
+        $role = $_SESSION['role'];
         
         // Vérifier si la fonctionnalité est accessible pour ce rôle
         return in_array($feature, $permissions[$role]);

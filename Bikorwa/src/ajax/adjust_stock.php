@@ -22,8 +22,8 @@ if (!$pdo) {
     exit;
 }
 
-$isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
-$isReceptionniste = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste';
+$isGestionnaire = isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
+$isReceptionniste = isset($_SESSION['role']) && $_SESSION['role'] === 'receptionniste';
 $hasStockAccess = $isGestionnaire || $isReceptionniste;
 
 if (!$hasStockAccess) {

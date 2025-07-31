@@ -21,8 +21,8 @@ if (!$pdo) {
 }
 
 // Check if user is logged in and has appropriate role
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
-    header('Location: ../auth/login.php');
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+    header('Location: ../../auth/login.php');
     exit;
 }
 

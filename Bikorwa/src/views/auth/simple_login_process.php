@@ -92,8 +92,8 @@ try {
         $_SESSION['user_id'] = (int)$user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_name'] = $user['nom'];
-        $_SESSION['user_role'] = $user['role'];
-        $_SESSION['user_active'] = true;
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['user_active'] = $user['actif'];
         $_SESSION['logged_in'] = true;
         $_SESSION['login_time'] = time();
         $_SESSION['simple_auth'] = true; // Flag to indicate simple auth is used

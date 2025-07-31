@@ -15,7 +15,7 @@ $conn = $database->getConnection();
 $auth = new Auth($conn);
 
 // Check permissions
-if (!$auth->isLoggedIn() || ($_SESSION['user_role'] ?? '') !== 'gestionnaire') {
+if (!$auth->isLoggedIn() || ($_SESSION['role'] ?? '') !== 'gestionnaire') {
     header('Location: '.BASE_URL.'/login.php');
     exit;
 }

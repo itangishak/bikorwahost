@@ -40,8 +40,8 @@ function get_category_threshold($cat) {
 
 // Determine user roles and stock privileges. Receptionnistes may manage
 // inventory but cannot delete products.
-$isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
-$isReceptionniste = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste';
+$isGestionnaire = isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
+$isReceptionniste = isset($_SESSION['role']) && $_SESSION['role'] === 'receptionniste';
 $hasStockAccess = $isGestionnaire || $isReceptionniste;
 
 // Process form actions

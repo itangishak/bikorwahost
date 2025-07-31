@@ -22,7 +22,7 @@ if (!$auth->isLoggedIn()) {
 
 // For now, allow access to both gestionnaires and receptionnistes with appropriate privileges
 // We can check role directly as fallback if hasAccess isn't working
-$userRole = $_SESSION['user_role'] ?? '';
+$userRole = $_SESSION['role'] ?? '';
 if (!$auth->hasAccess('depenses') && $userRole !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;

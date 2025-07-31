@@ -32,7 +32,7 @@ $date_fin = isset($_GET['date_fin']) ? $_GET['date_fin'] : $today;
 
 // Get user information
 $user_name = $_SESSION['user_name'] ?? 'Utilisateur';
-$user_role = $_SESSION['user_role'] ?? 'receptionniste';
+$user_role = $_SESSION['role'] ?? 'receptionniste';
 
 // Format current date and time
 setlocale(LC_TIME, 'fr_FR.UTF-8');

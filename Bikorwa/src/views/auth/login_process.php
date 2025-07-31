@@ -27,10 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Store session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['name'] = $user['nom'];
+            $_SESSION['user_name'] = $user['nom'];
             $_SESSION['role'] = $user['role'];
+            $_SESSION['user_active'] = $user['actif'];
             $_SESSION['logged_in'] = true;
-            $_SESSION['last_activity'] = time();
+            $_SESSION['login_time'] = date('Y-m-d H:i:s');
 
             // Determine redirect based on role
             if ($user['role'] === 'gestionnaire') {

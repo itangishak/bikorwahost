@@ -70,10 +70,10 @@ if (isset($_POST['test_login'])) {
                         $_SESSION['user_id'] = $user['id'];
                         $_SESSION['username'] = $user['username'];
                         $_SESSION['user_name'] = $user['nom'];
-                        $_SESSION['user_role'] = $user['role'];
+                        $_SESSION['role'] = $user['role'];
                         $_SESSION['user_active'] = $user['actif'];
                         $_SESSION['logged_in'] = true;
-                        $_SESSION['login_time'] = time();
+                        $_SESSION['login_time'] = date('Y-m-d H:i:s');
                         
                         echo "<p style='color: green;'>✅ Session variables set successfully</p>";
                         echo "<p><strong>Session ID:</strong> " . session_id() . "</p>";

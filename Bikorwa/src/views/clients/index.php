@@ -30,7 +30,7 @@ if (!$auth->hasAccess('clients')) {
 
 // Get current user ID for logging actions
 $current_user_id = $_SESSION['user_id'] ?? 0;
-$userRole = $_SESSION['user_role'] ?? '';
+$userRole = $_SESSION['role'] ?? '';
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';

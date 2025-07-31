@@ -8,7 +8,7 @@ require_once __DIR__.'/../../../src/config/database.php';
 require_once __DIR__.'/../../../src/utils/Auth.php';
 
 // Vérification des permissions
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gestionnaire') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }

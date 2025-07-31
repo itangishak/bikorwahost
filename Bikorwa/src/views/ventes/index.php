@@ -15,9 +15,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 // Check if user has 'gestionnaire' role - only gestionnaire can access this page
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
     // Redirect to appropriate dashboard based on role
-    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'receptionniste') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'receptionniste') {
         header('Location: ../dashboard/receptionniste.php');
     } else {
         header('Location: ../auth/login.php');

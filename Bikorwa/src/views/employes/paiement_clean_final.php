@@ -21,7 +21,7 @@ if (!$auth->isLoggedIn()) {
 }
 
 // Restrict access to gestionnaires only
-$userRole = $_SESSION['user_role'] ?? '';
+$userRole = $_SESSION['role'] ?? '';
 if ($userRole !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
     exit;

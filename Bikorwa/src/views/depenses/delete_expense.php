@@ -53,7 +53,7 @@ try {
     }
     
     // Allow access to both gestionnaires and users with depenses permission
-    $userRole = $_SESSION['user_role'] ?? '';
+    $userRole = $_SESSION['role'] ?? '';
     if (!$auth->hasAccess('depenses') && $userRole !== 'gestionnaire') {
         throw new Exception('Accès non autorisé. Vous n\'avez pas les permissions nécessaires.');
     }

@@ -127,7 +127,7 @@ if (isset($_POST['simulate_login'])) {
     $_SESSION['user_id'] = 1;
     $_SESSION['username'] = 'admin';
     $_SESSION['user_name'] = 'Administrateur';
-    $_SESSION['user_role'] = 'gestionnaire';
+    $_SESSION['role'] = 'gestionnaire';
     $_SESSION['user_active'] = true;
     $_SESSION['logged_in'] = 'true';
     $_SESSION['login_time'] = time();

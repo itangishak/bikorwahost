@@ -46,7 +46,7 @@ if ($isAuthenticated) {
     echo "<p><strong>User ID:</strong> " . htmlspecialchars($_SESSION['user_id']) . "</p>";
     echo "<p><strong>Username:</strong> " . htmlspecialchars($_SESSION['username'] ?? 'N/A') . "</p>";
     echo "<p><strong>Name:</strong> " . htmlspecialchars($_SESSION['user_name'] ?? 'N/A') . "</p>";
-    echo "<p><strong>Role:</strong> " . htmlspecialchars($_SESSION['user_role'] ?? 'N/A') . "</p>";
+    echo "<p><strong>Role:</strong> " . htmlspecialchars($_SESSION['role'] ?? 'N/A') . "</p>";
     echo "<p><strong>Login Time:</strong> " . date('Y-m-d H:i:s', $_SESSION['login_time'] ?? 0) . "</p>";
     
     echo "<h2>Dashboard Content</h2>";

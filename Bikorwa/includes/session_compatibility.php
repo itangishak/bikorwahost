@@ -64,7 +64,7 @@ if (!function_exists('requireRole') || isSimpleAuth()) {
         requireAuth();
         
         if (isSimpleAuth()) {
-            if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== $role) {
+            if (!isset($_SESSION['role']) || $_SESSION['role'] !== $role) {
                 header('Location: ' . BASE_URL . '/src/views/auth/simple_login.php');
                 exit;
             }
@@ -75,7 +75,7 @@ if (!function_exists('requireRole') || isSimpleAuth()) {
                 exit;
             } elseif (!isset($sessionManager)) {
                 // Fallback to simple check
-                if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== $role) {
+                if (!isset($_SESSION['role']) || $_SESSION['role'] !== $role) {
                     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
                     exit;
                 }
@@ -105,7 +105,7 @@ function getCurrentUserInfo() {
             'id' => $_SESSION['user_id'] ?? null,
             'username' => $_SESSION['username'] ?? null,
             'name' => $_SESSION['user_name'] ?? null,
-            'role' => $_SESSION['user_role'] ?? null,
+            'role' => $_SESSION['role'] ?? null,
             'active' => $_SESSION['user_active'] ?? null,
             'login_time' => $_SESSION['login_time'] ?? null
         ];

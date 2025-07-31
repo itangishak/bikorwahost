@@ -60,7 +60,7 @@ function get_logged_in_user() {
         'id' => $_SESSION['user_id'] ?? null,
         'username' => $_SESSION['username'] ?? null,
         'name' => $_SESSION['user_name'] ?? null,
-        'role' => $_SESSION['user_role'] ?? null,
+        'role' => $_SESSION['role'] ?? null,
         'active' => $_SESSION['user_active'] ?? false,
         'login_time' => $_SESSION['login_time'] ?? null
     ];
@@ -94,7 +94,7 @@ function require_auth($redirect_url = null) {
 function require_role($required_role) {
     require_auth();
     
-    if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== $required_role) {
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== $required_role) {
         header('Location: ../auth/login.php');
         exit;
     }
@@ -102,7 +102,7 @@ function require_role($required_role) {
 
 // Function to check if user has role
 function has_role($role) {
-    return is_user_logged_in() && isset($_SESSION['user_role']) && $_SESSION['user_role'] === $role;
+    return is_user_logged_in() && isset($_SESSION['role']) && $_SESSION['role'] === $role;
 }
 
 // Update last activity
