@@ -7,15 +7,16 @@ ini_set('display_errors', 0);
 ob_start();
 
 try {
-    // Start session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    // Include session manager FIRST
+    require_once('../../../includes/session_manager.php');
+    
+    // Initialize session manager before any session starts
+    $sessionManager = SessionManager::getInstance();
+    $sessionManager->startSession();
 
-    // Include database connection and config
+    // Then include other dependencies
     require_once('../../config/database.php');
     require_once('../../config/config.php');
-    require_once('../../../includes/session.php');
 
     // Check if user is logged in
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
