@@ -1,27 +1,49 @@
 <?php
 // Daily Expenses page for BIKORWA SHOP
-$page_title = "Dépenses du Jour";
-$active_page = "depenses-jour";
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+ob_start();
 
-// Initialize authentication
-$auth = new Auth($conn);
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Check if user is logged in and has appropriate role
-if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Include dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../../includes/session.php');
+    require_once('../../utils/Auth.php');
 
-// Get current user ID for logging actions
-$current_user_id = $_SESSION['user_id'] ?? 0;
+    // Verify authentication and role
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ||
+        !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
+    }
+
+    $page_title = "Dépenses du Jour";
+    $active_page = "depenses-jour";
+
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    // Initialize authentication
+    $auth = new Auth($conn);
+
+    // Get current user ID for logging actions
+    $current_user_id = $_SESSION['user_id'] ?? 0;
+
 
 // Get today's date
 $today = date('Y-m-d');
@@ -51,7 +73,7 @@ foreach ($depenses as $depense) {
 }
 
 // Include the header
-include_once './../../../src/views/layouts/header.php';
+require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -621,3 +643,13 @@ include_once './../../../src/views/layouts/header.php';
     </script>
 </body>
 </html>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Depenses Jour Error: '.$e->getMessage());
+    exit;
+}
+?>
