@@ -1,36 +1,46 @@
 <?php
-// Client Management page for BIKORWA SHOP
-$page_title = "Gestion des Clients";
-$active_page = "clients";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
-require_once './../../../src/utils/Settings.php';
+ob_start();
+try {
+    // Client Management page for BIKORWA SHOP
+    $page_title = "Gestion des Clients";
+    $active_page = "clients";
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
-$settingsObj = new Settings($conn);
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Initialize authentication
-$auth = new Auth($conn);
+    // Include dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../../includes/session.php');
 
-// Check if user is logged in
-if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    $settingsObj = new Settings($conn);
 
-// Check access permissions
-if (!$auth->hasAccess('clients')) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Initialize authentication
+    $auth = new Auth($conn);
 
-// Get current user ID for logging actions
-$current_user_id = $_SESSION['user_id'] ?? 0;
-$userRole = $_SESSION['role'] ?? '';
+    // Verify authentication and access permissions
+    if (!$auth->isLoggedIn() || !$auth->hasAccess('clients')) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
+    }
+
+    // Get current user ID for logging actions
+    $current_user_id = $_SESSION['user_id'] ?? 0;
+    $userRole = $_SESSION['role'] ?? '';
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
@@ -622,4 +632,14 @@ $use_custom_footer = true;
 <?php
 // Include footer
 require_once __DIR__ . '/../layouts/footer.php';
+?>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Clients Error: '.$e->getMessage());
+    exit;
+}
 ?>
