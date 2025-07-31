@@ -10,6 +10,12 @@ if (!isset($sessionManager)) {
     $sessionManager->startSession();
 }
 
+// DEBUG: Log session state before redirect
+$logMessage = date('Y-m-d H:i:s')." - Session Check:\n";
+$logMessage .= "Role: ".($_SESSION['role'] ?? 'NOT SET')."\n";
+$logMessage .= "User ID: ".($_SESSION['user_id'] ?? 'NOT SET')."\n";
+file_put_contents('session_debug.log', $logMessage, FILE_APPEND);
+
 // Standardized role check
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
     header('Location: /login.php');
