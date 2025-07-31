@@ -1,7 +1,4 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
-require_gestionnaire_access();
-
 // Produits index page for BIKORWA SHOP
 $page_title = "Gestion des Produits";
 $active_page = "produits";

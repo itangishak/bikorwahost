@@ -97,7 +97,7 @@ if (!function_exists('is_logged_in')) {
 
 if (!function_exists('is_manager')) {
     function is_manager() {
-        return isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
+        return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
     }
 }
 

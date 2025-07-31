@@ -3,12 +3,10 @@
 $page_title = "Gestion des Clients";
 $active_page = "clients";
 
-require_once __DIR__ . '/../../config/config.php';
-require_gestionnaire_access();
-
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../utils/Auth.php';
-require_once __DIR__ . '/../../utils/Settings.php';
+require_once './../../../src/config/config.php';
+require_once './../../../src/config/database.php';
+require_once './../../../src/utils/Auth.php';
+require_once './../../../src/utils/Settings.php';
 
 // Initialize database connection
 $database = new Database();

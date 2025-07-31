@@ -16,9 +16,6 @@ if ($_SESSION['role'] !== 'gestionnaire') {
     exit();
 }
 
-require_once __DIR__ . '/../../config/config.php';
-require_gestionnaire_access();
-
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";
 $active_page = "dashboard";
