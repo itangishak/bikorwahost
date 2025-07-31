@@ -16,22 +16,16 @@ try {
     require_once('../../config/config.php');
     require_once('../../../includes/session.php');
 
-    // Conditional session manager loading
-    if (!isset($_SESSION['SESSION_MANAGER_LOADED'])) {
-        require_once('../../../includes/session_manager.php');
-        $_SESSION['SESSION_MANAGER_LOADED'] = true;
-    }
-
-    // Authentication check
-    if (empty($_SESSION['logged_in'])) {
-        header('Location: ../auth/login.php');
-        exit;
-    }
-
-    // Role verification
-    if (empty($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-        header('Location: /dashboard/index.php?error=access_denied');
-        exit;
+    // Verify authentication and role in one check
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || 
+        !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
     }
 
     $page_title = "Gestion des Utilisateurs";
