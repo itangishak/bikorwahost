@@ -7,11 +7,7 @@ ini_set('display_errors', 1);
 ob_start();
 
 try {
-    // Start session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
+  
     echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
     echo '<pre>Session ID: '.session_id().'</pre>';
     echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
