@@ -23,7 +23,7 @@ $page_title = "Inventaire";
 $active_page = "stock";
 
 // Check if user has gestionnaire role
-$isGestionnaire = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'gestionnaire';
+$isGestionnaire = isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
 
 // Process form actions
 $message = "";
