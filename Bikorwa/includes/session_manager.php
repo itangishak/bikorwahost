@@ -344,7 +344,7 @@ class SessionManager
      */
     public function getUserRole() 
     {
-        return $this->get('user_role');
+        return $this->get('role');
     }
     
     /**
@@ -395,7 +395,7 @@ class SessionManager
         $this->set('user_id', $userData['id']);
         $this->set('username', $userData['username']);
         $this->set('user_name', $userData['nom']);
-        $this->set('user_role', $userData['role']);
+        $this->set('role', $userData['role']);
         $this->set('user_active', $userData['actif']);
         $this->set('logged_in', true);
         $this->set('login_time', time());

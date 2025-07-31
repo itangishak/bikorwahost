@@ -131,7 +131,7 @@ class DatabaseSessionManager {
             'user_id' => $user_data['id'],
             'username' => $user_data['username'],
             'user_name' => $user_data['nom'],
-            'user_role' => $user_data['role'],
+            'role' => $user_data['role'],
             'user_active' => $user_data['actif'],
             'logged_in' => true,
             'login_time' => time(),
@@ -164,7 +164,7 @@ class DatabaseSessionManager {
             'id' => $this->get('user_id'),
             'username' => $this->get('username'),
             'name' => $this->get('user_name'),
-            'role' => $this->get('user_role'),
+            'role' => $this->get('role'),
             'active' => $this->get('user_active'),
             'login_time' => $this->get('login_time')
         ];
@@ -178,7 +178,7 @@ class DatabaseSessionManager {
             $this->startSession($user_id);
         }
         
-        return $this->isLoggedIn() && $this->get('user_role') === $role;
+        return $this->isLoggedIn() && $this->get('role') === $role;
     }
     
     /**
