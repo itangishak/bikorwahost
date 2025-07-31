@@ -3,14 +3,11 @@
 $page_title = "Toutes les Activités";
 $active_page = "rapports";
 
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
-require_once __DIR__.'/../../../src/utils/Auth.php';
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
+// Accessible uniquement aux gestionnaires
+requireManager();
 
 $database = new Database();
 $pdo = $database->getConnection();
