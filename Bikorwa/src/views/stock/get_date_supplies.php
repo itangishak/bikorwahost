@@ -41,12 +41,15 @@ try {
     }
 
     // Fetch all supplies for the specified date
-    $sql = "SELECT 
-        m.id, 
-        p.nom AS produit_nom, 
-        m.quantite, 
-        m.prix_unitaire, 
-        m.valeur_totale, 
+    // Include produit_id and full date_mouvement for editing capabilities
+    $sql = "SELECT
+        m.id,
+        m.produit_id,
+        p.nom AS produit_nom,
+        m.quantite,
+        m.prix_unitaire,
+        m.valeur_totale,
+        m.date_mouvement,
         TIME(m.date_mouvement) AS heure,
         u.nom AS utilisateur_nom
     FROM mouvements_stock m
@@ -78,10 +81,12 @@ try {
     foreach ($supplies as $supply) {
         $formatted_supplies[] = [
             'id' => $supply['id'],
+            'produit_id' => $supply['produit_id'],
             'produit_nom' => $supply['produit_nom'],
             'quantite' => $supply['quantite'],
             'prix_unitaire' => floatval($supply['prix_unitaire']),
             'valeur_totale' => floatval($supply['valeur_totale']),
+            'date_mouvement' => $supply['date_mouvement'],
             'heure' => $supply['heure'],
             'utilisateur_nom' => $supply['utilisateur_nom']
         ];

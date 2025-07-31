@@ -408,8 +408,9 @@ try {
                                     <th>Quantité</th>
                                     <th>Prix Unitaire</th>
                                     <th>Valeur Totale</th>
-                                    <th>Heure</th>
+                                    <th>Date</th>
                                     <th>Utilisateur</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="modalTableBody">
@@ -541,20 +542,77 @@ document.addEventListener('DOMContentLoaded', function() {
         if (supplies.length > 0) {
             supplies.forEach(supply => {
                 const row = document.createElement('tr');
+                row.dataset.id = supply.id;
+                row.dataset.produitId = supply.produit_id;
+                const dateValue = supply.date_mouvement.replace(' ', 'T').slice(0,16);
                 row.innerHTML = `
                     <td>${escapeHtml(supply.id)}</td>
                     <td>${escapeHtml(supply.produit_nom)}</td>
-                    <td>${escapeHtml(supply.quantite)}</td>
-                    <td>${formatNumber(supply.prix_unitaire)} BIF</td>
-                    <td>${formatNumber(supply.valeur_totale)} BIF</td>
-                    <td>${escapeHtml(supply.heure)}</td>
+                    <td><input type="number" class="form-control form-control-sm quantite-input" value="${escapeHtml(supply.quantite)}"></td>
+                    <td><input type="number" step="0.01" class="form-control form-control-sm prix-input" value="${escapeHtml(supply.prix_unitaire)}"></td>
+                    <td class="valeur-cell">${formatNumber(supply.valeur_totale)} BIF</td>
+                    <td><input type="datetime-local" class="form-control form-control-sm date-input" value="${dateValue}"></td>
                     <td>${escapeHtml(supply.utilisateur_nom)}</td>
+                    <td><button class="btn btn-sm btn-primary save-row"><i class="fas fa-save"></i></button></td>
                 `;
                 tbody.appendChild(row);
             });
+
+            // Update total value when quantity or price changes
+            tbody.querySelectorAll('.quantite-input, .prix-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const row = this.closest('tr');
+                    const q = parseFloat(row.querySelector('.quantite-input').value) || 0;
+                    const p = parseFloat(row.querySelector('.prix-input').value) || 0;
+                    row.querySelector('.valeur-cell').textContent = formatNumber(q * p) + ' BIF';
+                });
+            });
+
+            // Save button handler for each row
+            tbody.querySelectorAll('.save-row').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const id = row.dataset.id;
+                    const produitId = row.dataset.produitId;
+                    const quantite = row.querySelector('.quantite-input').value;
+                    const prix = row.querySelector('.prix-input').value;
+                    const date = row.querySelector('.date-input').value;
+
+                    const formData = new FormData();
+                    formData.append('id', id);
+                    formData.append('produit_id', produitId);
+                    formData.append('quantite', quantite);
+                    formData.append('prix_unitaire', prix);
+                    formData.append('date_mouvement', date.replace('T', ' ') + ':00');
+                    formData.append('PHPSESSID', '<?= session_id() ?>');
+
+                    fetch('<?= BASE_URL ?>/src/views/stock/update_supply.php', {
+                        method: 'POST',
+                        body: formData,
+                        credentials: 'same-origin'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            if (typeof toastr !== 'undefined') {
+                                toastr.success(data.message || 'Mise à jour réussie');
+                            }
+                        } else {
+                            if (typeof toastr !== 'undefined') {
+                                toastr.error(data.message || 'Erreur lors de la mise à jour');
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        if (typeof toastr !== 'undefined') {
+                            toastr.error('Erreur de connexion au serveur');
+                        }
+                    });
+                });
+            });
         } else {
             const row = document.createElement('tr');
-            row.innerHTML = '<td colspan="7" class="text-center text-muted">Aucun approvisionnement trouvé pour cette date.</td>';
+            row.innerHTML = '<td colspan="8" class="text-center text-muted">Aucun approvisionnement trouvé pour cette date.</td>';
             tbody.appendChild(row);
         }
         
@@ -582,5 +640,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
-</body>
-</html>
+<?php if (!isset($toastr_included)) { ?>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<?php $toastr_included = true; } ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" crossorigin></script>
+<script>
+if (window.toastr) {
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        timeOut: 5000,
+        newestOnTop: true
+    };
+}
+</script>
