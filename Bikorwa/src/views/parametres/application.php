@@ -1,28 +1,45 @@
 <?php
-// Page de configuration de l'application
-$page_title = "Paramètres de l'application";
-$active_page = "parametres";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
-require_once './../../../src/utils/Settings.php';
+ob_start();
 
-$database = new Database();
-$pdo = $database->getConnection();
-$auth = new Auth($pdo);
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-if (!$auth->isLoggedIn() || !$auth->isManager()) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Page de configuration de l'application
+    $page_title = "Paramètres de l'application";
+    $active_page = "parametres";
 
-$settings = new Settings($pdo);
-$current_theme = $settings->get('theme', 'light');
-$shop_name = $settings->get('shop_name', APP_NAME);
-$items_per_page = $settings->get('items_per_page', 10);
+    // Include dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../../includes/session.php');
+    require_once('../../utils/Auth.php');
+    require_once('../../utils/Settings.php');
 
-require_once __DIR__ . '/../layouts/header.php';
+    // Initialize database and authentication
+    $database = new Database();
+    $pdo = $database->getConnection();
+    $auth = new Auth($pdo);
+
+    // Verify authentication and role
+    if (!$auth->isLoggedIn() || !$auth->isManager()) {
+        header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
+        exit;
+    }
+
+    // Load current settings
+    $settings = new Settings($pdo);
+    $current_theme = $settings->get('theme', 'light');
+    $shop_name = $settings->get('shop_name', APP_NAME);
+    $items_per_page = $settings->get('items_per_page', 10);
+
+    require_once __DIR__ . '/../layouts/header.php';
 ?>
 <div class="container">
     <h2 class="mb-4">Paramètres Généraux</h2>
@@ -57,4 +74,15 @@ form.addEventListener('submit', async (e) => {
     document.getElementById('settingsAlert').innerHTML = alert;
 });
 </script>
-<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
+<?php
+    require_once __DIR__ . '/../layouts/footer.php';
+} catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Application Settings Error: '.$e->getMessage());
+    exit;
+}
+?>
