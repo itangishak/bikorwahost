@@ -1,14 +1,24 @@
 <?php
 // Page de Suivi des Stocks
+error_reporting(0);
+ini_set('display_errors', 0);
+
+// Start session if not already active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "Suivi des Stocks";
 $active_page = "rapports";
 
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 require_once __DIR__.'/../../../src/utils/Auth.php';
+require_once __DIR__.'/../../../includes/session.php';
 
 // Vérification des permissions
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ||
+    !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit;
 }
