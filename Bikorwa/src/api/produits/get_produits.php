@@ -1,8 +1,13 @@
 <?php
 // API endpoint to get products with stock information
 
-// Start session if not already started
+// Start or resume session
 if (session_status() === PHP_SESSION_NONE) {
+    if (isset($_GET['PHPSESSID'])) {
+        session_id($_GET['PHPSESSID']);
+    } elseif (isset($_POST['PHPSESSID'])) {
+        session_id($_POST['PHPSESSID']);
+    }
     session_start();
 }
 

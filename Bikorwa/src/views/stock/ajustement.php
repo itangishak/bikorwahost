@@ -653,7 +653,7 @@ $(document).ready(function() {
                 type: 'GET',
                 // We want to search among all products regardless of their
                 // current stock level, so we don't filter by available stock
-                data: { search: search, with_stock: false },
+                data: { search: search, with_stock: false, PHPSESSID: '<?= session_id() ?>' },
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
