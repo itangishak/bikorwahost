@@ -12,27 +12,7 @@ define('SESSION_INIT_LOADED', true);
 
 // Only initialize if no session exists
 if (session_status() === PHP_SESSION_NONE) {
-    // Configure session settings
-    ini_set('session.use_strict_mode', 1);
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
-    ini_set('session.use_only_cookies', 1);
-    ini_set('session.cookie_lifetime', 3600);
-    ini_set('session.gc_maxlifetime', 3600);
-    
-    // Set session name
-    session_name('BIKORWA_SESSION');
-    
-    // Set cookie parameters with proper domain
-    session_set_cookie_params([
-        'lifetime' => 3600,
-        'path' => '/',
-        'domain' => $_SERVER['HTTP_HOST'],
-        'secure' => isset($_SERVER['HTTPS']),
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
-    
+ 
     // Start session with error suppression
     @session_start();
 }
