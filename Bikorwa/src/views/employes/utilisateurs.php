@@ -19,7 +19,7 @@ try {
     // Include database connection and config - using same relative depth as inventaire.php
     require_once('../../config/database.php');
     require_once('../../config/config.php');
-    require_once('../../includes/session.php');
+    require_once('../../../includes/session.php');
 
     echo '<p>Includes loaded successfully</p>';
 
