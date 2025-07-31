@@ -1,142 +1,129 @@
 <?php
-// Enable all error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Start session manager first
+require_once('../../../includes/session.php');
 
-// Start output buffering
-ob_start();
+global $sessionManager;
+if (!isset($sessionManager)) {
+    $sessionManager = SessionManager::getInstance();
+    $sessionManager->startSession();
+}
 
-try {
-    // Start session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+// Check if user is logged in
+if (!$sessionManager->isLoggedIn()) {
+    header('Location: ../auth/login.php');
+    exit;
+}
 
-    echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
-    echo '<pre>Session ID: '.session_id().'</pre>';
-    echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
+// Verify gestionnaire role
+if (!$sessionManager->isManager()) {
+    header('Location: /dashboard/index.php?error=access_denied');
+    exit;
+}
 
-    // Include database connection and config - using same relative depth as inventaire.php
-    require_once('../../config/database.php');
-    require_once('../../config/config.php');
-    require_once('../../../includes/session.php');
+$page_title = "Gestion des Utilisateurs";
+$active_page = "utilisateurs";
 
-    echo '<p>Includes loaded successfully</p>';
+// Include remaining config files
+require_once('../../config/database.php');
+require_once('../../config/config.php');
 
-    // Check if user is logged in
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        header('Location: ../auth/login.php');
-        exit;
-    }
+// Initialize database connection
+$database = new Database();
+$conn = $database->getConnection();
 
-    // Verify gestionnaire role
-    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-        header('Location: /dashboard/index.php?error=access_denied');
-        exit;
-    }
+// Initialize auth
+$auth = new Auth($conn);
+$authController = new AuthController();
 
-    $page_title = "Gestion des Utilisateurs";
-    $active_page = "utilisateurs";
+// Set default values and get search parameters
+$search = $_GET['search'] ?? '';
+$statut = $_GET['statut'] ?? '';
+$role = $_GET['role'] ?? '';
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$items_per_page = 10;
+$offset = ($current_page - 1) * $items_per_page;
 
-    echo '<p>Starting database connection</p>';
-    $database = new Database();
-    $conn = $database->getConnection();
-    echo '<p>Database connected</p>';
+// Build the base query
+$query = "SELECT * FROM users WHERE 1=1";
+$count_query = "SELECT COUNT(*) AS total FROM users WHERE 1=1";
+$params = [];
 
-    echo '<p>Initializing auth</p>';
-    $auth = new Auth($conn);
-    $authController = new AuthController();
-    echo '<p>Auth initialized</p>';
+// Add search conditions if any
+if (!empty($search)) {
+    $query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
+    $count_query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
+    $search_param = "%$search%";
+    array_push($params, $search_param, $search_param, $search_param, $search_param);
+}
 
-    // Set default values and get search parameters
-    $search = $_GET['search'] ?? '';
-    $statut = $_GET['statut'] ?? '';
-    $role = $_GET['role'] ?? '';
-    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $items_per_page = 10;
-    $offset = ($current_page - 1) * $items_per_page;
+// Add role filter if specified
+if (!empty($role)) {
+    $query .= " AND role = ?";
+    $count_query .= " AND role = ?";
+    array_push($params, $role);
+}
 
-    // Build the base query
-    $query = "SELECT * FROM users WHERE 1=1";
-    $count_query = "SELECT COUNT(*) AS total FROM users WHERE 1=1";
-    $params = [];
+// Add status filter if specified
+if ($statut === 'actif') {
+    $query .= " AND actif = 1";
+    $count_query .= " AND actif = 1";
+} elseif ($statut === 'inactif') {
+    $query .= " AND actif = 0";
+    $count_query .= " AND actif = 0";
+}
 
-    // Add search conditions if any
-    if (!empty($search)) {
-        $query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
-        $count_query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
-        $search_param = "%$search%";
-        array_push($params, $search_param, $search_param, $search_param, $search_param);
-    }
+// Add order by and pagination
+$query .= " ORDER BY nom ASC LIMIT ? OFFSET ?";
 
-    // Add role filter if specified
-    if (!empty($role)) {
-        $query .= " AND role = ?";
-        $count_query .= " AND role = ?";
-        array_push($params, $role);
-    }
+// Execute count query for pagination
+$count_stmt = $conn->prepare($count_query);
 
-    // Add status filter if specified
-    if ($statut === 'actif') {
-        $query .= " AND actif = 1";
-        $count_query .= " AND actif = 1";
-    } elseif ($statut === 'inactif') {
-        $query .= " AND actif = 0";
-        $count_query .= " AND actif = 0";
-    }
+// Bind parameters for count query if any
+for ($i = 0; $i < count($params); $i++) {
+    $count_stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
+}
 
-    // Add order by and pagination
-    $query .= " ORDER BY nom ASC LIMIT ? OFFSET ?";
+$count_stmt->execute();
+$result = $count_stmt->fetch(PDO::FETCH_ASSOC);
+$total_rows = $result['total'];
+$total_pages = ceil($total_rows / $items_per_page);
 
-    // Execute count query for pagination
-    $count_stmt = $conn->prepare($count_query);
+// Make sure current page is valid
+if ($current_page < 1) $current_page = 1;
+if ($current_page > $total_pages && $total_pages > 0) $current_page = $total_pages;
 
-    // Bind parameters for count query if any
-    for ($i = 0; $i < count($params); $i++) {
-        $count_stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
-    }
+// Recalculate offset based on validated current page
+$offset = ($current_page - 1) * $items_per_page;
 
-    $count_stmt->execute();
-    $result = $count_stmt->fetch(PDO::FETCH_ASSOC);
-    $total_rows = $result['total'];
-    $total_pages = ceil($total_rows / $items_per_page);
+// Execute the main query
+$stmt = $conn->prepare($query);
 
-    // Make sure current page is valid
-    if ($current_page < 1) $current_page = 1;
-    if ($current_page > $total_pages && $total_pages > 0) $current_page = $total_pages;
+// Bind parameters if any
+for ($i = 0; $i < count($params); $i++) {
+    $stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
+}
 
-    // Recalculate offset based on validated current page
-    $offset = ($current_page - 1) * $items_per_page;
+// Bind pagination parameters
+$param_index = count($params) + 1;
+$stmt->bindParam($param_index++, $items_per_page, PDO::PARAM_INT);
+$stmt->bindParam($param_index, $offset, PDO::PARAM_INT);
 
-    // Execute the main query
-    $stmt = $conn->prepare($query);
+$stmt->execute();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Bind parameters if any
-    for ($i = 0; $i < count($params); $i++) {
-        $stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
-    }
+// Get user statistics
+$stats_query = "SELECT 
+                COUNT(*) as total_users,
+                SUM(CASE WHEN actif = 1 THEN 1 ELSE 0 END) as users_actifs,
+                SUM(CASE WHEN role = 'receptionniste' THEN 1 ELSE 0 END) as receptionnistes,
+                SUM(CASE WHEN role = 'gestionnaire' THEN 1 ELSE 0 END) as gestionnaires
+                FROM users";
+$stats_stmt = $conn->prepare($stats_query);
+$stats_stmt->execute();
+$statistiques = $stats_stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Bind pagination parameters
-    $param_index = count($params) + 1;
-    $stmt->bindParam($param_index++, $items_per_page, PDO::PARAM_INT);
-    $stmt->bindParam($param_index, $offset, PDO::PARAM_INT);
-
-    $stmt->execute();
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Get user statistics
-    $stats_query = "SELECT 
-                    COUNT(*) as total_users,
-                    SUM(CASE WHEN actif = 1 THEN 1 ELSE 0 END) as users_actifs,
-                    SUM(CASE WHEN role = 'receptionniste' THEN 1 ELSE 0 END) as receptionnistes,
-                    SUM(CASE WHEN role = 'gestionnaire' THEN 1 ELSE 0 END) as gestionnaires
-                    FROM users";
-    $stats_stmt = $conn->prepare($stats_query);
-    $stats_stmt->execute();
-    $statistiques = $stats_stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Include the header
-    require_once __DIR__ . '/../layouts/header.php';
+// Include the header
+require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <style>
@@ -668,12 +655,3 @@ try {
     // Include footer
     require_once __DIR__ . '/../layouts/footer.php';
     ?>
-<?php } catch (Exception $e) {
-    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
-    echo '<h3>Error Debug Information</h3>';
-    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
-    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
-    echo '</div>';
-    error_log('Utilisateurs Error: '.$e->getMessage());
-    exit;
-}
