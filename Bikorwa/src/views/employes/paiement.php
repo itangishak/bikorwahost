@@ -1,27 +1,47 @@
 <?php
-// Employee Payments page for BIKORWA SHOP
-$pageTitle = "Paiement du Personnel";
-$active_page = "employes";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
-require_once __DIR__.'/../../../src/utils/Auth.php';
+ob_start();
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Initialize authentication
-$auth = new Auth($conn);
+    // Include dependencies
+    require_once __DIR__.'/../../../src/config/config.php';
+    require_once __DIR__.'/../../../src/config/database.php';
+    require_once __DIR__.'/../../../includes/session.php';
+    require_once __DIR__.'/../../../src/utils/Auth.php';
 
-// Check permissions
-if (!$auth->isLoggedIn() || ($_SESSION['role'] ?? '') !== 'gestionnaire') {
-    header('Location: '.BASE_URL.'/login.php');
-    exit;
-}
+    // Employee Payments page for BIKORWA SHOP
+    $pageTitle = "Paiement du Personnel";
+    $active_page = "employes";
 
-// Get current user ID for logging
-$current_user_id = $_SESSION['user_id'] ?? 0;
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    // Initialize authentication
+    $auth = new Auth($conn);
+
+    // Verify authentication and role
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ||
+        !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
+    }
+
+    // Get current user ID for logging
+    $current_user_id = $_SESSION['user_id'] ?? 0;
 
 // Fetch active employees
 try {
@@ -451,3 +471,7 @@ $(document).ready(function() {
 </script>
 
 <?php require __DIR__.'/../layouts/footer.php'; ?>
+<?php } catch (Exception $e) {
+    error_log('Paiement Error: ' . $e->getMessage());
+    exit;
+} ?>
