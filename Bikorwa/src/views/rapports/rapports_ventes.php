@@ -3,13 +3,11 @@
 $page_title = "Rapports de Ventes";
 $active_page = "rapports";
 
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
+// Ensure only gestionnaires access this page
+requireManager();
 
 // Initialize database connection
 $database = new Database();
@@ -18,12 +16,6 @@ $pdo = $database->getConnection();
 // Check if database connection is successful
 if (!$pdo) {
     die("Erreur de connexion à la base de données");
-}
-
-// Check if user is logged in and has gestionnaire role
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ../../auth/login.php');
-    exit;
 }
 
 // Get date filter parameters with defaults

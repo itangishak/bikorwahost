@@ -1,19 +1,10 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
+require_once __DIR__ . '/../../../src/utils/ProductCodeGenerator.php';
 
-// Include database connection and config
-require_once('../../config/database.php');
-require_once('../../config/config.php');
-require_once ('../../utils/ProductCodeGenerator.php'); 
-
-// Check if user is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: ../auth/login.php');
-    exit;
-}
+// Ensure the user is authenticated
+requireAuth();
 
 // Initialize database connection
 $db = new Database();
@@ -40,8 +31,9 @@ function get_category_threshold($cat) {
 
 // Determine user roles and stock privileges. Receptionnistes may manage
 // inventory but cannot delete products.
-$isGestionnaire = isset($_SESSION['role']) && $_SESSION['role'] === 'gestionnaire';
-$isReceptionniste = isset($_SESSION['role']) && $_SESSION['role'] === 'receptionniste';
+$userRole = $sessionManager->getUserRole();
+$isGestionnaire = $userRole === 'gestionnaire';
+$isReceptionniste = $userRole === 'receptionniste';
 $hasStockAccess = $isGestionnaire || $isReceptionniste;
 
 // Process form actions
@@ -113,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'produit_id' => $produit_id,
                 'prix_achat' => $prix_achat,
                 'prix_vente' => $prix_vente,
-                'cree_par' => $_SESSION['user_id']
+                'cree_par' => $sessionManager->getUserId()
             ]);
             
             // Insert initial stock
@@ -138,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'quantite' => $quantite,
                     'prix_unitaire' => $prix_achat,
                     'valeur_totale' => $prix_achat * $quantite,
-                    'utilisateur_id' => $_SESSION['user_id'],
+                    'utilisateur_id' => $sessionManager->getUserId(),
                     'note' => 'Stock initial',
                     'reference' => 'INIT-' . date('YmdHis')
                 ]);
@@ -159,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (:utilisateur_id, 'create', 'produit', :entite_id, :details)
             ");
             $stmt->execute([
-                'utilisateur_id' => $_SESSION['user_id'],
+                'utilisateur_id' => $sessionManager->getUserId(),
                 'entite_id' => $produit_id,
                 'details' => "Nouveau produit ajouté: {$nom} (Code: {$code})"
             ]);
@@ -238,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'produit_id' => $produit_id,
                     'prix_achat' => $prix_achat,
                     'prix_vente' => $prix_vente,
-                    'cree_par' => $_SESSION['user_id']
+                    'cree_par' => $sessionManager->getUserId()
                 ]);
             } elseif (
                 abs($currentPrice['prix_achat'] - $prix_achat) > 0.01 ||
@@ -260,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'produit_id' => $produit_id,
                     'prix_achat' => $prix_achat,
                     'prix_vente' => $prix_vente,
-                    'cree_par' => $_SESSION['user_id']
+                    'cree_par' => $sessionManager->getUserId()
                 ]);
             }
             
@@ -270,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (:utilisateur_id, 'update', 'produit', :entite_id, :details)
             ");
             $stmt->execute([
-                'utilisateur_id' => $_SESSION['user_id'],
+                'utilisateur_id' => $sessionManager->getUserId(),
                 'entite_id' => $produit_id,
                 'details' => "Produit modifié: {$nom} (Code: {$code})"
             ]);
@@ -336,7 +328,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (:utilisateur_id, 'delete', 'produit', :entite_id, :details)
             ");
             $stmt->execute([
-                'utilisateur_id' => $_SESSION['user_id'],
+                'utilisateur_id' => $sessionManager->getUserId(),
                 'entite_id' => $produit_id,
                 'details' => "Produit supprimé/désactivé: {$produit['nom']} (Code: {$produit['code']})"
             ]);
@@ -429,7 +421,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'quantite' => $quantite,
                 'prix_unitaire' => $produit['prix_achat'],
                 'valeur_totale' => $produit['prix_achat'] * $quantite,
-                'utilisateur_id' => $_SESSION['user_id'],
+                'utilisateur_id' => $sessionManager->getUserId(),
                 'note' => $note,
                 'reference' => $reference,
                 'date_mouvement' => $date_mouvement
@@ -441,10 +433,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (:utilisateur_id, 'adjust', 'stock', :entite_id, :details)
             ");
             $stmt->execute([
-                'utilisateur_id' => $_SESSION['user_id'],
+                'utilisateur_id' => $sessionManager->getUserId(),
                 'entite_id' => $produit_id,
-                'details' => "Ajustement de stock: {$produit['nom']} - " . 
-                             ($type_mouvement === 'entree' ? "Ajout" : "Retrait") . 
+                'details' => "Ajustement de stock: {$produit['nom']} - " .
+                             ($type_mouvement === 'entree' ? "Ajout" : "Retrait") .
                              " de {$quantite} {$produit['unite_mesure']}"
             ]);
             

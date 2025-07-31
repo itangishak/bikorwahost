@@ -1,9 +1,12 @@
 <?php
-// Start or resume session
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
+
+// Optional: support session ID passed via POST
 if (isset($_POST['PHPSESSID'])) {
     session_id($_POST['PHPSESSID']);
+    $sessionManager->startSession();
 }
-session_start();
 
 // Enhanced debug logging
 error_log("=== GET DATE SUPPLIES ACCESS ===");
@@ -12,15 +15,17 @@ error_log("Session Data: " . print_r($_SESSION, true));
 
 // Check permissions
 $allowedRoles = ['gestionnaire', 'admin'];
-if (!isset($_SESSION['role']) || !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
-    error_log("ACCESS DENIED - Role: " . ($_SESSION['role'] ?? 'Not Set'));
+requireAuth();
+if (!in_array(strtolower($sessionManager->getUserRole()), $allowedRoles)) {
+    error_log("ACCESS DENIED - Role: " . $sessionManager->getUserRole());
     http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Accès non autorisé', 'debug' => ['session' => $_SESSION]]);
+    echo json_encode(['success' => false, 'message' => 'Accès non autorisé']);
     exit;
 }
 
-// Include database connection
-require_once __DIR__ . '/../../../includes/db.php';
+// Database connection
+$database = new Database();
+$pdo = $database->getConnection();
 
 // Set content type to JSON
 header('Content-Type: application/json');

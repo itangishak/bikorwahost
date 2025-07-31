@@ -1,15 +1,13 @@
 <?php
-require_once __DIR__ . '/../../includes/header.php';
-require_once __DIR__ . '/../../includes/sidebar.php';
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
-// Check permissions
-if ($_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+// Only gestionnaires can access this page
+requireManager();
 
 // Database connection
-$conn = require __DIR__ . '/../../includes/db.php';
+$database = new Database();
+$pdo = $database->getConnection();
 
 // Get supply entry ID
 $id = $_GET['id'] ?? null;
@@ -21,7 +19,7 @@ if (!$id) {
 
 // Fetch entry data
 $query = "SELECT * FROM mouvements_stock WHERE id = ?";
-$stmt = $conn->prepare($query);
+$stmt = $pdo->prepare($query);
 $stmt->execute([$id]);
 $entry = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,9 +30,11 @@ if (!$entry) {
 
 // Fetch products
 $products_query = "SELECT id, nom FROM produits ORDER BY nom";
-$products_stmt = $conn->prepare($products_query);
+$products_stmt = $pdo->prepare($products_query);
 $products_stmt->execute();
 $products = $products_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <div class="content">

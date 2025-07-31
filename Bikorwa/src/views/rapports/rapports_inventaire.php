@@ -3,15 +3,11 @@
 $page_title = "Suivi des Stocks";
 $active_page = "rapports";
 
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
-require_once __DIR__.'/../../../src/utils/Auth.php';
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
-// Vérification des permissions
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
+// Seuls les gestionnaires peuvent accéder à cette page
+requireManager();
 
 // Connexion à la base
 $database = new Database();
@@ -76,7 +72,7 @@ try {
 }
 
 // Inclusion du header
-require_once __DIR__.'/../../../src/views/layouts/header.php';
+require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

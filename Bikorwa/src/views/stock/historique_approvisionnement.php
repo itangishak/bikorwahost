@@ -1,8 +1,6 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../src/config/database.php';
 
 // Enhanced debug logging
 error_log("=== STOCK HISTORY ACCESS ===");
@@ -11,19 +9,18 @@ error_log("Session Data: " . print_r($_SESSION, true));
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
 error_log("Request Data: " . print_r($_REQUEST, true));
 
-// Include config first to get BASE_URL
-require_once __DIR__ . '/../../config/config.php';
-
-// Enhanced role check
+// Role check (gestionnaire or admin)
 $allowedRoles = ['gestionnaire', 'admin'];
-if (!isset($_SESSION['role']) || !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
-    error_log("Access Denied - Role: " . ($_SESSION['role'] ?? 'Not Set'));
+requireAuth();
+if (!in_array(strtolower($sessionManager->getUserRole()), $allowedRoles)) {
+    error_log("Access Denied - Role: " . $sessionManager->getUserRole());
     header('Location: ' . BASE_URL . '/src/views/auth/login.php?reason=unauthorized');
     exit;
 }
 
-// Include database connection
-require_once __DIR__ . '/../../../includes/db.php';
+// Database connection
+$database = new Database();
+$pdo = $database->getConnection();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
