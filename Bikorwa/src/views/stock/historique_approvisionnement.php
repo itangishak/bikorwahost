@@ -487,11 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const date = dateInput.value;
 
         if (!date) {
-            if (typeof toastr !== 'undefined') {
-                toastr.warning('Veuillez sélectionner une date');
-            } else {
-                alert('Veuillez sélectionner une date');
-            }
+            showToast('Veuillez sélectionner une date', 'warning');
             return;
         }
         
@@ -539,11 +535,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayDateSupplies(data.supplies, data.summary);
             } else {
                 showModalError(data.message || 'Erreur lors du chargement des données');
+                showToast(data.message || 'Erreur lors du chargement des données', 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
             showModalError('Erreur de connexion au serveur');
+            showToast('Erreur de connexion au serveur', 'error');
         });
     }
     
@@ -615,13 +613,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            toastr.success('Mise à jour réussie');
+                            showToast('Mise à jour réussie');
                         } else {
-                            toastr.error(data.message || 'Erreur lors de la mise à jour');
+                            showToast(data.message || 'Erreur lors de la mise à jour', 'error');
                         }
                     })
                     .catch(() => {
-                        toastr.error('Erreur de connexion au serveur');
+                        showToast('Erreur de connexion au serveur', 'error');
                     });
                 });
             });
@@ -650,6 +648,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    function showToast(message, type = 'success') {
+        if (typeof toastr !== 'undefined') {
+            toastr[type](message);
+        } else {
+            alert(message);
+        }
     }
 });
 </script>
