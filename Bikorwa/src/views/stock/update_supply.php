@@ -28,37 +28,62 @@ if (!$id) {
     exit;
 }
 
-// Prepare data
-$produit_id = $_POST['produit_id'];
-$quantite = $_POST['quantite'];
-$prix_unitaire = $_POST['prix_unitaire'];
-$date_mouvement = $_POST['date_mouvement'];
+// Fetch current movement data for comparison
+$stmt = $pdo->prepare("SELECT produit_id, quantite, date_mouvement FROM mouvements_stock WHERE id = ?");
+$stmt->execute([$id]);
+$current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$current) {
+    echo json_encode(['success' => false, 'message' => 'Approvisionnement introuvable']);
+    exit;
+}
+
+// Prepare new data
+$produit_id = $_POST['produit_id'] ?? $current['produit_id'];
+$quantite = (float)($_POST['quantite'] ?? 0);
+$prix_unitaire = (float)($_POST['prix_unitaire'] ?? 0);
+$date_mouvement = $_POST['date_mouvement'] ?? $current['date_mouvement'];
 $reference = $_POST['reference'] ?? null;
 $note = $_POST['note'] ?? null;
 
-// Update supply entry
-$query = "UPDATE mouvements_stock SET
-    produit_id = ?,
-    quantite = ?,
-    prix_unitaire = ?,
-    date_mouvement = ?,
-    reference = ?,
-    note = ?
-WHERE id = ?";
+try {
+    $pdo->beginTransaction();
 
-$stmt = $pdo->prepare($query);
-$success = $stmt->execute([
-    $produit_id,
-    $quantite,
-    $prix_unitaire,
-    $date_mouvement,
-    $reference,
-    $note,
-    $id
-]);
+    // Update supply entry
+    $query = "UPDATE mouvements_stock SET
+        produit_id = ?,
+        quantite = ?,
+        prix_unitaire = ?,
+        valeur_totale = ?,
+        date_mouvement = ?,
+        reference = ?,
+        note = ?
+    WHERE id = ?";
 
-if ($success) {
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        $produit_id,
+        $quantite,
+        $prix_unitaire,
+        $quantite * $prix_unitaire,
+        $date_mouvement,
+        $reference,
+        $note,
+        $id
+    ]);
+
+    // Adjust stock if quantity changed
+    $oldQuantite = (float)$current['quantite'];
+    $diff = $quantite - $oldQuantite;
+    if ($diff !== 0.0) {
+        $stockQuery = "UPDATE stock SET quantite = quantite + ? WHERE produit_id = ?";
+        $stockStmt = $pdo->prepare($stockQuery);
+        $stockStmt->execute([$diff, $produit_id]);
+    }
+
+    $pdo->commit();
     echo json_encode(['success' => true]);
-} else {
+} catch (Exception $e) {
+    $pdo->rollBack();
     echo json_encode(['success' => false, 'message' => 'Erreur de mise à jour']);
 }
