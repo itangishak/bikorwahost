@@ -17,7 +17,11 @@ $conn = $database->getConnection();
 $auth = new Auth($conn);
 $authController = new AuthController();
 
-
+// Check if user is logged in and has gestionnaire role for user management
+if (!$auth->isLoggedIn() || $_SESSION['role'] !== 'gestionnaire') {
+    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
+    exit;
+}
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
