@@ -1,7 +1,17 @@
 <?php
+// DEBUG: Start output buffering to prevent header errors
+ob_start();
+
 // Users management page for BIKORWA SHOP
 require_once './../../../includes/session.php';
 require_once './../../../includes/init.php';
+
+// DEBUG: Full session dump
+session_start();
+echo '<pre>Session ID: '.session_id().'</pre>';
+echo '<pre>Current Session: ';
+print_r($_SESSION);
+echo '</pre>';
 
 // Use centralized session management
 global $sessionManager;
@@ -10,18 +20,23 @@ if (!isset($sessionManager)) {
     $sessionManager->startSession();
 }
 
-// DEBUG: Log session state before redirect
-$logMessage = date('Y-m-d H:i:s')." - Session Check:\n";
-$logMessage .= "Role: ".($_SESSION['role'] ?? 'NOT SET')."\n";
-$logMessage .= "User ID: ".($_SESSION['user_id'] ?? 'NOT SET')."\n";
-file_put_contents('session_debug.log', $logMessage, FILE_APPEND);
+// DEBUG: Verify session manager state
+echo '<pre>SessionManager State: ';
+var_dump($sessionManager);
+echo '</pre>';
 
-// Standardized role check
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: /login.php');
+// Standardized role check with debug
+if (!isset($_SESSION['role'])) {
+    echo '<p style="color:red">DEBUG: Role not set in session</p>';
     exit;
 }
 
+if ($_SESSION['role'] !== 'gestionnaire') {
+    echo '<p style="color:red">DEBUG: Role is '.htmlspecialchars($_SESSION['role']).' but requires gestionnaire</p>';
+    exit;
+}
+
+// If we get here, authentication passed
 $page_title = "Gestion des Utilisateurs";
 $active_page = "utilisateurs";
 
@@ -38,6 +53,9 @@ $conn = $database->getConnection();
 // Initialize auth
 $auth = new Auth($conn);
 $authController = new AuthController();
+
+// Clear debug buffer if we got this far
+ob_end_clean();
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
