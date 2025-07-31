@@ -1,8 +1,14 @@
 <?php
-// Start session if needed
+// Start or resume session using provided PHPSESSID if available
+if (isset($_POST['PHPSESSID'])) {
+    session_id($_POST['PHPSESSID']);
+}
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// Return JSON response
+header('Content-Type: application/json');
 
 require_once __DIR__ . '/../../config/config.php';
 

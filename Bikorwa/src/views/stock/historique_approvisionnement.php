@@ -443,14 +443,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Submit form for better reliability
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = 'delete_supply.php';
-                
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'id';
-                input.value = id;
-                
-                form.appendChild(input);
+                form.action = '<?= BASE_URL ?>/src/views/stock/delete_supply.php';
+
+                const idInput = document.createElement('input');
+                idInput.type = 'hidden';
+                idInput.name = 'id';
+                idInput.value = id;
+
+                const sessionInput = document.createElement('input');
+                sessionInput.type = 'hidden';
+                sessionInput.name = 'PHPSESSID';
+                sessionInput.value = '<?= session_id() ?>';
+
+                form.appendChild(idInput);
+                form.appendChild(sessionInput);
                 document.body.appendChild(form);
                 form.submit();
             }
@@ -500,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('date', date);
         formData.append('PHPSESSID', '<?= session_id() ?>');
         
-        fetch('get_date_supplies.php', {
+        fetch('<?= BASE_URL ?>/src/views/stock/get_date_supplies.php', {
             method: 'POST',
             body: formData,
             credentials: 'same-origin'

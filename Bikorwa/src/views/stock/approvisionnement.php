@@ -17,7 +17,8 @@ $active_page = "stock";
         <h6 class="m-0 font-weight-bold">Enregistrer un nouvel approvisionnement</h6>
     </div>
     <div class="card-body">
-        <form id="approForm" action="/stock/save_approvisionnement.php" method="post">
+        <form id="approForm" action="<?= BASE_URL ?>/src/views/stock/save_approvisionnement.php" method="post">
+            <input type="hidden" name="PHPSESSID" value="<?= session_id() ?>">
             <div class="row mb-4">
                 <div class="col-md-6">
                     <div class="mb-3">

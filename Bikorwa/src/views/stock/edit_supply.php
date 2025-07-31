@@ -53,8 +53,9 @@ $products = $products_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <h3 class="card-title">Modifier l'entrée d'approvisionnement</h3>
                     </div>
                     <div class="card-body">
-                        <form id="edit-supply-form" method="POST" action="update_supply.php">
+                        <form id="edit-supply-form" method="POST" action="<?= BASE_URL ?>/src/views/stock/update_supply.php">
                             <input type="hidden" name="id" value="<?= $entry['id'] ?>">
+                            <input type="hidden" name="PHPSESSID" value="<?= session_id() ?>">
                             
                             <div class="form-group">
                                 <label for="produit_id">Produit</label>
