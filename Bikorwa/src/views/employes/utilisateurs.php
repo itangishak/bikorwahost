@@ -1,126 +1,140 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Enable all error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Include database connection and config
-require_once('./../../../config/database.php');
-require_once('./../../../config/config.php');
-require_once('./../../../includes/session.php');
+// Start output buffering
+ob_start();
 
-// Check if user is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: ../auth/login.php');
-    exit;
-}
+try {
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Verify gestionnaire role
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: /dashboard/index.php?error=access_denied');
-    exit;
-}
+    echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
+    echo '<pre>Session ID: '.session_id().'</pre>';
+    echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
-$page_title = "Gestion des Utilisateurs";
-$active_page = "utilisateurs";
+    // Include database connection and config
+    require_once('./../../../config/database.php');
+    require_once('./../../../config/config.php');
+    require_once('./../../../includes/session.php');
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+    echo '<p>Includes loaded successfully</p>';
 
-// Initialize auth
-$auth = new Auth($conn);
-$authController = new AuthController();
+    // Check if user is logged in
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        throw new Exception('User not logged in');
+    }
 
-// Set default values and get search parameters
-$search = $_GET['search'] ?? '';
-$statut = $_GET['statut'] ?? '';
-$role = $_GET['role'] ?? '';
-$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$items_per_page = 10;
-$offset = ($current_page - 1) * $items_per_page;
+    // Verify gestionnaire role
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        throw new Exception('Access denied - requires gestionnaire role');
+    }
 
-// Build the base query
-$query = "SELECT * FROM users WHERE 1=1";
-$count_query = "SELECT COUNT(*) AS total FROM users WHERE 1=1";
-$params = [];
+    $page_title = "Gestion des Utilisateurs";
+    $active_page = "utilisateurs";
 
-// Add search conditions if any
-if (!empty($search)) {
-    $query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
-    $count_query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
-    $search_param = "%$search%";
-    array_push($params, $search_param, $search_param, $search_param, $search_param);
-}
+    echo '<p>Starting database connection</p>';
+    $database = new Database();
+    $conn = $database->getConnection();
+    echo '<p>Database connected</p>';
 
-// Add role filter if specified
-if (!empty($role)) {
-    $query .= " AND role = ?";
-    $count_query .= " AND role = ?";
-    array_push($params, $role);
-}
+    echo '<p>Initializing auth</p>';
+    $auth = new Auth($conn);
+    $authController = new AuthController();
+    echo '<p>Auth initialized</p>';
 
-// Add status filter if specified
-if ($statut === 'actif') {
-    $query .= " AND actif = 1";
-    $count_query .= " AND actif = 1";
-} elseif ($statut === 'inactif') {
-    $query .= " AND actif = 0";
-    $count_query .= " AND actif = 0";
-}
+    // Set default values and get search parameters
+    $search = $_GET['search'] ?? '';
+    $statut = $_GET['statut'] ?? '';
+    $role = $_GET['role'] ?? '';
+    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $items_per_page = 10;
+    $offset = ($current_page - 1) * $items_per_page;
 
-// Add order by and pagination
-$query .= " ORDER BY nom ASC LIMIT ? OFFSET ?";
+    // Build the base query
+    $query = "SELECT * FROM users WHERE 1=1";
+    $count_query = "SELECT COUNT(*) AS total FROM users WHERE 1=1";
+    $params = [];
 
-// Execute count query for pagination
-$count_stmt = $conn->prepare($count_query);
+    // Add search conditions if any
+    if (!empty($search)) {
+        $query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
+        $count_query .= " AND (nom LIKE ? OR username LIKE ? OR email LIKE ? OR telephone LIKE ?)";
+        $search_param = "%$search%";
+        array_push($params, $search_param, $search_param, $search_param, $search_param);
+    }
 
-// Bind parameters for count query if any
-for ($i = 0; $i < count($params); $i++) {
-    $count_stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
-}
+    // Add role filter if specified
+    if (!empty($role)) {
+        $query .= " AND role = ?";
+        $count_query .= " AND role = ?";
+        array_push($params, $role);
+    }
 
-$count_stmt->execute();
-$result = $count_stmt->fetch(PDO::FETCH_ASSOC);
-$total_rows = $result['total'];
-$total_pages = ceil($total_rows / $items_per_page);
+    // Add status filter if specified
+    if ($statut === 'actif') {
+        $query .= " AND actif = 1";
+        $count_query .= " AND actif = 1";
+    } elseif ($statut === 'inactif') {
+        $query .= " AND actif = 0";
+        $count_query .= " AND actif = 0";
+    }
 
-// Make sure current page is valid
-if ($current_page < 1) $current_page = 1;
-if ($current_page > $total_pages && $total_pages > 0) $current_page = $total_pages;
+    // Add order by and pagination
+    $query .= " ORDER BY nom ASC LIMIT ? OFFSET ?";
 
-// Recalculate offset based on validated current page
-$offset = ($current_page - 1) * $items_per_page;
+    // Execute count query for pagination
+    $count_stmt = $conn->prepare($count_query);
 
-// Execute the main query
-$stmt = $conn->prepare($query);
+    // Bind parameters for count query if any
+    for ($i = 0; $i < count($params); $i++) {
+        $count_stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
+    }
 
-// Bind parameters if any
-for ($i = 0; $i < count($params); $i++) {
-    $stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
-}
+    $count_stmt->execute();
+    $result = $count_stmt->fetch(PDO::FETCH_ASSOC);
+    $total_rows = $result['total'];
+    $total_pages = ceil($total_rows / $items_per_page);
 
-// Bind pagination parameters
-$param_index = count($params) + 1;
-$stmt->bindParam($param_index++, $items_per_page, PDO::PARAM_INT);
-$stmt->bindParam($param_index, $offset, PDO::PARAM_INT);
+    // Make sure current page is valid
+    if ($current_page < 1) $current_page = 1;
+    if ($current_page > $total_pages && $total_pages > 0) $current_page = $total_pages;
 
-$stmt->execute();
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Recalculate offset based on validated current page
+    $offset = ($current_page - 1) * $items_per_page;
 
-// Get user statistics
-$stats_query = "SELECT 
-                COUNT(*) as total_users,
-                SUM(CASE WHEN actif = 1 THEN 1 ELSE 0 END) as users_actifs,
-                SUM(CASE WHEN role = 'receptionniste' THEN 1 ELSE 0 END) as receptionnistes,
-                SUM(CASE WHEN role = 'gestionnaire' THEN 1 ELSE 0 END) as gestionnaires
-                FROM users";
-$stats_stmt = $conn->prepare($stats_query);
-$stats_stmt->execute();
-$statistiques = $stats_stmt->fetch(PDO::FETCH_ASSOC);
+    // Execute the main query
+    $stmt = $conn->prepare($query);
 
-// Include the header
-require_once __DIR__ . '/../layouts/header.php';
+    // Bind parameters if any
+    for ($i = 0; $i < count($params); $i++) {
+        $stmt->bindParam($i + 1, $params[$i], PDO::PARAM_STR);
+    }
+
+    // Bind pagination parameters
+    $param_index = count($params) + 1;
+    $stmt->bindParam($param_index++, $items_per_page, PDO::PARAM_INT);
+    $stmt->bindParam($param_index, $offset, PDO::PARAM_INT);
+
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get user statistics
+    $stats_query = "SELECT 
+                    COUNT(*) as total_users,
+                    SUM(CASE WHEN actif = 1 THEN 1 ELSE 0 END) as users_actifs,
+                    SUM(CASE WHEN role = 'receptionniste' THEN 1 ELSE 0 END) as receptionnistes,
+                    SUM(CASE WHEN role = 'gestionnaire' THEN 1 ELSE 0 END) as gestionnaires
+                    FROM users";
+    $stats_stmt = $conn->prepare($stats_query);
+    $stats_stmt->execute();
+    $statistiques = $stats_stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Include the header
+    require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <style>
@@ -578,77 +592,86 @@ require_once __DIR__ . '/../layouts/header.php';
                                     </button>
                                 </div>
                                 <div class="invalid-feedback">Les mots de passe ne correspondent pas.</div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6">
-                                                        <label for="edit_role" class="form-label">Rôle <span class="text-danger">*</span></label>
-                                                        <select class="form-select" id="edit_role" name="role" required>
-                                                            <option value="" disabled>Sélectionner un rôle</option>
-                                                            <option value="receptionniste">Réceptionniste</option>
-                                                            <option value="gestionnaire">Gestionnaire</option>
-                                                        </select>
-                                                        <div class="invalid-feedback">Veuillez sélectionner un rôle.</div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="edit_email" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="edit_email" name="email">
-                                                        <div class="invalid-feedback">Veuillez entrer une adresse email valide.</div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6">
-                                                        <label for="edit_telephone" class="form-label">Téléphone</label>
-                                                        <input type="text" class="form-control" id="edit_telephone" name="telephone">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="edit_actif" class="form-label">Statut</label>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="edit_actif" name="actif">
-                                                            <label class="form-check-label" for="edit_actif">Actif</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-warning" id="updateUserBtn">
-                                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                                Mettre à jour
-                                            </button>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="edit_role" class="form-label">Rôle <span class="text-danger">*</span></label>
+                                <select class="form-select" id="edit_role" name="role" required>
+                                    <option value="" disabled>Sélectionner un rôle</option>
+                                    <option value="receptionniste">Réceptionniste</option>
+                                    <option value="gestionnaire">Gestionnaire</option>
+                                </select>
+                                <div class="invalid-feedback">Veuillez sélectionner un rôle.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="edit_email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="edit_email" name="email">
+                                <div class="invalid-feedback">Veuillez entrer une adresse email valide.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="edit_telephone" class="form-label">Téléphone</label>
+                                <input type="text" class="form-control" id="edit_telephone" name="telephone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="edit_actif" class="form-label">Statut</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="edit_actif" name="actif">
+                                    <label class="form-check-label" for="edit_actif">Actif</label>
                                 </div>
                             </div>
-                            
-                            <!-- Confirmation Modal -->
-                            <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger text-white">
-                                            <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="confirmationMessage"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <button type="button" class="btn btn-danger" id="confirmBtn">
-                                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                                Confirmer
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <script src="./utilisateurs_script.js"></script>
-                            
-                            <?php
-                            // Include footer
-                            require_once __DIR__ . '/../layouts/footer.php';
-                            ?>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-warning" id="updateUserBtn">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Mettre à jour
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="confirmationMessage"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmBtn">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Confirmer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./utilisateurs_script.js"></script>
+    
+    <?php
+    // Include footer
+    require_once __DIR__ . '/../layouts/footer.php';
+    ?>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Utilisateurs Error: '.$e->getMessage());
+    exit;
+}
