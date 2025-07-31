@@ -17,9 +17,9 @@ try {
     echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
     // Include database connection and config
-    require_once('./../../../config/database.php');
-    require_once('./../../../config/config.php');
-    require_once('./../../../includes/session.php');
+    require_once(__DIR__.'/../../../config/database.php');
+    require_once(__DIR__.'/../../../config/config.php');
+    require_once(__DIR__.'/../../../includes/session.php');
 
     echo '<p>Includes loaded successfully</p>';
 
