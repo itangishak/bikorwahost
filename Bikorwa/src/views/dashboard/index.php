@@ -1,9 +1,20 @@
 <?php
-require_once __DIR__ . '/../../../includes/init.php';
+session_start();
+
+require_once __DIR__ . '/../../../src/config/config.php';
 require_once __DIR__ . '/../../../src/config/database.php';
 
-// Ensure only gestionnaires access this page
-requireManager();
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit();
+}
+
+// Check user role
+if ($_SESSION['role'] !== 'gestionnaire') {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+    exit();
+}
 
 // Dashboard Page for BIKORWA SHOP - Gestionnaire Role
 $page_title = "Tableau de Bord - Gestionnaire";

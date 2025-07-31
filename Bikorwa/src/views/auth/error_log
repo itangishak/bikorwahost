@@ -302,3 +302,51 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/auth/login_process.php on line 46
+[30-Jul-2025 16:32:51 UTC] User ID not found in session
+[30-Jul-2025 16:33:04 UTC] User ID not found in session
+[30-Jul-2025 16:35:05 UTC] User ID not found in session
+[30-Jul-2025 16:37:24 UTC] User ID not found in session
+[30-Jul-2025 16:37:41 UTC] User ID not found in session
+[30-Jul-2025 16:38:27 UTC] User ID not found in session
+[30-Jul-2025 16:38:42 UTC] User ID not found in session
+[30-Jul-2025 16:41:54 UTC] User ID not found in session
+[30-Jul-2025 16:41:57 UTC] User ID not found in session
+[30-Jul-2025 16:42:26 UTC] User ID not found in session
+[30-Jul-2025 16:46:36 UTC] User ID not found in session
+[30-Jul-2025 16:46:52 UTC] User ID not found in session
+[30-Jul-2025 16:47:10 UTC] User ID not found in session
+[30-Jul-2025 16:47:14 UTC] User ID not found in session
+[30-Jul-2025 16:47:31 UTC] User ID not found in session
+[30-Jul-2025 16:52:46 UTC] User ID not found in session
+[30-Jul-2025 16:52:49 UTC] User ID not found in session
+[30-Jul-2025 16:52:52 UTC] User ID not found in session
+[30-Jul-2025 16:53:06 UTC] User ID not found in session
+[30-Jul-2025 16:53:39 UTC] User ID not found in session
+[30-Jul-2025 16:53:56 UTC] User ID not found in session
+[30-Jul-2025 16:54:38 UTC] User ID not found in session
+[30-Jul-2025 16:55:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BASE_URL" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/auth/logout.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/auth/logout.php on line 11
+[30-Jul-2025 16:57:58 UTC] User ID not found in session
+[30-Jul-2025 16:58:21 UTC] User ID not found in session
+[30-Jul-2025 17:04:58 UTC] User ID not found in session
+[30-Jul-2025 17:10:10 UTC] User ID not found in session
+[30-Jul-2025 17:27:20 UTC] User ID not found in session
+[30-Jul-2025 17:27:44 UTC] User ID not found in session
+[30-Jul-2025 17:32:39 UTC] User ID not found in session
+[30-Jul-2025 17:35:07 UTC] User ID not found in session
+[30-Jul-2025 17:38:40 UTC] User ID not found in session
+[31-Jul-2025 09:39:58 UTC] User ID not found in session
+[31-Jul-2025 10:34:41 UTC] User ID not found in session
+[31-Jul-2025 10:35:33 UTC] User ID not found in session
+[31-Jul-2025 10:35:55 UTC] User ID not found in session
+[31-Jul-2025 10:36:59 UTC] User ID not found in session
+[31-Jul-2025 10:53:13 UTC] User ID not found in session
+[31-Jul-2025 12:25:56 UTC] User ID not found in session
+[31-Jul-2025 12:26:31 UTC] User ID not found in session
+[31-Jul-2025 12:40:53 UTC] User ID not found in session
+[31-Jul-2025 12:41:09 UTC] User ID not found in session
+[31-Jul-2025 12:51:27 UTC] User ID not found in session
+[31-Jul-2025 12:51:40 UTC] User ID not found in session
+[31-Jul-2025 13:02:08 UTC] User ID not found in session

@@ -1,0 +1,123 @@
+2025-07-30 14:45:22 - Login Error: Login attempt for username: admin
+2025-07-30 14:45:22 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 14:45:22 - Login Error: Password verification successful for user: admin
+2025-07-30 14:45:22 - Login Error: Session variables set successfully for user: admin
+2025-07-30 14:49:27 - Login Error: Login attempt for username: admin
+2025-07-30 14:49:27 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 14:49:27 - Login Error: Password verification successful for user: admin
+2025-07-30 14:49:27 - Login Error: Session variables set successfully for user: admin
+2025-07-30 14:55:01 - Login Error: Login attempt for username: admin
+2025-07-30 14:55:01 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 14:55:01 - Login Error: Password verification successful for user: admin
+2025-07-30 14:55:01 - Login Error: Session variables set successfully for user: admin
+2025-07-30 15:40:46 - Login Error: Login attempt for username: admin
+2025-07-30 15:40:46 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 15:40:46 - Login Error: Password verification successful for user: admin
+2025-07-30 15:40:46 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:04:26 - Login Error: Login attempt for username: admin
+2025-07-30 16:04:26 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:04:27 - Login Error: Password verification successful for user: admin
+2025-07-30 16:04:27 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:05:13 - Login Error: Login attempt for username: admin
+2025-07-30 16:05:13 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:05:13 - Login Error: Password verification failed for user: admin
+2025-07-30 16:05:19 - Login Error: Login attempt for username: admin
+2025-07-30 16:05:19 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:05:19 - Login Error: Password verification successful for user: admin
+2025-07-30 16:05:19 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:15:22 - Login Error: Login attempt for username: admin
+2025-07-30 16:15:22 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:15:22 - Login Error: Password verification successful for user: admin
+2025-07-30 16:15:22 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:33:01 - Login Error: Login attempt for username: admin
+2025-07-30 16:33:01 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:33:01 - Login Error: Password verification successful for user: admin
+2025-07-30 16:33:01 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:35:16 - Login Error: Login attempt for username: admin
+2025-07-30 16:35:16 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:35:16 - Login Error: Password verification successful for user: admin
+2025-07-30 16:35:16 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:35:16 - Login Error: Session data after login: Array
+(
+    [created_at] => 1753893316
+    [last_activity] => 1753893316
+    [csrf_token] => 53e8c81c7678636f3e5d5c9884a59d868fa4f82460bbd6289061e64d109ff1f9
+    [last_regeneration] => 1753893316
+    [user_id] => 1
+    [username] => admin
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [user_active] => 1
+    [logged_in] => 1
+    [login_time] => 1753893316
+)
+
+2025-07-30 16:37:37 - Login Error: Login attempt for username: admin
+2025-07-30 16:37:37 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:37:37 - Login Error: Password verification successful for user: admin
+2025-07-30 16:37:37 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:37:37 - Login Error: Session data after login: Array
+(
+    [created_at] => 1753893457
+    [last_activity] => 1753893457
+    [csrf_token] => 618d2b497eecc6ff245dc766bde9232facf8e25a2acf02097363888b3101c456
+    [last_regeneration] => 1753893457
+    [user_id] => 1
+    [username] => admin
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [user_active] => 1
+    [logged_in] => 1
+    [login_time] => 1753893457
+)
+
+2025-07-30 16:38:39 - Login Error: Login attempt for username: admin
+2025-07-30 16:38:39 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:38:39 - Login Error: Password verification successful for user: admin
+2025-07-30 16:38:39 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:38:39 - Login Error: Session data after login: Array
+(
+    [created_at] => 1753893519
+    [last_activity] => 1753893519
+    [csrf_token] => e22133e47df316a46bacf7f4e6a763013b56d4add6c654acebc8259158f01f55
+    [last_regeneration] => 1753893519
+    [user_id] => 1
+    [username] => admin
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [user_active] => 1
+    [logged_in] => 1
+    [login_time] => 1753893519
+)
+
+2025-07-30 16:42:21 - Login Error: Login attempt for username: admin
+2025-07-30 16:42:21 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:42:21 - Login Error: Password verification successful for user: admin
+2025-07-30 16:42:21 - Login Error: Session variables set successfully for user: admin
+2025-07-30 16:42:21 - Login Error: Session data after login: Array
+(
+    [created_at] => 1753893741
+    [last_activity] => 1753893741
+    [csrf_token] => 76c6ac94d068a83dc12d07e72c3cebe5200bab6d9d40a79e24f3fb959e113e0d
+    [last_regeneration] => 1753893741
+    [user_id] => 1
+    [username] => admin
+    [user_name] => Administrateur
+    [user_role] => gestionnaire
+    [user_active] => 1
+    [logged_in] => 1
+    [login_time] => 1753893741
+)
+
+2025-07-30 16:46:49 - Login Error: Login attempt for username: admin
+2025-07-30 16:46:49 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:46:50 - Login Error: Password verification successful for user: admin
+2025-07-30 16:47:29 - Login Error: Login attempt for username: admin
+2025-07-30 16:47:29 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:47:29 - Login Error: Password verification successful for user: admin
+2025-07-30 16:53:02 - Login Error: Login attempt for username: admin
+2025-07-30 16:53:02 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:53:02 - Login Error: Password verification successful for user: admin
+2025-07-30 16:53:53 - Login Error: Login attempt for username: admin
+2025-07-30 16:53:53 - Login Error: User found: admin, role: gestionnaire
+2025-07-30 16:53:53 - Login Error: Password verification successful for user: admin

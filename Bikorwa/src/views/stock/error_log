@@ -1,0 +1,614 @@
+[30-Jul-2025 13:11:41 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:14:18 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:23:47 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:24:26 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:46:24 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:46:37 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:55:06 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:55:10 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 13:58:28 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:00:32 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:05:03 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:05:21 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:17:04 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:17:09 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:17:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:24:23 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:24:32 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:24:37 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:24:52 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:25:19 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:25:35 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:28:36 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:30:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:30:56 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:31:07 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:32:16 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 14:32:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:35:33 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:38:29 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 17:38:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BASE_URL" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 23
+[30-Jul-2025 17:38:35 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 17:38:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BASE_URL" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 23
+[30-Jul-2025 17:39:02 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 17:39:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BASE_URL" in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 23
+[30-Jul-2025 17:40:45 UTC] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 18
+[30-Jul-2025 17:40:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php:1) in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/stock/historique_approvisionnement.php on line 26
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:42:17 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:47:13 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:47:13 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:47:13 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:47:24 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:47:24 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:47:24 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:47:29 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:47:29 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:47:29 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:50:48 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:50:48 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:50:48 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:50:58 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:50:58 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:50:58 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:51:15 UTC] Stock History Access Attempt - Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:51:15 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:51:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 17:55:15 UTC] === STOCK HISTORY ACCESS ===
+[30-Jul-2025 17:55:15 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 17:55:15 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 17:55:15 UTC] Request Method: GET
+[30-Jul-2025 17:55:15 UTC] Request Data: Array
+(
+    [date_debut] => 2025-07-29
+    [date_fin] => 2025-07-30
+)
+
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 17:55:15 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 18:00:10 UTC] === STOCK HISTORY ACCESS ===
+[30-Jul-2025 18:00:10 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 18:00:10 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 18:00:10 UTC] Request Method: GET
+[30-Jul-2025 18:00:10 UTC] Request Data: Array
+(
+    [date_debut] => 2025-07-29
+    [date_fin] => 2025-07-30
+)
+
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[30-Jul-2025 18:00:10 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[30-Jul-2025 18:00:18 UTC] === GET DATE SUPPLIES ACCESS ===
+[30-Jul-2025 18:00:18 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 18:00:18 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[30-Jul-2025 18:00:35 UTC] === GET DATE SUPPLIES ACCESS ===
+[30-Jul-2025 18:00:35 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[30-Jul-2025 18:00:35 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753897134
+)
+
+[31-Jul-2025 10:36:50 UTC] === STOCK HISTORY ACCESS ===
+[31-Jul-2025 10:36:50 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[31-Jul-2025 10:36:50 UTC] Session Data: Array
+(
+    [user_id] => 1
+    [username] => admin
+    [name] => Administrateur
+    [role] => gestionnaire
+    [logged_in] => 1
+    [last_activity] => 1753958196
+)
+
+[31-Jul-2025 10:36:50 UTC] Request Method: GET
+[31-Jul-2025 10:36:50 UTC] Request Data: Array
+(
+)
+
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 303
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 310
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 315
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 333
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 338
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 359
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 367
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 372
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 394
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 399
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 400
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 405
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 414
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 422
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 427
+[31-Jul-2025 10:36:50 UTC] PHP Warning:  Undefined variable $active_page in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/layouts/header.php on line 446
+[31-Jul-2025 12:25:56 UTC] === STOCK HISTORY ACCESS ===
+[31-Jul-2025 12:25:56 UTC] Session ID: 6ab3d4526d6c943f280a547f385100ce
+[31-Jul-2025 12:25:56 UTC] Session Data: Array
+(
+)
+
+[31-Jul-2025 12:25:56 UTC] Request Method: GET
+[31-Jul-2025 12:25:56 UTC] Request Data: Array
+(
+    [date_debut] => 2025-07-29
+    [date_fin] => 2025-07-30
+)
+
+[31-Jul-2025 12:25:56 UTC] Access Denied - Role: Not Set
