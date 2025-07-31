@@ -37,6 +37,23 @@ require_once __DIR__ . '/../../../includes/db.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../../../assets/css/style.css">
+    <!-- Toastr CSS for toast notifications -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKM35js9h5fDGXkGSp1XCMVvjJAnYXhYzu3/n6PvJEa3TBUnIFV969GryuVKy7jH9MuNoMyl2I6rNq5rW4vYg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- jQuery (required by Toastr) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJ+Y3VCRppShypQOWcZH/5LiO8Z8a9kaI0s+8=" crossorigin="anonymous"></script>
+    <!-- Toastr JS for toast notifications -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-5/uhZywS4cxMTKOouUMHjUo8eRP0upZgg/KwZq/953IBwYswcA6RAjHgNsx3Rp3XIanFkFJxuxMxDPZbkfK6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Configure default Toastr options
+        if (typeof toastr !== 'undefined') {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-right',
+                timeOut: 5000
+            };
+        }
+    </script>
 </head>
 <body>
 <?php
@@ -468,9 +485,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchDateBtn').addEventListener('click', function() {
         const dateInput = document.getElementById('search_date');
         const date = dateInput.value;
-        
+
         if (!date) {
-            alert('Veuillez sélectionner une date');
+            if (typeof toastr !== 'undefined') {
+                toastr.warning('Veuillez sélectionner une date');
+            } else {
+                alert('Veuillez sélectionner une date');
+            }
             return;
         }
         
@@ -594,12 +615,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Mise à jour réussie');
+                            toastr.success('Mise à jour réussie');
                         } else {
-                            alert(data.message || 'Erreur lors de la mise à jour');
+                            toastr.error(data.message || 'Erreur lors de la mise à jour');
                         }
                     })
-                    .catch(() => alert('Erreur de connexion au serveur'));
+                    .catch(() => {
+                        toastr.error('Erreur de connexion au serveur');
+                    });
                 });
             });
         } else {
