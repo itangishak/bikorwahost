@@ -1,49 +1,28 @@
 <?php
-// DEBUG: Start output buffering to prevent header errors
-ob_start();
-
-// Users management page for BIKORWA SHOP
-require_once './../../../includes/session.php';
-require_once './../../../includes/init.php';
-
-// Use centralized session management
-global $sessionManager;
-if (!isset($sessionManager)) {
-    $sessionManager = SessionManager::getInstance();
-    $sessionManager->startSession();
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-// Verify authentication data exists
-if (!isset($_SESSION['user_id'], $_SESSION['role'])) {
-    // Display debug information
-    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
-    echo '<h3>Session Debug Information</h3>';
-    echo '<p>Missing authentication data in session:</p>';
-    echo '<pre>User ID: '.($_SESSION['user_id'] ?? 'not set').'</pre>';
-    echo '<pre>Role: '.($_SESSION['role'] ?? 'not set').'</pre>';
-    echo '<pre>Full Session: '; print_r($_SESSION); echo '</pre>';
-    echo '</div>';
-    
-    // Destroy invalid session and redirect
-    $sessionManager->destroySession();
-    header('Location: /login.php');
+// Include database connection and config
+require_once('./../../../config/database.php');
+require_once('./../../../config/config.php');
+require_once('./../../../includes/session.php');
+
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../auth/login.php');
     exit;
 }
 
-// Standardized role check
-if ($_SESSION['role'] !== 'gestionnaire') {
+// Verify gestionnaire role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
     header('Location: /dashboard/index.php?error=access_denied');
     exit;
 }
 
 $page_title = "Gestion des Utilisateurs";
 $active_page = "utilisateurs";
-
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
-require_once './../../../src/models/User.php';
-require_once './../../../src/controllers/AuthController.php';
 
 // Initialize database connection
 $database = new Database();
@@ -52,9 +31,6 @@ $conn = $database->getConnection();
 // Initialize auth
 $auth = new Auth($conn);
 $authController = new AuthController();
-
-// Clear debug buffer if we got this far
-ob_end_clean();
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
