@@ -1,38 +1,34 @@
 <?php
-// Basic error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
 ob_start();
 
 try {
-    // Simple session start (like working pages)
+    // Start session if not active
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
-    // Basic debug output
-    echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
-    echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
     // Include dependencies
     require_once('../../config/database.php');
     require_once('../../config/config.php');
     require_once('../../../includes/session.php');
 
-    // Only include session manager if session not already configured
+    // Conditional session manager loading
     if (!isset($_SESSION['SESSION_MANAGER_LOADED'])) {
         require_once('../../../includes/session_manager.php');
         $_SESSION['SESSION_MANAGER_LOADED'] = true;
     }
 
-    // Verify login (flexible check)
+    // Authentication check
     if (empty($_SESSION['logged_in'])) {
         header('Location: ../auth/login.php');
         exit;
     }
 
-    // Verify role (flexible check)
+    // Role verification
     if (empty($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
         header('Location: /dashboard/index.php?error=access_denied');
         exit;
