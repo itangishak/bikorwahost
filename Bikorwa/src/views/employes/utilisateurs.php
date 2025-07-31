@@ -16,10 +16,10 @@ try {
     echo '<pre>Session ID: '.session_id().'</pre>';
     echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
-    // Include database connection and config
-    require_once(__DIR__.'/../../../config/database.php');
-    require_once(__DIR__.'/../../../config/config.php');
-    require_once(__DIR__.'/../../../includes/session.php');
+    // Include database connection and config using absolute paths
+    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/config/database.php');
+    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/config/config.php');
+    require_once('/home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session.php');
 
     echo '<p>Includes loaded successfully</p>';
 
