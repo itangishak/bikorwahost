@@ -15,3 +15,130 @@ Stack trace:
 #0 /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/receptionniste.php(3): require_once()
 #1 {main}
   thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/auth_check.php on line 19
+[30-Jul-2025 16:33:04 UTC] User ID not found in session
+[30-Jul-2025 16:35:18 UTC] PHP Warning:  Undefined global variable $_SESSION in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php on line 7
+[30-Jul-2025 16:35:18 UTC] Dashboard session variables: 
+[30-Jul-2025 16:35:18 UTC] SessionManager: Headers already sent, skipping session configuration
+[30-Jul-2025 16:35:18 UTC] SessionManager: Headers already sent in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php on line 7
+[30-Jul-2025 16:35:18 UTC] Session not active - sessionStarted: false, status: 1
+[30-Jul-2025 16:35:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php:7) in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/init.php on line 29
+[30-Jul-2025 16:37:24 UTC] Session initialized with params: Array
+(
+    [lifetime] => 3600
+    [path] => /
+    [domain] => 
+    [secure] => 
+    [httponly] => 1
+    [samesite] => Strict
+)
+
+[30-Jul-2025 16:37:24 UTC] Current session status: 2
+[30-Jul-2025 16:37:24 UTC] Dashboard session variables: Array
+(
+)
+
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:37:24 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:37:24 UTC] User ID not found in session
+[30-Jul-2025 16:37:41 UTC] Session initialized with params: Array
+(
+    [lifetime] => 3600
+    [path] => /
+    [domain] => 
+    [secure] => 
+    [httponly] => 1
+    [samesite] => Strict
+)
+
+[30-Jul-2025 16:37:41 UTC] Current session status: 2
+[30-Jul-2025 16:37:41 UTC] Dashboard session variables: Array
+(
+)
+
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:37:41 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:37:41 UTC] User ID not found in session
+[30-Jul-2025 16:38:41 UTC] Session initialized with params: Array
+(
+    [lifetime] => 3600
+    [path] => /
+    [domain] => 
+    [secure] => 
+    [httponly] => 1
+    [samesite] => Strict
+)
+
+[30-Jul-2025 16:38:41 UTC] Current session status: 2
+[30-Jul-2025 16:38:41 UTC] Dashboard session variables: Array
+(
+)
+
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:38:41 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:38:41 UTC] User ID not found in session
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:42:24 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:42:24 UTC] User ID not found in session
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:46:51 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:47:31 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:53:06 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 97
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 98
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 99
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 100
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 104
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 105
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  session_name(): Session name cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 108
+[30-Jul-2025 16:53:55 UTC] PHP Warning:  session_set_save_handler(): Session save handler cannot be changed when a session is active in /home/bumadste/uab.bumadventiste.org/Bikorwa/includes/session_manager.php on line 114
+[31-Jul-2025 10:55:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function require_gestionnaire_access() in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php:20
+Stack trace:
+#0 {main}
+  thrown in /home/bumadste/uab.bumadventiste.org/Bikorwa/src/views/dashboard/index.php on line 20
+[31-Jul-2025 12:40:53 UTC] User ID not found in session
+[31-Jul-2025 12:41:09 UTC] User ID not found in session
+[31-Jul-2025 12:51:40 UTC] User ID not found in session
