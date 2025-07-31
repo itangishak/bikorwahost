@@ -340,6 +340,133 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_vente_details') {
     }
 }
 
+// AJAX handler for updating a sale
+if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
+    header('Content-Type: application/json');
+
+    try {
+        $vente_id = intval($_POST['vente_id'] ?? 0);
+        $date_vente = $_POST['date_vente'] ?? date('Y-m-d');
+        $produits = json_decode($_POST['products'] ?? '[]', true);
+
+        if ($vente_id <= 0) {
+            throw new Exception('ID de vente invalide');
+        }
+
+        // Get sale info
+        $stmt = $pdo->prepare("SELECT numero_facture, montant_paye FROM ventes WHERE id = ?");
+        $stmt->execute([$vente_id]);
+        $venteInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$venteInfo) {
+            throw new Exception('Vente introuvable');
+        }
+        $numero_facture = $venteInfo['numero_facture'];
+        $montant_paye = floatval($venteInfo['montant_paye']);
+
+        // Get existing details
+        $stmt = $pdo->prepare("SELECT * FROM details_ventes WHERE vente_id = ?");
+        $stmt->execute([$vente_id]);
+        $existing = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $existing[$row['id']] = $row;
+        }
+
+        $pdo->beginTransaction();
+        $total = 0;
+        $processed = [];
+        $reference = 'Vente #' . $numero_facture;
+
+        foreach ($produits as $p) {
+            $detail_id = $p['detail_id'] ?? null;
+            $prod_id = intval($p['produit_id']);
+            $qty = floatval($p['quantite']);
+            $price = floatval($p['prix_unitaire']);
+            $amount = $qty * $price;
+            $total += $amount;
+
+            if ($detail_id && isset($existing[$detail_id])) {
+                $old = $existing[$detail_id];
+                $diff = $qty - $old['quantite'];
+
+                $stmt = $pdo->prepare("UPDATE details_ventes SET quantite=?, prix_unitaire=?, montant_total=? WHERE id=?");
+                $stmt->execute([$qty, $price, $amount, $detail_id]);
+
+                $stmt = $pdo->prepare("UPDATE mouvements_stock SET quantite=?, valeur_totale=? WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
+                $stmt->execute([$qty, $amount, $prod_id, $reference]);
+
+                if ($diff != 0) {
+                    if ($diff < 0) {
+                        $add = -$diff;
+                        $stmt = $pdo->prepare("UPDATE stock SET quantite = quantite + ?, date_mise_a_jour = NOW() WHERE produit_id=?");
+                        $stmt->execute([$add, $prod_id]);
+                    } else {
+                        $stmt = $pdo->prepare("SELECT quantite FROM stock WHERE produit_id=?");
+                        $stmt->execute([$prod_id]);
+                        $stock = $stmt->fetch(PDO::FETCH_ASSOC);
+                        if (!$stock || $stock['quantite'] < $diff) {
+                            throw new Exception('Stock insuffisant pour le produit ' . $prod_id);
+                        }
+                        $stmt = $pdo->prepare("UPDATE stock SET quantite = quantite - ?, date_mise_a_jour = NOW() WHERE produit_id=?");
+                        $stmt->execute([$diff, $prod_id]);
+                    }
+                }
+
+                $processed[] = $detail_id;
+            } else {
+                // New product
+                $stmt = $pdo->prepare("INSERT INTO details_ventes (vente_id, produit_id, quantite, prix_unitaire, montant_total) VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$vente_id, $prod_id, $qty, $price, $amount]);
+                $new_detail_id = $pdo->lastInsertId();
+
+                $stmt = $pdo->prepare("INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale, reference, utilisateur_id, quantity_remaining) VALUES (?, 'sortie', ?, ?, ?, ?, ?, 0)");
+                $stmt->execute([$prod_id, $qty, $price, $amount, $reference, $_SESSION['user_id']]);
+
+                $stmt = $pdo->prepare("SELECT quantite FROM stock WHERE produit_id=?");
+                $stmt->execute([$prod_id]);
+                $stock = $stmt->fetch(PDO::FETCH_ASSOC);
+                if (!$stock || $stock['quantite'] < $qty) {
+                    throw new Exception('Stock insuffisant pour le produit ' . $prod_id);
+                }
+                $stmt = $pdo->prepare("UPDATE stock SET quantite = quantite - ?, date_mise_a_jour = NOW() WHERE produit_id=?");
+                $stmt->execute([$qty, $prod_id]);
+
+                $processed[] = $new_detail_id;
+            }
+        }
+
+        // Remove deleted products
+        foreach ($existing as $id => $row) {
+            if (!in_array($id, $processed)) {
+                $stmt = $pdo->prepare("UPDATE stock SET quantite = quantite + ?, date_mise_a_jour = NOW() WHERE produit_id=?");
+                $stmt->execute([$row['quantite'], $row['produit_id']]);
+
+                $stmt = $pdo->prepare("DELETE FROM mouvements_stock WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
+                $stmt->execute([$row['produit_id'], $reference]);
+
+                $stmt = $pdo->prepare("DELETE FROM details_ventes WHERE id=?");
+                $stmt->execute([$id]);
+            }
+        }
+
+        // Update sale totals
+        $montant_paye = min($montant_paye, $total);
+        $stmt = $pdo->prepare("UPDATE ventes SET date_vente=?, montant_total=?, montant_paye=? WHERE id=?");
+        $stmt->execute([$date_vente, $total, $montant_paye, $vente_id]);
+
+        $pdo->commit();
+
+        echo json_encode(['success' => true, 'message' => 'Vente mise à jour']);
+        exit;
+
+    } catch (Exception $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        echo json_encode(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()]);
+        exit;
+    }
+}
+
 // Include header layout only (not main.php)
 require_once __DIR__ . '/../layouts/header.php';
 
@@ -497,7 +624,7 @@ EOT;
                 <div class="row">
                     <div class="col-md-6">
                         <p><strong>N° Facture:</strong> <span id="view-numero-facture"></span></p>
-                        <p><strong>Date:</strong> <span id="view-date"></span></p>
+                        <p><strong>Date:</strong> <input type="date" id="edit-date" class="form-control d-inline-block w-auto" /></p>
                         <p><strong>Statut:</strong> <span id="view-statut-vente" class="badge"></span></p>
                         <p><strong>Note:</strong> <span id="view-note"></span></p>
                     </div>
@@ -509,6 +636,7 @@ EOT;
                     </div>
                 </div>
                 <h5 class="mt-4">Produits</h5>
+                <button type="button" id="add-product" class="btn btn-sm btn-primary mb-2">Ajouter un produit</button>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -517,7 +645,7 @@ EOT;
                                 <th>Quantité</th>
                                 <th>Prix</th>
                                 <th>Montant</th>
-                                <th>Bénéfice</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="view-produits">
@@ -527,7 +655,7 @@ EOT;
                             <tr>
                                 <th colspan="3" class="text-right">Total:</th>
                                 <th id="view-total-amount"></th>
-                                <th id="view-total-profit"></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -535,6 +663,7 @@ EOT;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-success" id="save-changes">Enregistrer</button>
                 <a id="print-facture" href="#" target="_blank" class="btn btn-primary">
                     <i class="fas fa-print"></i> Imprimer
                 </a>
@@ -614,6 +743,8 @@ $(function() {
     let currentPage = 1;
     const itemsPerPage = 10;
     let totalPages = 0;
+    let currentVenteId = null;
+    let availableProducts = [];
     
     // Load sales on page load
     loadVentes();
@@ -794,6 +925,7 @@ $(function() {
     function setupViewButtons() {
         $('#ventes-list').on('click', '.view-btn', function() {
             const vente_id = $(this).data('id');
+            currentVenteId = vente_id;
             
             // Show loading in modal
             $('#view-produits').html('<tr><td colspan="5" class="text-center"><i class="fas fa-spinner fa-spin mr-2"></i> Chargement des détails...</td></tr>');
@@ -815,7 +947,7 @@ $(function() {
                         
                         // Update sale info
                         $('#view-numero-facture').text(vente.numero_facture);
-                        $('#view-date').text(date);
+                        $('#edit-date').val(date);
                         
                         // Status badge
                         let statut_class = vente.statut_vente === 'active' ? 'badge-light-primary' : 'badge-light-danger';
@@ -853,33 +985,33 @@ $(function() {
                             $('#view-produits').html('<tr><td colspan="5" class="text-center">Aucun produit trouvé</td></tr>');
                             return;
                         }
-                        
+
                         // Calculate totals
                         let totalAmount = 0;
-                        let totalProfit = 0;
-                        
+
                         // Populate products table
                         $.each(produits, function(index, produit) {
                             const montant = parseFloat(produit.montant_total);
-                            const benefice = parseFloat(produit.benefice);
-                            
                             totalAmount += montant;
-                            totalProfit += benefice;
-                            
+
                             $('#view-produits').append(`
-                                <tr>
-                                    <td>${produit.produit_nom} (${produit.produit_code})</td>
-                                    <td>${parseFloat(produit.quantite).toLocaleString('fr-FR')} ${produit.unite_mesure}</td>
-                                    <td>${parseFloat(produit.prix_unitaire).toLocaleString('fr-FR')} BIF</td>
-                                    <td>${montant.toLocaleString('fr-FR')} BIF</td>
-                                    <td>${benefice.toLocaleString('fr-FR')} BIF</td>
+                                <tr data-detail-id="${produit.id}">
+                                    <td>
+                                        ${produit.produit_nom} (${produit.produit_code})
+                                        <input type="hidden" class="product-id" value="${produit.produit_id}" />
+                                    </td>
+                                    <td><input type="number" class="form-control qty" value="${parseFloat(produit.quantite)}" /></td>
+                                    <td><input type="number" class="form-control price" value="${parseFloat(produit.prix_unitaire)}" /></td>
+                                    <td class="amount">${montant.toLocaleString('fr-FR')} BIF</td>
+                                    <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
                                 </tr>
                             `);
                         });
-                        
+
                         // Update totals
                         $('#view-total-amount').text(totalAmount.toLocaleString('fr-FR') + ' BIF');
-                        $('#view-total-profit').text(totalProfit.toLocaleString('fr-FR') + ' BIF');
+
+                        bindRowEvents();
                         
                     } else {
                         // Show error
@@ -894,6 +1026,106 @@ $(function() {
                 }
             });
         });
+    }
+
+    function bindRowEvents() {
+        // Recalculate totals when quantity or price changes
+        $('#view-produits').off('input', '.qty, .price').on('input', '.qty, .price', function() {
+            recalcTotals();
+        });
+
+        // Update price when product selection changes
+        $('#view-produits').off('change', '.product-select').on('change', '.product-select', function() {
+            const prix = $(this).find('option:selected').data('prix') || 0;
+            $(this).closest('tr').find('.price').val(prix);
+            recalcTotals();
+        });
+
+        // Remove row
+        $('#view-produits').off('click', '.remove-row').on('click', '.remove-row', function() {
+            $(this).closest('tr').remove();
+            recalcTotals();
+        });
+
+        // Add product row
+        $('#add-product').off('click').on('click', function() {
+            if (availableProducts.length === 0) {
+                $.getJSON('nouvelle.php?action=get_produits&with_stock=true', function(res) {
+                    if (res.success) {
+                        availableProducts = res.produits;
+                        addProductRow();
+                    }
+                });
+            } else {
+                addProductRow();
+            }
+        });
+
+        // Save changes
+        $('#save-changes').off('click').on('click', function() {
+            const produits = [];
+            $('#view-produits tr').each(function() {
+                const detailId = $(this).data('detail-id');
+                const productId = $(this).find('.product-id').val() || $(this).find('.product-select').val();
+                const qty = parseFloat($(this).find('.qty').val()) || 0;
+                const price = parseFloat($(this).find('.price').val()) || 0;
+                produits.push({ detail_id: detailId, produit_id: productId, quantite: qty, prix_unitaire: price });
+            });
+
+            $.ajax({
+                url: 'index.php',
+                type: 'POST',
+                data: {
+                    action: 'update_vente',
+                    vente_id: currentVenteId,
+                    date_vente: $('#edit-date').val(),
+                    products: JSON.stringify(produits)
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.success) {
+                        $('#view-modal').modal('hide');
+                        toastr.success(res.message || 'Vente mise à jour');
+                        loadVentes();
+                    } else {
+                        toastr.error(res.message || 'Erreur lors de la mise à jour');
+                    }
+                },
+                error: function() {
+                    toastr.error('Erreur lors de la mise à jour');
+                }
+            });
+        });
+    }
+
+    function addProductRow() {
+        if (availableProducts.length === 0) return;
+        let options = '';
+        $.each(availableProducts, function(_, p) {
+            options += `<option value="${p.id}" data-prix="${p.prix_vente}">${p.nom} (${p.code})</option>`;
+        });
+        const row = `
+            <tr data-detail-id="new-${Date.now()}">
+                <td><select class="form-control product-select">${options}</select></td>
+                <td><input type="number" class="form-control qty" value="1" /></td>
+                <td><input type="number" class="form-control price" value="0" /></td>
+                <td class="amount">0 BIF</td>
+                <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
+            </tr>`;
+        $('#view-produits').append(row);
+        $('#view-produits tr:last .product-select').trigger('change');
+    }
+
+    function recalcTotals() {
+        let total = 0;
+        $('#view-produits tr').each(function() {
+            const qty = parseFloat($(this).find('.qty').val()) || 0;
+            const price = parseFloat($(this).find('.price').val()) || 0;
+            const amount = qty * price;
+            $(this).find('.amount').text(amount.toLocaleString('fr-FR') + ' BIF');
+            total += amount;
+        });
+        $('#view-total-amount').text(total.toLocaleString('fr-FR') + ' BIF');
     }
     
     // Function to setup cancel buttons
