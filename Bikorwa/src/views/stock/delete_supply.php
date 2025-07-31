@@ -1,28 +1,35 @@
 <?php
-require_once __DIR__ . '/../../includes/config.php';
+// Start session if needed
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Check permissions
-if ($_SESSION['role'] !== 'gestionnaire') {
-    echo json_encode(['success' => false, 'message' => 'Permission denied']);
+require_once __DIR__ . '/../../config/config.php';
+
+// Check authentication and permissions
+$allowedRoles = ['gestionnaire', 'admin'];
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) ||
+    !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php?reason=unauthorized');
     exit;
 }
 
-$conn = require __DIR__ . '/../../includes/db.php';
+require_once __DIR__ . '/../../../includes/db.php';
 
 $id = $_POST['id'] ?? null;
 
 if (!$id) {
-    echo json_encode(['success' => false, 'message' => 'ID invalide']);
+    header('Location: historique_approvisionnement.php?error=invalid');
     exit;
 }
 
 // Delete supply entry
 $query = "DELETE FROM mouvements_stock WHERE id = ?";
-$stmt = $conn->prepare($query);
+$stmt = $pdo->prepare($query);
 $success = $stmt->execute([$id]);
 
 if ($success) {
-    echo json_encode(['success' => true]);
+    header('Location: historique_approvisionnement.php?status=deleted');
 } else {
-    echo json_encode(['success' => false, 'message' => 'Erreur de suppression']);
+    header('Location: historique_approvisionnement.php?error=delete');
 }

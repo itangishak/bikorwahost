@@ -1,18 +1,25 @@
 <?php
-require_once __DIR__ . '/../../includes/config.php';
+// Start session if needed
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Check permissions
-if ($_SESSION['role'] !== 'gestionnaire') {
-    echo json_encode(['success' => false, 'message' => 'Permission denied']);
+require_once __DIR__ . '/../../config/config.php';
+
+// Check authentication and permissions
+$allowedRoles = ['gestionnaire', 'admin'];
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) ||
+    !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
+    header('Location: ' . BASE_URL . '/src/views/auth/login.php?reason=unauthorized');
     exit;
 }
 
-$conn = require __DIR__ . '/../../includes/db.php';
+require_once __DIR__ . '/../../../includes/db.php';
 
 $id = $_POST['id'] ?? null;
 
 if (!$id) {
-    echo json_encode(['success' => false, 'message' => 'ID invalide']);
+    header('Location: historique_approvisionnement.php?error=invalid');
     exit;
 }
 
@@ -25,16 +32,16 @@ $reference = $_POST['reference'] ?? null;
 $note = $_POST['note'] ?? null;
 
 // Update supply entry
-$query = "UPDATE mouvements_stock SET 
-    produit_id = ?, 
-    quantite = ?, 
-    prix_unitaire = ?, 
-    date_mouvement = ?, 
-    reference = ?, 
-    note = ? 
+$query = "UPDATE mouvements_stock SET
+    produit_id = ?,
+    quantite = ?,
+    prix_unitaire = ?,
+    date_mouvement = ?,
+    reference = ?,
+    note = ?
 WHERE id = ?";
 
-$stmt = $conn->prepare($query);
+$stmt = $pdo->prepare($query);
 $success = $stmt->execute([
     $produit_id,
     $quantite,
@@ -46,7 +53,7 @@ $success = $stmt->execute([
 ]);
 
 if ($success) {
-    echo json_encode(['success' => true]);
+    header('Location: historique_approvisionnement.php?status=updated');
 } else {
-    echo json_encode(['success' => false, 'message' => 'Erreur de mise à jour']);
+    header('Location: historique_approvisionnement.php?error=update');
 }
