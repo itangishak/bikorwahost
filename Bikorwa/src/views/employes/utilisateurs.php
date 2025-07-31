@@ -1,34 +1,37 @@
 <?php
-// Error reporting - set to 0 in production or use error logging
-error_reporting(0);
-ini_set('display_errors', 0);
+// Error reporting (enable temporarily for debugging)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Start output buffering
 ob_start();
 
 try {
-    // Include session manager FIRST
+    // Always include session manager first
     require_once('../../../includes/session_manager.php');
     
-    // Initialize session manager before any session starts
+    // Get session manager instance
     $sessionManager = SessionManager::getInstance();
-    $sessionManager->startSession();
+    
+    // Start session only if not already active
+    if (!$sessionManager->isSessionStarted()) {
+        $sessionManager->startSession();
+    }
 
-    // Then include other dependencies
-    require_once('../../config/database.php');
-    require_once('../../config/config.php');
-
-    // Check if user is logged in
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // Verify authentication using session manager's methods
+    if (!$sessionManager->isLoggedIn()) {
         header('Location: ../auth/login.php');
         exit;
     }
 
-    // Verify gestionnaire role
-    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+    // Verify role using session manager's methods
+    if (!$sessionManager->isManager()) {
         header('Location: /dashboard/index.php?error=access_denied');
         exit;
     }
+
+    // Include other dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
 
     $page_title = "Gestion des Utilisateurs";
     $active_page = "utilisateurs";
