@@ -1,27 +1,45 @@
 <?php
-// Expense History page for BIKORWA SHOP
-$page_title = "Historique des Dépenses";
-$active_page = "depenses-historique";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
+ob_start();
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Initialize authentication
-$auth = new Auth($conn);
+    // Include dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../../includes/session.php');
 
-// Check if user is logged in and has appropriate role
-if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Verify authentication and role
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ||
+        !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
+    }
 
-// Get current user ID for logging actions
-$current_user_id = $_SESSION['user_id'] ?? 0;
+    $page_title = "Historique des Dépenses";
+    $active_page = "depenses-historique";
+
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    // Initialize authentication
+    $auth = new Auth($conn);
+
+    // Get current user ID for logging actions
+    $current_user_id = $_SESSION['user_id'] ?? 0;
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
@@ -119,7 +137,7 @@ $categories_stmt->execute();
 $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Include the header
-include_once './../../../src/views/layouts/header.php';
+require_once __DIR__ . '/../layouts/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -620,7 +638,7 @@ include_once './../../../src/views/layouts/header.php';
             }
 
             // Include the footer
-            include_once './../../../src/views/layouts/footer.php';
+            require_once __DIR__ . '/../layouts/footer.php';
             ?>
             <?php if (!isset($toastr_included)) { ?>
             <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -643,3 +661,12 @@ include_once './../../../src/views/layouts/header.php';
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
             <script src="depenses_script.js?v=<?php echo time(); ?>"></script>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Depenses Historique Error: '.$e->getMessage());
+    exit;
+}?>
