@@ -8,14 +8,28 @@ if (!isset($sessionManager)) {
     $sessionManager->startSession();
 }
 
+// Debug output
+echo '<div style="background:#ffffcc;padding:10px;margin:10px;border:1px solid orange">';
+echo '<h4>Session Debug</h4>';
+echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
+echo '<pre>Session ID: '.session_id().'</pre>';
+echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
+echo '</div>';
+
 // Check if user is logged in
 if (!$sessionManager->isLoggedIn()) {
+    echo '<div style="background:#ffdddd;padding:10px;margin:10px;border:1px solid red">';
+    echo 'Redirecting to login (not logged in)';
+    echo '</div>';
     header('Location: ../auth/login.php');
     exit;
 }
 
 // Verify gestionnaire role
 if (!$sessionManager->isManager()) {
+    echo '<div style="background:#ffdddd;padding:10px;margin:10px;border:1px solid red">';
+    echo 'Redirecting to dashboard (not gestionnaire)';
+    echo '</div>';
     header('Location: /dashboard/index.php?error=access_denied');
     exit;
 }
