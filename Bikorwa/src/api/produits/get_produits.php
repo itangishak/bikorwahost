@@ -1,6 +1,11 @@
 <?php
 // API endpoint to get products with stock information
 
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include necessary files using relative paths (consistent with other pages)
 
 require_once './../../config/config.php';
