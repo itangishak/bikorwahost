@@ -13,6 +13,7 @@ require_once './../../../src/config/database.php';
 require_once './../../../src/utils/Auth.php';
 require_once './../../../src/models/User.php';
 require_once './../../../src/controllers/AuthController.php';
+require_once './../../../includes/session.php';
 
 // Initialize database connection
 $database = new Database();
