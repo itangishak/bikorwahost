@@ -7,12 +7,17 @@ ini_set('display_errors', 1);
 ob_start();
 
 try {
-  
+    // Start session if not already started - REQUIRED for session access
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Debug output to verify session
     echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
     echo '<pre>Session ID: '.session_id().'</pre>';
     echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
-    // Include database connection and config - using same relative depth as inventaire.php
+    // Include database connection and config
     require_once('../../config/database.php');
     require_once('../../config/config.php');
     require_once('../../../includes/session.php');
