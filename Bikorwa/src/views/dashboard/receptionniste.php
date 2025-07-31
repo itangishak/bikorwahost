@@ -11,7 +11,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 // Check user role
-if ($_SESSION['role'] !== 'receptionniste') {
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['gestionnaire', 'receptionniste'])) {
     header('Location: ' . BASE_URL . '/src/views/auth/login.php');
     exit();
 }

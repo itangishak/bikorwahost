@@ -11,6 +11,9 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 
+require_once __DIR__ . '/../../config/config.php';
+require_gestionnaire_access();
+
 // Initialize database connection
 $database = new Database();
 $pdo = $database->getConnection();
@@ -18,12 +21,6 @@ $pdo = $database->getConnection();
 // Check if database connection is successful
 if (!$pdo) {
     die("Erreur de connexion à la base de données");
-}
-
-// Check if user is logged in and has appropriate role
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gestionnaire') {
-    header('Location: ../auth/login.php');
-    exit;
 }
 
 // Get date filter parameters with defaults

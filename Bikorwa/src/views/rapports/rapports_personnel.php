@@ -1,11 +1,10 @@
 <?php
-// Rapports Personnel - BIKORWA SHOP
-$page_title = "Rapports du Personnel";
-$active_page = "rapports";
-
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 require_once __DIR__.'/../../../src/utils/Auth.php';
+
+require_gestionnaire_access();
 
 // Vérification de l'authentification
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gestionnaire') {
@@ -444,7 +443,7 @@ require_once __DIR__.'/../../../src/views/layouts/header.php';
                     <div class="card-body">
                         <h5 class="card-title">Employés Actifs</h5>
                         <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center me-2">
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="ps-3">

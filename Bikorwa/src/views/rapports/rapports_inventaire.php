@@ -6,6 +6,8 @@ $active_page = "rapports";
 require_once __DIR__.'/../../../src/config/config.php';
 require_once __DIR__.'/../../../src/config/database.php';
 require_once __DIR__.'/../../../src/utils/Auth.php';
+require_once __DIR__.'/../../../src/utils/access_control.php';
+require_gestionnaire_access();
 
 // Vérification des permissions
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gestionnaire') {

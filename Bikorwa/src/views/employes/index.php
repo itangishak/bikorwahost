@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/../../config/config.php';
+require_gestionnaire_access();
+
 // Employes index page for BIKORWA SHOP
 $page_title = "Gestion des Employés";
 $active_page = "employes";

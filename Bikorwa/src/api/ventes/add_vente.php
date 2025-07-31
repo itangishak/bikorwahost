@@ -7,11 +7,11 @@ require_once __DIR__ . '/../../../includes/db_connect.php';
 // Set header to JSON
 header('Content-Type: application/json');
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
+// Check if the user is logged in and is a gestionnaire
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
     echo json_encode([
         'success' => false,
-        'message' => 'Vous devez être connecté pour effectuer cette action'
+        'message' => 'Accès refusé: Seuls les gestionnaires peuvent effectuer cette action'
     ]);
     exit;
 }
