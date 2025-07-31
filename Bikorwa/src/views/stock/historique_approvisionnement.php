@@ -594,12 +594,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Mise à jour réussie');
+                            if (typeof toastr !== 'undefined') {
+                                toastr.success(data.message || 'Mise à jour réussie');
+                            }
                         } else {
-                            alert(data.message || 'Erreur lors de la mise à jour');
+                            if (typeof toastr !== 'undefined') {
+                                toastr.error(data.message || 'Erreur lors de la mise à jour');
+                            }
                         }
                     })
-                    .catch(() => alert('Erreur de connexion au serveur'));
+                    .catch(() => {
+                        if (typeof toastr !== 'undefined') {
+                            toastr.error('Erreur de connexion au serveur');
+                        }
+                    });
                 });
             });
         } else {
@@ -632,5 +640,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
-</body>
-</html>
+<?php if (!isset($toastr_included)) { ?>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<?php $toastr_included = true; } ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" crossorigin></script>
+<script>
+if (window.toastr) {
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        timeOut: 5000,
+        newestOnTop: true
+    };
+}
+</script>
