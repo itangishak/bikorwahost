@@ -6,13 +6,6 @@ ob_start();
 require_once './../../../includes/session.php';
 require_once './../../../includes/init.php';
 
-// DEBUG: Full session dump
-session_start();
-echo '<pre>Session ID: '.session_id().'</pre>';
-echo '<pre>Current Session: ';
-print_r($_SESSION);
-echo '</pre>';
-
 // Use centralized session management
 global $sessionManager;
 if (!isset($sessionManager)) {
@@ -20,23 +13,29 @@ if (!isset($sessionManager)) {
     $sessionManager->startSession();
 }
 
-// DEBUG: Verify session manager state
-echo '<pre>SessionManager State: ';
-var_dump($sessionManager);
-echo '</pre>';
-
-// Standardized role check with debug
-if (!isset($_SESSION['role'])) {
-    echo '<p style="color:red">DEBUG: Role not set in session</p>';
+// Verify authentication data exists
+if (!isset($_SESSION['user_id'], $_SESSION['role'])) {
+    // Display debug information
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Session Debug Information</h3>';
+    echo '<p>Missing authentication data in session:</p>';
+    echo '<pre>User ID: '.($_SESSION['user_id'] ?? 'not set').'</pre>';
+    echo '<pre>Role: '.($_SESSION['role'] ?? 'not set').'</pre>';
+    echo '<pre>Full Session: '; print_r($_SESSION); echo '</pre>';
+    echo '</div>';
+    
+    // Destroy invalid session and redirect
+    $sessionManager->destroySession();
+    header('Location: /login.php');
     exit;
 }
 
+// Standardized role check
 if ($_SESSION['role'] !== 'gestionnaire') {
-    echo '<p style="color:red">DEBUG: Role is '.htmlspecialchars($_SESSION['role']).' but requires gestionnaire</p>';
+    header('Location: /dashboard/index.php?error=access_denied');
     exit;
 }
 
-// If we get here, authentication passed
 $page_title = "Gestion des Utilisateurs";
 $active_page = "utilisateurs";
 
