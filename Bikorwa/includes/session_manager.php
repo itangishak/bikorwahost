@@ -89,8 +89,17 @@ class SessionManager
     /**
      * Configure session settings
      */
-    private function configureSession() 
+    private function configureSession()
     {
+        // Configuration changes are only allowed before a session starts
+        if (session_status() !== PHP_SESSION_NONE) {
+            // Another part of the application already started a session.
+            // Skip further configuration to avoid warnings like
+            // "ini_set(): Session ini settings cannot be changed".
+            error_log('SessionManager: Session already active, skipping session configuration');
+            return;
+        }
+
         // Only configure if headers haven't been sent
         if (!headers_sent()) {
             // Configure session settings before starting
@@ -99,14 +108,14 @@ class SessionManager
             ini_set('session.cookie_secure', 0); // Set to 1 for HTTPS
             ini_set('session.use_only_cookies', 1);
             ini_set('session.cookie_samesite', 'Strict');
-            
+
             // Set session lifetime
             ini_set('session.gc_maxlifetime', $this->sessionLifetime);
             ini_set('session.cookie_lifetime', $this->sessionLifetime);
-            
+
             // Set session name
             session_name($this->sessionName);
-            
+
             // Set up database session handler if available
             if ($this->pdo) {
                 try {
