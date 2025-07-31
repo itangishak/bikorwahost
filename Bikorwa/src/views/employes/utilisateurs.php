@@ -3,6 +3,19 @@
 require_once './../../../includes/session.php';
 require_once './../../../includes/init.php';
 
+// Use centralized session management
+global $sessionManager;
+if (!isset($sessionManager)) {
+    $sessionManager = SessionManager::getInstance();
+    $sessionManager->startSession();
+}
+
+// Standardized role check
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+    header('Location: /login.php');
+    exit;
+}
+
 $page_title = "Gestion des Utilisateurs";
 $active_page = "utilisateurs";
 
@@ -19,14 +32,6 @@ $conn = $database->getConnection();
 // Initialize auth
 $auth = new Auth($conn);
 $authController = new AuthController();
-
-// DEBUG: Check session before requireRole
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
-
-// Check if user is logged in and has gestionnaire role for user management
-requireRole('gestionnaire');
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
