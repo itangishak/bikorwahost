@@ -1,26 +1,47 @@
 <?php
 // Rapports Personnel - BIKORWA SHOP
-$page_title = "Rapports du Personnel";
-$active_page = "rapports";
 
-require_once __DIR__.'/../../../src/config/config.php';
-require_once __DIR__.'/../../../src/config/database.php';
-require_once __DIR__.'/../../../src/utils/Auth.php';
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-// Vérification de l'authentification
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
+ob_start();
 
-// Initialisation de la base de données
-$database = new Database();
-$pdo = $database->getConnection();
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Récupération des paramètres de filtre
-$date_debut = $_GET['date_debut'] ?? date('Y-m-01');
-$date_fin = $_GET['date_fin'] ?? date('Y-m-d');
-$export = $_GET['export'] ?? '';
+    // Include dependencies
+    require_once __DIR__.'/../../../src/config/config.php';
+    require_once __DIR__.'/../../../src/config/database.php';
+    require_once __DIR__.'/../../../includes/session.php';
+    require_once __DIR__.'/../../../src/utils/Auth.php';
+
+    // Vérification de l'authentification
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ||
+        !isset($_SESSION['role']) || $_SESSION['role'] !== 'gestionnaire') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            http_response_code(403);
+            exit(json_encode(['error' => 'Accès non autorisé']));
+        } else {
+            header('Location: ../auth/login.php');
+            exit;
+        }
+    }
+
+    $page_title = "Rapports du Personnel";
+    $active_page = "rapports";
+
+    // Initialisation de la base de données
+    $database = new Database();
+    $pdo = $database->getConnection();
+
+    // Récupération des paramètres de filtre
+    $date_debut = $_GET['date_debut'] ?? date('Y-m-01');
+    $date_fin = $_GET['date_fin'] ?? date('Y-m-d');
+    $export = $_GET['export'] ?? '';
 
 // Validation des dates
 if (!DateTime::createFromFormat('Y-m-d', $date_debut) || !DateTime::createFromFormat('Y-m-d', $date_fin)) {
@@ -1078,3 +1099,12 @@ function calculatePerformanceJS(staff) {
 </script>
 
 <?php require_once __DIR__.'/../../../src/views/layouts/footer.php'; ?>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Rapports Personnel Error: '.$e->getMessage());
+    exit;
+} ?>
