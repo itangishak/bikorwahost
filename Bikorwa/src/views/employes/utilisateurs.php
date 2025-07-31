@@ -1,28 +1,21 @@
 <?php
-// Enable all error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Error reporting - set to 0 in production or use error logging
+error_reporting(0);
+ini_set('display_errors', 0);
 
 // Start output buffering
 ob_start();
 
 try {
-    // Start session if not already started - REQUIRED for session access
+    // Start session if not already started
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
-    // Debug output to verify session
-    echo '<pre>Session Status: '; var_dump(session_status()); echo '</pre>';
-    echo '<pre>Session ID: '.session_id().'</pre>';
-    echo '<pre>Session Data: '; print_r($_SESSION); echo '</pre>';
 
     // Include database connection and config
     require_once('../../config/database.php');
     require_once('../../config/config.php');
     require_once('../../../includes/session.php');
-
-    echo '<p>Includes loaded successfully</p>';
 
     // Check if user is logged in
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
@@ -39,15 +32,13 @@ try {
     $page_title = "Gestion des Utilisateurs";
     $active_page = "utilisateurs";
 
-    echo '<p>Starting database connection</p>';
+    // Initialize database connection
     $database = new Database();
     $conn = $database->getConnection();
-    echo '<p>Database connected</p>';
 
-    echo '<p>Initializing auth</p>';
+    // Initialize auth
     $auth = new Auth($conn);
     $authController = new AuthController();
-    echo '<p>Auth initialized</p>';
 
     // Set default values and get search parameters
     $search = $_GET['search'] ?? '';
