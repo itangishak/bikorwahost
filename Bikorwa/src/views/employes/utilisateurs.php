@@ -20,6 +20,12 @@ try {
     require_once('../../config/config.php');
     require_once('../../../includes/session.php');
 
+    // Only include session manager if session not already configured
+    if (!isset($_SESSION['SESSION_MANAGER_LOADED'])) {
+        require_once('../../../includes/session_manager.php');
+        $_SESSION['SESSION_MANAGER_LOADED'] = true;
+    }
+
     // Verify login (flexible check)
     if (empty($_SESSION['logged_in'])) {
         header('Location: ../auth/login.php');
