@@ -20,6 +20,11 @@ $conn = $database->getConnection();
 $auth = new Auth($conn);
 $authController = new AuthController();
 
+// DEBUG: Check session before requireRole
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+
 // Check if user is logged in and has gestionnaire role for user management
 requireRole('gestionnaire');
 
