@@ -38,11 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         formData.append('action', 'add');
         formData.append('actif', form.querySelector('#add_actif').checked ? '1' : '0');
-        
+        formData.append('PHPSESSID', PHPSESSID);
+
         // Send AJAX request
         fetch('./process_users.php', {
             method: 'POST',
-            body: formData
+            body: formData,
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {
@@ -98,11 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         formData.append('action', 'update');
         formData.append('actif', form.querySelector('#edit_actif').checked ? '1' : '0');
-        
+        formData.append('PHPSESSID', PHPSESSID);
+
         // Send AJAX request
         fetch('./process_users.php', {
             method: 'POST',
-            body: formData
+            body: formData,
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {
@@ -192,7 +196,7 @@ function viewUser(id) {
     document.body.style.cursor = 'wait';
     
     // Fetch user details
-    fetch(`./get_user.php?id=${id}`)
+    fetch(`./get_user.php?id=${id}&PHPSESSID=${PHPSESSID}`, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => {
             // Reset cursor
@@ -249,7 +253,7 @@ function editUser(id) {
     document.body.style.cursor = 'wait';
     
     // Fetch user details
-    fetch(`./get_user.php?id=${id}`)
+    fetch(`./get_user.php?id=${id}&PHPSESSID=${PHPSESSID}`, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => {
             // Reset cursor
@@ -319,7 +323,8 @@ function deleteUser(id, nom) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `action=delete&id=${id}`
+            body: `action=delete&id=${id}&PHPSESSID=${encodeURIComponent(PHPSESSID)}`,
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {
@@ -401,7 +406,8 @@ function toggleStatus(id, isActive) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `action=toggle_status&id=${id}&actif=${isActive ? '0' : '1'}`
+            body: `action=toggle_status&id=${id}&actif=${isActive ? '0' : '1'}&PHPSESSID=${encodeURIComponent(PHPSESSID)}`,
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {

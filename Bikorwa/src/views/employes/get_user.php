@@ -13,6 +13,13 @@ require_once './../../../src/config/database.php';
 require_once './../../../src/utils/Auth.php';
 require_once './../../../src/models/User.php';
 require_once './../../../src/controllers/AuthController.php';
+if (session_status() === PHP_SESSION_NONE) {
+    if (isset($_GET['PHPSESSID'])) {
+        session_id($_GET['PHPSESSID']);
+    } elseif (isset($_POST['PHPSESSID'])) {
+        session_id($_POST['PHPSESSID']);
+    }
+}
 require_once './../../../includes/session.php';
 
 // Initialize database connection
