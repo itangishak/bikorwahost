@@ -1,36 +1,46 @@
 <?php
-// Employes listing page with CRUD for BIKORWA SHOP
-$page_title = "Liste des Employés";
-$active_page = "employes";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
-require_once './../../../src/models/User.php';
-require_once './../../../src/controllers/AuthController.php';
-require_once './../../../src/utils/Settings.php';
+ob_start();
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
-$settingsObj = new Settings($conn);
+try {
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Initialize auth
-$auth = new Auth($conn);
-$authController = new AuthController();
+    // Include dependencies
+    require_once('../../config/database.php');
+    require_once('../../config/config.php');
+    require_once('../../../includes/session.php');
 
-// Check if user is logged in
-if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
+    // Verify authentication
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header('Location: ../auth/login.php');
+        exit;
+    }
 
-// Set default values and get search parameters
-$search = $_GET['search'] ?? '';
-$statut = $_GET['statut'] ?? '';
-$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$items_per_page = (int)$settingsObj->get('items_per_page', 10);
-$offset = ($current_page - 1) * $items_per_page;
+    // Page settings
+    $page_title = "Liste des Employés";
+    $active_page = "employes";
+
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    $settingsObj = new Settings($conn);
+
+    // Initialize auth
+    $auth = new Auth($conn);
+    $authController = new AuthController();
+
+    // Set default values and get search parameters
+    $search = $_GET['search'] ?? '';
+    $statut = $_GET['statut'] ?? '';
+    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $items_per_page = (int)$settingsObj->get('items_per_page', 10);
+    $offset = ($current_page - 1) * $items_per_page;
 
 // Build the base query
 $query = "SELECT * FROM employes WHERE 1=1";
@@ -1101,6 +1111,15 @@ require_once __DIR__ . '/../layouts/header.php';
 </script>
 
 <?php
-// Include footer
-require_once __DIR__ . '/../layouts/footer.php';
+    // Include footer
+    require_once __DIR__ . '/../layouts/footer.php';
 ?>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Employes Liste Error: '.$e->getMessage());
+    exit;
+}
