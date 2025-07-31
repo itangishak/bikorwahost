@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewDetteModal.show();
         
         // Fetch data
-        fetch(`../../../src/api/dettes/get_dette.php?id=${detteId}`)
+        fetch(`${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('saveDetteBtn').disabled = true;
         
         // Fetch data
-        fetch(`../../../src/api/dettes/get_dette.php?id=${detteId}`)
+        fetch(`${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load debt for payment
     function loadDetteForPayment(detteId) {
         // Fetch data
-        fetch(`../../../src/api/dettes/get_dette.php?id=${detteId}`)
+        fetch(`${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -305,11 +305,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Prepare form data
         const formData = new FormData(form);
-        formData.append('utilisateur_id', '<?php echo $current_user_id; ?>');
+        formData.append('utilisateur_id', currentUserId);
         
         // Determine if this is a create or update operation
         const isUpdate = formData.get('id') !== '';
-        const url = isUpdate ? '../../../src/api/dettes/update_dette.php' : '../../../src/api/dettes/add_dette.php';
+        const url = isUpdate ? `${baseUrl}/src/api/dettes/update_dette.php` : `${baseUrl}/src/api/dettes/add_dette.php`;
         
         // Submit data
         fetch(url, {
@@ -383,10 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Prepare form data
         const formData = new FormData(form);
-        formData.append('utilisateur_id', '<?php echo $current_user_id; ?>');
+        formData.append('utilisateur_id', currentUserId);
         
         // Submit data
-        fetch('../../../src/api/dettes/add_paiement.php', {
+        fetch(`${baseUrl}/src/api/dettes/add_paiement.php`, {
             method: 'POST',
             body: formData
         })
@@ -471,10 +471,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare data
         const formData = new FormData();
         formData.append('id', detteId);
-        formData.append('utilisateur_id', '<?php echo $current_user_id; ?>');
+        formData.append('utilisateur_id', currentUserId);
         
         // Submit data
-        fetch('../../../src/api/dettes/cancel_dette.php', {
+        fetch(`${baseUrl}/src/api/dettes/cancel_dette.php`, {
             method: 'POST',
             body: formData
         })
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
         invoiceSelect.innerHTML = '<option value="">Chargement des factures...</option>';
         invoiceSelect.disabled = true;
         
-        fetch(`../../../src/api/dettes/get_client_invoices.php?client_id=${clientId}`)
+        fetch(`${baseUrl}/src/api/dettes/get_client_invoices.php?client_id=${clientId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

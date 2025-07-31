@@ -779,6 +779,8 @@ require_once __DIR__ . '/../layouts/header.php';
                 // Store user role for permission checks
                 const userRole = '<?php echo $userRole; ?>';
                 const isManager = <?php echo ($userRole === 'gestionnaire') ? 'true' : 'false'; ?>;
+                const currentUserId = <?php echo (int)($current_user_id ?? 0); ?>;
+                const baseUrl = '<?php echo BASE_URL; ?>';
             </script>
             
             <!-- External JavaScript for debt management functionality -->
