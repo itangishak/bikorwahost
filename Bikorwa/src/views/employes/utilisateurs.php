@@ -652,7 +652,10 @@ try {
             </div>
         </div>
     </div>
-    
+
+    <script>
+        const PHPSESSID = '<?php echo session_id(); ?>';
+    </script>
     <script src="./utilisateurs_script.js"></script>
     
     <?php
