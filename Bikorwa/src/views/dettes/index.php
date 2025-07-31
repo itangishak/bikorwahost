@@ -1,35 +1,49 @@
 <?php
-// Debt Management page for BIKORWA SHOP
-$page_title = "Gestion des Dettes";
-$active_page = "dettes";
+// Production error settings
+error_reporting(0);
+ini_set('display_errors', 0);
 
-require_once './../../../src/config/config.php';
-require_once './../../../src/config/database.php';
-require_once './../../../src/utils/Auth.php';
+ob_start();
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+try {
+    // Debt Management page for BIKORWA SHOP
+    $page_title = "Gestion des Dettes";
+    $active_page = "dettes";
 
-// Initialize authentication
-$auth = new Auth($conn);
+    // Start session if not active
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Check if user is logged in and has appropriate role
-// Redirect unauthenticated users to the login page rather than the dashboard
-if (!$auth->isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/src/views/auth/login.php');
-    exit;
-}
+    // Include dependencies
+    require_once '../../config/config.php';
+    require_once '../../config/database.php';
+    require_once '../../../includes/session.php';
+    require_once '../../utils/Auth.php';
 
-// Allow access to both gestionnaires and receptionnistes with appropriate privileges
-$userRole = $_SESSION['role'] ?? '';
-if (!$auth->hasAccess('dettes') && $userRole !== 'gestionnaire') {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
 
-// Get current user ID for logging actions
-$current_user_id = $_SESSION['user_id'] ?? 0;
+    // Initialize authentication
+    $auth = new Auth($conn);
+
+    // Check if user is logged in and has appropriate role
+    // Redirect unauthenticated users to the login page rather than the dashboard
+    if (!$auth->isLoggedIn()) {
+        header('Location: ' . BASE_URL . '/src/views/auth/login.php');
+        exit;
+    }
+
+    // Allow access to both gestionnaires and receptionnistes with appropriate privileges
+    $userRole = $_SESSION['role'] ?? '';
+    if (!$auth->hasAccess('dettes') && $userRole !== 'gestionnaire') {
+        header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
+        exit;
+    }
+
+    // Get current user ID for logging actions
+    $current_user_id = $_SESSION['user_id'] ?? 0;
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
@@ -777,3 +791,12 @@ require_once __DIR__ . '/../layouts/header.php';
 // Include footer
 require_once __DIR__ . '/../layouts/footer.php';
 ?>
+<?php } catch (Exception $e) {
+    echo '<div style="background:#ffeeee;padding:20px;border:2px solid red;margin:20px">';
+    echo '<h3>Error Debug Information</h3>';
+    echo '<p><strong>Error:</strong> '.htmlspecialchars($e->getMessage()).'</p>';
+    echo '<pre>Stack Trace: '.htmlspecialchars($e->getTraceAsString()).'</pre>';
+    echo '</div>';
+    error_log('Dettes Error: '.$e->getMessage());
+    exit;
+}
