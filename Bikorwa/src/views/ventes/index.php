@@ -942,9 +942,9 @@ $(function() {
                         const vente = response.vente;
                         const produits = response.produits;
                         
-                        // Format date
-                        const date = new Date(vente.date_vente).toLocaleString('fr-FR');
-                        
+                        // Format date for date input (YYYY-MM-DD)
+                        const date = vente.date_vente ? vente.date_vente.split(' ')[0] : '';
+
                         // Update sale info
                         $('#view-numero-facture').text(vente.numero_facture);
                         $('#edit-date').val(date);
