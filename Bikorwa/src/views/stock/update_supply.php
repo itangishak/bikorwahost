@@ -1,12 +1,13 @@
 <?php
-require_once __DIR__ . '/../../../includes/init.php';
-require_once __DIR__ . '/../../../src/config/database.php';
+require_once __DIR__ . '/../../includes/config.php';
 
-// Only gestionnaires can update supply entries
-requireManager();
+// Check permissions
+if ($_SESSION['role'] !== 'gestionnaire') {
+    echo json_encode(['success' => false, 'message' => 'Permission denied']);
+    exit;
+}
 
-$database = new Database();
-$pdo = $database->getConnection();
+$conn = require __DIR__ . '/../../includes/db.php';
 
 $id = $_POST['id'] ?? null;
 
@@ -33,7 +34,7 @@ $query = "UPDATE mouvements_stock SET
     note = ? 
 WHERE id = ?";
 
-$stmt = $pdo->prepare($query);
+$stmt = $conn->prepare($query);
 $success = $stmt->execute([
     $produit_id,
     $quantite,
