@@ -17,11 +17,7 @@ $conn = $database->getConnection();
 $auth = new Auth($conn);
 $authController = new AuthController();
 
-// Check if user is logged in and has access to user management
-if (!$auth->isLoggedIn() || !$auth->hasAccess('gestionnaire')) {
-    header('Location: ' . BASE_URL . '/src/views/dashboard/index.php');
-    exit;
-}
+
 
 // Set default values and get search parameters
 $search = $_GET['search'] ?? '';
