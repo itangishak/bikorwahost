@@ -81,15 +81,15 @@ class Vente {
             // Si la vente est à crédit, créer une dette
             if($this->statut_paiement == 'credit' || $this->statut_paiement == 'partiel') {
                 $montant_restant = $this->montant_total - $this->montant_paye;
-                
+
                 if($montant_restant > 0 && $this->client_id) {
-                    $query = "INSERT INTO dettes 
-                              SET client_id = :client_id, 
-                                  vente_id = :vente_id, 
-                                  montant_initial = :montant_initial, 
-                                  montant_restant = :montant_restant, 
+                    $query = "INSERT INTO dettes
+                              SET client_id = :client_id,
+                                  vente_id = :vente_id,
+                                  montant_initial = :montant_initial,
+                                  montant_restant = :montant_restant,
                                   statut = :statut";
-                    
+
                     $stmt = $this->conn->prepare($query);
                     $stmt->bindParam(":client_id", $this->client_id);
                     $stmt->bindParam(":vente_id", $this->id);
@@ -100,10 +100,120 @@ class Vente {
                     $stmt->execute();
                 }
             }
-            
+
+            // Traiter les détails de la vente avec la logique FIFO
+            foreach ($this->details as $detail) {
+                $produit_id = $detail['produit_id'];
+                $quantite = $detail['quantite'];
+                $prix_vente = $detail['prix_unitaire'];
+
+                if ($quantite <= 0) {
+                    throw new Exception('Quantité invalide pour le produit ID: ' . $produit_id);
+                }
+
+                // Récupérer les lots de stock disponibles (FIFO)
+                $queryStock = "SELECT id, quantity_remaining, prix_unitaire
+                               FROM mouvements_stock
+                               WHERE produit_id = :produit_id
+                                 AND type_mouvement = 'entree'
+                                 AND quantity_remaining > 0
+                               ORDER BY date_mouvement ASC";
+                $stmtStock = $this->conn->prepare($queryStock);
+                $stmtStock->bindParam(':produit_id', $produit_id);
+                $stmtStock->execute();
+                $batches = $stmtStock->fetchAll(PDO::FETCH_ASSOC);
+
+                $totalDisponible = 0;
+                foreach ($batches as $batch) {
+                    $totalDisponible += $batch['quantity_remaining'];
+                }
+
+                if ($totalDisponible < $quantite) {
+                    throw new Exception('Stock insuffisant pour le produit ID: ' . $produit_id);
+                }
+
+                $quantite_restante = $quantite;
+                $cout_total = 0;
+                $lots_utilises = [];
+
+                foreach ($batches as $batch) {
+                    if ($quantite_restante <= 0) break;
+
+                    $utilise = min($batch['quantity_remaining'], $quantite_restante);
+                    $cout_total += $utilise * $batch['prix_unitaire'];
+                    $lots_utilises[] = [
+                        'id' => $batch['id'],
+                        'quantite_restante' => $batch['quantity_remaining'] - $utilise
+                    ];
+                    $quantite_restante -= $utilise;
+                }
+
+                $prix_achat_moyen = $cout_total / $quantite;
+                $montant_produit = $quantite * $prix_vente;
+                $benefice = $montant_produit - ($quantite * $prix_achat_moyen);
+
+                // Insérer le détail de vente
+                $queryDetail = "INSERT INTO " . $this->table_details . "
+                               SET vente_id = :vente_id,
+                                   produit_id = :produit_id,
+                                   quantite = :quantite,
+                                   prix_unitaire = :prix_unitaire,
+                                   montant_total = :montant_total,
+                                   prix_achat_unitaire = :prix_achat_unitaire,
+                                   benefice = :benefice";
+                $stmtDetail = $this->conn->prepare($queryDetail);
+                $stmtDetail->bindParam(':vente_id', $this->id);
+                $stmtDetail->bindParam(':produit_id', $produit_id);
+                $stmtDetail->bindParam(':quantite', $quantite);
+                $stmtDetail->bindParam(':prix_unitaire', $prix_vente);
+                $stmtDetail->bindParam(':montant_total', $montant_produit);
+                $stmtDetail->bindParam(':prix_achat_unitaire', $prix_achat_moyen);
+                $stmtDetail->bindParam(':benefice', $benefice);
+                $stmtDetail->execute();
+
+                // Mettre à jour les quantités restantes des lots
+                foreach ($lots_utilises as $lot) {
+                    $queryUpdate = "UPDATE mouvements_stock
+                                    SET quantity_remaining = :quantity_remaining
+                                    WHERE id = :id";
+                    $stmtUpdate = $this->conn->prepare($queryUpdate);
+                    $stmtUpdate->bindParam(':quantity_remaining', $lot['quantite_restante']);
+                    $stmtUpdate->bindParam(':id', $lot['id']);
+                    $stmtUpdate->execute();
+                }
+
+                // Enregistrer le mouvement de sortie
+                $reference = "Vente #" . $this->numero_facture;
+                $valeur_totale = $montant_produit;
+                $querySortie = "INSERT INTO mouvements_stock
+                                 (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale,
+                                  reference, utilisateur_id, note, quantity_remaining)
+                                 VALUES (:produit_id, 'sortie', :quantite, :prix_unitaire, :valeur_totale,
+                                         :reference, :utilisateur_id, :note, 0)";
+                $stmtSortie = $this->conn->prepare($querySortie);
+                $stmtSortie->bindParam(':produit_id', $produit_id);
+                $stmtSortie->bindParam(':quantite', $quantite);
+                $stmtSortie->bindParam(':prix_unitaire', $prix_vente);
+                $stmtSortie->bindParam(':valeur_totale', $valeur_totale);
+                $stmtSortie->bindParam(':reference', $reference);
+                $stmtSortie->bindParam(':utilisateur_id', $this->utilisateur_id);
+                $stmtSortie->bindParam(':note', $this->note);
+                $stmtSortie->execute();
+
+                // Mettre à jour le stock global
+                $queryStockUpdate = "UPDATE stock
+                                     SET quantite = quantite - :quantite,
+                                         date_mise_a_jour = NOW()
+                                     WHERE produit_id = :produit_id";
+                $stmtStockUpdate = $this->conn->prepare($queryStockUpdate);
+                $stmtStockUpdate->bindParam(':quantite', $quantite);
+                $stmtStockUpdate->bindParam(':produit_id', $produit_id);
+                $stmtStockUpdate->execute();
+            }
+
             // Valider la transaction
             $this->conn->commit();
-            
+
             return $this->id;
         } catch (Exception $e) {
             // Annuler la transaction en cas d'erreur
