@@ -354,14 +354,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
         }
 
         // Get sale info
-        $stmt = $pdo->prepare("SELECT numero_facture, montant_paye FROM ventes WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT numero_facture, utilisateur_id FROM ventes WHERE id = ?");
         $stmt->execute([$vente_id]);
         $venteInfo = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$venteInfo) {
             throw new Exception('Vente introuvable');
         }
         $numero_facture = $venteInfo['numero_facture'];
-        $montant_paye = floatval($venteInfo['montant_paye']);
+        $current_user = $_SESSION['user_id'];
+        $note_update = 'Modification vente #' . $numero_facture;
 
         // Get existing details
         $stmt = $pdo->prepare("SELECT * FROM details_ventes WHERE vente_id = ?");
@@ -391,8 +392,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
                 $stmt = $pdo->prepare("UPDATE details_ventes SET quantite=?, prix_unitaire=?, montant_total=? WHERE id=?");
                 $stmt->execute([$qty, $price, $amount, $detail_id]);
 
-                $stmt = $pdo->prepare("UPDATE mouvements_stock SET quantite=?, valeur_totale=? WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
-                $stmt->execute([$qty, $amount, $prod_id, $reference]);
+                $stmt = $pdo->prepare("UPDATE mouvements_stock SET quantite=?, prix_unitaire=?, valeur_totale=?, utilisateur_id=?, note=?, date_mouvement=? WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
+                $stmt->execute([$qty, $price, $amount, $current_user, $note_update, $date_vente, $prod_id, $reference]);
 
                 if ($diff != 0) {
                     if ($diff < 0) {
@@ -418,8 +419,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
                 $stmt->execute([$vente_id, $prod_id, $qty, $price, $amount]);
                 $new_detail_id = $pdo->lastInsertId();
 
-                $stmt = $pdo->prepare("INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale, reference, utilisateur_id, quantity_remaining) VALUES (?, 'sortie', ?, ?, ?, ?, ?, 0)");
-                $stmt->execute([$prod_id, $qty, $price, $amount, $reference, $_SESSION['user_id']]);
+                $note_new = 'Ajout produit vente #' . $numero_facture;
+                $stmt = $pdo->prepare("INSERT INTO mouvements_stock (produit_id, type_mouvement, quantite, prix_unitaire, valeur_totale, reference, date_mouvement, utilisateur_id, note, quantity_remaining) VALUES (?, 'sortie', ?, ?, ?, ?, ?, ?, ?, 0)");
+                $stmt->execute([$prod_id, $qty, $price, $amount, $reference, $date_vente, $current_user, $note_new]);
 
                 $stmt = $pdo->prepare("SELECT quantite FROM stock WHERE produit_id=?");
                 $stmt->execute([$prod_id]);
@@ -440,6 +442,10 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
                 $stmt = $pdo->prepare("UPDATE stock SET quantite = quantite + ?, date_mise_a_jour = NOW() WHERE produit_id=?");
                 $stmt->execute([$row['quantite'], $row['produit_id']]);
 
+                $note_del = 'Suppression produit vente #' . $numero_facture;
+                $stmt = $pdo->prepare("UPDATE mouvements_stock SET utilisateur_id=?, note=?, date_mouvement=? WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
+                $stmt->execute([$current_user, $note_del, $date_vente, $row['produit_id'], $reference]);
+
                 $stmt = $pdo->prepare("DELETE FROM mouvements_stock WHERE produit_id=? AND reference=? AND type_mouvement='sortie'");
                 $stmt->execute([$row['produit_id'], $reference]);
 
@@ -449,9 +455,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
         }
 
         // Update sale totals
-        $montant_paye = min($montant_paye, $total);
-        $stmt = $pdo->prepare("UPDATE ventes SET date_vente=?, montant_total=?, montant_paye=? WHERE id=?");
-        $stmt->execute([$date_vente, $total, $montant_paye, $vente_id]);
+        $stmt = $pdo->prepare("UPDATE ventes SET date_vente=?, montant_total=?, montant_paye=?, utilisateur_id=? WHERE id=?");
+        $stmt->execute([$date_vente, $total, $total, $current_user, $vente_id]);
 
         $pdo->commit();
 
@@ -636,7 +641,6 @@ EOT;
                     </div>
                 </div>
                 <h5 class="mt-4">Produits</h5>
-                <button type="button" id="add-product" class="btn btn-sm btn-primary mb-2">Ajouter un produit</button>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -656,6 +660,13 @@ EOT;
                                 <th colspan="3" class="text-right">Total:</th>
                                 <th id="view-total-amount"></th>
                                 <th></th>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <button type="button" id="add-product" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
@@ -1126,6 +1137,8 @@ $(function() {
             total += amount;
         });
         $('#view-total-amount').text(total.toLocaleString('fr-FR') + ' BIF');
+        $('#view-montant-total').text(total.toLocaleString('fr-FR'));
+        $('#view-montant-paye').text(total.toLocaleString('fr-FR'));
     }
     
     // Function to setup cancel buttons
