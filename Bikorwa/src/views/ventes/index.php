@@ -475,8 +475,10 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_vente') {
 // Include header layout only (not main.php)
 require_once __DIR__ . '/../layouts/header.php';
 
-// Add Toastr CSS for notifications and custom styles
+// Add Select2 and Toastr CSS for notifications and custom styles
 echo <<<EOT
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <!-- Toastr CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- Custom styles -->
@@ -505,6 +507,13 @@ echo <<<EOT
     .badge {
         font-weight: 500;
         padding: 0.35em 0.65em;
+    }
+    .new-row {
+        background-color: #e7f3fe;
+    }
+    .stock-info {
+        display: block;
+        font-size: 0.8rem;
     }
 </style>
 EOT;
@@ -756,6 +765,19 @@ $(function() {
     let totalPages = 0;
     let currentVenteId = null;
     let availableProducts = [];
+
+    function loadAvailableProducts(callback) {
+        if (availableProducts.length === 0) {
+            $.getJSON('nouvelle.php?action=get_produits&with_stock=true', function(res) {
+                if (res.success) {
+                    availableProducts = res.produits;
+                }
+                if (callback) callback();
+            });
+        } else if (callback) {
+            callback();
+        }
+    }
     
     // Load sales on page load
     loadVentes();
@@ -1023,6 +1045,18 @@ $(function() {
                         $('#view-total-amount').text(totalAmount.toLocaleString('fr-FR') + ' BIF');
 
                         bindRowEvents();
+
+                        loadAvailableProducts(function() {
+                            $('#view-produits tr').each(function() {
+                                const prodId = $(this).find('.product-id').val();
+                                const product = availableProducts.find(p => p.id == prodId);
+                                if (product) {
+                                    const currentQty = parseFloat($(this).find('.qty').val()) || 0;
+                                    $(this).find('.qty').attr('max', currentQty + parseFloat(product.quantite_stock));
+                                    $(this).find('td:first').append(`<small class="text-muted stock-info">Stock: ${product.quantite_stock}</small>`);
+                                }
+                            });
+                        });
                         
                     } else {
                         // Show error
@@ -1040,15 +1074,29 @@ $(function() {
     }
 
     function bindRowEvents() {
-        // Recalculate totals when quantity or price changes
+        // Recalculate totals when quantity or price changes with stock validation
         $('#view-produits').off('input', '.qty, .price').on('input', '.qty, .price', function() {
+            if ($(this).hasClass('qty')) {
+                const max = parseFloat($(this).attr('max')) || Infinity;
+                let val = parseFloat($(this).val()) || 0;
+                if (val > max) {
+                    toastr.warning('La quantité dépasse le stock disponible');
+                    val = max;
+                    $(this).val(val);
+                }
+            }
             recalcTotals();
         });
 
-        // Update price when product selection changes
+        // Update price and stock info when product selection changes
         $('#view-produits').off('change', '.product-select').on('change', '.product-select', function() {
-            const prix = $(this).find('option:selected').data('prix') || 0;
-            $(this).closest('tr').find('.price').val(prix);
+            const selected = $(this).find('option:selected');
+            const prix = selected.data('prix') || 0;
+            const stock = selected.data('stock') || 0;
+            const row = $(this).closest('tr');
+            row.find('.price').val(prix);
+            row.find('.qty').attr({ max: stock }).val(1);
+            row.find('.stock-info').text('Stock: ' + stock);
             recalcTotals();
         });
 
@@ -1060,16 +1108,7 @@ $(function() {
 
         // Add product row
         $('#add-product').off('click').on('click', function() {
-            if (availableProducts.length === 0) {
-                $.getJSON('nouvelle.php?action=get_produits&with_stock=true', function(res) {
-                    if (res.success) {
-                        availableProducts = res.produits;
-                        addProductRow();
-                    }
-                });
-            } else {
-                addProductRow();
-            }
+            loadAvailableProducts(addProductRow);
         });
 
         // Save changes
@@ -1113,18 +1152,23 @@ $(function() {
         if (availableProducts.length === 0) return;
         let options = '';
         $.each(availableProducts, function(_, p) {
-            options += `<option value="${p.id}" data-prix="${p.prix_vente}">${p.nom} (${p.code})</option>`;
+            options += `<option value="${p.id}" data-prix="${p.prix_vente}" data-stock="${p.quantite_stock}">${p.nom} (${p.code})</option>`;
         });
         const row = `
-            <tr data-detail-id="new-${Date.now()}">
-                <td><select class="form-control product-select">${options}</select></td>
-                <td><input type="number" class="form-control qty" value="1" /></td>
+            <tr class="table-info new-row" data-detail-id="new-${Date.now()}">
+                <td>
+                    <select class="form-control product-select">${options}</select>
+                    <small class="text-muted stock-info"></small>
+                </td>
+                <td><input type="number" class="form-control qty" value="1" min="1" /></td>
                 <td><input type="number" class="form-control price" value="0" /></td>
                 <td class="amount">0 BIF</td>
                 <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
             </tr>`;
         $('#view-produits').append(row);
-        $('#view-produits tr:last .product-select').trigger('change');
+        const select = $('#view-produits tr:last .product-select');
+        select.select2({ dropdownParent: $('#view-modal') });
+        select.trigger('change');
     }
 
     function recalcTotals() {
@@ -1229,6 +1273,8 @@ $(function() {
 });
 </script>
 
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- Toastr JS (must be included after jQuery from footer) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
