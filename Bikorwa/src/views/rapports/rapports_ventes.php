@@ -136,13 +136,12 @@ try {
     $gross_profit = 0;
     $net_profit = 0;
     
-    // 1. Coût des Marchandises Vendues - calculé à partir du prix d'achat des produits vendus
+    // 1. Coût des Marchandises Vendues - calculé à partir des mouvements de stock (sorties)
     $cogs_query = "SELECT
-            SUM(dv.prix_achat_unitaire * dv.quantite) AS total_cogs
-        FROM details_ventes dv
-        JOIN ventes v ON dv.vente_id = v.id
-        WHERE DATE(v.date_vente) BETWEEN :date_debut AND :date_fin
-        AND v.statut_vente != 'annulee'";
+            SUM(valeur_totale) AS total_cogs
+        FROM mouvements_stock
+        WHERE type_mouvement = 'sortie'
+        AND DATE(date_mouvement) BETWEEN :date_debut AND :date_fin";
     $cogs_stmt = $pdo->prepare($cogs_query);
     $cogs_stmt->execute([':date_debut' => $date_debut, ':date_fin' => $date_fin]);
     $cogs_result = $cogs_stmt->fetch(PDO::FETCH_ASSOC);
