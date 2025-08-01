@@ -274,21 +274,21 @@ require_once __DIR__ . '/../layouts/header.php';
     }
  </style>
  <div class="container-fluid px-4">
-     <!-- Page Header -->
-     <div class="d-flex justify-content-between align-items-center mb-4">
-         <div>
-             <h1 class="h3 mb-2 text-gray-800"><?php echo $page_title; ?></h1>
-             <nav aria-label="breadcrumb">
-                 <ol class="breadcrumb mb-0">
-                     <li class="breadcrumb-item"><a href="../dashboard/index.php" class="text-decoration-none">Tableau de bord</a></li>
-                     <li class="breadcrumb-item active"><?php echo $page_title; ?></li>
-                 </ol>
-             </nav>
-         </div>
-         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detteModal">
-             <i class="fas fa-plus-circle me-2"></i>Nouvelle dette
-         </button>
-     </div>
+    <!-- Page Header -->
+    <header class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-2 text-gray-800"><?php echo $page_title; ?></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="../dashboard/index.php" class="text-decoration-none">Tableau de bord</a></li>
+                    <li class="breadcrumb-item active"><?php echo $page_title; ?></li>
+                </ol>
+            </nav>
+        </div>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detteModal">
+            <i class="fas fa-plus-circle me-2"></i>Nouvelle dette
+        </button>
+    </header>
 
      <!-- Action buttons and filters -->
      <div class="row mb-4">
