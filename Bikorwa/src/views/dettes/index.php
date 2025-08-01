@@ -272,23 +272,32 @@ require_once __DIR__ . '/../layouts/header.php';
             margin-bottom: 0.5rem;
         }
     }
-</style>
-<div class="container-fluid px-4">
-    <h1 class="mt-4"><?php echo $page_title; ?></h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="../dashboard/index.php">Tableau de bord</a></li>
-        <li class="breadcrumb-item active"><?php echo $page_title; ?></li>
-    </ol>
-    
-    <!-- Action buttons and filters -->
-    <div class="row mb-4">
-        <div class="col-md-6">
+ </style>
+ <div class="container-fluid px-4">
+     <!-- Page Header -->
+     <div class="d-flex justify-content-between align-items-center mb-4">
+         <div>
+             <h1 class="h3 mb-2 text-gray-800"><?php echo $page_title; ?></h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb mb-0">
+                     <li class="breadcrumb-item"><a href="../dashboard/index.php" class="text-decoration-none">Tableau de bord</a></li>
+                     <li class="breadcrumb-item active"><?php echo $page_title; ?></li>
+                 </ol>
+             </nav>
+         </div>
+         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detteModal">
+             <i class="fas fa-plus-circle me-2"></i>Nouvelle dette
+         </button>
+     </div>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#filterCollapse">
-                <i class="fas fa-filter me-1"></i>Filtres avancés
-            </button>
-        </div>
-    </div>
+     <!-- Action buttons and filters -->
+     <div class="row mb-4">
+         <div class="col-md-6">
+             <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#filterCollapse">
+                 <i class="fas fa-filter me-1"></i>Filtres avancés
+             </button>
+         </div>
+     </div>
     
     <!-- Collapsible Filter Form -->
     <div class="collapse mb-4" id="filterCollapse">
