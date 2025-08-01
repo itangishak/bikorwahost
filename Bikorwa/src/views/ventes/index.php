@@ -768,12 +768,15 @@ $(function() {
 
     function loadAvailableProducts(callback) {
         if (availableProducts.length === 0) {
-            $.getJSON('nouvelle.php?action=get_produits&with_stock=true', function(res) {
-                if (res.success) {
-                    availableProducts = res.produits;
+            $.getJSON(
+                BASE_URL + '/src/views/ventes/nouvelle.php?action=get_produits&with_stock=true',
+                function(res) {
+                    if (res.success) {
+                        availableProducts = res.produits;
+                    }
+                    if (callback) callback();
                 }
-                if (callback) callback();
-            });
+            );
         } else if (callback) {
             callback();
         }
@@ -1088,15 +1091,24 @@ $(function() {
             recalcTotals();
         });
 
-        // Update price and stock info when product selection changes
-        $('#view-produits').off('change', '.product-select').on('change', '.product-select', function() {
-            const selected = $(this).find('option:selected');
-            const prix = selected.data('prix') || 0;
-            const stock = selected.data('stock') || 0;
+        // Update price and stock info when product selection changes (Select2)
+        $('#view-produits').off('select2:select', '.product-select').on('select2:select', '.product-select', function(e) {
+            const produit = e.params.data.produit || {};
             const row = $(this).closest('tr');
+            const prix = produit.prix_vente || 0;
+            const stock = produit.quantite_stock || 0;
             row.find('.price').val(prix);
             row.find('.qty').attr({ max: stock }).val(1);
             row.find('.stock-info').text('Stock: ' + stock);
+            recalcTotals();
+        });
+
+        // Reset fields when selection is cleared
+        $('#view-produits').off('select2:clear', '.product-select').on('select2:clear', '.product-select', function() {
+            const row = $(this).closest('tr');
+            row.find('.price').val('');
+            row.find('.qty').val(1).attr('max', '');
+            row.find('.stock-info').text('');
             recalcTotals();
         });
 
@@ -1107,9 +1119,7 @@ $(function() {
         });
 
         // Add product row
-        $('#add-product').off('click').on('click', function() {
-            loadAvailableProducts(addProductRow);
-        });
+        $('#add-product').off('click').on('click', addProductRow);
 
         // Save changes
         $('#save-changes').off('click').on('click', function() {
@@ -1149,15 +1159,10 @@ $(function() {
     }
 
     function addProductRow() {
-        if (availableProducts.length === 0) return;
-        let options = '';
-        $.each(availableProducts, function(_, p) {
-            options += `<option value="${p.id}" data-prix="${p.prix_vente}" data-stock="${p.quantite_stock}">${p.nom} (${p.code})</option>`;
-        });
         const row = `
             <tr class="table-info new-row" data-detail-id="new-${Date.now()}">
                 <td>
-                    <select class="form-control product-select">${options}</select>
+                    <select class="form-control product-select" style="width:100%;"><option></option></select>
                     <small class="text-muted stock-info"></small>
                 </td>
                 <td><input type="number" class="form-control qty" value="1" min="1" /></td>
@@ -1166,9 +1171,56 @@ $(function() {
                 <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
             </tr>`;
         $('#view-produits').append(row);
+
         const select = $('#view-produits tr:last .product-select');
-        select.select2({ dropdownParent: $('#view-modal') });
-        select.trigger('change');
+        select.select2({
+            dropdownParent: $('#view-modal'),
+            placeholder: 'Rechercher un produit',
+            allowClear: true,
+            ajax: {
+                url: BASE_URL + '/src/views/ventes/nouvelle.php?action=get_produits',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    const existingIds = [];
+                    $('#view-produits tr').each(function() {
+                        const id = $(this).find('.product-id').val() || $(this).find('.product-select').val();
+                        if (id) existingIds.push(id);
+                    });
+                    return {
+                        search: params.term,
+                        page: params.page || 1,
+                        with_stock: true,
+                        exclude: existingIds.join(',')
+                    };
+                },
+                processResults: function(data, params) {
+                    params.page = params.page || 1;
+                    const existingIds = [];
+                    $('#view-produits tr').each(function() {
+                        const id = $(this).find('.product-id').val() || $(this).find('.product-select').val();
+                        if (id) existingIds.push(String(id));
+                    });
+                    const produits = $.map(data.produits, function(produit) {
+                        if (existingIds.includes(String(produit.id))) {
+                            return null;
+                        }
+                        return {
+                            id: produit.id,
+                            text: produit.nom + ' - ' + produit.code,
+                            produit: produit
+                        };
+                    });
+                    return {
+                        results: produits,
+                        pagination: {
+                            more: (params.page * 10) < data.total_count
+                        }
+                    };
+                },
+                cache: false
+            }
+        });
     }
 
     function recalcTotals() {
