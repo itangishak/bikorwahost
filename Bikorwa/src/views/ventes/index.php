@@ -186,6 +186,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'cancel_sale') {
 if (isset($_GET['action']) && $_GET['action'] === 'get_ventes') {
     header('Content-Type: application/json');
     
+    // Debug logging
+    error_log('get_ventes endpoint called');
+    
     try {
         // Set default values and get search parameters
         $search = $_GET['search'] ?? '';
@@ -879,6 +882,7 @@ $(function() {
         $('#ventes-list').html('<tr><td colspan="10" class="text-center"><i class="fas fa-spinner fa-spin mr-2"></i> Chargement des données...</td></tr>');
         
         // Make AJAX request
+        console.log('Making AJAX request to load ventes...');
         $.ajax({
             url: 'index.php?action=get_ventes',
             type: 'GET',
@@ -890,6 +894,7 @@ $(function() {
             },
             dataType: 'json',
             success: function(response) {
+                console.log('AJAX response received:', response);
                 if (response.success) {
                     // Update pagination
                     totalPages = response.total_pages;
@@ -961,10 +966,13 @@ $(function() {
                     toastr.error(response.message || 'Erreur lors du chargement des ventes');
                 }
             },
-            error: function(xhr) {
-                console.error('Error loading sales:', xhr);
-                $('#ventes-list').html('<tr><td colspan="10" class="text-center text-danger">Erreur lors du chargement des ventes</td></tr>');
-                toastr.error('Erreur lors du chargement des ventes');
+            error: function(xhr, status, error) {
+                console.error('AJAX Error loading sales:');
+                console.error('Status:', status);
+                console.error('Error:', error);
+                console.error('Response:', xhr.responseText);
+                $('#ventes-list').html('<tr><td colspan="10" class="text-center text-danger">Erreur lors du chargement des ventes: ' + error + '</td></tr>');
+                toastr.error('Erreur lors du chargement des ventes: ' + error);
             }
         });
     }
