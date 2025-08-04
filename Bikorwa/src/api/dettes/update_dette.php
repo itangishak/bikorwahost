@@ -47,9 +47,16 @@ try {
     }
 
     // Only managers can update debts
-    if ($_SESSION['role'] !== 'gestionnaire') {
+    $user_role = strtolower($_SESSION['role'] ?? '');
+    if ($user_role !== 'gestionnaire') {
         http_response_code(403);
         $response['message'] = "Permission refusée: seuls les gestionnaires peuvent modifier des dettes";
+        $response['debug'] = [
+            'session_role' => $user_role,
+            'expected_role' => 'gestionnaire',
+            'session_data' => $_SESSION ?? null,
+            'user_id' => $_SESSION['user_id'] ?? 'NOT_SET'
+        ];
         echo json_encode($response);
         exit;
     }
