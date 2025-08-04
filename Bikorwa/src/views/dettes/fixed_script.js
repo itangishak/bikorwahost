@@ -201,24 +201,50 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load debt for edit
     function loadDetteForEdit(detteId) {
         console.log('[DEBUG] Starting loadDetteForEdit with ID:', detteId);
+        console.log('[DEBUG] baseUrl value:', baseUrl);
+        console.log('[DEBUG] userRole:', userRole);
+        console.log('[DEBUG] isManager:', isManager);
         
         // Show loading state
         document.getElementById('saveDetteBtn').disabled = true;
         const spinner = document.getElementById('detteSpinner');
-        spinner.classList.remove('d-none');
+        if (spinner) {
+            spinner.classList.remove('d-none');
+        } else {
+            console.error('[DEBUG] Spinner element not found!');
+        }
         
         // Fetch data
         const apiUrl = `${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`;
         console.log('[DEBUG] Calling API:', apiUrl);
+        console.log('[DEBUG] Full URL constructed:', apiUrl);
         
         fetch(apiUrl)
             .then(response => {
                 console.log('[DEBUG] Raw response:', response);
+                console.log('[DEBUG] Response status:', response.status);
+                console.log('[DEBUG] Response headers:', response.headers);
+                
                 if (!response.ok) {
                     console.error('[DEBUG] HTTP Error:', response.status, response.statusText);
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    // Try to get response text for debugging
+                    return response.text().then(text => {
+                        console.error('[DEBUG] Error response body:', text);
+                        throw new Error(`HTTP error! Status: ${response.status} - ${text}`);
+                    });
                 }
-                return response.json();
+                
+                // Try to parse JSON
+                return response.text().then(text => {
+                    console.log('[DEBUG] Raw response text:', text);
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error('[DEBUG] JSON parse error:', e);
+                        console.error('[DEBUG] Response text that failed to parse:', text);
+                        throw new Error('Invalid JSON response: ' + text.substring(0, 100));
+                    }
+                });
             })
             .then(data => {
                 console.log('[DEBUG] API Response:', data);

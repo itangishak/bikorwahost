@@ -1,43 +1,76 @@
 <?php
+// API endpoint to update debt details
+// Enhanced error handling and session management
+error_reporting(0);
+ini_set('display_errors', 0);
+
+// Set JSON header
 header('Content-Type: application/json');
-require_once __DIR__ . '/../../../includes/auth.php';
-require_once __DIR__ . '/../../../includes/db.php';
+
+// Start session if not active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Conditional session manager loading
+if (!isset($_SESSION['SESSION_MANAGER_LOADED'])) {
+    require_once __DIR__ . '/../../config/config.php';
+    require_once __DIR__ . '/../../config/database.php';
+    require_once __DIR__ . '/../../utils/Auth.php';
+    $_SESSION['SESSION_MANAGER_LOADED'] = true;
+} else {
+    require_once __DIR__ . '/../../config/config.php';
+    require_once __DIR__ . '/../../config/database.php';
+    require_once __DIR__ . '/../../utils/Auth.php';
+}
 
 $response = ['success' => false, 'message' => ''];
 
 try {
-    // Start session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    
+    if (!$conn) {
+        throw new Exception("Database connection failed");
     }
 
-    // Verify authentication
-    if (!Auth::isLoggedIn() || !isset($_SESSION['user_id'])) {
-        throw new Exception('Session expirée ou non autorisée', 401);
+    // Initialize authentication
+    $auth = new Auth($conn);
+
+    // Check if user is logged in
+    if (!$auth->isLoggedIn()) {
+        http_response_code(401);
+        $response['message'] = "Session expirée. Veuillez vous reconnecter.";
+        echo json_encode($response);
+        exit;
     }
 
     // Only managers can update debts
     if ($_SESSION['role'] !== 'gestionnaire') {
-        throw new Exception('Permission refusée: rôle gestionnaire requis', 403);
+        http_response_code(403);
+        $response['message'] = "Permission refusée: seuls les gestionnaires peuvent modifier des dettes";
+        echo json_encode($response);
+        exit;
     }
 
     // Validate required fields
     if (empty($_POST['dette_id']) || empty($_POST['client_id']) || empty($_POST['montant_initial'])) {
-        throw new Exception('Données manquantes', 400);
+        http_response_code(400);
+        $response['message'] = "Données manquantes: ID dette, client et montant requis";
+        echo json_encode($response);
+        exit;
     }
 
-    $pdo = getPDO();
-    $pdo->beginTransaction();
+    $conn->beginTransaction();
 
     try {
         // Update debt
-        $stmt = $pdo->prepare("UPDATE dettes SET 
+        $stmt = $conn->prepare("UPDATE dettes SET 
             client_id = :client_id, 
             montant_initial = :montant_initial,
             note = :note,
-            date_echeance = :date_echeance,
-            updated_at = NOW(),
-            updated_by = :user_id
+            date_echeance = :date_echeance
             WHERE id = :dette_id");
 
         $stmt->execute([
@@ -45,16 +78,21 @@ try {
             ':montant_initial' => $_POST['montant_initial'],
             ':note' => $_POST['note'] ?? null,
             ':date_echeance' => !empty($_POST['date_echeance']) ? $_POST['date_echeance'] : null,
-            ':user_id' => $_SESSION['user_id'],
             ':dette_id' => $_POST['dette_id']
         ]);
 
-        $pdo->commit();
-        $response['success'] = true;
-        $response['message'] = 'Dette mise à jour avec succès';
+        if ($stmt->rowCount() > 0) {
+            $conn->commit();
+            $response['success'] = true;
+            $response['message'] = 'Dette mise à jour avec succès';
+        } else {
+            $conn->rollBack();
+            $response['message'] = 'Aucune modification effectuée ou dette non trouvée';
+        }
     } catch (PDOException $e) {
-        $pdo->rollBack();
-        throw new Exception('Erreur de base de données: ' . $e->getMessage(), 500);
+        $conn->rollBack();
+        error_log("Database error in update_dette.php: " . $e->getMessage());
+        $response['message'] = 'Erreur de base de données: ' . $e->getMessage();
     }
 } catch (Exception $e) {
     http_response_code($e->getCode() ?: 500);
