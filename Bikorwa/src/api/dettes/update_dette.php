@@ -31,8 +31,8 @@ $user_id = $_SESSION['user_id'] ?? 0;
 // Get POST data
 $dette_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 $client_id = isset($_POST['client_id']) ? intval($_POST['client_id']) : 0;
-$vente_id = !empty($_POST['vente_id']) ? intval($_POST['vente_id']) : null;
 $montant_initial = isset($_POST['montant_initial']) ? floatval($_POST['montant_initial']) : 0;
+$date_creation = !empty($_POST['date_creation']) ? $_POST['date_creation'] : null;
 $date_echeance = !empty($_POST['date_echeance']) ? $_POST['date_echeance'] : null;
 $note = $_POST['note'] ?? '';
 
@@ -62,20 +62,20 @@ try {
     $new_montant_restant = round($current_dette['montant_restant'] * $proportion, 2);
     
     // Update debt
-    $query = "UPDATE dettes 
-              SET client_id = ?, 
-                  vente_id = ?, 
-                  montant_initial = ?, 
+    $query = "UPDATE dettes
+              SET client_id = ?,
+                  montant_initial = ?,
                   montant_restant = ?,
-                  date_echeance = ?, 
+                  date_creation = ?,
+                  date_echeance = ?,
                   note = ?
               WHERE id = ?";
-    
+
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $client_id, PDO::PARAM_INT);
-    $stmt->bindParam(2, $vente_id, $vente_id ? PDO::PARAM_INT : PDO::PARAM_NULL);
-    $stmt->bindParam(3, $montant_initial, PDO::PARAM_STR);
-    $stmt->bindParam(4, $new_montant_restant, PDO::PARAM_STR);
+    $stmt->bindParam(2, $montant_initial, PDO::PARAM_STR);
+    $stmt->bindParam(3, $new_montant_restant, PDO::PARAM_STR);
+    $stmt->bindParam(4, $date_creation, $date_creation ? PDO::PARAM_STR : PDO::PARAM_NULL);
     $stmt->bindParam(5, $date_echeance, $date_echeance ? PDO::PARAM_STR : PDO::PARAM_NULL);
     $stmt->bindParam(6, $note, PDO::PARAM_STR);
     $stmt->bindParam(7, $dette_id, PDO::PARAM_INT);

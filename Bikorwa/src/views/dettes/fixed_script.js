@@ -97,18 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
         savePaiement();
     });
     
-    // Client selection change - load related invoices
-    document.getElementById('client_id_form').addEventListener('change', function() {
-        const clientId = this.value;
-        if (clientId) {
-            loadClientInvoices(clientId);
-        } else {
-            // Clear invoices dropdown
-            const invoiceSelect = document.getElementById('vente_id');
-            invoiceSelect.innerHTML = '<option value="">Aucune facture associée</option>';
-        }
-    });
-    
     // Functions
     
     // Load debt details for view modal
@@ -230,10 +218,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         document.getElementById('date_echeance').value = '';
                     }
-                    
-                    // Load invoices for this client
-                    loadClientInvoices(dette.client_id, dette.vente_id);
-                    
+
+                    if (dette.date_creation) {
+                        document.getElementById('date_creation').value = dette.date_creation.split(' ')[0];
+                    } else {
+                        document.getElementById('date_creation').value = '';
+                    }
+
                     // Show modal
                     detteModal.show();
                     
@@ -543,51 +534,6 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast('Erreur', 'Une erreur est survenue lors de l\'annulation', 'error');
             deleteModal.hide();
         });
-    }
-    
-    // Load client invoices
-    function loadClientInvoices(clientId, selectedInvoiceId = null) {
-        if (!clientId) {
-            const invoiceSelect = document.getElementById('vente_id');
-            invoiceSelect.innerHTML = '<option value="">Aucune facture associée</option>';
-            return;
-        }
-        
-        // Show loading state
-        const invoiceSelect = document.getElementById('vente_id');
-        invoiceSelect.innerHTML = '<option value="">Chargement des factures...</option>';
-        invoiceSelect.disabled = true;
-        
-        fetch(`${baseUrl}/src/api/dettes/get_client_invoices.php?client_id=${clientId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Re-enable and reset select
-                invoiceSelect.disabled = false;
-                invoiceSelect.innerHTML = '<option value="">Aucune facture associée</option>';
-                
-                if (data.success && data.invoices && data.invoices.length > 0) {
-                    data.invoices.forEach(invoice => {
-                        const option = document.createElement('option');
-                        option.value = invoice.id;
-                        option.textContent = `${invoice.numero_facture} (${formatMontant(invoice.montant_total)} F)`;
-                        if (selectedInvoiceId && invoice.id == selectedInvoiceId) {
-                            option.selected = true;
-                        }
-                        invoiceSelect.appendChild(option);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                invoiceSelect.disabled = false;
-                invoiceSelect.innerHTML = '<option value="">Aucune facture associée</option>';
-                showToast('Erreur', 'Impossible de charger les factures du client', 'error');
-            });
     }
     
     // Format amount with thousands separator
