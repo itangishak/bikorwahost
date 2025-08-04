@@ -1403,6 +1403,10 @@ $(function() {
 });
 </script>
 
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- Toastr JS (must be included after jQuery from footer) -->
@@ -1416,6 +1420,78 @@ $(function() {
             positionClass: "toast-top-right",
             timeOut: 5000
         };
+        
+        // Initialize Select2 for products in modal
+        $('.select2-modal-products').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Rechercher un produit...',
+            allowClear: true,
+            dropdownParent: $('#view-modal'),
+            ajax: {
+                url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    // Get already selected product IDs to exclude them
+                    var excludeIds = [];
+                    $('#view-produits tr').each(function() {
+                        var productId = $(this).find('.product-id').val();
+                        if (productId) {
+                            excludeIds.push(productId);
+                        }
+                    });
+                    
+                    return {
+                        search: params.term,
+                        page: params.page || 1,
+                        with_stock: true,
+                        exclude: excludeIds.join(',')
+                    };
+                },
+                processResults: function(data, params) {
+                    params.page = params.page || 1;
+                    
+                    if (data.success) {
+                        return {
+                            results: $.map(data.produits, function(produit) {
+                                return {
+                                    id: produit.id,
+                                    text: produit.nom + ' - ' + produit.code + ' (Stock: ' + produit.quantite_stock + ')',
+                                    produit: produit
+                                };
+                            }),
+                            pagination: {
+                                more: (params.page * 10) < data.total_count
+                            }
+                        };
+                    } else {
+                        return {
+                            results: []
+                        };
+                    }
+                },
+                cache: false
+            }
+        });
+        
+        // Handle product selection
+        $('#modal-produit').on('select2:select', function(e) {
+            var data = e.params.data;
+            var produit = data.produit;
+            
+            if (produit) {
+                // Update product price and stock info
+                $('#modal-prix').val(produit.prix_vente);
+                $('#modal-stock-disponible').val(produit.quantite_stock);
+            }
+        });
+        
+        // Reset form fields when product is cleared
+        $('#modal-produit').on('select2:clear', function() {
+            $('#modal-prix').val('');
+            $('#modal-quantite').val('1');
+            $('#modal-stock-disponible').val('');
+        });
     });
 </script>
 

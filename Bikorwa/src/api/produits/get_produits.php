@@ -38,6 +38,7 @@ try {
     $offset = ($page - 1) * $limit;
     $search = isset($_GET['search']) ? addslashes($_GET['search']) : '';
     $with_stock = isset($_GET['with_stock']) && $_GET['with_stock'] === 'true';
+    $exclude = isset($_GET['exclude']) ? $_GET['exclude'] : '';
     
     // Base query for products - Use INNER JOIN with stock for with_stock=true to ensure results have stock
     $baseQuery = "FROM produits p";
@@ -68,6 +69,16 @@ try {
     // Add stock condition if requested
     if ($with_stock) {
         $baseQuery .= " AND (s.quantite > 0)";
+    }
+    
+    // Add exclude condition if provided
+    if (!empty($exclude)) {
+        $excludeIds = explode(',', $exclude);
+        $excludeIds = array_map('intval', $excludeIds);
+        $excludeIds = array_filter($excludeIds, function($id) { return $id > 0; });
+        if (!empty($excludeIds)) {
+            $baseQuery .= " AND p.id NOT IN (" . implode(',', $excludeIds) . ")";
+        }
     }
     
     // Count total products
