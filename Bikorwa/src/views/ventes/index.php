@@ -1421,58 +1421,135 @@ $(function() {
             timeOut: 5000
         };
         
-        // Initialize Select2 for products in modal
-        $('.select2-modal-products').select2({
-            theme: 'bootstrap-5',
-            placeholder: 'Rechercher un produit...',
-            allowClear: true,
-            dropdownParent: $('#view-modal'),
-            ajax: {
-                url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    // Get already selected product IDs to exclude them
-                    var excludeIds = [];
-                    $('#view-produits tr').each(function() {
-                        var productId = $(this).find('.product-id').val();
-                        if (productId) {
-                            excludeIds.push(productId);
-                        }
-                    });
-                    
-                    return {
-                        search: params.term,
-                        page: params.page || 1,
-                        with_stock: true,
-                        exclude: excludeIds.join(',')
-                    };
-                },
-                processResults: function(data, params) {
-                    params.page = params.page || 1;
-                    
-                    if (data.success) {
+        // Debug information
+        console.log('BASE_URL:', '<?= BASE_URL ?>');
+        console.log('jQuery version:', $.fn.jquery);
+        console.log('Select2 available:', typeof $.fn.select2);
+        
+        // Function to initialize Select2
+        function initializeProductSelect2() {
+            console.log('Initializing product Select2...');
+            
+            var $select = $('#modal-produit');
+            if ($select.length === 0) {
+                console.error('Product select element not found!');
+                return;
+            }
+            
+            // Destroy existing Select2 if it exists
+            if ($select.hasClass('select2-hidden-accessible')) {
+                $select.select2('destroy');
+            }
+            
+            // Initialize Select2
+            $select.select2({
+                placeholder: 'Rechercher un produit...',
+                allowClear: true,
+                dropdownParent: $('#view-modal'),
+                minimumInputLength: 0,
+                ajax: {
+                    url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        console.log('Select2 request params:', params);
                         return {
-                            results: $.map(data.produits, function(produit) {
-                                return {
-                                    id: produit.id,
-                                    text: produit.nom + ' - ' + produit.code + ' (Stock: ' + produit.quantite_stock + ')',
-                                    produit: produit
-                                };
-                            }),
+                            search: params.term || '',
+                            page: params.page || 1,
+                            with_stock: true
+                        };
+                    },
+                    processResults: function(data, params) {
+                        console.log('Select2 API response:', data);
+                        
+                        if (!data) {
+                            console.error('No data received from API');
+                            return { results: [] };
+                        }
+                        
+                        if (!data.success) {
+                            console.error('API returned error:', data.message || 'Unknown error');
+                            return { results: [] };
+                        }
+                        
+                        if (!data.produits || !Array.isArray(data.produits)) {
+                            console.error('Invalid products data:', data.produits);
+                            return { results: [] };
+                        }
+                        
+                        var results = data.produits.map(function(produit) {
+                            return {
+                                id: produit.id,
+                                text: produit.nom + ' - ' + produit.code + ' (Stock: ' + produit.quantite_stock + ')',
+                                produit: produit
+                            };
+                        });
+                        
+                        console.log('Processed results:', results);
+                        
+                        return {
+                            results: results,
                             pagination: {
-                                more: (params.page * 10) < data.total_count
+                                more: false // Simplified for now
                             }
                         };
+                    },
+                    cache: false
+                },
+                templateNoResults: function() {
+                    return 'Aucun produit trouvé';
+                },
+                templateSearching: function() {
+                    return 'Recherche en cours...';
+                }
+            });
+            
+            console.log('Select2 initialized successfully');
+        }
+        
+        // Test API directly first
+        function testAPI() {
+            console.log('Testing API...');
+            $.ajax({
+                url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
+                type: 'GET',
+                data: { with_stock: true, page: 1 },
+                dataType: 'json',
+                success: function(data) {
+                    console.log('API Test Success:', data);
+                    if (data.success && data.produits && data.produits.length > 0) {
+                        console.log('Found', data.produits.length, 'products');
                     } else {
-                        return {
-                            results: []
-                        };
+                        console.warn('No products found or API error');
                     }
                 },
-                cache: false
-            }
+                error: function(xhr, status, error) {
+                    console.error('API Test Failed:');
+                    console.error('Status:', status);
+                    console.error('Error:', error);
+                    console.error('Response:', xhr.responseText);
+                }
+            });
+        }
+        
+        // Test API on page load
+        testAPI();
+        
+        // Initialize Select2 when modal is shown
+        $('#view-modal').on('shown.bs.modal', function() {
+            console.log('Modal shown, initializing Select2');
+            setTimeout(function() {
+                initializeProductSelect2();
+            }, 100);
         });
+        
+        // Fallback initialization after delay
+        setTimeout(function() {
+            if ($('#modal-produit').length > 0) {
+                console.log('Fallback Select2 initialization');
+                initializeProductSelect2();
+            }
+        }, 2000);
         
         // Handle product selection
         $('#modal-produit').on('select2:select', function(e) {
