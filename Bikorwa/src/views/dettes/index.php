@@ -658,21 +658,18 @@ require_once __DIR__ . '/../layouts/header.php';
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="vente_id" class="form-label">Facture associée</label>
-                                    <select class="form-select" id="vente_id" name="vente_id">
-                                        <option value="">Aucune facture associée</option>
-                                        <!-- Rempli dynamiquement lors de la sélection du client -->
-                                    </select>
-                                </div>
-                                
-                                <div class="mb-3">
                                     <label for="montant_initial" class="form-label">Montant initial <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="montant_initial" name="montant_initial" required min="1" step="1">
                                         <span class="input-group-text">F</span>
                                     </div>
                                 </div>
-                                
+
+                                <div class="mb-3">
+                                    <label for="date_creation" class="form-label">Date de la dette <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date_creation" name="date_creation" required value="<?php echo date('Y-m-d'); ?>">
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="date_echeance" class="form-label">Date d'échéance</label>
                                     <input type="date" class="form-control" id="date_echeance" name="date_echeance">
