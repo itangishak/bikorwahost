@@ -797,7 +797,7 @@ $(function() {
 
     function loadAvailableProducts(callback) {
         if (availableProducts.length === 0) {
-            $.getJSON('nouvelle.php?action=get_produits&with_stock=true', function(res) {
+            $.getJSON('<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits&with_stock=true', function(res) {
                 if (res.success) {
                     availableProducts = res.produits;
                 }
@@ -841,7 +841,7 @@ $(function() {
         placeholder: 'Rechercher un produit',
         allowClear: true,
         ajax: {
-            url: 'nouvelle.php?action=get_produits',
+            url: '<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits',
             dataType: 'json',
             delay: 250,
             data: function(params) {
