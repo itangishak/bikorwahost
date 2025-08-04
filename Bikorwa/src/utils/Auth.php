@@ -101,12 +101,12 @@ class Auth {
     
     // Méthode pour vérifier si l'utilisateur est un gestionnaire
     public function isManager() {
-        return $this->isLoggedIn() && $_SESSION['role'] === 'gestionnaire';
+        return $this->isLoggedIn() && strtolower($_SESSION['role']) === 'gestionnaire';
     }
-    
+
     // Méthode pour vérifier si l'utilisateur est un réceptionniste
     public function isReceptionist() {
-        return $this->isLoggedIn() && $_SESSION['role'] === 'receptionniste';
+        return $this->isLoggedIn() && strtolower($_SESSION['role']) === 'receptionniste';
     }
     
     // Méthode pour vérifier si l'utilisateur a la permission de modifier
@@ -139,11 +139,11 @@ class Auth {
             return false;
         }
         
-        // Récupérer le rôle de l'utilisateur
-        $role = $_SESSION['role'];
-        
+        // Récupérer le rôle de l'utilisateur en minuscules pour éviter les problèmes de casse
+        $role = strtolower($_SESSION['role']);
+
         // Vérifier si la fonctionnalité est accessible pour ce rôle
-        return in_array($feature, $permissions[$role]);
+        return isset($permissions[$role]) && in_array($feature, $permissions[$role]);
     }
     
     // Méthode pour journaliser une activité
