@@ -436,8 +436,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('Succès', data.message || (isUpdate ? 'Dette modifiée avec succès' : 'Dette ajoutée avec succès'), 'success');
                 detteModal.hide();
                 
-                // Refresh the debts list
-                loadDettes();
+                // Refresh the page to show updated debt list
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
             } else {
                 console.error('API Error:', data);
                 showToast('Erreur', data.message || (isUpdate ? 'Erreur lors de la modification' : 'Erreur lors de l\'ajout'), 'error');
