@@ -31,11 +31,22 @@ function updateStatistics(amount, action) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[DEBUG] DOM Content Loaded - Debt management script starting');
+    console.log('[DEBUG] Available variables:', {
+        baseUrl: typeof baseUrl !== 'undefined' ? baseUrl : 'UNDEFINED',
+        userRole: typeof userRole !== 'undefined' ? userRole : 'UNDEFINED',
+        isManager: typeof isManager !== 'undefined' ? isManager : 'UNDEFINED',
+        currentUserId: typeof currentUserId !== 'undefined' ? currentUserId : 'UNDEFINED'
+    });
+    
     // Initialize Bootstrap components
+    console.log('[DEBUG] Initializing Bootstrap modals');
     const viewDetteModal = new bootstrap.Modal(document.getElementById('viewDetteModal'));
     const detteModal = new bootstrap.Modal(document.getElementById('detteModal'));
     const paiementModal = new bootstrap.Modal(document.getElementById('paiementModal'));
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    
+    console.log('[DEBUG] Bootstrap modals initialized');
     
     // Note: The Add new debt button has been removed
     
@@ -48,13 +59,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Edit debt - only managers
-    document.querySelectorAll('.editBtn').forEach(btn => {
-        btn.addEventListener('click', function() {
+    console.log('[DEBUG] Setting up edit button event handlers');
+    const editButtons = document.querySelectorAll('.editBtn');
+    console.log('[DEBUG] Found', editButtons.length, 'edit buttons');
+    
+    editButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('[DEBUG] Edit button clicked!');
+            console.log('[DEBUG] Button element:', this);
+            console.log('[DEBUG] isManager:', isManager);
+            
             if (!isManager) {
+                console.log('[DEBUG] User is not manager, showing error');
                 showToast('Erreur', 'Seuls les gestionnaires peuvent modifier des dettes', 'error');
                 return;
             }
+            
             const detteId = this.getAttribute('data-id');
+            console.log('[DEBUG] Debt ID from button:', detteId);
+            
+            if (!detteId) {
+                console.error('[DEBUG] No debt ID found on button!');
+                showToast('Erreur', 'ID de dette manquant', 'error');
+                return;
+            }
+            
+            console.log('[DEBUG] Calling loadDetteForEdit with ID:', detteId);
             loadDetteForEdit(detteId);
         });
     });
@@ -650,7 +681,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show toast notification
     function showToast(title, message, type = 'info') {
+        console.log('[DEBUG] showToast called:', { title, message, type });
         const toastContainer = document.getElementById('toastContainer');
+        
+        if (!toastContainer) {
+            console.error('[DEBUG] Toast container not found!');
+            alert(title + ': ' + message); // Fallback
+            return;
+        }
         
         // Create toast element
         const toastElement = document.createElement('div');
