@@ -281,18 +281,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Save debt
     function saveDette() {
+        console.log('Starting saveDette function');
         const form = document.getElementById('detteForm');
         
         // Validate form
         if (!form.checkValidity()) {
+            console.log('Form validation failed');
             form.reportValidity();
             return;
         }
-        
-        // Show spinner
-        const spinner = document.getElementById('saveDetteSpinner');
-        spinner.classList.remove('d-none');
-        document.getElementById('saveDetteBtn').disabled = true;
         
         // Prepare form data
         const formData = new FormData(form);
@@ -301,6 +298,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Determine if this is a create or update operation
         const isUpdate = formData.get('id') !== '';
         const url = isUpdate ? `${baseUrl}/src/api/dettes/update_dette.php` : `${baseUrl}/src/api/dettes/add_dette.php`;
+        
+        // Log form data before submission
+        console.log('Submitting form data to:', url);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+        
+        // Show spinner
+        const spinner = document.getElementById('saveDetteSpinner');
+        spinner.classList.remove('d-none');
+        document.getElementById('saveDetteBtn').disabled = true;
         
         // Submit data
         fetch(url, {
@@ -337,7 +345,16 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             spinner.classList.add('d-none');
             document.getElementById('saveDetteBtn').disabled = false;
-            showToast('Erreur', 'Une erreur est survenue lors de l\'enregistrement', 'error');
+            
+            // Enhanced error message
+            let errorMsg = 'Une erreur est survenue lors de l\'enregistrement';
+            if (error.message.includes('Failed to fetch')) {
+                errorMsg = 'Erreur de connexion au serveur. Vérifiez votre connexion internet.';
+            } else if (error.message.includes('401')) {
+                errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+            }
+            
+            showToast('Erreur', errorMsg, 'error');
         });
     }
     

@@ -96,7 +96,12 @@ class Auth {
     
     // Méthode pour vérifier si l'utilisateur est connecté
     public function isLoggedIn() {
-        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+        // Handle both boolean true and string 'true' to avoid type conversion issues
+        return isset($_SESSION['logged_in']) && 
+               ($_SESSION['logged_in'] === true || 
+                $_SESSION['logged_in'] === 'true' || 
+                $_SESSION['logged_in'] === 1 || 
+                $_SESSION['logged_in'] === '1');
     }
     
     // Méthode pour vérifier si l'utilisateur est un gestionnaire

@@ -438,6 +438,11 @@ require_once __DIR__ . '/../layouts/header.php';
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-table me-1"></i>Liste des dettes</h6>
                 <div>
+                    <?php if ($auth->hasAccess('dettes') || $userRole === 'gestionnaire'): ?>
+                        <button class="btn btn-sm btn-light me-2" data-bs-toggle="modal" data-bs-target="#detteModal">
+                            <i class="fas fa-plus me-1"></i>Ajouter une dette
+                        </button>
+                    <?php endif; ?>
                     <span class="badge bg-light text-dark">Total: <?php echo number_format($total_rows, 0, ',', ' '); ?></span>
                 </div>
             </div>

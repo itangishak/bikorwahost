@@ -1,22 +1,45 @@
 <?php
 // API endpoint to add a new debt
+// Enhanced error handling and debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Start session if not active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../utils/Auth.php';
 
-// Initialize database connection
-$database = new Database();
-$conn = $database->getConnection();
+try {
+    // Initialize database connection
+    $database = new Database();
+    $conn = $database->getConnection();
+    
+    if (!$conn) {
+        throw new Exception("Database connection failed");
+    }
 
-// Initialize authentication
-$auth = new Auth($conn);
+    // Initialize authentication
+    $auth = new Auth($conn);
 
-// Check if user is logged in
-if (!$auth->isLoggedIn()) {
-    http_response_code(401);
-    echo json_encode(["success" => false, "message" => "Non autorisé"]);
-    exit;
-}
+    // Check if user is logged in
+    if (!$auth->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode([
+            "success" => false, 
+            "message" => "Non autorisé - Utilisateur non connecté",
+            "debug" => [
+                "session_status" => session_status(),
+                "logged_in" => $_SESSION['logged_in'] ?? 'not_set',
+                "user_id" => $_SESSION['user_id'] ?? 'not_set',
+                "role" => $_SESSION['role'] ?? 'not_set'
+            ]
+        ]);
+        exit;
+    }
 
 // Get user ID for logging
 $user_id = $_SESSION['user_id'] ?? 0;
@@ -31,7 +54,15 @@ $note = $_POST['note'] ?? '';
 
 // Validate required fields
 if (!$client_id || $montant_initial <= 0) {
-    echo json_encode(["success" => false, "message" => "Veuillez remplir tous les champs obligatoires"]);
+    echo json_encode([
+        "success" => false, 
+        "message" => "Veuillez remplir tous les champs obligatoires",
+        "debug" => [
+            "client_id" => $client_id,
+            "montant_initial" => $montant_initial,
+            "post_data" => $_POST
+        ]
+    ]);
     exit;
 }
 
@@ -97,7 +128,33 @@ try {
     
 } catch (PDOException $e) {
     // Rollback transaction on error
-    $conn->rollBack();
-    error_log("Database error: " . $e->getMessage());
-    echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout de la dette"]);
+    if ($conn->inTransaction()) {
+        $conn->rollBack();
+    }
+    error_log("Database error in add_dette.php: " . $e->getMessage());
+    echo json_encode([
+        "success" => false, 
+        "message" => "Erreur de base de données: " . $e->getMessage(),
+        "debug" => [
+            "error_code" => $e->getCode(),
+            "error_info" => $e->errorInfo ?? null
+        ]
+    ]);
+} catch (Exception $e) {
+    error_log("General error in add_dette.php: " . $e->getMessage());
+    echo json_encode([
+        "success" => false, 
+        "message" => "Erreur générale: " . $e->getMessage(),
+        "debug" => [
+            "trace" => $e->getTraceAsString()
+        ]
+    ]);
+}
+
+} catch (Exception $e) {
+    error_log("Fatal error in add_dette.php: " . $e->getMessage());
+    echo json_encode([
+        "success" => false, 
+        "message" => "Erreur fatale lors de l'initialisation: " . $e->getMessage()
+    ]);
 }
