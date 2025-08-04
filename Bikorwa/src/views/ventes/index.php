@@ -1160,6 +1160,46 @@ $(function() {
             $('#view-produits').html('<tr><td colspan="5" class="text-center"><i class="fas fa-spinner fa-spin mr-2"></i> Chargement des détails...</td></tr>');
             $('#view-modal').modal('show');
             
+            // Initialize Select2 after modal is shown
+            setTimeout(function() {
+                if (!$('#modal-produit').hasClass('select2-hidden-accessible')) {
+                    $('#modal-produit').select2({
+                        placeholder: 'Rechercher un produit',
+                        allowClear: true,
+                        dropdownParent: $('#view-modal'),
+                        ajax: {
+                            url: '<?= BASE_URL ?>/src/views/ventes/index.php?action=get_produits',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
+                                return {
+                                    search: params.term,
+                                    page: params.page || 1,
+                                    with_stock: true
+                                };
+                            },
+                            processResults: function(data, params) {
+                                params.page = params.page || 1;
+                                
+                                return {
+                                    results: $.map(data.produits, function(produit) {
+                                        return {
+                                            id: produit.id,
+                                            text: produit.nom + ' - ' + produit.code,
+                                            produit: produit
+                                        };
+                                    }),
+                                    pagination: {
+                                        more: (params.page * 10) < data.total_count
+                                    }
+                                };
+                            },
+                            cache: false
+                        }
+                    });
+                }
+            }, 500);
+            
             // Fetch sale details
             $.ajax({
                 url: 'index.php?action=get_vente_details',
@@ -1542,42 +1582,6 @@ $(function() {
         console.log('BASE_URL:', '<?= BASE_URL ?>');
         console.log('jQuery version:', $.fn.jquery);
         console.log('Select2 available:', typeof $.fn.select2);
-        
-        // Initialize Select2 for products (same as nouvelle.php)
-        $('#modal-produit').select2({
-            placeholder: 'Rechercher un produit',
-            allowClear: true,
-            dropdownParent: $('#view-modal'),
-            ajax: {
-                url: '<?= BASE_URL ?>/src/views/ventes/index.php?action=get_produits',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        search: params.term,
-                        page: params.page || 1,
-                        with_stock: true
-                    };
-                },
-                processResults: function(data, params) {
-                    params.page = params.page || 1;
-                    
-                    return {
-                        results: $.map(data.produits, function(produit) {
-                            return {
-                                id: produit.id,
-                                text: produit.nom + ' - ' + produit.code,
-                                produit: produit
-                            };
-                        }),
-                        pagination: {
-                            more: (params.page * 10) < data.total_count
-                        }
-                    };
-                },
-                cache: false
-            }
-        });
         
 
         
