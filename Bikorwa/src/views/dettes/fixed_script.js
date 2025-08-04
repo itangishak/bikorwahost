@@ -200,20 +200,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load debt for edit
     function loadDetteForEdit(detteId) {
+        console.log('[DEBUG] Starting loadDetteForEdit with ID:', detteId);
+        
         // Show loading state
         document.getElementById('saveDetteBtn').disabled = true;
+        const spinner = document.getElementById('detteSpinner');
+        spinner.classList.remove('d-none');
         
         // Fetch data
-        fetch(`${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`)
+        const apiUrl = `${baseUrl}/src/api/dettes/get_dette.php?id=${detteId}`;
+        console.log('[DEBUG] Calling API:', apiUrl);
+        
+        fetch(apiUrl)
             .then(response => {
+                console.log('[DEBUG] Raw response:', response);
                 if (!response.ok) {
+                    console.error('[DEBUG] HTTP Error:', response.status, response.statusText);
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
             })
             .then(data => {
+                console.log('[DEBUG] API Response:', data);
                 if (data.success) {
                     const dette = data.dette;
+                    console.log('[DEBUG] Debt data received:', dette);
                     
                     // Set form title
                     document.getElementById('detteModalLabel').innerHTML = '<i class="fas fa-edit me-2"></i>Modifier la dette';
@@ -241,13 +252,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Enable save button
                     document.getElementById('saveDetteBtn').disabled = false;
+                    spinner.classList.add('d-none');
                 } else {
+                    console.error('API Error:', data);
                     showToast('Erreur', data.message || 'Erreur lors du chargement des données', 'error');
+                    spinner.classList.add('d-none');
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showToast('Erreur', 'Une erreur est survenue lors du chargement des données', 'error');
+                console.error('Error loading debt:', error);
+                
+                let errorMsg = 'Une erreur est survenue lors du chargement des données';
+                if (error.message.includes('Failed to fetch')) {
+                    errorMsg = 'Erreur de connexion au serveur';
+                } else if (error.message.includes('401')) {
+                    errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+                } else if (error.message.includes('404')) {
+                    errorMsg = 'Dette non trouvée';
+                }
+                
+                showToast('Erreur', errorMsg, 'error');
+                spinner.classList.add('d-none');
             });
     }
     
@@ -307,10 +332,9 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('utilisateur_id', currentUserId);
         
         // Determine if this is a create or update operation
-        const isUpdate = formData.get('id') !== '';
+        const isUpdate = formData.get('dette_id') !== '';
         const url = isUpdate ? `${baseUrl}/src/api/dettes/update_dette.php` : `${baseUrl}/src/api/dettes/add_dette.php`;
         
-        // Log form data before submission
         console.log('Submitting form data to:', url);
         for (let pair of formData.entries()) {
             console.log(pair[0] + ': ' + pair[1]);
@@ -333,39 +357,35 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            // Hide spinner
-            spinner.classList.add('d-none');
-            document.getElementById('saveDetteBtn').disabled = false;
-            
             if (data.success) {
-                // Show success message
-                showToast('Succès', data.message || 'Dette enregistrée avec succès', 'success');
-                
-                // Close modal
+                console.log('Save successful:', data);
+                showToast('Succès', data.message || (isUpdate ? 'Dette modifiée avec succès' : 'Dette ajoutée avec succès'), 'success');
                 detteModal.hide();
                 
-                // Reload page to show updated data
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
+                // Refresh the debts list
+                loadDettes();
             } else {
-                showToast('Erreur', data.message || 'Erreur lors de l\'enregistrement', 'error');
+                console.error('API Error:', data);
+                showToast('Erreur', data.message || (isUpdate ? 'Erreur lors de la modification' : 'Erreur lors de l\'ajout'), 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            spinner.classList.add('d-none');
-            document.getElementById('saveDetteBtn').disabled = false;
             
-            // Enhanced error message
-            let errorMsg = 'Une erreur est survenue lors de l\'enregistrement';
+            let errorMsg = isUpdate ? 'Erreur lors de la modification' : 'Erreur lors de l\'ajout';
             if (error.message.includes('Failed to fetch')) {
-                errorMsg = 'Erreur de connexion au serveur. Vérifiez votre connexion internet.';
+                errorMsg = 'Erreur de connexion au serveur';
             } else if (error.message.includes('401')) {
-                errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+                errorMsg = 'Session expirée';
+            } else if (error.message.includes('403')) {
+                errorMsg = 'Permission refusée';
             }
             
             showToast('Erreur', errorMsg, 'error');
+        })
+        .finally(() => {
+            spinner.classList.add('d-none');
+            document.getElementById('saveDetteBtn').disabled = false;
         });
     }
     
