@@ -20,7 +20,34 @@ if (!defined('APP_VERSION'))  define('APP_VERSION', '1.0.0');
 if (!defined('BASE_URL')) {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    define('BASE_URL', $protocol . $host . '/Bikorwa');
+    
+    // Handle different environments
+    if ($host === 'uab.bumadventiste.org') {
+        // Live production environment
+        define('BASE_URL', $protocol . $host . '/Bikorwa');
+    } else {
+        // Local development or other environments
+        // Auto-detect the correct path based on the current script location
+        $script_path = $_SERVER['SCRIPT_NAME'] ?? '';
+        $base_path = '';
+        
+        // If we can detect the path from the script name
+        if (strpos($script_path, '/bikorwahost/Bikorwa/') !== false) {
+            $base_path = '/bikorwahost/Bikorwa';
+        } elseif (strpos($script_path, '/Bikorwa/') !== false) {
+            $base_path = '/Bikorwa';
+        } else {
+            // Fallback: try to detect from current directory
+            $current_dir = __DIR__;
+            if (strpos($current_dir, 'bikorwahost') !== false) {
+                $base_path = '/bikorwahost/Bikorwa';
+            } else {
+                $base_path = '/Bikorwa';
+            }
+        }
+        
+        define('BASE_URL', $protocol . $host . $base_path);
+    }
 }
 
 // Path constants
