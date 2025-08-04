@@ -181,8 +181,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showToast('Erreur', 'Une erreur est survenue lors du chargement des détails', 'error');
+                console.error('Error loading debt details:', error);
+                document.getElementById('detailsSpinner').classList.add('d-none');
+                
+                let errorMsg = 'Une erreur est survenue lors du chargement des détails';
+                if (error.message.includes('Failed to fetch')) {
+                    errorMsg = 'Erreur de connexion au serveur. Vérifiez votre connexion internet.';
+                } else if (error.message.includes('401')) {
+                    errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+                } else if (error.message.includes('403')) {
+                    errorMsg = 'Accès refusé. Vous n\'avez pas les permissions nécessaires.';
+                }
+                
+                showToast('Erreur', errorMsg, 'error');
                 viewDetteModal.hide();
             });
     }
@@ -455,10 +466,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error saving payment:', error);
             spinner.classList.add('d-none');
             document.getElementById('savePaiementBtn').disabled = false;
-            showToast('Erreur', 'Une erreur est survenue lors de l\'enregistrement', 'error');
+            
+            let errorMsg = 'Une erreur est survenue lors de l\'enregistrement du paiement';
+            if (error.message.includes('Failed to fetch')) {
+                errorMsg = 'Erreur de connexion au serveur. Vérifiez votre connexion internet.';
+            } else if (error.message.includes('401')) {
+                errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+            } else if (error.message.includes('403')) {
+                errorMsg = 'Accès refusé. Vous n\'avez pas les permissions nécessaires.';
+            }
+            
+            showToast('Erreur', errorMsg, 'error');
         });
     }
     
