@@ -649,6 +649,11 @@ require_once __DIR__ . '/../layouts/header.php';
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <div class="text-center mb-3 d-none" id="detteSpinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Chargement...</span>
+                                </div>
+                            </div>
                             <form id="detteForm">
                                 <input type="hidden" id="dette_id" name="id">
                                 
@@ -795,7 +800,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </script>
             
             <!-- External JavaScript for debt management functionality -->
-            <script src="fixed_script.js"></script>
+            <script src="<?php echo BASE_URL; ?>/src/views/dettes/fixed_script.js"></script>
             <!-- All JavaScript code has been moved to the external file for better organization and maintenance -->
 
             </div>

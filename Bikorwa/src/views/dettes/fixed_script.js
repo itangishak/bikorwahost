@@ -260,18 +260,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Error loading debt:', error);
+                console.error('[DEBUG] Error loading debt:', error);
+                console.error('[DEBUG] Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    apiUrl: apiUrl,
+                    detteId: detteId
+                });
                 
                 let errorMsg = 'Une erreur est survenue lors du chargement des données';
+                let debugInfo = '';
+                
                 if (error.message.includes('Failed to fetch')) {
                     errorMsg = 'Erreur de connexion au serveur';
+                    debugInfo = 'Vérifiez que le serveur est accessible';
                 } else if (error.message.includes('401')) {
                     errorMsg = 'Session expirée. Veuillez vous reconnecter.';
+                    debugInfo = 'Rechargez la page et reconnectez-vous';
                 } else if (error.message.includes('404')) {
                     errorMsg = 'Dette non trouvée';
+                    debugInfo = 'La dette demandée n\'existe pas';
+                } else {
+                    debugInfo = 'Erreur: ' + error.message;
                 }
                 
-                showToast('Erreur', errorMsg, 'error');
+                console.log('[DEBUG] Showing error toast:', errorMsg, debugInfo);
+                showToast('Erreur', errorMsg + (debugInfo ? ' - ' + debugInfo : ''), 'error');
+                
+                // Re-enable button and hide spinner
+                document.getElementById('saveDetteBtn').disabled = false;
                 spinner.classList.add('d-none');
             });
     }

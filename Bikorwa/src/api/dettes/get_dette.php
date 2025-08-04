@@ -1,17 +1,28 @@
 <?php
 // API endpoint to fetch debt details with payment history
 // Enhanced error handling and session management
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
 
 // Start session if not active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../utils/Auth.php';
+// Conditional session manager loading
+if (!isset($_SESSION['SESSION_MANAGER_LOADED'])) {
+    require_once __DIR__ . '/../../config/config.php';
+    require_once __DIR__ . '/../../config/database.php';
+    require_once __DIR__ . '/../../utils/Auth.php';
+    $_SESSION['SESSION_MANAGER_LOADED'] = true;
+} else {
+    require_once __DIR__ . '/../../config/config.php';
+    require_once __DIR__ . '/../../config/database.php';
+    require_once __DIR__ . '/../../utils/Auth.php';
+}
+
+// Set JSON header
+header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => ''];
 
@@ -30,7 +41,14 @@ try {
     // Check if user is logged in
     if (!$auth->isLoggedIn()) {
         http_response_code(401);
-        throw new Exception("Non autorisé - Session expirée", 401);
+        $response['message'] = "Session expirée. Veuillez vous reconnecter.";
+        $response['debug'] = [
+            'session_status' => session_status(),
+            'session_data' => $_SESSION ?? null,
+            'logged_in_check' => $auth->isLoggedIn()
+        ];
+        echo json_encode($response);
+        exit;
     }
 
     // Get debt ID from request
@@ -55,7 +73,15 @@ try {
         $dette = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$dette) {
-            throw new Exception("Dette non trouvée", 404);
+            http_response_code(404);
+            $response['message'] = "Dette non trouvée";
+            $response['debug'] = [
+                'dette_id' => $dette_id,
+                'query' => $query,
+                'user_id' => $_SESSION['user_id'] ?? null
+            ];
+            echo json_encode($response);
+            exit;
         }
         
         // Get payment history
