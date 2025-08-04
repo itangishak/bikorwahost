@@ -650,6 +650,42 @@ EOT;
                     </div>
                 </div>
                 <h5 class="mt-4">Produits</h5>
+                <div class="row mb-3">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="modal-produit">Produit</label>
+                            <select class="form-control select2-modal-products" id="modal-produit">
+                                <option value="">Rechercher un produit...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="modal-prix">Prix unitaire</label>
+                            <input type="number" class="form-control" id="modal-prix">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="modal-quantite">Quantité</label>
+                            <input type="number" class="form-control" id="modal-quantite" min="0.01" step="0.01" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="modal-stock-disponible">Stock disponible</label>
+                            <input type="text" class="form-control" id="modal-stock-disponible" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="button" class="btn btn-primary btn-block" id="add-product">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -669,13 +705,6 @@ EOT;
                                 <th colspan="3" class="text-right">Total:</th>
                                 <th id="view-total-amount"></th>
                                 <th></th>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="text-center">
-                                    <button type="button" id="add-product" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </td>
                             </tr>
                         </tfoot>
                     </table>
@@ -805,6 +834,56 @@ $(function() {
     // Initialize delegated event handlers
     setupViewButtons();
     setupCancelButtons();
+
+    // Initialize product selector for modal
+    $('#modal-produit').select2({
+        dropdownParent: $('#view-modal'),
+        placeholder: 'Rechercher un produit',
+        allowClear: true,
+        ajax: {
+            url: 'nouvelle.php?action=get_produits',
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+                const existingIds = [];
+                $('#view-produits tr').each(function() {
+                    const id = $(this).find('.product-id').val();
+                    if (id) existingIds.push(id);
+                });
+                return {
+                    search: params.term,
+                    page: params.page || 1,
+                    with_stock: true,
+                    exclude: existingIds.join(',')
+                };
+            },
+            processResults: function(data, params) {
+                params.page = params.page || 1;
+                const existingIds = [];
+                $('#view-produits tr').each(function() {
+                    const id = $(this).find('.product-id').val();
+                    if (id) existingIds.push(String(id));
+                });
+                const produits = $.map(data.produits, function(produit) {
+                    if (existingIds.includes(String(produit.id))) {
+                        return null;
+                    }
+                    return {
+                        id: produit.id,
+                        text: produit.nom + ' - ' + produit.code,
+                        produit: produit
+                    };
+                });
+                return {
+                    results: produits,
+                    pagination: {
+                        more: (params.page * 10) < data.total_count
+                    }
+                };
+            },
+            cache: false
+        }
+    });
 
     // Function to load sales with pagination and filters
     function loadVentes() {
@@ -1074,6 +1153,12 @@ $(function() {
     }
 
     function bindRowEvents() {
+        // Reset product form
+        $('#modal-produit').val(null).trigger('change');
+        $('#modal-prix').val('');
+        $('#modal-quantite').val(1);
+        $('#modal-stock-disponible').val('');
+
         // Recalculate totals when quantity or price changes with stock validation
         $('#view-produits').off('input', '.qty, .price').on('input', '.qty, .price', function() {
             if ($(this).hasClass('qty')) {
@@ -1088,42 +1173,103 @@ $(function() {
             recalcTotals();
         });
 
-        // Update price and stock info when product selection changes (Select2)
-        $('#view-produits').off('select2:select', '.product-select').on('select2:select', '.product-select', function(e) {
-            const produit = e.params.data.produit || {};
-            const row = $(this).closest('tr');
-            const prix = produit.prix_vente || 0;
-            const stock = produit.quantite_stock || 0;
-            row.find('.price').val(prix);
-            row.find('.qty').attr({ max: stock }).val(1);
-            row.find('.stock-info').text('Stock: ' + stock);
-            recalcTotals();
-        });
-
-        // Reset fields when selection is cleared
-        $('#view-produits').off('select2:clear', '.product-select').on('select2:clear', '.product-select', function() {
-            const row = $(this).closest('tr');
-            row.find('.price').val('');
-            row.find('.qty').val(1).attr('max', '');
-            row.find('.stock-info').text('');
-            recalcTotals();
-        });
-
         // Remove row
         $('#view-produits').off('click', '.remove-row').on('click', '.remove-row', function() {
             $(this).closest('tr').remove();
             recalcTotals();
         });
 
-        // Add product row
-        $('#add-product').off('click').on('click', addProductRow);
+        // Product selection change
+        $('#modal-produit').off('select2:select').on('select2:select', function(e) {
+            const produit = e.params.data.produit || {};
+            $('#modal-prix').val(produit.prix_vente || 0);
+            $('#modal-quantite').val(1);
+            $('#modal-stock-disponible').val(produit.quantite_stock || 0);
+        });
+
+        $('#modal-produit').off('select2:clear').on('select2:clear', function() {
+            $('#modal-prix').val('');
+            $('#modal-quantite').val(1);
+            $('#modal-stock-disponible').val('');
+        });
+
+        $('#modal-quantite').off('input').on('input', function() {
+            const stock = parseFloat($('#modal-stock-disponible').val()) || 0;
+            let qty = parseFloat($(this).val()) || 0;
+            if (qty > stock) {
+                toastr.warning('La quantité ne peut pas dépasser le stock disponible');
+                qty = stock;
+                $(this).val(qty);
+            }
+        });
+
+        // Add product to table
+        $('#add-product').off('click').on('click', function() {
+            const produitSelect = $('#modal-produit');
+            const produitId = produitSelect.val();
+            if (!produitId) {
+                toastr.error('Veuillez sélectionner un produit');
+                return;
+            }
+
+            const produitData = produitSelect.select2('data')[0].produit;
+            const prix = parseFloat($('#modal-prix').val());
+            const quantite = parseFloat($('#modal-quantite').val());
+            const stock = parseFloat($('#modal-stock-disponible').val());
+
+            if (isNaN(prix) || prix <= 0) {
+                toastr.error('Le prix doit être supérieur à 0');
+                return;
+            }
+
+            if (isNaN(quantite) || quantite <= 0) {
+                toastr.error('La quantité doit être supérieure à 0');
+                return;
+            }
+
+            if (quantite > stock) {
+                toastr.error('La quantité dépasse le stock disponible');
+                return;
+            }
+
+            const existingRow = $('#view-produits').find(`tr[data-product-id="${produitId}"]`);
+            if (existingRow.length > 0) {
+                let currentQty = parseFloat(existingRow.find('.qty').val()) || 0;
+                let newQty = currentQty + quantite;
+                if (newQty > stock) {
+                    toastr.error('La quantité totale dépasse le stock disponible');
+                    return;
+                }
+                existingRow.find('.qty').val(newQty);
+                existingRow.find('.price').val(prix);
+                const amount = newQty * prix;
+                existingRow.find('.amount').text(amount.toLocaleString('fr-FR') + ' BIF');
+            } else {
+                const amount = prix * quantite;
+                const row = `<tr class="table-info new-row" data-detail-id="new-${Date.now()}" data-product-id="${produitId}">
+                    <td>${produitData.nom} (${produitData.code})<input type="hidden" class="product-id" value="${produitId}" /></td>
+                    <td><input type="number" class="form-control qty" value="${quantite}" min="1" /></td>
+                    <td><input type="number" class="form-control price" value="${prix}" /></td>
+                    <td class="amount">${amount.toLocaleString('fr-FR')} BIF</td>
+                    <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
+                </tr>`;
+                $('#view-produits').append(row);
+            }
+
+            recalcTotals();
+
+            produitSelect.val(null).trigger('change');
+            $('#modal-prix').val('');
+            $('#modal-quantite').val(1);
+            $('#modal-stock-disponible').val('');
+        });
 
         // Save changes
         $('#save-changes').off('click').on('click', function() {
             const produits = [];
             $('#view-produits tr').each(function() {
                 const detailId = $(this).data('detail-id');
-                const productId = $(this).find('.product-id').val() || $(this).find('.product-select').val();
+                const productId = $(this).find('.product-id').val();
                 const qty = parseFloat($(this).find('.qty').val()) || 0;
                 const price = parseFloat($(this).find('.price').val()) || 0;
                 produits.push({ detail_id: detailId, produit_id: productId, quantite: qty, prix_unitaire: price });
@@ -1152,71 +1298,6 @@ $(function() {
                     toastr.error('Erreur lors de la mise à jour');
                 }
             });
-        });
-    }
-
-    function addProductRow() {
-        const row = `
-            <tr class="table-info new-row" data-detail-id="new-${Date.now()}">
-                <td>
-                    <select class="form-control product-select" style="width:100%;"></select>
-                    <small class="text-muted stock-info"></small>
-                </td>
-                <td><input type="number" class="form-control qty" value="1" min="1" /></td>
-                <td><input type="number" class="form-control price" value="0" /></td>
-                <td class="amount">0 BIF</td>
-                <td><button type="button" class="btn btn-sm btn-danger remove-row">&times;</button></td>
-            </tr>`;
-        $('#view-produits').append(row);
-
-        const select = $('#view-produits tr:last .product-select');
-        select.select2({
-            dropdownParent: $('#view-modal'),
-            placeholder: 'Rechercher un produit',
-            allowClear: true,
-            ajax: {
-                url: 'nouvelle.php?action=get_produits',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    const existingIds = [];
-                    $('#view-produits tr').each(function() {
-                        const id = $(this).find('.product-id').val() || $(this).find('.product-select').val();
-                        if (id) existingIds.push(id);
-                    });
-                    return {
-                        search: params.term,
-                        page: params.page || 1,
-                        with_stock: true,
-                        exclude: existingIds.join(',')
-                    };
-                },
-                processResults: function(data, params) {
-                    params.page = params.page || 1;
-                    const existingIds = [];
-                    $('#view-produits tr').each(function() {
-                        const id = $(this).find('.product-id').val() || $(this).find('.product-select').val();
-                        if (id) existingIds.push(String(id));
-                    });
-                    const produits = $.map(data.produits, function(produit) {
-                        if (existingIds.includes(String(produit.id))) {
-                            return null;
-                        }
-                        return {
-                            id: produit.id,
-                            text: produit.nom + ' - ' + produit.code,
-                            produit: produit
-                        };
-                    });
-                    return {
-                        results: produits,
-                        pagination: {
-                            more: (params.page * 10) < data.total_count
-                        }
-                    };
-                },
-                cache: false
-            }
         });
     }
 
