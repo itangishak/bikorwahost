@@ -53,12 +53,6 @@ try {
     if (!$has_dettes_access && $user_role !== 'gestionnaire') {
         http_response_code(403);
         $response['message'] = "Permission refusée: vous n'avez pas l'autorisation de modifier des dettes";
-        $response['debug'] = [
-            'session_role' => $user_role,
-            'has_access' => $has_dettes_access,
-            'session_data' => $_SESSION ?? null,
-            'user_id' => $_SESSION['user_id'] ?? 'NOT_SET'
-        ];
         echo json_encode($response);
         exit;
     }

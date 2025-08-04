@@ -655,7 +655,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 </div>
                             </div>
                             <form id="detteForm">
-                                <input type="hidden" id="dette_id" name="id">
+                                <input type="hidden" id="dette_id" name="dette_id">
                                 
                                 <div class="mb-3">
                                     <label for="client_id_form" class="form-label">Client <span class="text-danger">*</span></label>
