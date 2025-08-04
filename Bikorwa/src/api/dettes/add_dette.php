@@ -45,11 +45,27 @@ try {
 
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $client_id, PDO::PARAM_INT);
-    $stmt->bindParam(2, $vente_id, $vente_id ? PDO::PARAM_INT : PDO::PARAM_NULL);
+
+    // Vente ID may be null. bindValue handles null values correctly while
+    // bindParam with PARAM_NULL can lead to unexpected behaviour on some
+    // drivers.  Use bindValue when the value is null.
+    if ($vente_id !== null) {
+        $stmt->bindParam(2, $vente_id, PDO::PARAM_INT);
+    } else {
+        $stmt->bindValue(2, null, PDO::PARAM_NULL);
+    }
+
     $stmt->bindParam(3, $montant_initial, PDO::PARAM_STR);
     $stmt->bindParam(4, $montant_initial, PDO::PARAM_STR); // montant_restant = montant_initial for new debt
     $stmt->bindParam(5, $date_creation, PDO::PARAM_STR);
-    $stmt->bindParam(6, $date_echeance, $date_echeance ? PDO::PARAM_STR : PDO::PARAM_NULL);
+
+    // date_echeance is optional and may be null as well
+    if ($date_echeance !== null) {
+        $stmt->bindParam(6, $date_echeance, PDO::PARAM_STR);
+    } else {
+        $stmt->bindValue(6, null, PDO::PARAM_NULL);
+    }
+
     $stmt->bindParam(7, $note, PDO::PARAM_STR);
     
     $stmt->execute();

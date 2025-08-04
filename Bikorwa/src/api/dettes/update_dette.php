@@ -75,8 +75,21 @@ try {
     $stmt->bindParam(1, $client_id, PDO::PARAM_INT);
     $stmt->bindParam(2, $montant_initial, PDO::PARAM_STR);
     $stmt->bindParam(3, $new_montant_restant, PDO::PARAM_STR);
-    $stmt->bindParam(4, $date_creation, $date_creation ? PDO::PARAM_STR : PDO::PARAM_NULL);
-    $stmt->bindParam(5, $date_echeance, $date_echeance ? PDO::PARAM_STR : PDO::PARAM_NULL);
+
+    // date_creation and date_echeance are optional. Use bindValue when the
+    // value is null to ensure PDO correctly sends NULL to the database.
+    if ($date_creation !== null) {
+        $stmt->bindParam(4, $date_creation, PDO::PARAM_STR);
+    } else {
+        $stmt->bindValue(4, null, PDO::PARAM_NULL);
+    }
+
+    if ($date_echeance !== null) {
+        $stmt->bindParam(5, $date_echeance, PDO::PARAM_STR);
+    } else {
+        $stmt->bindValue(5, null, PDO::PARAM_NULL);
+    }
+
     $stmt->bindParam(6, $note, PDO::PARAM_STR);
     $stmt->bindParam(7, $dette_id, PDO::PARAM_INT);
     
