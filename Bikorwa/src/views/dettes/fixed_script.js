@@ -406,12 +406,17 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('utilisateur_id', currentUserId);
         
         // Determine if this is a create or update operation
-        const isUpdate = formData.get('dette_id') !== '';
+        const detteIdValue = formData.get('dette_id');
+        const isUpdate = detteIdValue !== '' && detteIdValue !== null;
         const url = isUpdate ? `${baseUrl}/src/api/dettes/update_dette.php` : `${baseUrl}/src/api/dettes/add_dette.php`;
         
-        console.log('Submitting form data to:', url);
+        console.log('[DEBUG] saveDette - Operation details:');
+        console.log('[DEBUG] dette_id value:', detteIdValue);
+        console.log('[DEBUG] isUpdate:', isUpdate);
+        console.log('[DEBUG] URL to call:', url);
+        console.log('[DEBUG] Form data:');
         for (let pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
+            console.log('  ' + pair[0] + ': ' + pair[1]);
         }
         
         // Show spinner
@@ -425,22 +430,48 @@ document.addEventListener('DOMContentLoaded', function() {
             body: formData
         })
         .then(response => {
+            console.log('[DEBUG] Response status:', response.status);
+            console.log('[DEBUG] Response headers:', [...response.headers.entries()]);
+            
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.text().then(text => {
+                    console.error('[DEBUG] HTTP Error response body:', text);
+                    throw new Error(`HTTP error! Status: ${response.status} - ${text}`);
+                });
             }
-            return response.json();
+            
+            return response.text().then(text => {
+                console.log('[DEBUG] Raw response text:', text);
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error('[DEBUG] JSON parse error:', e);
+                    throw new Error('Invalid JSON response: ' + text.substring(0, 200));
+                }
+            });
         })
         .then(data => {
+            console.log('[DEBUG] Parsed response data:', data);
+            
             if (data.success) {
-                console.log('Save successful:', data);
+                console.log('[DEBUG] Save successful:', data);
                 showToast('Succès', data.message || (isUpdate ? 'Dette modifiée avec succès' : 'Dette ajoutée avec succès'), 'success');
                 detteModal.hide();
                 
                 // Refresh the debts list
-                loadDettes();
+                // loadDettes();
             } else {
-                console.error('API Error:', data);
-                showToast('Erreur', data.message || (isUpdate ? 'Erreur lors de la modification' : 'Erreur lors de l\'ajout'), 'error');
+                console.error('[DEBUG] API Error:', data);
+                
+                let errorMessage = data.message || (isUpdate ? 'Erreur lors de la modification' : 'Erreur lors de l\'ajout');
+                
+                // Show debug info if available
+                if (data.debug) {
+                    console.error('[DEBUG] Error debug info:', data.debug);
+                    errorMessage += ' (Voir console pour détails)';
+                }
+                
+                showToast('Erreur', errorMessage, 'error');
             }
         })
         .catch(error => {
