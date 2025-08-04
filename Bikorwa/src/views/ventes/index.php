@@ -186,9 +186,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'cancel_sale') {
 if (isset($_GET['action']) && $_GET['action'] === 'get_ventes') {
     header('Content-Type: application/json');
     
-    // Debug logging
-    error_log('get_ventes endpoint called');
-    
     try {
         // Set default values and get search parameters
         $search = $_GET['search'] ?? '';
@@ -777,11 +774,10 @@ $(function() {
     toastr.options = {
         "closeButton": true,
         "debug": false,
-        "newestOnTop": false,
+        "newestOnTop": true,
         "progressBar": true,
         "positionClass": "toast-top-right",
         "preventDuplicates": false,
-        "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
         "timeOut": "5000",
@@ -791,40 +787,6 @@ $(function() {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-
-    // Initialize Select2 for product search in modal
-    $('.select2-modal-products').select2({
-        placeholder: 'Rechercher un produit...',
-        allowClear: true,
-        dropdownParent: $('#view-modal')
-    });
-
-    // Handle product selection in modal
-    $('#modal-produit').on('select2:select', function(e) {
-        var data = e.params.data;
-        var produit = data.produit;
-        
-        if (produit) {
-            // Update product price and stock info
-            $('#modal-prix').val(produit.prix_vente);
-            $('#modal-stock-disponible').val(produit.quantite_stock);
-            
-            // Set max quantity to available stock
-            $('#modal-quantite').attr('max', produit.quantite_stock);
-        }
-    });
-
-    // Clear product info when selection is cleared
-    $('#modal-produit').on('select2:clear', function(e) {
-        $('#modal-prix').val('');
-        $('#modal-stock-disponible').val('');
-        $('#modal-quantite').removeAttr('max');
-    });
-
-    // Basic add product functionality (simplified)
-    $('#add-product').on('click', function() {
-        toastr.info('Fonctionnalite en cours de developpement');
-    });
     
     // Variables
     let currentPage = 1;
@@ -873,6 +835,56 @@ $(function() {
     setupViewButtons();
     setupCancelButtons();
 
+    // Initialize product selector for modal
+    $('#modal-produit').select2({
+        dropdownParent: $('#view-modal'),
+        placeholder: 'Rechercher un produit',
+        allowClear: true,
+        ajax: {
+            url: '<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits',
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+                const existingIds = [];
+                $('#view-produits tr').each(function() {
+                    const id = $(this).find('.product-id').val();
+                    if (id) existingIds.push(id);
+                });
+                return {
+                    search: params.term,
+                    page: params.page || 1,
+                    with_stock: true,
+                    exclude: existingIds.join(',')
+                };
+            },
+            processResults: function(data, params) {
+                params.page = params.page || 1;
+                const existingIds = [];
+                $('#view-produits tr').each(function() {
+                    const id = $(this).find('.product-id').val();
+                    if (id) existingIds.push(String(id));
+                });
+                const produits = $.map(data.produits, function(produit) {
+                    if (existingIds.includes(String(produit.id))) {
+                        return null;
+                    }
+                    return {
+                        id: produit.id,
+                        text: produit.nom + ' - ' + produit.code,
+                        produit: produit
+                    };
+                });
+                return {
+                    results: produits,
+                    pagination: {
+                        more: (params.page * 10) < data.total_count
+                    }
+                };
+            },
+            cache: false
+        }
+    });
+
     // Function to load sales with pagination and filters
     function loadVentes() {
         const search = $('#search-input').val();
@@ -882,7 +894,6 @@ $(function() {
         $('#ventes-list').html('<tr><td colspan="10" class="text-center"><i class="fas fa-spinner fa-spin mr-2"></i> Chargement des données...</td></tr>');
         
         // Make AJAX request
-        console.log('Making AJAX request to load ventes...');
         $.ajax({
             url: 'index.php?action=get_ventes',
             type: 'GET',
@@ -894,7 +905,6 @@ $(function() {
             },
             dataType: 'json',
             success: function(response) {
-                console.log('AJAX response received:', response);
                 if (response.success) {
                     // Update pagination
                     totalPages = response.total_pages;
@@ -966,13 +976,10 @@ $(function() {
                     toastr.error(response.message || 'Erreur lors du chargement des ventes');
                 }
             },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error loading sales:');
-                console.error('Status:', status);
-                console.error('Error:', error);
-                console.error('Response:', xhr.responseText);
-                $('#ventes-list').html('<tr><td colspan="10" class="text-center text-danger">Erreur lors du chargement des ventes: ' + error + '</td></tr>');
-                toastr.error('Erreur lors du chargement des ventes: ' + error);
+            error: function(xhr) {
+                console.error('Error loading sales:', xhr);
+                $('#ventes-list').html('<tr><td colspan="10" class="text-center text-danger">Erreur lors du chargement des ventes</td></tr>');
+                toastr.error('Erreur lors du chargement des ventes');
             }
         });
     }
