@@ -880,8 +880,9 @@ EOT;
     </div>
 </div>
 <!-- Page specific script -->
-<!-- Ensure jQuery is available for the page scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Select2 and Toastr JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 // Define BASE_URL variable for JavaScript use
 var BASE_URL = window.location.origin + '/Bikorwa';
@@ -914,7 +915,7 @@ $(function() {
 
     function loadAvailableProducts(callback) {
         if (availableProducts.length === 0) {
-            $.getJSON('<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits&with_stock=true', function(res) {
+            $.getJSON('<?= BASE_URL ?>/src/views/ventes/index.php?action=get_produits&with_stock=true', function(res) {
                 if (res.success) {
                     availableProducts = res.produits;
                 }
@@ -958,7 +959,7 @@ $(function() {
         placeholder: 'Rechercher un produit',
         allowClear: true,
         ajax: {
-            url: '<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits',
+            url: '<?= BASE_URL ?>/src/views/ventes/index.php?action=get_produits',
             dataType: 'json',
             delay: 250,
             data: function(params) {
@@ -1560,51 +1561,6 @@ $(function() {
 });
 </script>
 
-<!-- Select2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
-
-<!-- Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- Toastr JS (must be included after jQuery from footer) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    // Initialize Toastr options
-    $(document).ready(function() {
-        toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            timeOut: 5000
-        };
-        
-        // Debug information
-        console.log('BASE_URL:', '<?= BASE_URL ?>');
-        console.log('jQuery version:', $.fn.jquery);
-        console.log('Select2 available:', typeof $.fn.select2);
-        
-
-        
-        // Handle product selection
-        $('#modal-produit').on('select2:select', function(e) {
-            var data = e.params.data;
-            var produit = data.produit;
-            
-            if (produit) {
-                // Update product price and stock info
-                $('#modal-prix').val(produit.prix_vente);
-                $('#modal-stock-disponible').val(produit.quantite_stock);
-            }
-        });
-        
-        // Reset form fields when product is cleared
-        $('#modal-produit').on('select2:clear', function() {
-            $('#modal-prix').val('');
-            $('#modal-quantite').val('1');
-            $('#modal-stock-disponible').val('');
-        });
-    });
-</script>
 
 <?php
 // Include footer
