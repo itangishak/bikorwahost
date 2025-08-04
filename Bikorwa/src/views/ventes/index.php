@@ -774,10 +774,11 @@ $(function() {
     toastr.options = {
         "closeButton": true,
         "debug": false,
-        "newestOnTop": true,
+        "newestOnTop": false,
         "progressBar": true,
         "positionClass": "toast-top-right",
         "preventDuplicates": false,
+        "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
         "timeOut": "5000",
@@ -787,6 +788,80 @@ $(function() {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
+
+    // Initialize Select2 for product search in modal
+    $('.select2-modal-products').select2({
+        placeholder: 'Rechercher un produit...',
+        allowClear: true,
+        dropdownParent: $('#view-modal'),
+        ajax: {
+            url: '<?= BASE_URL ?>/src/api/produits/get_produits.php',
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+                // Get already selected product IDs to exclude them
+                var selectedIds = [];
+                $('#view-produits tr').each(function() {
+                    var productId = $(this).find('.product-id').val();
+                    if (productId) {
+                        selectedIds.push(productId);
+                    }
+                });
+                
+                return {
+                    search: params.term,
+                    page: params.page || 1,
+                    with_stock: true,
+                    exclude_ids: selectedIds.join(',')
+                };
+            },
+            processResults: function(data, params) {
+                params.page = params.page || 1;
+                
+                if (data.success) {
+                    return {
+                        results: $.map(data.produits, function(produit) {
+                            return {
+                                id: produit.id,
+                                text: produit.nom + ' - ' + produit.code + ' (Stock: ' + produit.quantite_stock + ')',
+                                produit: produit
+                            };
+                        }),
+                        pagination: {
+                            more: (params.page * 10) < data.total_count
+                        }
+                    };
+                } else {
+                    return {
+                        results: []
+                    };
+                }
+            },
+            cache: false
+        }
+    });
+
+    // Handle product selection in modal
+    $('#modal-produit').on('select2:select', function(e) {
+        var data = e.params.data;
+        var produit = data.produit;
+        
+        if (produit) {
+            // Update product price and stock info
+            $('#modal-prix').val(produit.prix_vente);
+            $('#modal-stock-disponible').val(produit.quantite_stock);
+            
+            // Set max quantity to available stock
+            $('#modal-quantite').attr('max', produit.quantite_stock);
+        }
+    });
+
+    // Clear product info when selection is cleared
+    $('#modal-produit').on('select2:clear', function(e) {
+        $('#modal-prix').val('');
+        $('#modal-stock-disponible').val('');
+        $('#modal-quantite').removeAttr('max');
+    });
     
     // Variables
     let currentPage = 1;
@@ -834,56 +909,6 @@ $(function() {
     // Initialize delegated event handlers
     setupViewButtons();
     setupCancelButtons();
-
-    // Initialize product selector for modal
-    $('#modal-produit').select2({
-        dropdownParent: $('#view-modal'),
-        placeholder: 'Rechercher un produit',
-        allowClear: true,
-        ajax: {
-            url: '<?= BASE_URL ?>/src/views/ventes/nouvelle.php?action=get_produits',
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                const existingIds = [];
-                $('#view-produits tr').each(function() {
-                    const id = $(this).find('.product-id').val();
-                    if (id) existingIds.push(id);
-                });
-                return {
-                    search: params.term,
-                    page: params.page || 1,
-                    with_stock: true,
-                    exclude: existingIds.join(',')
-                };
-            },
-            processResults: function(data, params) {
-                params.page = params.page || 1;
-                const existingIds = [];
-                $('#view-produits tr').each(function() {
-                    const id = $(this).find('.product-id').val();
-                    if (id) existingIds.push(String(id));
-                });
-                const produits = $.map(data.produits, function(produit) {
-                    if (existingIds.includes(String(produit.id))) {
-                        return null;
-                    }
-                    return {
-                        id: produit.id,
-                        text: produit.nom + ' - ' + produit.code,
-                        produit: produit
-                    };
-                });
-                return {
-                    results: produits,
-                    pagination: {
-                        more: (params.page * 10) < data.total_count
-                    }
-                };
-            },
-            cache: false
-        }
-    });
 
     // Function to load sales with pagination and filters
     function loadVentes() {
